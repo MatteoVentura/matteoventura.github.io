@@ -14,15 +14,16 @@ title: "Publications"
 **Model-based Clustering of Multivariate Rating Data accounting for Feeling and  Uncertainty**
 
 - Ventura M., Macis A., Manisera M., Zuccolotto P. <br>
-**On the Equivalence of two Mixture Models for Rating Data**
-
-- Ventura M., Macis A., Manisera M., Zuccolotto P. <br>
 **Measuring Synesthetic Experience of Museum Visitors using Multi-point Semantic Differential Scales**
 
 - Simonetto A., Ventura M. <br>
 **Distance Measures for Unweighted Undirected Networks: a comparison study**
 
 ## Published Articles
+
+- Ventura M., Macis A., Manisera M., Zuccolotto P. (2024) <br>
+**On the Equivalence of two Mixture Models for Rating Data** <br>
+Advances in Statistical Analysis. 1 --25, 70--86
 
 - Manisera M., Migliorati M., Ventura M., Zuccolotto P. (2024) <br>
 **A Mixture Model for the Analysis of Categorical Variables Measured on Five-point Semantic Differential Scales** <br>
