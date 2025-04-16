@@ -1,0 +1,61 @@
+---
+title: "Publications"
+---
+
+<!-- <div style="text-align: center;"> -->
+<!--   <img src="image1.jpg" alt="Descrizione dell'immagine" style="width: 15em; height: 15em; border-radius: 50%;"> -->
+<!--   <h1 style="font-size: 2em;">**Publications**</h1> -->
+<!-- </div> -->
+
+<div style="text-align: justify;">
+## Submitted Articles
+
+- Ventura M., Jacques J., Zuccolotto P. <br>
+**Model-based Clustering of Multivariate Rating Data accounting for Feeling and  Uncertainty**
+
+- Ventura M., Macis A., Manisera M., Zuccolotto P. <br>
+**On the Equivalence of two Mixture Models for Rating Data**
+
+- Ventura M., Macis A., Manisera M., Zuccolotto P. <br>
+**Measuring Synesthetic Experience of Museum Visitors using Multi-point Semantic Differential Scales**
+
+- Simonetto A., Ventura M. <br>
+**Distance Measures for Unweighted Undirected Networks: a comparison study**
+
+## Published Articles
+
+- Manisera M., Migliorati M., Ventura M., Zuccolotto P. (2024) <br>
+**A Mixture Model for the Analysis of Categorical Variables Measured on Five-point Semantic Differential Scales** <br>
+Austrian Journal of Statistics. 53(3), 70--86
+
+- Ventura M., Ricciardi R. (2022) <br>
+**Exploring Financial Microblogs: Analysis of Users’ Trading Profiles with Multivariate Statistical Methods**<br>
+Statistica e Applicazioni. 20(1), 61--78
+
+- Ghiglieno I., Simonetto A., Sperandio G., Ventura M., Gatti F., Donna P., Tonni M., Valenti L., Gilioli G. (2021)<br>
+**Impact of Environmental Conditions and Management on Soil Arthropods Communities in Vineyard Ecosystems** <br>
+Sustainability. 13(21), 11999
+
+
+## Conference Proceedings
+- Ventura M., Jacques J., Zuccolotto P. (2024) <br>
+**Clustering Multivariate Rating Data within the CUB Framework** <br>
+52nd Scientific Meeting of the Italian Statistical Society -- Bari, 17--20 giugno 2022
+
+- Simonetto A., Ventura M., Gilioli G. (2022) <br>
+**An Explorative analysis of Different Distance Metrics to Compare Unweighted Undirected Networks** <br>
+<!-- Short paper in A. Balzanella, M. Bini, C. Cavicchia, R. Verde (Eds.) <br> -->
+51st Scientific Meeting of the Italian Statistical Society -- Caserta, 22--24 giugno 2022 (pp. 1522-1527). Pearson. ISBN: 9788891932310.
+
+- Simonetto A., Ventura M., Ghiglieno I., Gatti F., Gilioli G. (2021)<br>
+**Le Risposte della Biodiversità Edafica alla Gestione degli Agroecosistemi: un Approccio Basato sull'Ecological Network Anlaysis** <br>
+<!-- Abstract in A. Elia & G. Conversa (Eds.),  -->
+Agriculture, Environment and Health XIII National Congress on Biodiversity -- Foggia, 7--9 September 2021 (p. 236). DAFNE, University of Foggia. ISBN: 9788874271016.
+
+- Ghiglieno, I., Simonetto, A., Sperandio G., Ventura M., Gatti F., Donna P., Tonni M., Valenti L., Gilioli G. (2021) <br>
+**Impatto delle Condizioni Ambientali e della Gestione del Suolo sugli Artropodi Edafici dell'Ecosistema Vigneto** <br>
+<!-- Abstract in A. Elia & G. Conversa (Eds.),  -->
+Agriculture, Environment and Health XIII National Congress on Biodiversity -- Foggia, 7--9 September 2021 (p. 123). DAFNE, University of Foggia. ISBN: 9788874271016.
+
+
+<div>

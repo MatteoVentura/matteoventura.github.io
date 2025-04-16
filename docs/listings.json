@@ -1,0 +1,18 @@
+[
+  {
+    "listing": "/lectures.html",
+    "items": [
+      "/courses/Ordinal_data_an_R.html"
+    ]
+  },
+  {
+    "listing": "/courses/course1.html",
+    "items": [
+      "/courses/Ordinal_data_an_R.html"
+    ]
+  },
+  {
+    "listing": "/courses/Ordinal_data_an_R.html",
+    "items": []
+  }
+]

@@ -1,0 +1,26 @@
+---
+title: "Matteo Ventura"
+image: me.jpg
+about:
+  template: jolla
+  image-width: 15em
+  image-shape: round
+  links:
+    - icon: github
+      # text: Github
+      href: https://github.com/MatteoVentura
+    - icon: linkedin
+      # text: LinkedIn
+      href: https://www.linkedin.com/in/matteo-ventura-770037171/
+    - icon: globe2
+      # text: University
+      href: https://www.unibs.it/en/ugov/person/145546
+    - icon: google
+      # text: Google Scholar
+      href: https://scholar.google.com/citations?user=aRhtf3kAAAAJ&hl=en
+
+---
+
+<h4>Ph.D. Student in Statistics</h4>
+
+Univeristy of Brescia

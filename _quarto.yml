@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Matteo Ventura"
+  navbar:
+    background: light
+    left:
+      - href: main.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - href: publications.qmd
+        text: Publications
+      - href: lectures.qmd
+        text: Lectures
+      - href: contacts.qmd
+        text: Contacts
+      
+
+format:
+  html:
+    theme: flatly
+    mainfont: "Lucida Console"
+    css: styles.css
+    toc: false
+
+
+
+

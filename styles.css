@@ -1,0 +1,14 @@
+/* css styles */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', serif;
+}
+
+code, pre {
+  font-family: 'Fira Code', monospace;
+}

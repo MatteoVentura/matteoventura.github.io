@@ -1,0 +1,99 @@
+---
+title: "Ordinal Data Analysis in R" 
+subtitle: "Measuring Human Perceptions from Surveys"
+# description: "This short course provides hands-on training in the statistical models for ordinal data analysis, emphasizing the discovery of latent patterns and more reliable conclusions than treating it as numerical."
+author: "Matteo Ventura"
+date: "04/16/2025"
+listing: true
+categories: [ordinal data, CUB, survey]
+format: 
+  html:
+    toc: true
+    toc-depth: 2
+    toc-location: left
+    number-sections: true
+    theme: spacelab
+    highlight-style: tango
+    df-print: paged
+    css: styles.css
+execute: 
+  echo: true
+---
+
+::: {.cell}
+<style> p { text-align: justify; } </style>
+:::
+
+# Description of the course {.unnumbered .toc-ignore}
+
+Surveys are key tools for measuring human perceptions, capturing latent traits through structured responses. Among the data they generate, ordinal and rating data are particularly important yet often less studied, requiring specialized statistical techniques. Ordinal data appears frequently in real-world applications, such as customer satisfaction surveys, psychological assessments, and medical research, making its correct analysis crucial for obtaining reliable insights.
+This short course provides instructor-led, hands-on training in the analysis of ordinal data. It begins with an overview of survey design and the validation of results, focusing on building effective surveys and ensuring the reliability of the data obtained. The course then covers the most commonly used statistical models for analyzing ordinal data, with an emphasis on discovering latent patterns and traits. Both theoretical foundations and practical applications will be explored, using real-world case studies from domains such as marketing, social sciences, tourism and culture.
+
+A common approach to analyzing ordinal data is to treat it as numerical, but this can lead to a loss of statistical power. In this course, participants will learn how to apply specialized methods designed for ordinal data, allowing them to draw more effective and reliable conclusions. 
+
+# Objectives of the course {.unnumbered .toc-ignore}
+
+By the end of the course, participants will have both theoretical knowledge and practical skills to analyze ordinal data in research and professional settings. Specifically, they will be able to:
+
+ - Understand what ordinal data is, how it differs from other types of data, and the challenges involved in its analysis
+ - Compute and interpret reliability and validity measures
+ - Fit proportional odds models in R and interpret the results
+ - Analyse rating data by applying CUB models
+
+
+# Introduction to Ordinal Data and Survey Design 
+
+## The Role of Measurement in Science
+
+Measurement is a fundamental activity in science, indeed we acquire knowledge about the world around us by observing it, and we usually quantify to give a sense to what we observe. Therefore, measurement is essential in a wide range of research contexts.
+
+There exist several situations in which scientists come up with measurement problems, even though they are not interested primary in measurement. For instance:
+
+1) A health psychologist needs a measurement scale which doesn't seem to exist. The study depends on a tool that can clearly distinguish between what individuals want to happen and what they expect to happen when visiting a physician. However, the review of previous research reveals that existing scales often blur this distinction, unintentionally mixing the two concepts. None of the available instruments capture the separation in the specific way her study requires. While the psychologist could create a few items that appear to address the difference between wants and expectations, she/he is concerned that these improvised questions may lack the reliability and validity necessary to serve as accurate measures.
+
+2) An epidemiologist is conducting secondary analyses on data from a national health survey. They wish to investigate the link between perceived psychological stress and health status. Unfortunately, the survey did not include a validated stress measure. While it may be possible to construct one using existing items, a poorly constructed scale could lead to misleading conclusions.
+
+3) A marketing team is struggling to design a campaign for a new line of high-end infant toys. Focus groups suggest that parents are heavily influenced by a toy's perceived educational value. The team hypothesizes that parents with strong educational and career aspirations for their children are more likely to be interested in the product. To test this idea across a broad, geographically diverse sample, the team needs a way to reliably measure parental aspirations. Something that additional focus groups can't easily provide.
+ 
+Despite coming from different disciplines, these researchers share a common understanding: using arbitrary or poorly designed measurement tools increases the risk of collecting inaccurate data. As a result, developing their own carefully constructed measurement instruments appears to be the most reliable solution.
+
+Historically, measurement problems were well-known in natural sciences such as physics and astronomy, even concerning figures like Isaac Newton. However, among social scientists, a debate arose regarding the measurability of psychological variables. While physical attributes like mass and length seem to possess an intrinsic mathematical structure similar to positive real numbers, the measurement of psychological variables was considered impossible by the Commission of the British Association for the Advancement of Science. The primary reason was the difficulty in objectively ordering or summing sensory perceptions, as well illustrated by the question: how can one establish that a sensation of "a little warm" plus another similar sensation equals "twice as warm"?
+
+
+
+### Measurement classification {.unnumbered .toc-ignore}
+
+The americal psychologist Stevens (1946) disagreed with this perspective. He contended that the rigid requirement of "strict additivity," as seen in measurements of length or mass, was not essential for measuring sensations. He pointed out that individuals could make reasonably consistent ratio judgments regarding the loudness of sounds. For instance, they could determine if one sound was twice as loud as another.
+
+Stevens further argued that this "ratio" characteristic enabled the data derived from such measurements to be mathematically analyzed. He is known for categorizing measurements into nominal, ordinal, interval, and ratio scales. In his view, judgments about sound "loudness" belonged to the ratio scale.
+
+Despite the classification proposed by Stevens has been criticized by several authors and new classifications has been proposed, it is the most commonly accepted and used internationally. 
+
+Stevens identified four properties for describing the scales of measurement: 
+
+- **Identity**: each value has a unique meaning.
+- **Magnitude**: the values of the variable have an ordered relationship to one another, so there is a specific order to the variables.
+- **Equal intervals**: the data points along the scale are equally spaced, so the difference between data points one and two, is the same as data points three and four.
+- **A minimum value of zero**: the scale has a true zero point.
+
+As previously said, Stevens identified four scales of measurement, that is how variables are defined and categorised: 
+
+- **Nominal scale of measurement**:  This scale has certain characteristics, but doesn’t have any form of numerical meaning. The data can be placed into categories but can’t be multiplied, divided, added or subtracted from one another. It’s also not possible to measure the difference between data points. It defines only the identity property of data.  
+Examples: Gender, Etnicity, Eye colour...
+
+- **Ordinal scale of measurement**: It defines data that is placed in a specific order. While each value is ranked, there’s no information that specifies what differentiates the categories from each other. These values can’t be added to or subtracted from.  
+Examples: satisfaction data points in a survey, where ‘one = happy, two = neutral and three = unhappy.’ 
+
+- **Interval scale of measurement**: The interval scale contains properties of nominal and ordered data, but the difference between data points can be quantified. This type of data shows both the order of the variables and the exact differences between the variables. They can be added to or subtracted from each other, but not multiplied or divided (For example, 40 degrees is not 20 degrees multiplied by two.).  
+In this scale of measurement the zero is just a convention and not absolute, it is an existing value of the variable itself.  
+
+- **Ratio scale of measurement**: This scale include properties from all four scales of measurement. The data is nominal and defined by an identity, can be classified in order, contains intervals and can be broken down into exact value. Weight, height and distance are all examples of ratio variables. Data in the ratio scale can be added, subtracted, divided and multiplied.
+Ratio scales also differ from interval scales in that the scale has a ‘true zero’. The number zero means that the data has no value point.  
+An example of this is height or weight, as someone cannot be zero centimetres tall or weigh zero kilos.
+
+
+## Scales and Questionnaires development 
+
+Measurement is a crucial aspect in various scientific disciplines, with each field developing specialized methods and tools to measure its specific objects of study. In the behavioral and social sciences, the branch dedicated to measurement is known as psychometrics. This subfield focuses on the assessment of psychological and social phenomena, which are typically measured through the use of questionnaires.
+
+
