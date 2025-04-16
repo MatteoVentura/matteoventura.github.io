@@ -7,7 +7,7 @@ website:
   navbar:
     background: light
     left:
-      - href: main.qmd
+      - href: index.qmd
         text: Home
       - href: about.qmd
         text: About
