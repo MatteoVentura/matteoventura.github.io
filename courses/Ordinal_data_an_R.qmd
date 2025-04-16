@@ -1,12 +1,12 @@
 ---
-title: "Ordinal Data Analysis in R" 
+title: "Ordinal Data Analysis in R"
 subtitle: "Measuring Human Perceptions from Surveys"
 # description: "This short course provides hands-on training in the statistical models for ordinal data analysis, emphasizing the discovery of latent patterns and more reliable conclusions than treating it as numerical."
 author: "Matteo Ventura"
 date: "04/16/2025"
 listing: true
 categories: [ordinal data, CUB, survey]
-format: 
+format:
   html:
     toc: true
     toc-depth: 2
@@ -16,7 +16,11 @@ format:
     highlight-style: tango
     df-print: paged
     css: styles.css
-execute: 
+  pdf:
+    latex-distribution: miktex # o tinytex se lo stai usando
+    documentclass: scrartcl
+    engine: lualatex
+execute:
   echo: true
 ---
 
@@ -24,14 +28,14 @@ execute:
 <style> p { text-align: justify; } </style>
 :::
 
-# Description of the course {.unnumbered .toc-ignore}
+<h1>Description of the course</h1>
 
 Surveys are key tools for measuring human perceptions, capturing latent traits through structured responses. Among the data they generate, ordinal and rating data are particularly important yet often less studied, requiring specialized statistical techniques. Ordinal data appears frequently in real-world applications, such as customer satisfaction surveys, psychological assessments, and medical research, making its correct analysis crucial for obtaining reliable insights.
 This short course provides instructor-led, hands-on training in the analysis of ordinal data. It begins with an overview of survey design and the validation of results, focusing on building effective surveys and ensuring the reliability of the data obtained. The course then covers the most commonly used statistical models for analyzing ordinal data, with an emphasis on discovering latent patterns and traits. Both theoretical foundations and practical applications will be explored, using real-world case studies from domains such as marketing, social sciences, tourism and culture.
 
 A common approach to analyzing ordinal data is to treat it as numerical, but this can lead to a loss of statistical power. In this course, participants will learn how to apply specialized methods designed for ordinal data, allowing them to draw more effective and reliable conclusions. 
 
-# Objectives of the course {.unnumbered .toc-ignore}
+<h1>Objectives of the course</h1>
 
 By the end of the course, participants will have both theoretical knowledge and practical skills to analyze ordinal data in research and professional settings. Specifically, they will be able to:
 

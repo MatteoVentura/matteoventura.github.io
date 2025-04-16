@@ -11,21 +11,13 @@ title: "Publications"
 
 ## Published Articles
 
-- Ventura M., Macis A., Manisera M., Zuccolotto P. (2024) <br>
-**On the Equivalence of two Mixture Models for Rating Data** <br>
-Advances in Statistical Analysis. 1 --25, 70--86
+- Ventura M., Macis A., Manisera M., Zuccolotto P. (2024) On the Equivalence of two Mixture Models for Rating Data, *Advances in Statistical Analysis*. 1 --25, 70--86
 
-- Manisera M., Migliorati M., Ventura M., Zuccolotto P. (2024) <br>
-**A Mixture Model for the Analysis of Categorical Variables Measured on Five-point Semantic Differential Scales** <br>
-Austrian Journal of Statistics. 53(3), 70--86
+- Manisera M., Migliorati M., Ventura M., Zuccolotto P. (2024) A Mixture Model for the Analysis of Categorical Variables Measured on Five-point Semantic Differential Scales, *Austrian Journal of Statistics*. 53(3), 70--86
 
-- Ventura M., Ricciardi R. (2022) <br>
-**Exploring Financial Microblogs: Analysis of Users’ Trading Profiles with Multivariate Statistical Methods**<br>
-Statistica e Applicazioni. 20(1), 61--78
+- Ventura M., Ricciardi R. (2022) Exploring Financial Microblogs: Analysis of Users’ Trading Profiles with Multivariate Statistical Methods, *Statistica e Applicazioni*. 20(1), 61--78
 
-- Ghiglieno I., Simonetto A., Sperandio G., Ventura M., Gatti F., Donna P., Tonni M., Valenti L., Gilioli G. (2021)<br>
-**Impact of Environmental Conditions and Management on Soil Arthropods Communities in Vineyard Ecosystems** <br>
-Sustainability. 13(21), 11999
+- Ghiglieno I., Simonetto A., Sperandio G., Ventura M., Gatti F., Donna P., Tonni M., Valenti L., Gilioli G. (2021) Impact of Environmental Conditions and Management on Soil Arthropods Communities in Vineyard Ecosystems, *Sustainability*. 13(21), 11999
 
 
 ## Conference Proceedings
