@@ -8,16 +8,6 @@ title: "Publications"
 <!-- </div> -->
 
 <div style="text-align: justify;">
-## Submitted Articles
-
-- Ventura M., Jacques J., Zuccolotto P. <br>
-**Model-based Clustering of Multivariate Rating Data accounting for Feeling and  Uncertainty**
-
-- Ventura M., Macis A., Manisera M., Zuccolotto P. <br>
-**Measuring Synesthetic Experience of Museum Visitors using Multi-point Semantic Differential Scales**
-
-- Simonetto A., Ventura M. <br>
-**Distance Measures for Unweighted Undirected Networks: a comparison study**
 
 ## Published Articles
 
@@ -58,5 +48,16 @@ Agriculture, Environment and Health XIII National Congress on Biodiversity -- Fo
 <!-- Abstract in A. Elia & G. Conversa (Eds.),  -->
 Agriculture, Environment and Health XIII National Congress on Biodiversity -- Foggia, 7--9 September 2021 (p. 123). DAFNE, University of Foggia. ISBN: 9788874271016.
 
+
+## Submitted Articles
+
+- Ventura M., Jacques J., Zuccolotto P. <br>
+**Model-based Clustering of Multivariate Rating Data accounting for Feeling and  Uncertainty**
+
+- Ventura M., Macis A., Manisera M., Zuccolotto P. <br>
+**Measuring Synesthetic Experience of Museum Visitors using Multi-point Semantic Differential Scales**
+
+- Simonetto A., Ventura M. <br>
+**Distance Measures for Unweighted Undirected Networks: a comparison study**
 
 <div>
