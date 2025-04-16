@@ -1,6 +1,6 @@
 ---
 title: ""
-image: scale.jpg
+image: canoa.jpg
 about:
   template: trestles
   image-width: 20em
