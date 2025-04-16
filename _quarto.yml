@@ -24,7 +24,7 @@ format:
     theme: flatly
     mainfont: "Lucida Console"
     css: styles.css
-    toc: false
+    toc: true
 
 
 
