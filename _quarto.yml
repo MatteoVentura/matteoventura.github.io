@@ -7,8 +7,6 @@ website:
   navbar:
     background: light
     left:
-      # - href: index.qmd
-      #   text: Home
       - href: about.qmd
         text: About
       - href: publications.qmd
@@ -17,15 +15,26 @@ website:
         text: Lectures
       - href: contacts.qmd
         text: Contacts
-      
-
+deployment:
+    targets:
+      - id: primary
+        type: github-pages
+        url: "https://MatteoVentura.github.io" # Assicurati che sia il tuo URL corretto di GitHub Pages
+        branch: main # O gh-pages, a seconda della configurazione del tuo repository
+        dir: docs # Corrisponde al tuo output-dir
+        include:
+          - "**/*.qmd"
+          - "**/*.md"
+        exclude:
+          - "**/*_files"
+          - "**/*_cache"
+          - "**/_*"
+          - "**/*.tmp"
+          - "_site"
+          - "**/draft: true" # Esclude i file con draft: true
 format:
   html:
     theme: flatly
     mainfont: "Lucida Console"
     css: styles.css
-    toc: true
-
-
-
-
+    toc: false

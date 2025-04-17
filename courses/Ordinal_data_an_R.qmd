@@ -4,6 +4,7 @@ subtitle: "Measuring Human Perceptions from Surveys"
 # description: "This short course provides hands-on training in the statistical models for ordinal data analysis, emphasizing the discovery of latent patterns and more reliable conclusions than treating it as numerical."
 author: "Matteo Ventura"
 date: "04/16/2025"
+draft: false
 listing: true
 categories: [ordinal data, CUB, survey]
 format:
@@ -16,10 +17,12 @@ format:
     highlight-style: tango
     df-print: paged
     css: styles.css
+    callout-appearance: simple
   pdf:
     latex-distribution: miktex # o tinytex se lo stai usando
     documentclass: scrartcl
     engine: lualatex
+    number-sections: true
 execute:
   echo: true
 ---
@@ -101,7 +104,7 @@ An example of this is height or weight, as someone cannot be zero centimetres ta
 Measurement plays a vital role across scientific disciplines, with each field creating specialized methods and tools tailored to its unique subjects of study. In the behavioral and social sciences, the area devoted to measurement is called psychometrics. This subfield concentrates on evaluating psychological and social constructs, which are most often assessed using questionnaires. Theaching how to build effective questionnaires would require a specific course, but this is out of the scope of this course. The following are some practical guidelines that researchers can use to develop measurement scales and questionnaires.
 
 
-### Step 1: Determine Clearly What It Is You Want to Measure  {.unnumbered .toc-ignore}
+### Determine Clearly What You Want to Measure  {.unnumbered .toc-ignore}
 
 Researchers often discover their initial ideas about what they want to measure are vague, which can lead to costly changes later. Key questions include whether the scale should be theory-based or explore new directions, its level of specificity, and which aspects of the phenomenon to emphasize. 
 
@@ -112,7 +115,11 @@ Researchers often discover their initial ideas about what they want to measure a
 - **Define which aspects are enphasised**: Scale developers must clearly distinguish the target construct from related ones. Scales can be broad (e.g., general anxiety) or narrow (e.g., test anxiety). Including items outside the intended focus can lead to confusion or inaccurate measurement. For example, in health contexts, physical symptoms caused by an illness might be mistaken for psychological symptoms (like depression), leading to misleading results. Therefore, item selection should match the specific research purpose and avoid overlap with unrelated constructs.
 <!-- When building a scale, it's important to make sure it measures only the construct of interest—not other, similar ones. For instance, if you're interested in measuring test anxiety, including items about social anxiety would muddy the results. Similarly, if a depression scale includes physical symptoms like fatigue, it might confuse illness-related issues (like arthritis-related tiredness) with depression. This can distort results, especially in clinical or medical research. So, researchers need to be deliberate about item selection, ensuring the scale reflects exactly what they want to measure—and nothing else. -->
 
-### Step 2: Generate an Item Pool  {.unnumbered .toc-ignore} 
+<!-- ::: {.callout-tip} -->
+<!-- If a depression scale includes physical symptoms like fatigue, it might confuse illness-related issues (like arthritis-related tiredness) with depression. This can distort results, especially in clinical or medical research.  -->
+<!-- ::: -->
+
+### Generate an Item Pool  {.unnumbered .toc-ignore} 
 
 When developing a psychometric scale, items should be **carefully selected** or created to match the specific construct you aim to measure. That means you need a clear idea of what the scale is supposed to do, and every item on the scale should reflect that goal.
 
@@ -133,6 +140,12 @@ Each of these could be a separate construct with its own latent variable, so a s
 - **The wording** Including both positively worded items (indicating the presence of the construct) and negatively worded items (indicating its absence or low levels) is a common strategy to reduce acquiescence bias—the tendency of respondents to agree with statements regardless of their content. However, reversing the wording can sometimes confuse participants, particularly in general population or community samples, and this confusion may reduce the scale's reliability.
 
 <!-- Explanation: -->
+
+::: {.callout-caution}
+ Reversing the wording of items (also known as reversed polarity) can confuse respondents, especially if the items are complex or abstract, ot if the respondents have lower reading comprehension or aren’t used to taking surveys.  
+This confusion can lead to inconsistent or inaccurate responses, which lowers the reliability of the scale (i.e., how consistently it measures the construct).
+:::
+
 <!-- When people respond to surveys, some tend to just agree with statements out of habit—this is called acquiescence bias. To prevent this, researchers often mix in negatively worded items (e.g., “I rarely feel confident” alongside “I feel confident”) to check whether the respondent is paying attention and to balance out response patterns. -->
 
 <!-- However, this technique can backfire. Reversing the wording of items (also known as reversed polarity) can confuse respondents, especially if: -->
@@ -145,82 +158,99 @@ Each of these could be a separate construct with its own latent variable, so a s
 
 <!-- Conclusion (Item Pool): The item pool should be large, relevant, and contain useful redundancy. Items should be grammatically sound, avoid ambiguity, and not force respondents into "package deals".  -->
 
-### Step 3: Determine the Format for Measurement {.unnumbered .toc-ignore} 
+### Determine the Format for Measurement {.unnumbered .toc-ignore} 
 
-Numerous formats for questions exist. The researcher should consider early on what the format will be. This step should occur simultaneously with the generation of items so that the two are compatible. 
+Defining the measurement format is a critical step in designing data collection instruments like questionnaires and scales. This decision, ideally made concurrently with item generation, impacts data quality, variability, instrument sensitivity, and ultimately, research conclusions. 
 
 <!-- Thurstone Scaling: Aims to create items that respond ("resonate") to specific levels of an attribute, like tuning forks. Judges typically sort items into piles representing equal intervals of the construct. Respondents' agreement patterns theoretically pinpoint their level of the attribute. Elegant but difficult to implement effectively.  -->
 <!-- Guttman Scaling: Items tap progressively higher levels of an attribute, so endorsing one implies endorsing all lower-level items. The score is the highest item endorsed. Works well for objective, hierarchical data (e.g., smoking frequency) but less so for subjective constructs where the order might vary across individuals.  -->
 <!-- Scales With Equally Weighted Items: Fit well with models where items are roughly equivalent indicators of a common phenomenon. Allows flexibility in response formats.  -->
 
-Number of Response Categories: More options can increase variability, which is desirable, especially with fewer items. Continuous formats (like a thermometer scale) allow many gradations. However, too many options may exceed respondents' ability to discriminate meaningfully, leading to "false precision" and potentially increasing error variance. Avoid ambiguous wording (e.g., "several," "few") and confusing spatial arrangements. Consider the practicality of scoring very fine-grained responses. 
+Most scale items consist of two parts: a stem and a series of response options. A kew aspect of the scale items is the number of response options. A desiderable quality of a measurement scale is variability. 
+One way to increase opportunities for variability is to include lots of scale items. Another way is to provide numerous respose options within each item, especially with fewer items.
 
-Odd vs. Even Categories: For bipolar scales (e.g., agree/disagree), an odd number allows a neutral midpoint ("neither agree nor disagree," "not sure"), while an even number forces a choice toward one end. The choice depends on whether allowing neutrality is desirable or should be avoided. 
+In this view, continuous formats (e.g., thermometer scales) offer many gradations, and so increase the opportunities for variability. However, too many options can exceed respondents' ability to meaningfully discriminate, leading to "false precision" and increased error variance. Researchers must balance the need for variability with respondents' cognitive limitations. 
 
-Specific Formats:
+Another issue the investigator has to concern with, is whether the number of options should be even or odd.
+This choice depends on the type of question. the type of response option, and the objectives of the investigator.
 
-Likert Scale: Presents declarative statements with response options indicating degree of agreement (e.g., strongly disagree to strongly agree). Options should represent roughly equal intervals. Often uses 5, 6, or 7 points, potentially including a neutral midpoint (though midpoint wording can be subtle). Useful for opinions, beliefs, attitudes. Statements should generally be moderately forceful, aiming to elicit responses near the center of the scale from the "average" respondent to maximize variance and discrimination. 
+An odd number of categories usually allows to express neutrality, while an even number of categories forces a choice from the respondent. The choice depends on whether allowing neutrality is desirable or should be avoided. 
 
-Semantic Differential: Presents a stimulus (e.g., "automobile salesmen") followed by pairs of opposite adjectives (e.g., honest/dishonest) separated by several response lines/spaces. Respondents mark the space reflecting their evaluation. Adjectives can be bipolar (friendly/hostile) or unipolar (friendly/not friendly). Sets of related adjective pairs can form a scale tapping an underlying variable (e.g., honesty). 
+There exist several ways to present items that are commonly used:
 
-Visual Analog Scale (VAS): Presents a continuous line between two descriptors (e.g., "No pain" to "Worst pain imaginable"). Respondents mark a point on the line. Allows continuous scoring but interpretation can be subjective, and comparisons across individuals may be difficult. Highly sensitive, making it useful for detecting subtle changes within individuals over time (e.g., pre/post intervention). May reduce bias from recalling previous discrete responses. Often used as single items, limiting internal consistency checks; multi-item VAS scales are preferable. 
+- **Likert Scale**: It is one of the most common item formats.
+The Liker Scale presents declarative statements with response options indicating degree of agreement (e.g., strongly disagree to strongly agree), and it is useful for measuring opinions, beliefs, attitudes.  
+The statements should generally be moderately strong, since it is better to lead the respondent to not give responses near the center of the scale from the "average" respondent to maximize variance and discrimination.  
+Options should represent roughly equal intervals. Likert Scales with 5, 6, 7 categories are commonly used. 
 
-Numerical Response Formats & Neural Processes: Research suggests linear arrays of numbers may align with fundamental neural processing of quantity, potentially giving formats like Likert scales special merit. 
+ - **Semantic Differential Scale**:  It is used in reference ot one or more stimuli (e.g. a group of people) followed by pairs of opposite adjectives (e.g., honest/dishonest) separated by several response lines/spaces. Respondents mark the space reflecting their evaluation. The adjectives can be bipolar (friendly/hostile) or unipolar (friendly/not friendly). To measure an underlying variable, multiple related adjective pairs can be used (e.g., honesty). 
 
-Binary Options: Offer two choices (e.g., agree/disagree, yes/no, check if applies). Simple for respondents but yields minimal variability per item, requiring more items for adequate scale variance. The ease of response may allow for more items to be administered. 
+ - **Visual Analog Scale** (VAS): Presents a continuous line between two descriptors and the respondents mark a point on the line. Therefore, it is clear that this scale allows continuous scoring but it has to be noted that interpretation can be subjective, and comparisons across individuals may be difficult. An advantage of this type of scale is that it is shghly sensitive, so it useful for detecting subtle changes within individuals over time; moreover they may reduce reduce bias from recalling previous discrete responses.
 
-Item Time Frames: Consider the temporal aspect. Some scales imply an enduring trait (e.g., locus of control), while others assess transient states (e.g., depression "in the past week") or have separate state/trait forms (e.g., anxiety). The choice should be active and theory-driven, matching the nature of the phenomenon and the scale's intended use. 
+ <!-- - **Numerical Response Formats**: Research suggests linear arrays of numbers may align with fundamental neural processing of quantity, potentially giving formats like Likert scales special merit.  -->
 
+ - **Binary Options**: Offer two choices (e.g., agree/disagree, yes/no, check if applies). This type of option is simple for respondents but yields to minimal variability per item, therefore more items are required for obtaining an adequate scale variance. However, the ease of response may allow for more items to be administered. 
 
-### Step 4: Have Initial Item Pool Reviewed by Experts  {.unnumbered .toc-ignore}
-
-Purpose: Experts knowledgeable in the content area review the item pool to maximize content validity. 
-Tasks for Experts:
-Rate item relevance to the construct definition, helping confirm the definition and item-construct correspondence. 
-Evaluate item clarity and conciseness, suggesting improvements to reduce ambiguity. 
-Identify potential gaps or overlooked aspects of the phenomenon. 
-Caution: Experts may not understand scale construction principles (e.g., the need for redundancy). The scale developer makes the final decisions based on informed judgment. 
-
-### Step 5: Consider Inclusion of Validation Items {.unnumbered .toc-ignore} 
-
-Rationale: Including additional items during development can aid later validation efforts. 
-Types of Items:
-Detecting Problems: Items to assess response biases like social desirability. Items correlating highly with social desirability may need exclusion. Standard scales (e.g., Strahan & Gerbasi; MMPI bias scales) can be included. 
-Construct Validity: Measures of theoretically related (or unrelated) constructs can be included to examine convergent and discriminant validity early on. 
-
-### Step 6: Administer Items to a Development Sample {.unnumbered .toc-ignore} 
-
-Sample Size: Needs to be large enough to minimize subject variance as a concern and ensure stable item covariation patterns. Nunnally suggests 300, but smaller samples are sometimes used, depending on the number of items/scales. Risks of small samples include unstable results (e.g., inflated alpha estimates) and poor representation of the target population.
-Sample Representativeness: The sample should resemble the intended population. Non-representativeness can be quantitative (different mean level or range of the attribute) or qualitative (different relationships among items/constructs). Quantitative differences may be less problematic for assessing internal consistency. Qualitative differences, where items have different meanings or underlying structures in the sample versus the population (e.g., due to language/cultural differences), are more serious and can undermine the development effort. 
-
-### Step 7: Evaluate the Items {.unnumbered .toc-ignore}
+<!-- Item Time Frames: Consider the temporal aspect. Some scales imply an enduring trait (e.g., locus of control), while others assess transient states (e.g., depression "in the past week") or have separate state/trait forms (e.g., anxiety). The choice should be active and theory-driven, matching the nature of the phenomenon and the scale's intended use.  -->
 
 
-Goal: Identify the best-performing items from the pool to form the final scale, assessing their relationship with the latent variable's true score. 
+### Experts' review  {.unnumbered .toc-ignore}
 
-Key Qualities & Analyses:
-High Intercorrelations: Items should correlate highly with each other, indicating they share a common latent variable and have higher individual reliability. Inspect the correlation matrix. 
+Expert review plays a key role in strengthening content validity during scale development. By drawing on their subject-matter expertise, reviewers help ensure that the items meaningfully represent the construct.
 
-Reverse Scoring: Address negatively correlated items, potentially by reverse scoring them if they reflect the opposite pole of the construct. Reverse scoring can be done during administration (potentially confusing), data coding (tedious/error-prone), or electronically (easiest) using formulas like NEW = (k + 1) - OLD. If reverse scoring doesn't resolve inconsistent correlations, the item likely doesn't belong. 
+Experts are typically asked to assess how well each item reflects the construct definition, providing feedback that can confirm or refine the conceptual framework. They also evaluate the clarity and precision of item wording, offering suggestions to reduce ambiguity. In addition, experts may highlight important aspects of the construct that have been overlooked.
 
-Item-Scale Correlations: Each item should correlate substantially with the sum of the other items (corrected item-scale correlation is preferred over uncorrected to avoid inflation).
+However, it's important to note that content experts may not be familiar with psychometric principles. For instance, they might recommend eliminating seemingly redundant items, not realizing that some redundancy is intentional and necessary for reliability. While expert input is highly valuable, final decisions should rest with the scale developer, who must balance expert judgment with methodological rigor. 
 
-Item Variances: Items should have relatively high variance, indicating they discriminate between individuals. Very low variance suggests poor discrimination. Markedly different variances might signal inconsistent error or violation of model assumptions (like essential tau equivalence).
+<!-- ### Step 5: Include Validation Items {.unnumbered .toc-ignore} -->
 
-Item Means: Means should be close to the center of the possible score range. Extreme means often lead to low variance and poor correlations. Check means/variances after initial selection based on correlations.
+<!-- Rationale: Including additional items during development can aid later validation efforts. -->
+<!-- Types of Items: -->
+<!-- Detecting Problems: Items to assess response biases like social desirability. Items correlating highly with social desirability may need exclusion. Standard scales (e.g., Strahan & Gerbasi; MMPI bias scales) can be included. -->
+<!-- Construct Validity: Measures of theoretically related (or unrelated) constructs can be included to examine convergent and discriminant validity early on. -->
 
-Dimensionality: Use factor analysis to determine if the items form a single, unidimensional set, which is an assumption for coefficient alpha.
+<!-- ### Step 6: Administer Items to a Development Sample {.unnumbered .toc-ignore}  -->
 
-Reliability (Alpha): Calculate coefficient alpha (or alternatives like omega if assumptions aren't met) to assess internal consistency – the proportion of variance due to the true score. Can be computed using statistical software (SPSS RELIABILITY, SAS PROC CORR ALPHA) or by hand using variance-based formulas (preferred) or correlation-based Spearman-Brown. Alpha ranges from 0 to 1 (negative alpha indicates problems like negative inter-item correlations). Common (subjective) benchmarks for research scales: <.60 unacceptable, .60-.65 undesirable, .65-.70 minimal, .70-.80 respectable, .80-.90 very good; >.90 consider shortening. Aim higher during development as alpha might drop in new samples. Scales for individual assessment (clinical, diagnostic) require much higher reliability (e.g., mid-.90s). Single-item measures cannot use alpha; test-retest is an imperfect alternative. Omega is an option if assumptions for alpha are unmet. 
+<!-- Sample Size: Needs to be large enough to minimize subject variance as a concern and ensure stable item covariation patterns. Nunnally suggests 300, but smaller samples are sometimes used, depending on the number of items/scales. Risks of small samples include unstable results (e.g., inflated alpha estimates) and poor representation of the target population. -->
+<!-- Sample Representativeness: The sample should resemble the intended population. Non-representativeness can be quantitative (different mean level or range of the attribute) or qualitative (different relationships among items/constructs). Quantitative differences may be less problematic for assessing internal consistency. Qualitative differences, where items have different meanings or underlying structures in the sample versus the population (e.g., due to language/cultural differences), are more serious and can undermine the development effort.  -->
 
-
-### Step 8: Optimize Scale Length  {.unnumbered .toc-ignore}
-
-Trade-off: Shorter scales reduce respondent burden, while longer scales are generally more reliable. The goal is an optimal balance. Brevity is pointless if reliability is too low. Consider shortening only when reliability is high. 
-Dropping Items: Removing weak items (low correlation with others) can increase alpha, especially in shorter scales where each item has more impact. If an item's correlation is only slightly below average, keeping it usually benefits alpha more than removing it hurts. 
-Process: Identify items for potential removal based on their impact on alpha (using software output), low item-scale correlations, or low squared multiple correlations (communality). 
-Alpha Precision: Alpha itself is an estimate; its stability (reliability) increases with the number of items. Longer scales yield more consistent alpha values across administrations. Build in a safety margin, as alpha may decrease in new samples.
-Split Samples: If the development sample is large enough, split it (e.g., in half or unevenly). Develop/optimize the scale on one subsample and cross-validate (check stability of alpha and other stats) on the second subsample, whose data did not influence item selection. This helps assess if initial results were inflated by chance, though subsamples are still more similar than entirely separate samples. 
+<!-- ### Step 7: Evaluate the Items {.unnumbered .toc-ignore} -->
 
 
+<!-- Goal: Identify the best-performing items from the pool to form the final scale, assessing their relationship with the latent variable's true score.  -->
 
+<!-- Key Qualities & Analyses: -->
+<!-- High Intercorrelations: Items should correlate highly with each other, indicating they share a common latent variable and have higher individual reliability. Inspect the correlation matrix.  -->
+
+<!-- Reverse Scoring: Address negatively correlated items, potentially by reverse scoring them if they reflect the opposite pole of the construct. Reverse scoring can be done during administration (potentially confusing), data coding (tedious/error-prone), or electronically (easiest) using formulas like NEW = (k + 1) - OLD. If reverse scoring doesn't resolve inconsistent correlations, the item likely doesn't belong.  -->
+
+<!-- Item-Scale Correlations: Each item should correlate substantially with the sum of the other items (corrected item-scale correlation is preferred over uncorrected to avoid inflation). -->
+
+<!-- Item Variances: Items should have relatively high variance, indicating they discriminate between individuals. Very low variance suggests poor discrimination. Markedly different variances might signal inconsistent error or violation of model assumptions (like essential tau equivalence). -->
+
+<!-- Item Means: Means should be close to the center of the possible score range. Extreme means often lead to low variance and poor correlations. Check means/variances after initial selection based on correlations. -->
+
+<!-- Dimensionality: Use factor analysis to determine if the items form a single, unidimensional set, which is an assumption for coefficient alpha. -->
+
+<!-- Reliability (Alpha): Calculate coefficient alpha (or alternatives like omega if assumptions aren't met) to assess internal consistency – the proportion of variance due to the true score. Can be computed using statistical software (SPSS RELIABILITY, SAS PROC CORR ALPHA) or by hand using variance-based formulas (preferred) or correlation-based Spearman-Brown. Alpha ranges from 0 to 1 (negative alpha indicates problems like negative inter-item correlations). Common (subjective) benchmarks for research scales: <.60 unacceptable, .60-.65 undesirable, .65-.70 minimal, .70-.80 respectable, .80-.90 very good; >.90 consider shortening. Aim higher during development as alpha might drop in new samples. Scales for individual assessment (clinical, diagnostic) require much higher reliability (e.g., mid-.90s). Single-item measures cannot use alpha; test-retest is an imperfect alternative. Omega is an option if assumptions for alpha are unmet.  -->
+
+
+<!-- ### Step 8: Optimize Scale Length  {.unnumbered .toc-ignore} -->
+
+<!-- Trade-off: Shorter scales reduce respondent burden, while longer scales are generally more reliable. The goal is an optimal balance. Brevity is pointless if reliability is too low. Consider shortening only when reliability is high.  -->
+<!-- Dropping Items: Removing weak items (low correlation with others) can increase alpha, especially in shorter scales where each item has more impact. If an item's correlation is only slightly below average, keeping it usually benefits alpha more than removing it hurts.  -->
+<!-- Process: Identify items for potential removal based on their impact on alpha (using software output), low item-scale correlations, or low squared multiple correlations (communality).  -->
+<!-- Alpha Precision: Alpha itself is an estimate; its stability (reliability) increases with the number of items. Longer scales yield more consistent alpha values across administrations. Build in a safety margin, as alpha may decrease in new samples. -->
+<!-- Split Samples: If the development sample is large enough, split it (e.g., in half or unevenly). Develop/optimize the scale on one subsample and cross-validate (check stability of alpha and other stats) on the second subsample, whose data did not influence item selection. This helps assess if initial results were inflated by chance, though subsamples are still more similar than entirely separate samples.  -->
+
+### Subsequent Steps in Scales Development  {.unnumbered .toc-ignore}
+
+Following the initial design of the questionnaire, including the selection and construction of appropriate scales, the next crucial phase involves preparing for validation and data collection. This includes strategically incorporating additional items aimed at facilitating later validation efforts, such as those designed to detect response biases or to assess the questionnaire's construct validity by measuring theoretically related concepts. 
+
+Subsequently, the questionnaire is administered to a development sample. It's essential that this sample is sufficiently large and representative of the target population to ensure stable results and minimize concerns about subject variance. 
+
+Once the data is collected, a thorough evaluation of the individual items is undertaken. This involves examining their intercorrelations to ensure they are measuring a common underlying construct, addressing any negatively correlated items through techniques like reverse scoring, and assessing the correlation of each item with the overall scale. Furthermore, the variance and means of the items are analyzed to ensure they discriminate effectively among respondents. Factor analysis is employed to confirm the dimensionality of the scale, and reliability, often measured by Cronbach's alpha, is calculated to assess the internal consistency of the items. 
+
+Finally, the length of the scale is optimized. This involves balancing the need for brevity to reduce respondent burden with the desire for higher reliability, which is generally associated with longer scales. Weak items that negatively impact reliability are considered for removal, and techniques like splitting the development sample for cross-validation can be used to ensure the stability of the optimized scale in new samples.
+
+RANKINGS

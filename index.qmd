@@ -18,6 +18,8 @@ about:
     - icon: google
       # text: Google Scholar
       href: https://scholar.google.com/citations?user=aRhtf3kAAAAJ&hl=en
+    - icon: layout-text-sidebar
+      href: CV_VENTURA_ENG.pdf
 
 ---
 
