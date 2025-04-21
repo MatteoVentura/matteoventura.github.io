@@ -2,7 +2,7 @@
   {
     "listing": "/lectures.html",
     "items": [
-      "/courses/Ordinal_data_an_R.html"
+      "/courses/ordinal_data/Ordinal_data_an_R.html"
     ]
   },
   {
@@ -13,6 +13,10 @@
   },
   {
     "listing": "/courses/Ordinal_data_an_R.html",
+    "items": []
+  },
+  {
+    "listing": "/courses/ordinal_data/Ordinal_data_an_R.html",
     "items": []
   }
 ]

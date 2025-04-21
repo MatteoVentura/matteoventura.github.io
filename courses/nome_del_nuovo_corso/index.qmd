@@ -1,0 +1,8 @@
+---
+title: "Titolo del Nuovo Corso"
+date: "2025-MM-GG" # Inserisci la data del nuovo corso
+# Altri campi opzionali
+---
+
+# Contenuto del Nuovo Corso
+...

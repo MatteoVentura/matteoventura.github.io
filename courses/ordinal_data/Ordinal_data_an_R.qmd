@@ -18,6 +18,11 @@ format:
     df-print: paged
     css: styles.css
     callout-appearance: simple
+    grid:
+      margin-width: 300px
+      body-width: 1000px 
+    code-fold: true         # <-- AGGIUNGI QUESTO
+    code-tools: true        # <-- OPZIONALE: aggiunge pulsanti per mostrare/nascondere tutto
   pdf:
     latex-distribution: miktex # o tinytex se lo stai usando
     documentclass: scrartcl
@@ -26,6 +31,18 @@ format:
 execute:
   echo: true
 ---
+
+
+<!-- <p> -->
+<!--   <a href="materials/CUM7vsCUB.r" download style="margin-right: 15px;"> -->
+<!--     <i class="bi bi-file-earmark-code-fill" style="font-size: 1.2em; vertical-align: middle;"></i> -->
+<!--     <span style="margin-left: 5px; vertical-align: middle;">R Script</span> -->
+<!--   </a> -->
+<!--   <a href="materials/CV_VENTURA_ITA_nodata.pdf" download> -->
+<!--     <i class="bi bi-file-earmark-slides-fill" style="font-size: 1.2em; vertical-align: middle;"></i> -->
+<!--     <span style="margin-left: 5px; vertical-align: middle;">Slides</span> -->
+<!--   </a> -->
+<!-- </p> -->
 
 ::: {.cell}
 <style> p { text-align: justify; } </style>
@@ -48,7 +65,25 @@ By the end of the course, participants will have both theoretical knowledge and 
  - Analyse rating data by applying CUB models
 
 
+
+
 # Introduction to Ordinal Data and Survey Design 
+::: {.content-visible when-format="html"}
+::: column-margin
+<p>
+  <a href="materials/Script_plots_examples.R" download style="margin-right: 5px;">
+    <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i>
+    <span style="margin-left: 2px; vertical-align: middle;">R Script</span>
+  </a>
+</p>
+<p>
+  <a href="materials/Lec_1 - Introduction_ordinal_data_and_survey_design.pdf" download>
+    <i class="bi bi-file-earmark-slides-fill" style="font-size: 0.9em; vertical-align: middle;"></i>
+    <span style="margin-left: 2px; vertical-align: middle;">Slides</span>
+  </a>
+</p>
+:::
+:::
 
 ## The Role of Measurement in Science
 
@@ -178,12 +213,33 @@ An odd number of categories usually allows to express neutrality, while an even 
 
 There exist several ways to present items that are commonly used:
 
-- **Likert Scale**: It is one of the most common item formats.
-The Liker Scale presents declarative statements with response options indicating degree of agreement (e.g., strongly disagree to strongly agree), and it is useful for measuring opinions, beliefs, attitudes.  
-The statements should generally be moderately strong, since it is better to lead the respondent to not give responses near the center of the scale from the "average" respondent to maximize variance and discrimination.  
-Options should represent roughly equal intervals. Likert Scales with 5, 6, 7 categories are commonly used. 
+ - **Likert scales**: are widely used psychometric tools designed to measure attitudes, opinions, and perceptions by assessing the degree of agreement or disagreement with a statement. These scales typically present a statement (called a Likert item) followed by an ordered series of response options, generally consisting of five or seven points. However, scales with four, nine, or ten points can also be employed.
 
- - **Semantic Differential Scale**:  It is used in reference ot one or more stimuli (e.g. a group of people) followed by pairs of opposite adjectives (e.g., honest/dishonest) separated by several response lines/spaces. Respondents mark the space reflecting their evaluation. The adjectives can be bipolar (friendly/hostile) or unipolar (friendly/not friendly). To measure an underlying variable, multiple related adjective pairs can be used (e.g., honesty). 
+Response anchors are the labels that define each point on the scale (for example, "Strongly disagree," "Disagree," "Neutral," "Agree," "Strongly agree"). Scales with an odd number of points often include a neutral midpoint, while scales with an even number of points force the respondent to express a direction (agreement or disagreement).
+
+Likert scales are extensively applied in surveys to assess employee engagement, customer satisfaction, product feedback, and clinical evaluations.
+
+<!-- Key Insight: The structure of a Likert scale, including the number of points and the wording of the anchors, significantly influences the data collected. Researchers must carefully consider these factors to ensure the scale accurately measures the desired construct. -->
+
+::: {.callout-warning}
+Although Likert scale data is often numerically coded to facilitate analysis, it's essential to remember their ordinal nature and approach the calculation of means with caution.
+:::
+<!-- Median and mode represent more robust measures of central tendency for this type of data.  -->
+
+* - **Semantic Differential scales**: are assessment tools used to measure attitudes and opinions toward an object, person, event, or idea through pairs of bipolar adjectives. Developed by psychologist Charles E. Osgood, these scales present a concept followed by several rows of opposite adjective pairs placed at the extremes of a continuum, typically with five to seven intermediate points.
+Respondents evaluate the concept on each adjectival scale by selecting the point that best represents their attitude. Examples of bipolar adjective pairs include "Good - Bad," "Happy - Sad," "Strong - Weak," and "Pleasant - Unpleasant." These scales are commonly used in market research, branding, and customer satisfaction assessments to understand perceptions and associations.
+
+Semantic differential scales explore the connotative meaning of a concept, revealing the emotional and evaluative dimensions of attitudes, unlike Likert scales which primarily focus on the degree of agreement. 
+
+<!-- Data visualization for semantic differential scales can be accomplished through semantic differential graphs (often resembling line profiles connecting the average ratings for each adjective pair) or by treating each scale as an ordinal variable and using divergent stacked bar charts. -->
+
+<!-- Visualization Considerations: When visualizing semantic differential scale data, it's crucial to clearly represent the bipolar nature of the scales, allowing for easy comparison of responses across different adjective pairs for the same concept or between different groups for the same adjective pair. -->
+
+
+ - **Rankings**: represent data where items are ordered according to a specific criterion or preference. Respondents arrange items in a sequence based on their preference, importance, or another defined attribute. Examples include ranking favorite movies, product features by importance, or job candidates.
+Ranking data indicates relative order but not the magnitude of difference between positions. The difference between the first and second positions might be substantial, while the difference between lower positions might be negligible.
+
+<!-- Key Insight: Analysis of ranking data focuses on the position of items within the ordered sequence. Visualizations should emphasize the distribution of positions for each item and facilitate comparisons regarding how frequently items appear in different positions. -->
 
  - **Visual Analog Scale** (VAS): Presents a continuous line between two descriptors and the respondents mark a point on the line. Therefore, it is clear that this scale allows continuous scoring but it has to be noted that interpretation can be subjective, and comparisons across individuals may be difficult. An advantage of this type of scale is that it is shghly sensitive, so it useful for detecting subtle changes within individuals over time; moreover they may reduce reduce bias from recalling previous discrete responses.
 
@@ -253,4 +309,344 @@ Once the data is collected, a thorough evaluation of the individual items is und
 
 Finally, the length of the scale is optimized. This involves balancing the need for brevity to reduce respondent burden with the desire for higher reliability, which is generally associated with longer scales. Weak items that negatively impact reliability are considered for removal, and techniques like splitting the development sample for cross-validation can be used to ensure the stability of the optimized scale in new samples.
 
-RANKINGS
+
+## Principles for Visualizing Ordinal Data
+
+The most important principle in visualizing ordinal data is to always represent ordinal categories in their natural, ordered sequence in any visual representation. In bar charts, bars should be arranged along the axis based on the logical order of the ordinal scale (e.g., from "Low" to "High"). For stacked and divergent bar charts, the segments representing ordinal categories should also follow this intrinsic order within each bar.
+
+```{r warning=FALSE}
+library(ggplot2)
+
+# Create sample data
+satisfaction <- data.frame(
+  level = factor(c("Very Dissatisfied", "Dissatisfied", "Neutral", "Satisfied", "Very Satisfied"),
+                 levels = c("Very Dissatisfied", "Dissatisfied", "Neutral", "Satisfied", "Very Satisfied")),
+  count = c(15, 23, 30, 45, 27)
+)
+
+# Create bar chart with ordered categories
+ggplot(satisfaction, aes(x = level, y = count)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  theme_minimal() +
+  labs(title = "Customer Satisfaction Levels",
+       x = "Satisfaction Level",
+       y = "Number of Responses") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
+The choice of chart should align with the research question and the specific aspect of ordinal data being investigated. Not all chart types are equally effective for representing ordered categorical data.
+
+
+### Bar Charts  {.unnumbered .toc-ignore}
+Represent each ordinal category with a bar, whose height or length corresponds to the frequency or count of that category. Fundamentally, the bars must be arranged in the logical order of the ordinal variable (e.g., from lowest to highest category). They can be vertical or horizontal; horizontal orientation is often preferred for readability of long category labels.
+
+Bar charts provide a clear and easily understandable visualization of the distribution of a single ordinal variable, highlighting the frequency of each ordered category.
+
+
+```{r warning=FALSE, message=FALSE}
+library(ggplot2)
+library(dplyr)
+
+# Create sample Likert scale data for one survey question
+likert_data <- data.frame(
+  response_category = factor(
+    c("Strongly Disagree", "Disagree", 
+      "Neutral", "Agree", "Strongly Agree"),
+    levels = c("Strongly Disagree", "Disagree", 
+               "Neutral", "Agree", "Strongly Agree")
+  ),
+  frequency = c(15, 27, 43, 85, 30)
+)
+
+# Create horizontal bar chart with properly ordered categories
+ggplot(likert_data, aes(x = response_category,
+                        y = frequency, 
+                        fill = response_category)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = c(
+    "Strongly Disagree" = "#d7191c",
+    "Disagree" = "#fdae61",
+    "Neutral" = "#ffffbf",
+    "Agree" = "#abd9e9",
+    "Strongly Agree" = "#2c7bb6"
+  )) +
+  coord_flip() +  # Horizontal orientation for better label readability
+  theme_minimal() +
+  labs(
+    title = "Responses to: 'The new software 
+    interface is intuitive to use'",
+    subtitle = "Distribution of 200 employee responses",
+    x = "",
+    y = "Number of Responses"
+  ) +
+  theme(
+    legend.position = "none",  # Remove legend as colors are self-explanatory
+    axis.text.y = element_text(size = 12),
+    plot.title = element_text(face = "bold"),
+    panel.grid.major.y = element_blank()  # Remove horizontal grid lines
+  )
+```
+
+### Stacked Bar Charts {.unnumbered .toc-ignore}
+
+Show multiple ordinal categories within a single bar, with each segment representing a different category stacked on top of another. They are useful for comparing the distribution of ordinal data across different groups or conditions. They can be displayed as counts or as percentages (where each bar totals 100%).
+
+Stacked bar charts allow comparison of both total amounts within each group and the proportion of each ordinal category within those groups, providing insights into how distributions differ between categories.
+
+
+```{r warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Create sample semantic differential scale data
+# This represents evaluations of three different smartphones on five dimensions
+semantic_data <- data.frame(
+  product = rep(c("Smartphone A", "Smartphone B", "Smartphone C"), each = 5),
+  dimension = rep(c("Ineffective - Effective",
+                    "Complicated - Simple",
+                    "Unreliable - Reliable",
+                    "Outdated - Innovative",
+                    "Unattractive - Attractive"), 3),
+  rating_1 = c(5, 8, 3, 10, 7,       # Smartphone A
+               2, 5, 2, 3, 4,        # Smartphone B
+               8, 6, 4, 5, 3),       # Smartphone C
+  rating_2 = c(10, 12, 15, 8, 13,    # Smartphone A
+               8, 10, 7, 9, 11,      # Smartphone B
+               12, 8, 9, 10, 7),     # Smartphone C
+  rating_3 = c(25, 20, 22, 18, 20,   # Smartphone A
+               15, 20, 18, 13, 15,   # Smartphone B
+               20, 22, 18, 15, 20),  # Smartphone C
+  rating_4 = c(35, 30, 32, 40, 35,   # Smartphone A
+               45, 35, 40, 38, 35,   # Smartphone B
+               30, 35, 38, 40, 35),  # Smartphone C
+  rating_5 = c(25, 30, 28, 24, 25,   # Smartphone A
+               30, 30, 33, 37, 35,   # Smartphone B
+               30, 29, 31, 30, 35)   # Smartphone C
+)
+
+# Reshape data for ggplot
+semantic_long <- semantic_data %>%
+  pivot_longer(cols = starts_with("rating_"),
+               names_to = "rating_level",
+               values_to = "count") %>%
+  mutate(
+    rating_number = as.numeric(substr(rating_level, 8, 8)),
+    rating_label = factor(
+      case_when(
+        rating_number == 1 ~ "1 (Negative)",
+        rating_number == 2 ~ "2",
+        rating_number == 3 ~ "3 (Neutral)",
+        rating_number == 4 ~ "4",
+        rating_number == 5 ~ "5 (Positive)"
+      ),
+      levels = c("1 (Negative)", "2", "3 (Neutral)", "4", "5 (Positive)")
+    )
+  )
+
+# Calculate percentages for each product-dimension combination
+semantic_pct <- semantic_long %>%
+  group_by(product, dimension) %>%
+  mutate(
+    percentage = count / sum(count) * 100,
+    total = sum(count)
+  ) %>%
+  ungroup()
+
+# Create stacked bar chart
+ggplot(semantic_pct, aes(x = dimension, y = percentage, fill = rating_label)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~ product) +
+  scale_fill_manual(values = c("1 (Negative)" = "#d7191c",
+                               "2" = "#fdae61",
+                               "3 (Neutral)" = "#ffffbf",
+                               "4" = "#a6d96a",
+                               "5 (Positive)" = "#1a9641")) +
+  coord_flip() +
+  theme_minimal() +
+  labs(title = "Smartphone Evaluations using Semantic Differential Scales",
+       subtitle = "Distribution of ratings across five dimensions",
+       x = "",
+       y = "Percentage of Responses",
+       fill = "Rating") +
+  theme(
+    legend.position = "bottom",
+    strip.background = element_rect(fill = "lightblue", color = NA),
+    strip.text = element_text(face = "bold")
+  )
+```
+
+
+This visualization effectively reveals patterns such as which smartphone is perceived as more innovative, which has the most consistent ratings across dimensions, and where the greatest differences between products exist. These insights would be difficult to discern from tables of raw data.
+The stacked bar format is particularly effective for semantic differential scales because it shows the full distribution of responses, not just averages, allowing you to see whether opinions are polarized or consistent across respondents.
+
+
+### Divergent Stacked Bar Charts {.unnumbered .toc-ignore}
+
+Specifically designed to visualize ordinal data with a neutral central category or bipolar responses, such as Likert scales and semantic differentials. Segments representing responses on one side of the neutral point extend in one direction, while segments representing responses on the other side extend in the opposite direction from a central baseline. They effectively illustrate the balance between positive and negative responses and the distribution of opinions.
+
+Divergent stacked bar charts are the recommended visualization for Likert-type scales as they clearly show the proportion of responses in each category and the overall tendency of agreement or disagreement.
+
+```{r warning=FALSE}
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+# Create sample Likert scale data
+likert_data <- data.frame(
+  question = c("The product is easy to use",
+               "The customer service was helpful",
+               "I would recommend this product to others"),
+  strongly_disagree = c(5, 10, 8),
+  disagree = c(15, 18, 12),
+  neutral = c(20, 25, 15),
+  agree = c(40, 30, 35),
+  strongly_agree = c(20, 17, 30)
+)
+
+# Reshape data for ggplot
+likert_long <- likert_data %>%
+  pivot_longer(cols = -question,
+               names_to = "response",
+               values_to = "count") %>%
+  mutate(response = factor(response,
+                           levels = c("strongly_disagree", "disagree", "neutral",
+                                     "agree", "strongly_agree")),
+         response_type = ifelse(response %in% c("strongly_disagree", "disagree"),
+                               "negative",
+                               ifelse(response == "neutral", "neutral", "positive")),
+         # Negative values for disagreement
+         plot_value = ifelse(response_type == "negative", -count, count),
+         # For neutral, split half to each side (as per original code)
+         plot_value = ifelse(response_type == "neutral", count/2, plot_value))
+
+# Create divergent stacked bar chart
+ggplot(likert_long, aes(x = question, y = plot_value, fill = response)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = c("strongly_disagree" = "darkred",
+                               "disagree" = "lightcoral",
+                               "neutral" = "lightgrey",
+                               "agree" = "lightblue",
+                               "strongly_agree" = "darkblue")) +
+  coord_flip() +
+  theme_minimal() +
+  labs(title = "Responses to Product Survey",
+       x = "",
+       y = "Count",
+       fill = "Response") +
+  theme(legend.position = "bottom")
+```
+
+### Other Possible Visualizations {.unnumbered .toc-ignore}
+
+Depending on the specific analytical objective, these alternative visualizations can provide valuable perspectives on ordinal data, particularly when exploring relationships between variables or tracking changes in rankings.
+
+**Mosaic plots** show the relationship between two or more categorical variables, including ordinal ones, using tiled rectangles whose area is proportional to the frequency of each combination of categories. 
+
+
+```{r warning=FALSE}
+# install.packages("ggmosaic")
+library(ggplot2)
+library(ggmosaic)
+library(dplyr)
+
+# Create sample data for education level (ordinal) 
+#and job satisfaction (ordinal)
+set.seed(123)
+n <- 500
+
+education_levels <- c("High School", "Associate's", "Bachelor's",
+                      "Master's", "Doctorate")
+satisfaction_levels <- c("Very Dissatisfied", "Dissatisfied",
+                         "Neutral", "Satisfied", "Very Satisfied")
+
+# Create sample data with a pattern 
+#(higher education tends to correlate with higher satisfaction)
+mosaic_data <- data.frame(
+  education = factor(sample(education_levels, n, replace = TRUE,
+                            prob = c(0.3, 0.25, 0.25, 0.15, 0.05)),
+                     levels = education_levels),
+  satisfaction = factor(NA, levels = satisfaction_levels)
+)
+
+# Generate satisfaction levels with 
+#some correlation to education
+for (i in 1:n) {
+  # Higher education levels tend to have higher satisfaction probabilities
+  edu_level <- which(education_levels == mosaic_data$education[i])
+
+  # Adjust probabilities based on education level
+  probs <- c(0.25, 0.25, 0.2, 0.2, 0.1)  # Base probabilities
+
+  # Shift probabilities based on education level
+  shift <- (edu_level - 3) * 0.05  # Shift factor based on education
+
+  # Adjust probabilities (higher education gets 
+  #more weight for higher satisfaction)
+  adjusted_probs <- probs + c(-0.1, -0.05, 0, 0.05, 0.1) * edu_level
+
+  # Ensure probabilities are valid
+  adjusted_probs <- pmax(adjusted_probs, 0.01)
+  adjusted_probs <- adjusted_probs / sum(adjusted_probs)
+
+  mosaic_data$satisfaction[i] <- sample(satisfaction_levels, 1, prob = adjusted_probs)
+}
+
+# Create mosaic plot
+ggplot(data = mosaic_data) +
+  geom_mosaic(aes(x = product(education), 
+                  fill = satisfaction)) +
+  scale_fill_brewer(palette = "RdYlGn", direction = 1) +
+  labs(title = "Relationship Between 
+       Education Level and Job Satisfaction",
+       subtitle = "Mosaic plot showing the 
+       distribution of satisfaction within 
+       each education level",
+       x = "Education Level",
+       y = "Job Satisfaction",
+       fill = "Satisfaction Level") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+         legend.position = "bottom")
+```
+
+This mosaic plot visualizes the relationship between two ordinal variables: education level and job satisfaction. The width of each column represents the proportion of respondents with that education level in the overall sample. Within each education level column, the height of each colored section represents the proportion of respondents reporting that satisfaction level.
+
+**Line charts** (bump charts) visualize the change in rank of different items over time or between categories, emphasizing movement in relative positions.
+
+```{r warning=FALSE}
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+# Create sample data for product rankings over time
+rankings <- data.frame(
+  product = rep(c("Product A", "Product B", 
+                  "Product C", "Product D", "Product E"), 4),
+  quarter = rep(c("Q1 2024", "Q2 2024", 
+                  "Q3 2024", "Q4 2024"), each = 5),
+  rank = c(1, 2, 3, 4, 5,       # Q1 rankings
+           1, 3, 2, 5, 4,       # Q2 rankings
+           2, 1, 3, 5, 4,       # Q3 rankings
+           3, 1, 2, 4, 5)       # Q4 rankings
+)
+
+# Create bump chart
+ggplot(rankings, aes(x = quarter, y = rank, 
+                     group = product, color = product)) +
+  geom_line(size = 1.5) +
+  geom_point(size = 4) +
+  scale_y_reverse(breaks = 1:5) +  # Reverse Y-axis so 
+                                   # rank 1 is at the top
+  theme_minimal() +
+  labs(title = "Product Rankings by Quarter",
+       subtitle = "Showing changes in ranking 
+       position over time",
+       x = "Quarter",
+       y = "Rank (Lower is Better)",
+       color = "Product") +
+  theme(legend.position = "bottom")
+```
+
+

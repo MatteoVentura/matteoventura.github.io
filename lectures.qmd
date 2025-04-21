@@ -1,9 +1,10 @@
 ---
 title: "Courses"
 listing:
-  contents: courses
-  type: table  # puoi usare 'table', 'grid', 'posts'
+  contents:
+    - courses/ordinal_data
+    # - courses/nome_del_nuovo_corso
+  type: table
   sort: "date desc"
   fields: [title, date]
 ---
-
