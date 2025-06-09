@@ -1,0 +1,3495 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Ordinal Data Analysis in R},
+  pdfauthor={Matteo Ventura},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Ordinal Data Analysis in R}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Measuring Human Perceptions from Surveys}
+\author{Matteo Ventura}
+\date{2025-04-16}
+
+\begin{document}
+\maketitle
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, frame hidden, interior hidden, boxrule=0pt, enhanced, sharp corners, breakable]}{\end{tcolorbox}}\fi
+
+Description of the course
+
+Surveys are key tools for measuring human perceptions, capturing latent
+traits through structured responses. Among the data they generate,
+ordinal and rating data are particularly important yet often less
+studied, requiring specialized statistical techniques. Ordinal data
+appears frequently in real-world applications, such as customer
+satisfaction surveys, psychological assessments, and medical research,
+making its correct analysis crucial for obtaining reliable insights.
+This short course provides instructor-led, hands-on training in the
+analysis of ordinal data. It begins with an overview of survey design
+and the validation of results, focusing on building effective surveys
+and ensuring the reliability of the data obtained. The course then
+covers the most commonly used statistical models for analyzing ordinal
+data, with an emphasis on discovering latent patterns and traits. Both
+theoretical foundations and practical applications will be explored,
+using real-world case studies from domains such as marketing, social
+sciences, tourism and culture.
+
+A common approach to analyzing ordinal data is to treat it as numerical,
+but this can lead to a loss of statistical power. In this course,
+participants will learn how to apply specialized methods designed for
+ordinal data, allowing them to draw more effective and reliable
+conclusions.
+
+Objectives of the course
+
+By the end of the course, participants will have both theoretical
+knowledge and practical skills to analyze ordinal data in research and
+professional settings. Specifically, they will be able to:
+
+\begin{itemize}
+\tightlist
+\item
+  Understand what ordinal data is, how it differs from other types of
+  data, and the challenges involved in its analysis
+\item
+  Compute and interpret reliability and validity measures
+\item
+  Fit proportional odds models in R and interpret the results
+\item
+  Analyse rating data by applying CUB models
+\end{itemize}
+
+\hypertarget{introduction-to-ordinal-data-and-survey-design}{%
+\section{Introduction to Ordinal Data and Survey
+Design}\label{introduction-to-ordinal-data-and-survey-design}}
+
+\hypertarget{the-role-of-measurement-in-science}{%
+\subsection{The Role of Measurement in
+Science}\label{the-role-of-measurement-in-science}}
+
+Measurement is a fundamental activity in science, indeed we acquire
+knowledge about the world around us by observing it, and we usually
+quantify to give a sense to what we observe. Therefore, measurement is
+essential in a wide range of research contexts.
+
+There exist several situations in which scientists come up with
+measurement problems, even though they are not interested primary in
+measurement. For instance:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  A health psychologist needs a measurement scale which doesn't seem to
+  exist. The study depends on a tool that can clearly distinguish
+  between what individuals want to happen and what they expect to happen
+  when visiting a physician. However, the review of previous research
+  reveals that existing scales often blur this distinction,
+  unintentionally mixing the two concepts. None of the available
+  instruments capture the separation in the specific way her study
+  requires. While the psychologist could create a few items that appear
+  to address the difference between wants and expectations, she/he is
+  concerned that these improvised questions may lack the reliability and
+  validity necessary to serve as accurate measures.
+\item
+  An epidemiologist is conducting secondary analyses on data from a
+  national health survey. They wish to investigate the link between
+  perceived psychological stress and health status. Unfortunately, the
+  survey did not include a validated stress measure. While it may be
+  possible to construct one using existing items, a poorly constructed
+  scale could lead to misleading conclusions.
+\item
+  A marketing team is struggling to design a campaign for a new line of
+  high-end infant toys. Focus groups suggest that parents are heavily
+  influenced by a toy's perceived educational value. The team
+  hypothesizes that parents with strong educational and career
+  aspirations for their children are more likely to be interested in the
+  product. To test this idea across a broad, geographically diverse
+  sample, the team needs a way to reliably measure parental aspirations.
+  Something that additional focus groups can't easily provide.
+\end{enumerate}
+
+Despite coming from different disciplines, these researchers share a
+common understanding: using arbitrary or poorly designed measurement
+tools increases the risk of collecting inaccurate data. As a result,
+developing their own carefully constructed measurement instruments
+appears to be the most reliable solution.
+
+Historically, measurement problems were well-known in natural sciences
+such as physics and astronomy, even concerning figures like Isaac
+Newton. However, among social scientists, a debate arose regarding the
+measurability of psychological variables. While physical attributes like
+mass and length seem to possess an intrinsic mathematical structure
+similar to positive real numbers, the measurement of psychological
+variables was considered impossible by the Commission of the British
+Association for the Advancement of Science. The primary reason was the
+difficulty in objectively ordering or summing sensory perceptions, as
+well illustrated by the question: how can one establish that a sensation
+of ``a little warm'' plus another similar sensation equals ``twice as
+warm''?
+
+\hypertarget{measurement-classification}{%
+\subsubsection*{Measurement
+classification}\label{measurement-classification}}
+\addcontentsline{toc}{subsubsection}{Measurement classification}
+
+The americal psychologist Stevens (1946) disagreed with this
+perspective. He contended that the rigid requirement of ``strict
+additivity,'' as seen in measurements of length or mass, was not
+essential for measuring sensations. He pointed out that individuals
+could make reasonably consistent ratio judgments regarding the loudness
+of sounds. For instance, they could determine if one sound was twice as
+loud as another.
+
+Stevens further argued that this ``ratio'' characteristic enabled the
+data derived from such measurements to be mathematically analyzed. He is
+known for categorizing measurements into nominal, ordinal, interval, and
+ratio scales. In his view, judgments about sound ``loudness'' belonged
+to the ratio scale.
+
+Despite the classification proposed by Stevens has been criticized by
+several authors and new classifications has been proposed, it is the
+most commonly accepted and used internationally.
+
+Stevens identified four properties for describing the scales of
+measurement:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Identity}: each value has a unique meaning.
+\item
+  \textbf{Magnitude}: the values of the variable have an ordered
+  relationship to one another, so there is a specific order to the
+  variables.
+\item
+  \textbf{Equal intervals}: the data points along the scale are equally
+  spaced, so the difference between data points one and two, is the same
+  as data points three and four.
+\item
+  \textbf{A minimum value of zero}: the scale has a true zero point.
+\end{itemize}
+
+As previously said, Stevens identified four scales of measurement, that
+is how variables are defined and categorised:
+
+\begin{itemize}
+\item
+  \textbf{Nominal scale of measurement}: This scale has certain
+  characteristics, but doesn't have any form of numerical meaning. The
+  data can be placed into categories but can't be multiplied, divided,
+  added or subtracted from one another. It's also not possible to
+  measure the difference between data points. It defines only the
+  identity property of data.\\
+  Examples: Gender, Etnicity, Eye colour\ldots{}
+\item
+  \textbf{Ordinal scale of measurement}: It defines data that is placed
+  in a specific order. While each value is ranked, there's no
+  information that specifies what differentiates the categories from
+  each other. These values can't be added to or subtracted from.\\
+  Examples: satisfaction data points in a survey, where `one = happy,
+  two = neutral and three = unhappy.'
+\item
+  \textbf{Interval scale of measurement}: The interval scale contains
+  properties of nominal and ordered data, but the difference between
+  data points can be quantified. This type of data shows both the order
+  of the variables and the exact differences between the variables. They
+  can be added to or subtracted from each other, but not multiplied or
+  divided (For example, 40 degrees is not 20 degrees multiplied by
+  two.).\\
+  In this scale of measurement the zero is just a convention and not
+  absolute, it is an existing value of the variable itself.
+\item
+  \textbf{Ratio scale of measurement}: This scale include properties
+  from all four scales of measurement. The data is nominal and defined
+  by an identity, can be classified in order, contains intervals and can
+  be broken down into exact value. Weight, height and distance are all
+  examples of ratio variables. Data in the ratio scale can be added,
+  subtracted, divided and multiplied. Ratio scales also differ from
+  interval scales in that the scale has a `true zero'. The number zero
+  means that the data has no value point.\\
+  An example of this is height or weight, as someone cannot be zero
+  centimetres tall or weigh zero kilos.
+\end{itemize}
+
+\hypertarget{scales-and-questionnaires-development}{%
+\subsection{Scales and Questionnaires
+development}\label{scales-and-questionnaires-development}}
+
+Measurement plays a vital role across scientific disciplines, with each
+field creating specialized methods and tools tailored to its unique
+subjects of study. In the behavioral and social sciences, the area
+devoted to measurement is called psychometrics. This subfield
+concentrates on evaluating psychological and social constructs, which
+are most often assessed using questionnaires. Theaching how to build
+effective questionnaires would require a specific course, but this is
+out of the scope of this course. The following are some practical
+guidelines that researchers can use to develop measurement scales and
+questionnaires.
+
+\hypertarget{determine-clearly-what-you-want-to-measure}{%
+\subsubsection*{Determine Clearly What You Want to
+Measure}\label{determine-clearly-what-you-want-to-measure}}
+\addcontentsline{toc}{subsubsection}{Determine Clearly What You Want to
+Measure}
+
+Researchers often discover their initial ideas about what they want to
+measure are vague, which can lead to costly changes later. Key questions
+include whether the scale should be theory-based or explore new
+directions, its level of specificity, and which aspects of the
+phenomenon to emphasize.
+
+\begin{itemize}
+\item
+  \textbf{Define the theory}: Basing scale development on relevant
+  substantive theories is essential for clearly defining the construct
+  being measured, particularly when dealing with abstract or
+  non-observable phenomena. A theoretical basis helps establish the
+  construct's boundaries, reducing the risk of the scale extending into
+  unrelated areas. In the absence of an existing theory, developers
+  should create a conceptual framework of their own---beginning with a
+  precise definition and linking the new construct to related,
+  established ones.
+\item
+  \textbf{Determine the level of specificity}: In psychometric scale
+  development, it's important to consider how general or specific the
+  measurement should be. This decision affects how well the scale works
+  in predicting or relating to other variables. For example, if you're
+  interested in general attitudes about personal control, a broad scale
+  scale works well. But if you're studying beliefs about controlling a
+  specific health issue, a focused scale is more appropriate.
+\item
+  \textbf{Define which aspects are enphasised}: Scale developers must
+  clearly distinguish the target construct from related ones. Scales can
+  be broad (e.g., general anxiety) or narrow (e.g., test anxiety).
+  Including items outside the intended focus can lead to confusion or
+  inaccurate measurement. For example, in health contexts, physical
+  symptoms caused by an illness might be mistaken for psychological
+  symptoms (like depression), leading to misleading results. Therefore,
+  item selection should match the specific research purpose and avoid
+  overlap with unrelated constructs.
+\end{itemize}
+
+\hypertarget{generate-an-item-pool}{%
+\subsubsection*{Generate an Item Pool}\label{generate-an-item-pool}}
+\addcontentsline{toc}{subsubsection}{Generate an Item Pool}
+
+When developing a psychometric scale, items should be \textbf{carefully
+selected} or created to match the specific construct you aim to measure.
+That means you need a clear idea of what the scale is supposed to do,
+and every item on the scale should reflect that goal.
+
+Imagine the construct (like anxiety, motivation, or trust) as something
+hidden or latent, which can't be observed directly. The items on your
+scale are the visible signs or behaviors that reflect this hidden thing.
+So, each item acts like a small ``test'' of how much of that construct a
+person has. If your items truly measure the construct, then someone with
+a high level of the trait should tend to score higher on all of them.
+
+When constructing the item pool, it is important to consider the
+following aspects:
+
+\begin{itemize}
+\item
+  \textbf{The latent construct} A good scale includes multiple items to
+  improve reliability, but every single item must still be strongly
+  connected to the latent construct. You should think broadly and
+  creatively when writing items to make sure they cover all the
+  different ways the construct can be expressed---but without straying
+  into measuring something else.\\
+  A construct is a single, unified idea (like ``attitudes toward
+  punishing drug abusers'') that can be thought of as causing how
+  someone responds to related items. A category, on the other hand, is
+  just a grouping of different constructs (like ``attitudes'' in
+  general, or ``barriers to compliance'').\\
+  Just because several items relate to the same category doesn't mean
+  they measure the same underlying construct. For instance, ``Barriers
+  to compliance'' is a category that can include many distinct things
+  (fear of symptoms, cost concerns, distance to treatment, etc.). Each
+  of these could be a separate construct with its own latent variable,
+  so a scale that mixes these up wouldn't truly be unidimensional (i.e.,
+  measuring just one thing).
+\item
+  \textbf{Redundancy} is crucial for reliability: multiple items allow
+  common content to summate while idiosyncrasies cancel out. However,
+  avoid superficial redundancy (e.g., minor wording changes, identical
+  grammatical structures) which can inflate reliability estimates.
+  Useful redundancy involves expressing the same core idea differently.
+  Overly specific or redundant items within a broader scale can create
+  subclusters (e.g., multiple specific anxiety items in a general
+  emotion scale), potentially undermining unidimensionality and biasing
+  the scale. This is less of a problem if the items match the scale's
+  intended specificity.
+\item
+  \textbf{The number of items} Start with more items than planned for
+  the final scale (e.g., 3-4 times as many) to allow for careful
+  selection and ensure good internal consistency. An initial pool 50\%
+  larger might suffice if items are hard to generate or fewer are needed
+  for reliability. If the pool is too large, eliminate items based on
+  criteria like lack of clarity or relevance.
+\item
+  \textbf{The wording} Including both positively worded items
+  (indicating the presence of the construct) and negatively worded items
+  (indicating its absence or low levels) is a common strategy to reduce
+  acquiescence bias---the tendency of respondents to agree with
+  statements regardless of their content. However, reversing the wording
+  can sometimes confuse participants, particularly in general population
+  or community samples, and this confusion may reduce the scale's
+  reliability.
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, opacityback=0, colframe=quarto-callout-caution-color-frame, bottomrule=.15mm, toprule=.15mm, bottomtitle=1mm, arc=.35mm, left=2mm, opacitybacktitle=0.6, colback=white, leftrule=.75mm, titlerule=0mm, toptitle=1mm, colbacktitle=quarto-callout-caution-color!10!white, rightrule=.15mm, breakable, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Caution}]
+
+Reversing the wording of items (also known as reversed polarity) can
+confuse respondents, especially if the items are complex or abstract, ot
+if the respondents have lower reading comprehension or aren't used to
+taking surveys.\\
+This confusion can lead to inconsistent or inaccurate responses, which
+lowers the reliability of the scale (i.e., how consistently it measures
+the construct).
+
+\end{tcolorbox}
+
+\hypertarget{determine-the-format-for-measurement}{%
+\subsubsection*{Determine the Format for
+Measurement}\label{determine-the-format-for-measurement}}
+\addcontentsline{toc}{subsubsection}{Determine the Format for
+Measurement}
+
+Defining the measurement format is a critical step in designing data
+collection instruments like questionnaires and scales. This decision,
+ideally made concurrently with item generation, impacts data quality,
+variability, instrument sensitivity, and ultimately, research
+conclusions.
+
+Most scale items consist of two parts: a stem and a series of response
+options. A kew aspect of the scale items is the number of response
+options. A desiderable quality of a measurement scale is variability.
+One way to increase opportunities for variability is to include lots of
+scale items. Another way is to provide numerous respose options within
+each item, especially with fewer items.
+
+In this view, continuous formats (e.g., thermometer scales) offer many
+gradations, and so increase the opportunities for variability. However,
+too many options can exceed respondents' ability to meaningfully
+discriminate, leading to ``false precision'' and increased error
+variance. Researchers must balance the need for variability with
+respondents' cognitive limitations.
+
+Another issue the investigator has to concern with, is whether the
+number of options should be even or odd. This choice depends on the type
+of question. the type of response option, and the objectives of the
+investigator.
+
+An odd number of categories usually allows to express neutrality, while
+an even number of categories forces a choice from the respondent. The
+choice depends on whether allowing neutrality is desirable or should be
+avoided.
+
+There exist several ways to present items that are commonly used:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Likert scales}: are widely used psychometric tools designed to
+  measure attitudes, opinions, and perceptions by assessing the degree
+  of agreement or disagreement with a statement. These scales typically
+  present a statement (called a Likert item) followed by an ordered
+  series of response options, generally consisting of five or seven
+  points. However, scales with four, nine, or ten points can also be
+  employed.
+\end{itemize}
+
+Response anchors are the labels that define each point on the scale (for
+example, ``Strongly disagree,'' ``Disagree,'' ``Neutral,'' ``Agree,''
+``Strongly agree''). Scales with an odd number of points often include a
+neutral midpoint, while scales with an even number of points force the
+respondent to express a direction (agreement or disagreement).
+
+Likert scales are extensively applied in surveys to assess employee
+engagement, customer satisfaction, product feedback, and clinical
+evaluations.
+
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, opacityback=0, colframe=quarto-callout-warning-color-frame, bottomrule=.15mm, toprule=.15mm, bottomtitle=1mm, arc=.35mm, left=2mm, opacitybacktitle=0.6, colback=white, leftrule=.75mm, titlerule=0mm, toptitle=1mm, colbacktitle=quarto-callout-warning-color!10!white, rightrule=.15mm, breakable, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}]
+
+Although Likert scale data is often numerically coded to facilitate
+analysis, it's essential to remember their ordinal nature and approach
+the calculation of means with caution.
+
+\end{tcolorbox}
+
+\begin{itemize}
+\item
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Semantic Differential scales}: are assessment tools used to
+    measure attitudes and opinions toward an object, person, event, or
+    idea through pairs of bipolar adjectives. Developed by psychologist
+    Charles E. Osgood, these scales present a concept followed by
+    several rows of opposite adjective pairs placed at the extremes of a
+    continuum, typically with five to seven intermediate points.
+    Respondents evaluate the concept on each adjectival scale by
+    selecting the point that best represents their attitude. Examples of
+    bipolar adjective pairs include ``Good - Bad,'' ``Happy - Sad,''
+    ``Strong - Weak,'' and ``Pleasant - Unpleasant.'' These scales are
+    commonly used in market research, branding, and customer
+    satisfaction assessments to understand perceptions and associations.
+  \end{itemize}
+\end{itemize}
+
+Semantic differential scales explore the connotative meaning of a
+concept, revealing the emotional and evaluative dimensions of attitudes,
+unlike Likert scales which primarily focus on the degree of agreement.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Rankings}: represent data where items are ordered according to
+  a specific criterion or preference. Respondents arrange items in a
+  sequence based on their preference, importance, or another defined
+  attribute. Examples include ranking favorite movies, product features
+  by importance, or job candidates. Ranking data indicates relative
+  order but not the magnitude of difference between positions. The
+  difference between the first and second positions might be
+  substantial, while the difference between lower positions might be
+  negligible.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Visual Analog Scale} (VAS): Presents a continuous line between
+  two descriptors and the respondents mark a point on the line.
+  Therefore, it is clear that this scale allows continuous scoring but
+  it has to be noted that interpretation can be subjective, and
+  comparisons across individuals may be difficult. An advantage of this
+  type of scale is that it is shghly sensitive, so it useful for
+  detecting subtle changes within individuals over time; moreover they
+  may reduce reduce bias from recalling previous discrete responses.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Binary Options}: Offer two choices (e.g., agree/disagree,
+  yes/no, check if applies). This type of option is simple for
+  respondents but yields to minimal variability per item, therefore more
+  items are required for obtaining an adequate scale variance. However,
+  the ease of response may allow for more items to be administered.
+\end{itemize}
+
+\hypertarget{experts-review}{%
+\subsubsection*{Experts' review}\label{experts-review}}
+\addcontentsline{toc}{subsubsection}{Experts' review}
+
+Expert review plays a key role in strengthening content validity during
+scale development. By drawing on their subject-matter expertise,
+reviewers help ensure that the items meaningfully represent the
+construct.
+
+Experts are typically asked to assess how well each item reflects the
+construct definition, providing feedback that can confirm or refine the
+conceptual framework. They also evaluate the clarity and precision of
+item wording, offering suggestions to reduce ambiguity. In addition,
+experts may highlight important aspects of the construct that have been
+overlooked.
+
+However, it's important to note that content experts may not be familiar
+with psychometric principles. For instance, they might recommend
+eliminating seemingly redundant items, not realizing that some
+redundancy is intentional and necessary for reliability. While expert
+input is highly valuable, final decisions should rest with the scale
+developer, who must balance expert judgment with methodological rigor.
+
+\hypertarget{subsequent-steps-in-scales-development}{%
+\subsubsection*{Subsequent Steps in Scales
+Development}\label{subsequent-steps-in-scales-development}}
+\addcontentsline{toc}{subsubsection}{Subsequent Steps in Scales
+Development}
+
+Following the initial design of the questionnaire, including the
+selection and construction of appropriate scales, the next crucial phase
+involves preparing for validation and data collection. This includes
+strategically incorporating additional items aimed at facilitating later
+validation efforts, such as those designed to detect response biases or
+to assess the questionnaire's construct validity by measuring
+theoretically related concepts.
+
+Subsequently, the questionnaire is administered to a development sample.
+It's essential that this sample is sufficiently large and representative
+of the target population to ensure stable results and minimize concerns
+about subject variance.
+
+Once the data is collected, a thorough evaluation of the individual
+items is undertaken. This involves examining their intercorrelations to
+ensure they are measuring a common underlying construct, addressing any
+negatively correlated items through techniques like reverse scoring, and
+assessing the correlation of each item with the overall scale.
+Furthermore, the variance and means of the items are analyzed to ensure
+they discriminate effectively among respondents. Factor analysis is
+employed to confirm the dimensionality of the scale, and reliability,
+often measured by Cronbach's alpha, is calculated to assess the internal
+consistency of the items.
+
+Finally, the length of the scale is optimized. This involves balancing
+the need for brevity to reduce respondent burden with the desire for
+higher reliability, which is generally associated with longer scales.
+Weak items that negatively impact reliability are considered for
+removal, and techniques like splitting the development sample for
+cross-validation can be used to ensure the stability of the optimized
+scale in new samples.
+
+\hypertarget{visualizing-ordinal-data}{%
+\subsection{Visualizing Ordinal Data}\label{visualizing-ordinal-data}}
+
+The most important principle in visualizing ordinal data is to always
+represent ordinal categories in their natural, ordered sequence in any
+visual representation. In bar charts, bars should be arranged along the
+axis based on the logical order of the ordinal scale (e.g., from ``Low''
+to ``High''). For stacked and divergent bar charts, the segments
+representing ordinal categories should also follow this intrinsic order
+within each bar.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# Create sample data}
+\NormalTok{satisfaction }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{level =} \FunctionTok{factor}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Very Dissatisfied"}\NormalTok{, }\StringTok{"Dissatisfied"}\NormalTok{, }\StringTok{"Neutral"}\NormalTok{, }\StringTok{"Satisfied"}\NormalTok{, }\StringTok{"Very Satisfied"}\NormalTok{),}
+                 \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Very Dissatisfied"}\NormalTok{, }\StringTok{"Dissatisfied"}\NormalTok{, }\StringTok{"Neutral"}\NormalTok{, }\StringTok{"Satisfied"}\NormalTok{, }\StringTok{"Very Satisfied"}\NormalTok{)),}
+  \AttributeTok{count =} \FunctionTok{c}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{27}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\# Create bar chart with ordered categories}
+\FunctionTok{ggplot}\NormalTok{(satisfaction, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ level, }\AttributeTok{y =}\NormalTok{ count)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Customer Satisfaction Levels"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Satisfaction Level"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Number of Responses"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-1-1.pdf}
+
+}
+
+\end{figure}
+
+The choice of chart should align with the research question and the
+specific aspect of ordinal data being investigated. Not all chart types
+are equally effective for representing ordered categorical data.
+
+\hypertarget{bar-charts}{%
+\subsubsection*{Bar Charts}\label{bar-charts}}
+\addcontentsline{toc}{subsubsection}{Bar Charts}
+
+Represent each ordinal category with a bar, whose height or length
+corresponds to the frequency or count of that category. Fundamentally,
+the bars must be arranged in the logical order of the ordinal variable
+(e.g., from lowest to highest category). They can be vertical or
+horizontal; horizontal orientation is often preferred for readability of
+long category labels.
+
+Bar charts provide a clear and easily understandable visualization of
+the distribution of a single ordinal variable, highlighting the
+frequency of each ordered category.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\CommentTok{\# Create sample Likert scale data for one survey question}
+\NormalTok{likert\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{response\_category =} \FunctionTok{factor}\NormalTok{(}
+    \FunctionTok{c}\NormalTok{(}\StringTok{"Strongly Disagree"}\NormalTok{, }\StringTok{"Disagree"}\NormalTok{, }
+      \StringTok{"Neutral"}\NormalTok{, }\StringTok{"Agree"}\NormalTok{, }\StringTok{"Strongly Agree"}\NormalTok{),}
+    \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Strongly Disagree"}\NormalTok{, }\StringTok{"Disagree"}\NormalTok{, }
+               \StringTok{"Neutral"}\NormalTok{, }\StringTok{"Agree"}\NormalTok{, }\StringTok{"Strongly Agree"}\NormalTok{)}
+\NormalTok{  ),}
+  \AttributeTok{frequency =} \FunctionTok{c}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{43}\NormalTok{, }\DecValTok{85}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\# Create horizontal bar chart with properly ordered categories}
+\FunctionTok{ggplot}\NormalTok{(likert\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ response\_category,}
+                        \AttributeTok{y =}\NormalTok{ frequency, }
+                        \AttributeTok{fill =}\NormalTok{ response\_category)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}
+    \StringTok{"Strongly Disagree"} \OtherTok{=} \StringTok{"\#d7191c"}\NormalTok{,}
+    \StringTok{"Disagree"} \OtherTok{=} \StringTok{"\#fdae61"}\NormalTok{,}
+    \StringTok{"Neutral"} \OtherTok{=} \StringTok{"\#ffffbf"}\NormalTok{,}
+    \StringTok{"Agree"} \OtherTok{=} \StringTok{"\#abd9e9"}\NormalTok{,}
+    \StringTok{"Strongly Agree"} \OtherTok{=} \StringTok{"\#2c7bb6"}
+\NormalTok{  )) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}  \CommentTok{\# Horizontal orientation for better label readability}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Responses to: \textquotesingle{}The new software }
+\StringTok{    interface is intuitive to use\textquotesingle{}"}\NormalTok{,}
+    \AttributeTok{subtitle =} \StringTok{"Distribution of 200 employee responses"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{""}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Number of Responses"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,  }\CommentTok{\# Remove legend as colors are self{-}explanatory}
+    \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{),}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{),}
+    \AttributeTok{panel.grid.major.y =} \FunctionTok{element\_blank}\NormalTok{()  }\CommentTok{\# Remove horizontal grid lines}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-2-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{stacked-bar-charts}{%
+\subsubsection*{Stacked Bar Charts}\label{stacked-bar-charts}}
+\addcontentsline{toc}{subsubsection}{Stacked Bar Charts}
+
+Show multiple ordinal categories within a single bar, with each segment
+representing a different category stacked on top of another. They are
+useful for comparing the distribution of ordinal data across different
+groups or conditions. They can be displayed as counts or as percentages
+(where each bar totals 100\%).
+
+Stacked bar charts allow comparison of both total amounts within each
+group and the proportion of each ordinal category within those groups,
+providing insights into how distributions differ between categories.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+
+\CommentTok{\# Create sample semantic differential scale data}
+\CommentTok{\# This represents evaluations of three different smartphones on five dimensions}
+\NormalTok{semantic\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{product =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Smartphone A"}\NormalTok{, }\StringTok{"Smartphone B"}\NormalTok{, }\StringTok{"Smartphone C"}\NormalTok{), }\AttributeTok{each =} \DecValTok{5}\NormalTok{),}
+  \AttributeTok{dimension =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Ineffective {-} Effective"}\NormalTok{,}
+                    \StringTok{"Complicated {-} Simple"}\NormalTok{,}
+                    \StringTok{"Unreliable {-} Reliable"}\NormalTok{,}
+                    \StringTok{"Outdated {-} Innovative"}\NormalTok{,}
+                    \StringTok{"Unattractive {-} Attractive"}\NormalTok{), }\DecValTok{3}\NormalTok{),}
+  \AttributeTok{rating\_1 =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{7}\NormalTok{,       }\CommentTok{\# Smartphone A}
+               \DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{,        }\CommentTok{\# Smartphone B}
+               \DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{),       }\CommentTok{\# Smartphone C}
+  \AttributeTok{rating\_2 =} \FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{13}\NormalTok{,    }\CommentTok{\# Smartphone A}
+               \DecValTok{8}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{,      }\CommentTok{\# Smartphone B}
+               \DecValTok{12}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{7}\NormalTok{),     }\CommentTok{\# Smartphone C}
+  \AttributeTok{rating\_3 =} \FunctionTok{c}\NormalTok{(}\DecValTok{25}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{20}\NormalTok{,   }\CommentTok{\# Smartphone A}
+               \DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{15}\NormalTok{,   }\CommentTok{\# Smartphone B}
+               \DecValTok{20}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{),  }\CommentTok{\# Smartphone C}
+  \AttributeTok{rating\_4 =} \FunctionTok{c}\NormalTok{(}\DecValTok{35}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{35}\NormalTok{,   }\CommentTok{\# Smartphone A}
+               \DecValTok{45}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{38}\NormalTok{, }\DecValTok{35}\NormalTok{,   }\CommentTok{\# Smartphone B}
+               \DecValTok{30}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{38}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{35}\NormalTok{),  }\CommentTok{\# Smartphone C}
+  \AttributeTok{rating\_5 =} \FunctionTok{c}\NormalTok{(}\DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{24}\NormalTok{, }\DecValTok{25}\NormalTok{,   }\CommentTok{\# Smartphone A}
+               \DecValTok{30}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{37}\NormalTok{, }\DecValTok{35}\NormalTok{,   }\CommentTok{\# Smartphone B}
+               \DecValTok{30}\NormalTok{, }\DecValTok{29}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{35}\NormalTok{)   }\CommentTok{\# Smartphone C}
+\NormalTok{)}
+
+\CommentTok{\# Reshape data for ggplot}
+\NormalTok{semantic\_long }\OtherTok{\textless{}{-}}\NormalTok{ semantic\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"rating\_"}\NormalTok{),}
+               \AttributeTok{names\_to =} \StringTok{"rating\_level"}\NormalTok{,}
+               \AttributeTok{values\_to =} \StringTok{"count"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{rating\_number =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{substr}\NormalTok{(rating\_level, }\DecValTok{8}\NormalTok{, }\DecValTok{8}\NormalTok{)),}
+    \AttributeTok{rating\_label =} \FunctionTok{factor}\NormalTok{(}
+      \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{        rating\_number }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\textasciitilde{}} \StringTok{"1 (Negative)"}\NormalTok{,}
+\NormalTok{        rating\_number }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\textasciitilde{}} \StringTok{"2"}\NormalTok{,}
+\NormalTok{        rating\_number }\SpecialCharTok{==} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \StringTok{"3 (Neutral)"}\NormalTok{,}
+\NormalTok{        rating\_number }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\textasciitilde{}} \StringTok{"4"}\NormalTok{,}
+\NormalTok{        rating\_number }\SpecialCharTok{==} \DecValTok{5} \SpecialCharTok{\textasciitilde{}} \StringTok{"5 (Positive)"}
+\NormalTok{      ),}
+      \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"1 (Negative)"}\NormalTok{, }\StringTok{"2"}\NormalTok{, }\StringTok{"3 (Neutral)"}\NormalTok{, }\StringTok{"4"}\NormalTok{, }\StringTok{"5 (Positive)"}\NormalTok{)}
+\NormalTok{    )}
+\NormalTok{  )}
+
+\CommentTok{\# Calculate percentages for each product{-}dimension combination}
+\NormalTok{semantic\_pct }\OtherTok{\textless{}{-}}\NormalTok{ semantic\_long }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(product, dimension) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{percentage =}\NormalTok{ count }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(count) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{,}
+    \AttributeTok{total =} \FunctionTok{sum}\NormalTok{(count)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+
+\CommentTok{\# Create stacked bar chart}
+\FunctionTok{ggplot}\NormalTok{(semantic\_pct, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ dimension, }\AttributeTok{y =}\NormalTok{ percentage, }\AttributeTok{fill =}\NormalTok{ rating\_label)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ product) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"1 (Negative)"} \OtherTok{=} \StringTok{"\#d7191c"}\NormalTok{,}
+                               \StringTok{"2"} \OtherTok{=} \StringTok{"\#fdae61"}\NormalTok{,}
+                               \StringTok{"3 (Neutral)"} \OtherTok{=} \StringTok{"\#ffffbf"}\NormalTok{,}
+                               \StringTok{"4"} \OtherTok{=} \StringTok{"\#a6d96a"}\NormalTok{,}
+                               \StringTok{"5 (Positive)"} \OtherTok{=} \StringTok{"\#1a9641"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Smartphone Evaluations using Semantic Differential Scales"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Distribution of ratings across five dimensions"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{""}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Percentage of Responses"}\NormalTok{,}
+       \AttributeTok{fill =} \StringTok{"Rating"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+    \AttributeTok{strip.background =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }\AttributeTok{color =} \ConstantTok{NA}\NormalTok{),}
+    \AttributeTok{strip.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-3-1.pdf}
+
+}
+
+\end{figure}
+
+This visualization effectively reveals patterns such as which smartphone
+is perceived as more innovative, which has the most consistent ratings
+across dimensions, and where the greatest differences between products
+exist. These insights would be difficult to discern from tables of raw
+data. The stacked bar format is particularly effective for semantic
+differential scales because it shows the full distribution of responses,
+not just averages, allowing you to see whether opinions are polarized or
+consistent across respondents.
+
+\hypertarget{divergent-stacked-bar-charts}{%
+\subsubsection*{Divergent Stacked Bar
+Charts}\label{divergent-stacked-bar-charts}}
+\addcontentsline{toc}{subsubsection}{Divergent Stacked Bar Charts}
+
+Specifically designed to visualize ordinal data with a neutral central
+category or bipolar responses, such as Likert scales and semantic
+differentials. Segments representing responses on one side of the
+neutral point extend in one direction, while segments representing
+responses on the other side extend in the opposite direction from a
+central baseline. They effectively illustrate the balance between
+positive and negative responses and the distribution of opinions.
+
+Divergent stacked bar charts are the recommended visualization for
+Likert-type scales as they clearly show the proportion of responses in
+each category and the overall tendency of agreement or disagreement.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Install and load required package}
+\CommentTok{\# install.packages("HH")}
+\FunctionTok{library}\NormalTok{(HH)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Caricamento del pacchetto richiesto: lattice
+\end{verbatim}
+
+\begin{verbatim}
+Caricamento del pacchetto richiesto: grid
+\end{verbatim}
+
+\begin{verbatim}
+Caricamento del pacchetto richiesto: latticeExtra
+\end{verbatim}
+
+\begin{verbatim}
+
+Caricamento pacchetto: 'latticeExtra'
+\end{verbatim}
+
+\begin{verbatim}
+Il seguente oggetto è mascherato da 'package:ggplot2':
+
+    layer
+\end{verbatim}
+
+\begin{verbatim}
+Caricamento del pacchetto richiesto: multcomp
+\end{verbatim}
+
+\begin{verbatim}
+Caricamento del pacchetto richiesto: mvtnorm
+\end{verbatim}
+
+\begin{verbatim}
+Caricamento del pacchetto richiesto: survival
+\end{verbatim}
+
+\begin{verbatim}
+Caricamento del pacchetto richiesto: TH.data
+\end{verbatim}
+
+\begin{verbatim}
+Caricamento del pacchetto richiesto: MASS
+\end{verbatim}
+
+\begin{verbatim}
+
+Caricamento pacchetto: 'MASS'
+\end{verbatim}
+
+\begin{verbatim}
+Il seguente oggetto è mascherato da 'package:dplyr':
+
+    select
+\end{verbatim}
+
+\begin{verbatim}
+
+Caricamento pacchetto: 'TH.data'
+\end{verbatim}
+
+\begin{verbatim}
+Il seguente oggetto è mascherato da 'package:MASS':
+
+    geyser
+\end{verbatim}
+
+\begin{verbatim}
+Caricamento del pacchetto richiesto: gridExtra
+\end{verbatim}
+
+\begin{verbatim}
+
+Caricamento pacchetto: 'gridExtra'
+\end{verbatim}
+
+\begin{verbatim}
+Il seguente oggetto è mascherato da 'package:dplyr':
+
+    combine
+\end{verbatim}
+
+\begin{verbatim}
+
+Caricamento pacchetto: 'HH'
+\end{verbatim}
+
+\begin{verbatim}
+Il seguente oggetto è mascherato da 'package:base':
+
+    is.R
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Frequency data for three items (rows) on a 5{-}point Likert scale}
+\NormalTok{likert\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \StringTok{"Easy"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{20}\NormalTok{),}
+  \StringTok{"Helpful"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{17}\NormalTok{),}
+  \StringTok{"Recommend"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\# Set column names (Likert scale labels)}
+\FunctionTok{rownames}\NormalTok{(likert\_data) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Strongly Disagree"}\NormalTok{, }\StringTok{"Disagree"}\NormalTok{, }\StringTok{"Neutral"}\NormalTok{, }\StringTok{"Agree"}\NormalTok{, }\StringTok{"Strongly Agree"}\NormalTok{)}
+\NormalTok{likert\_data }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(likert\_data)  }\CommentTok{\# Transpose: items as columns, scale points as rows}
+
+\CommentTok{\# Create the Likert plot}
+\NormalTok{likert\_plot }\OtherTok{\textless{}{-}} \FunctionTok{likert}\NormalTok{(likert\_data,}
+                      \AttributeTok{main =} \StringTok{"Customer Feedback on Product Experience"}\NormalTok{,}
+                      \AttributeTok{xlab =} \StringTok{"Percentage of Responses"}\NormalTok{,}
+                      \AttributeTok{ylab =} \ConstantTok{NULL}\NormalTok{,}
+                      \AttributeTok{positive.order =} \ConstantTok{TRUE}\NormalTok{,}
+                      \AttributeTok{reference =} \DecValTok{0}\NormalTok{)}
+
+\CommentTok{\# Display the plot}
+\FunctionTok{print}\NormalTok{(likert\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-4-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{other-possible-visualizations}{%
+\subsubsection*{Other Possible
+Visualizations}\label{other-possible-visualizations}}
+\addcontentsline{toc}{subsubsection}{Other Possible Visualizations}
+
+Depending on the specific analytical objective, these alternative
+visualizations can provide valuable perspectives on ordinal data,
+particularly when exploring relationships between variables or tracking
+changes in rankings.
+
+\textbf{Mosaic plots} show the relationship between two or more
+categorical variables, including ordinal ones, using tiled rectangles
+whose area is proportional to the frequency of each combination of
+categories.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install.packages("ggmosaic")}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(ggmosaic)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\CommentTok{\# Create sample data for education level (ordinal) }
+\CommentTok{\#and job satisfaction (ordinal)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{500}
+
+\NormalTok{education\_levels }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"High School"}\NormalTok{, }\StringTok{"Associate\textquotesingle{}s"}\NormalTok{, }\StringTok{"Bachelor\textquotesingle{}s"}\NormalTok{,}
+                      \StringTok{"Master\textquotesingle{}s"}\NormalTok{, }\StringTok{"Doctorate"}\NormalTok{)}
+\NormalTok{satisfaction\_levels }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Very Dissatisfied"}\NormalTok{, }\StringTok{"Dissatisfied"}\NormalTok{,}
+                         \StringTok{"Neutral"}\NormalTok{, }\StringTok{"Satisfied"}\NormalTok{, }\StringTok{"Very Satisfied"}\NormalTok{)}
+
+\CommentTok{\# Create sample data with a pattern }
+\CommentTok{\#(higher education tends to correlate with higher satisfaction)}
+\NormalTok{mosaic\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{education =} \FunctionTok{factor}\NormalTok{(}\FunctionTok{sample}\NormalTok{(education\_levels, n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{,}
+                            \AttributeTok{prob =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.3}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.05}\NormalTok{)),}
+                     \AttributeTok{levels =}\NormalTok{ education\_levels),}
+  \AttributeTok{satisfaction =} \FunctionTok{factor}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\AttributeTok{levels =}\NormalTok{ satisfaction\_levels)}
+\NormalTok{)}
+
+\CommentTok{\# Generate satisfaction levels with }
+\CommentTok{\#some correlation to education}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n) \{}
+  \CommentTok{\# Higher education levels tend to have higher satisfaction probabilities}
+\NormalTok{  edu\_level }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(education\_levels }\SpecialCharTok{==}\NormalTok{ mosaic\_data}\SpecialCharTok{$}\NormalTok{education[i])}
+
+  \CommentTok{\# Adjust probabilities based on education level}
+\NormalTok{  probs }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.1}\NormalTok{)  }\CommentTok{\# Base probabilities}
+
+  \CommentTok{\# Shift probabilities based on education level}
+\NormalTok{  shift }\OtherTok{\textless{}{-}}\NormalTok{ (edu\_level }\SpecialCharTok{{-}} \DecValTok{3}\NormalTok{) }\SpecialCharTok{*} \FloatTok{0.05}  \CommentTok{\# Shift factor based on education}
+
+  \CommentTok{\# Adjust probabilities (higher education gets }
+  \CommentTok{\#more weight for higher satisfaction)}
+\NormalTok{  adjusted\_probs }\OtherTok{\textless{}{-}}\NormalTok{ probs }\SpecialCharTok{+} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{0.05}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{0.05}\NormalTok{, }\FloatTok{0.1}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ edu\_level}
+
+  \CommentTok{\# Ensure probabilities are valid}
+\NormalTok{  adjusted\_probs }\OtherTok{\textless{}{-}} \FunctionTok{pmax}\NormalTok{(adjusted\_probs, }\FloatTok{0.01}\NormalTok{)}
+\NormalTok{  adjusted\_probs }\OtherTok{\textless{}{-}}\NormalTok{ adjusted\_probs }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(adjusted\_probs)}
+
+\NormalTok{  mosaic\_data}\SpecialCharTok{$}\NormalTok{satisfaction[i] }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(satisfaction\_levels, }\DecValTok{1}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ adjusted\_probs)}
+\NormalTok{\}}
+
+\CommentTok{\# Create mosaic plot}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mosaic\_data) }\SpecialCharTok{+}
+  \FunctionTok{geom\_mosaic}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{product}\NormalTok{(education), }
+                  \AttributeTok{fill =}\NormalTok{ satisfaction)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"RdYlGn"}\NormalTok{, }\AttributeTok{direction =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Relationship Between }
+\StringTok{       Education Level and Job Satisfaction"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Mosaic plot showing the }
+\StringTok{       distribution of satisfaction within }
+\StringTok{       each education level"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Education Level"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Job Satisfaction"}\NormalTok{,}
+       \AttributeTok{fill =} \StringTok{"Satisfaction Level"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{),}
+         \AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-5-1.pdf}
+
+}
+
+\end{figure}
+
+This mosaic plot visualizes the relationship between two ordinal
+variables: education level and job satisfaction. The width of each
+column represents the proportion of respondents with that education
+level in the overall sample. Within each education level column, the
+height of each colored section represents the proportion of respondents
+reporting that satisfaction level.
+
+\textbf{Line charts} (bump charts) visualize the change in rank of
+different items over time or between categories, emphasizing movement in
+relative positions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\CommentTok{\# Create sample data for product rankings over time}
+\NormalTok{rankings }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{product =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Product A"}\NormalTok{, }\StringTok{"Product B"}\NormalTok{, }
+                  \StringTok{"Product C"}\NormalTok{, }\StringTok{"Product D"}\NormalTok{, }\StringTok{"Product E"}\NormalTok{), }\DecValTok{4}\NormalTok{),}
+  \AttributeTok{quarter =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Q1 2024"}\NormalTok{, }\StringTok{"Q2 2024"}\NormalTok{, }
+                  \StringTok{"Q3 2024"}\NormalTok{, }\StringTok{"Q4 2024"}\NormalTok{), }\AttributeTok{each =} \DecValTok{5}\NormalTok{),}
+  \AttributeTok{rank =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{,       }\CommentTok{\# Q1 rankings}
+           \DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{4}\NormalTok{,       }\CommentTok{\# Q2 rankings}
+           \DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{4}\NormalTok{,       }\CommentTok{\# Q3 rankings}
+           \DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{)       }\CommentTok{\# Q4 rankings}
+\NormalTok{)}
+
+\CommentTok{\# Create bump chart}
+\FunctionTok{ggplot}\NormalTok{(rankings, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ quarter, }\AttributeTok{y =}\NormalTok{ rank, }
+                     \AttributeTok{group =}\NormalTok{ product, }\AttributeTok{color =}\NormalTok{ product)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{size =} \FloatTok{1.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{4}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_reverse}\NormalTok{(}\AttributeTok{breaks =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Reverse Y{-}axis so }
+                                   \CommentTok{\# rank 1 is at the top}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Product Rankings by Quarter"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Showing changes in ranking }
+\StringTok{       position over time"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Quarter"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Rank (Lower is Better)"}\NormalTok{,}
+       \AttributeTok{color =} \StringTok{"Product"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-6-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{classical-models-for-ordinal-data}{%
+\section{Classical Models for Ordinal
+Data}\label{classical-models-for-ordinal-data}}
+
+\hypertarget{limitations-of-most-commonly-used-models}{%
+\subsection{Limitations of most commonly used
+models}\label{limitations-of-most-commonly-used-models}}
+
+\hypertarget{limitations-of-linear-regression}{%
+\subsubsection*{Limitations of Linear
+Regression:}\label{limitations-of-linear-regression}}
+\addcontentsline{toc}{subsubsection}{Limitations of Linear Regression:}
+
+Linear regression is designed for dependent variables that are
+continuous and can take any value within a range (or at least have a
+large number of distinct, equally-spaced values). Applying linear
+regression to ordinal data involves treating the ordered categories as
+if they were numerical scores with equal intervals between them.
+
+\begin{itemize}
+\item
+  \textbf{Ignores Non-Interval Nature}: The primary issue is that linear
+  regression assumes that the difference between category 1 and 2 is the
+  same as the difference between category 2 and 3, and so on. For
+  ordinal data, this is often not true. The ``distance'' between ``Very
+  Dissatisfied'' and ``Dissatisfied'' might not be the same in the minds
+  of respondents as the distance between ``Satisfied'' and ``Very
+  Satisfied.'' By assigning numerical scores (e.g., 1, 2, 3, 4, 5) and
+  running linear regression, we impose an arbitrary interval structure
+  that the data doesn't necessarily possess. This can lead to inaccurate
+  estimates of the effects of predictors.
+\item
+  \textbf{Violation of Assumptions}: Linear regression assumes the
+  dependent variable is continuous and errors are normally distributed
+  with constant variance. For an ordinal variable with a limited number
+  of categories, these assumptions are violated. The predicted values
+  from a linear model can also fall outside the valid range of the
+  ordinal scale (e.g., predicting a satisfaction level of 0.5 or 5.8 on
+  a 1-5 scale).
+\item
+  \textbf{Misleading Interpretation}: Interpreting coefficients in
+  linear regression involves saying that a one-unit increase in a
+  predictor is associated with a certain change in the mean score of the
+  ordinal variable. This interpretation is based on the problematic
+  assumption of equal intervals and might not accurately reflect the
+  underlying process generating the ordinal response.
+\end{itemize}
+
+\hypertarget{limitations-of-binary-logistic-regression}{%
+\subsubsection*{Limitations of Binary Logistic
+Regression:}\label{limitations-of-binary-logistic-regression}}
+\addcontentsline{toc}{subsubsection}{Limitations of Binary Logistic
+Regression:}
+
+Binary logistic regression is suitable for dependent variables with
+exactly two outcomes (e.g., Yes/No, Success/Failure). To use it with an
+ordinal variable, you have to collapse the multiple ordered categories
+into just two.
+
+\begin{itemize}
+\item
+  \textbf{Loss of Information}: The biggest drawback is the loss of
+  valuable information about the granularity and ordering of the
+  original categories. Forcing a 5-point scale into a binary outcome
+  (e.g., ``Satisfied/Very Satisfied'' vs.~``Dissatisfied/Neutral/Very
+  Dissatisfied'') discards the nuances within the original categories. A
+  model that can distinguish between ``Dissatisfied'' and ``Very
+  Dissatisfied'' will likely be more informative than one that groups
+  them.
+\item
+  \textbf{Arbitrary Threshold}: The choice of where to split the ordinal
+  scale into two groups is often arbitrary. Different researchers might
+  choose different cut-off points, and this arbitrary choice can
+  significantly influence the results and conclusions drawn from the
+  analysis. The effect of a predictor might appear different depending
+  on how the dichotomization is performed.
+\item
+  \textbf{Reduced Statistical Power}: By reducing the number of
+  outcomes, you potentially reduce the variability captured by the
+  dependent variable, which can lead to a loss of statistical power to
+  detect significant effects of your predictors compared to a model that
+  utilizes the full ordinal scale.
+\end{itemize}
+
+\hypertarget{limitations-of-multinomial-logistic-regression}{%
+\subsubsection*{Limitations of Multinomial Logistic
+Regression:}\label{limitations-of-multinomial-logistic-regression}}
+\addcontentsline{toc}{subsubsection}{Limitations of Multinomial Logistic
+Regression:}
+
+Multinomial (or polytomous) logistic regression is designed for
+dependent variables with three or more categories that have no natural
+order (e.g., choice of car color: red, blue, green). While it can handle
+multiple categories, its fundamental structure doesn't account for
+ranking.
+
+\begin{itemize}
+\item
+  \textbf{Ignores the Order}: Multinomial logistic regression models the
+  probability of being in each category relative to a chosen baseline
+  category. It estimates a separate set of coefficients for each
+  category comparison (e.g., Category 2 vs.~Category 1, Category 3
+  vs.~Category 1, etc.). It treats the categories as distinct nominal
+  outcomes, completely ignoring the fact that category 3 falls between
+  category 2 and category 4 in a meaningful way.
+\item
+  \textbf{Difficult Interpretation} (in terms of Order): The
+  coefficients in a multinomial logit model are interpreted in terms of
+  the change in log-odds of being in a specific category versus the
+  baseline category for a one-unit change in a predictor. While
+  technically correct, relating these separate category-specific effects
+  back to the overall ordered nature of the dependent variable can be
+  cumbersome and less intuitive than the single cumulative odds ratio
+  provided by the cumulative logit model (when the proportional odds
+  assumption holds). It doesn't directly answer questions like ``how
+  does this predictor affect the likelihood of being in a higher
+  category?''
+\end{itemize}
+
+\hypertarget{modeling-cumulative-probabilities}{%
+\subsection{Modeling Cumulative
+Probabilities}\label{modeling-cumulative-probabilities}}
+
+The primary methodology for modeling ordinal data revolves around the
+cumulative probabilities associated with the ordered categories. This
+approach respects the inherent order of the data, ensuring that these
+probabilities monotonically increase as we move up the ordinal scale.
+
+To more appropriately handle ordinality, the cumulative probabilities
+approach modifies logistic regression by applying transformations that
+consider the order of the categories. A common transformation is the
+logit transformation applied to the cumulative probabilities, which
+enhances the model's ability to capture the ordered nature of the data.
+Other transformations, such as probit or log-log, can also be used
+depending on the specific data characteristics and analytical
+requirements.
+
+\textbf{Definition}: Given an ordinal variable \(R\) with \(m\) ordered
+categories, let's denote these categories as \(r_1, r_2, \dots, r_m\),
+where \(r_1\) is the ``lowest'' category and \(r_m\) is the ``highest''.
+The categories have a meaningful order:
+\(r_1 \leq r_2, \leq \dots, \leq r_m\).
+
+A cumulative probability for a specific category \(r_j\) is the
+probability that the observed response \(R\) falls into category
+\(r_j\), or any category below it. Mathematically, this is expressed as
+\(P(R \leq r_j)\).
+
+We can define \(m-1\) such cumulative probabilities, corresponding to
+the thresholds between the categories:
+
+\begin{itemize}
+\item
+  For the first category \(r_1\):\\
+  \(P(R \leq r_1) = P(R = r_1)\) is simply the probability of being in
+  the lowest category.
+\item
+  For the first category \(r_2\):\\
+  \(P(R \leq r_2) = P(R = r_1) + P(R = r_2)\) is the probability of
+  being in the second category or any category below it (which is just
+  the first category).
+\item
+  For the third category \(r_3\):\\
+  \(P(R \leq r_3) = P(R = r_1) + P(R = r_2) + P(R = r_3)\) is the
+  probability of being in the third category or any category below it.
+\item
+  \ldots and so on, up to the \((m-1)\)-th category \(r_{(m-1)}\):\\
+  \(P(R \leq r_{(m-1)}) = P(R = r_1) + P(R = r_2) + P(R = r_3) + \dots + P(R = r_{(m-1)})\)
+  is the probability of being in the second-highest category or any
+  category below it.
+\item
+  For the last category \(r_m\) \(r_{(m-1)}\):\\
+  \(P(R \leq r_m) = P(R = r_1) + P(R = r_2) + P(R = r_3) + \dots + P(R = r_{(m-1)})+ P(R = r_m)=1\),
+  which is the cumulative probability is always 1 because it includes
+  all possible outcomes. Since it carries no information about the
+  differences between categories, it is not included in the modeling
+  process; we only model the first \(m-1\) cumulative probabilities.
+\end{itemize}
+
+The use of cumulative probabilities is a clever way to turn the ordinal
+modeling problem into a series of binary comparisons, while respecting
+the order. Each cumulative probability \(P(R \leq r_j)\) inherently
+creates a binary split at the threshold \(r_j\): - Outcome 1: the
+response is in category \(r_j\) or lower \((R\leq r_j)\); - Outcome 2:
+The response is in category higher than \(r_j\) \((R > r_j)\).
+
+By modeling the probability of this binary outcome for each threshold
+\(j=1,\dots,m−1\), we capture the transitions between categories along
+the ordered scale. The cumulative logit model then applies the logit
+transformation to these cumulative probabilities, allowing them to be
+related to a linear combination of predictors.
+
+\textbf{Numerical Example}: Let's consider a simple ordinal variable,
+``Product Satisfaction,'' with \(m = 4\) ordered categories:
+
+\begin{itemize}
+\tightlist
+\item
+  \(r_1\): Very Dissatisfied (VD)
+\item
+  \(r_2\): Dissatisfied (D)
+\item
+  \(r_3\): Satisfied (S)
+\item
+  \(r_4\): Very Satisfied (VS)
+\end{itemize}
+
+Suppose, for a particular group of individuals, the probabilities of
+being in each specific category are:
+
+\begin{itemize}
+\tightlist
+\item
+  \(P(R=VD)=P(R=r_1)=0.10\)
+\item
+  \(P(R=D)=P(R=r_2)=0.20\)
+\item
+  \(P(R=S)=P(R=r_3)=0.40\)
+\item
+  \(P(R=VS)=P(R=r_4)=0.30\)
+\end{itemize}
+
+Now, let's calculate the cumulative probabilities:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Cumulative Probability for \(r_1\) (VD)
+  \(P(R \leq r_1) = P(R = VD) = 0.10\) This represents the probability
+  of being in the ``Very Dissatisfied'' category or below (just VD). The
+  implied binary split is \(\{VD\}\) vs \(\{D, S, VS\}\).
+\item
+  Cumulative Probability for \(r_2\) (D)
+  \(P(R \leq r_2) = P(R = VD) + P(R = D) = 0.10 + 0.20 = 0.30\) This
+  represents the probability of being in the ``Dissatisfied'' category
+  or below (VD or D). The implied binary split is \(\{VD, D\}\) vs
+  \(\{S, VS\}\).
+\item
+  Cumulative Probability for \(r_3\) (S)
+  \(P(R \leq r_3) = P(R = VD) + P(R = D) + P(R = S) = 0.10 + 0.20 + 0.40 = 0.70\)
+  This represents the probability of being in the ``Satisfied'' category
+  or below (VD, D, or S). The implied binary split is \(\{VD, D, S\}\)
+  vs \(\{VS\}\).
+\item
+  Cumulative Probability for \(r_4\) (VS)
+  \(P(R \leq r_4) = P(R = VD) + P(R = D) + P(R = S) + P(R = VS) = 0.10 + 0.20 + 0.40 + 0.3 = 1\)
+  As expected, the cumulative probability for the highest category is 1.
+  We do not model this.
+\end{enumerate}
+
+So, for this 4-category variable, the cumulative logit model will focus
+on modeling the relationships between predictors and the first
+\(m−1=4−1=3\) cumulative probabilities. Each of these represents a
+different threshold or cut-point on the ordered scale.
+
+\hypertarget{the-cumulative-logit-with-proportional-odds-assumption}{%
+\subsection{The Cumulative Logit with Proportional Odds
+Assumption}\label{the-cumulative-logit-with-proportional-odds-assumption}}
+
+To be able to model the relationship between the cumulative
+probabilities and the explanatory variables, a function is needed and,
+as in the binary logistic regression, we use the logit to model the
+probability of success. In the case of ordinal data, we apply the logit
+not to the probability of a single category, but to the cumulative
+probabilities.
+
+The cumulative logit transformation for the \(j\)-th threshold (where
+\(j\) goes from \(1\) to \(m−1\)) is defined as the natural logarithm of
+the cumulative odds:
+
+\begin{equation}\protect\hypertarget{eq-cumlogit1}{}{
+\text{logit} [ P (R \leq r_j)] = \log \Bigg( \frac{P(R \leq r_j)}{1-P(R \leq r_j)}\Bigg)
+}\label{eq-cumlogit1}\end{equation}
+
+Since \(1-P(R \leq r_j)\) is the probability that the outcome \(R\) is
+greather than the category \(r_j\). So, the cumulative logit can be
+rewritten as:
+
+\begin{equation}\protect\hypertarget{eq-cumlogit2}{}{
+\text{logit} [ P (R \leq r_j)] = \log \Bigg( \frac{P(R \leq r_j)}{P(R > r_j)}\Bigg)
+}\label{eq-cumlogit2}\end{equation}
+
+This expression represents the natural logarithm of the odds of being in
+category \(r_j\) or any category below it, versus being in any category
+above \(r_j\). This transformation, as in the case of the binary
+logistic regression, maps probabilities (which are between 0 and 1) onto
+the entire real number line \((-\infty, + \infty)\). This allows us to
+equate the logit of this cumulative probability to a linear combination
+of our predictors, which can take any real value.
+
+The resulting statistical model, and the most common one for ordinal
+data with a cumulative logit link, is known as the Cumulative Logit
+Proportional Odds Model. Its basic structure assumes that the cumulative
+logit for each threshold is a linear function of the predictor
+variables:
+
+\begin{equation}\protect\hypertarget{eq-cumlogit3}{}{
+\text{logit}[P(R\leq r_j | X_1, \dots, X_k)] = \alpha_j + \beta_1X_1 + \beta_2X_2 + \dots + \beta_kX_k
+}\label{eq-cumlogit3}\end{equation}
+
+This equation is estimated simultaneously for each of the \(m-1\)
+cumulative thresholds. in this equation:
+
+\begin{itemize}
+\item
+  \(P(R \leq r_j | \boldsymbol{X})\) is the cumulative probability of
+  being in category \(r_j\) or lower, conditional on the values of the
+  predictor variables \(X_1 ,X_2, \dots, X_k\).
+\item
+  \(\alpha_j\) are the intercepts of the model. A crucial aspect of the
+  cumulative logit model is that there is a different intercept for each
+  of the \(m-1\) cumulative logits we are modeling.\\
+  \(\alpha_1\) is the intercept for \(\text{logit}[P(R\leq r_1)]\),
+  \(\alpha_2\) is the intercept for \(\text{logit}[P(R\leq r_2)]\), and
+  \(\alpha_{(m-1)}\) is the intercept for
+  \(\text{logit}[P(R\leq r_{(m-1)})]\).\\
+  These intercepts represent the baseline cumulative log-odds for their
+  respective threshold when all the predictor variables X are zero.\\
+  It is necessary that these intercepts are ordered:
+  \(\alpha_1 \leq \alpha_2 \leq \dots \leq \alpha_{(m-1)}\).\\
+  This ensures that the resulting cumulative probabilities are
+  non-decreasing as j increases.
+\item
+  \(\beta_1, \beta_2, \dots, \beta_k\) are the coefficients associated
+  to each predictor variables \(X_1\), \(X_2\), \(\dots, X_k\).\\
+  Since we are operating under proportional odds assumption, in this
+  model these is only one set of \(\beta\) coefficients that applies
+  across all \(m-1\) cumulative logit equations.\\
+  This implies that the effect of each predictor on the cumulative
+  log-odds is the same.
+\end{itemize}
+
+To demonstrate the proportional odds assumption, let's consider the
+cumulative odds for two distinct sets of predictor values:
+\(\boldsymbol{X}^{(1)} = (X_1^{(1)}, \dots, X_k^{(1)})\) and
+\(\boldsymbol{X}^{(2)} = (X_1^{(2)}, \dots, X_k^{(2)})\).
+
+The cumulative odds at threshold \(r_j\) for the first set of predictors
+\(\boldsymbol{X}^{(1)}\) are: \[
+\text{Odds}(R \leq r_j | \boldsymbol{X}^{(1)}) =\exp \Bigg( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(1)} \Bigg)
+\] Similarly, for the second set of predictors \(\boldsymbol{X}^{(2)}\):
+
+\[
+\text{Odds}(R \leq r_j | \boldsymbol{X}^{(2)}) = \exp \Bigg( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(2)} \Bigg)
+\] The Odds Ratio (OR) comparing the cumulative odds at
+\(\boldsymbol{X}^{(2)}\) to those at \(\boldsymbol{X}^{(1)}\) for the
+event \(R \leq r_j\) is: \[
+\text{OR}_j = \frac{\text{Odds}(R \leq r_j | \boldsymbol{X}^{(2)})}{\text{Odds}(R \leq r_j | \boldsymbol{X}^{(1)})}
+\] Substituting the exponential expressions for the odds: \[
+\text{OR}_j = \frac{\exp \Big( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(2)} \Big)}{\exp \Big( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(1)} \Big)}
+\] Using the property \(e^a / e^b = e^{a-b}\), we can simplify the
+expression: \[
+\text{OR}_j = \exp \Bigg( \Big( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(2)} \Big) - \Big( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(1)} \Big) \Bigg)
+\]
+
+Crucially, the intercept term \(\alpha_j\) cancels out:
+
+\[
+\text{OR}_j = \exp \Bigg( \sum_{i=1}^{k} \beta_iX_i^{(2)} - \sum_{i=1}^{k} \beta_iX_i^{(1)} \Bigg)
+\]
+
+This can be further condensed:
+
+\[
+\text{OR}_j = \exp \Bigg( \sum_{i=1}^{k} \beta_i(X_i^{(2)} - X_i^{(1)}) \Bigg)
+\]
+
+As evident from this final formula, the Odds Ratio (\(\text{OR}_j\))
+does not contain the subscript \(j\). This signifies that the odds ratio
+associated with a change in the predictor variables is constant across
+all \(m-1\) cumulative thresholds. This inherent consistency in the
+effect of predictors across the ordinal categories is precisely what
+defines the proportional odds assumption. It means that while the
+baseline odds change for each category, the multiplicative effect of the
+predictors on these odds remains the same.
+
+Graphically, this translates to parallelism on the log-odds scale. If
+you were to plot the cumulative log-odds for different levels of a
+predictor, you would see a set of parallel lines. For example, imagine
+an ordinal outcome with four categories (e.g., `Low', `Medium', `High',
+`Very High'). There would be three cumulative probabilities:
+\(P(R\leq Low)\), \(P(R \leq Medium)\), and \(P(R \leq High)\). If the
+Proportional Odds assumption holds for a continuous predictor, then the
+log-odds for each of these cumulative probabilities would change by the
+same amount for a one-unit increase in that predictor.
+
+You would visualize three separate curves, one for each cumulative
+probability, plotted against the predictor on the x-axis, with the
+y-axis representing the logit of these probabilities. If the
+Proportional Odds assumption holds, these three curves would run
+parallel to each other across the entire range of the predictor. They
+would be shifted vertically relative to each other (due to the different
+\(\alpha_j\), but their slopes (the \(\beta\) coefficients) would be
+identical.
+
+\includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-7-1.pdf}
+
+The Proportional Odds assumption is useful for two main reason:
+
+\begin{itemize}
+\item
+  \textbf{Parsimony and Simplicity}: This is a major advantage. If the
+  assumption holds, the \(\beta\) coefficients are estimated for each
+  predictor, regardless of the number of categories \(m\). Fewer
+  parameters make the model easier to estimate, interpret, and
+  potentially more stable, especially with smaller sample sizes.
+\item
+  \textbf{Clear and Consistent Interpretation}: A single Odds Ratio per
+  predictor provides a clear, concise summary of its effect across the
+  entire ordinal scale.
+\end{itemize}
+
+\hypertarget{latent-variable-motivation}{%
+\subsubsection*{Latent Variable
+Motivation}\label{latent-variable-motivation}}
+\addcontentsline{toc}{subsubsection}{Latent Variable Motivation}
+
+To better understand this model we can think about an underlying,
+unobserved latent continuous variable, called \(R^*\). Let's imagine
+that the ordinal response \(R\) that we observe is actually a
+categorized version of the continuous unobserved variable \(R^*\). We
+can assume that \(R^*\) is linearly related to our predictors plus some
+error, similar to a standard linear regression model:
+
+\[
+R^* = \beta_0^* + \beta_1^*X_1 + \dots + \beta_k^*X_k + \epsilon
+\]
+
+We can set some fixed thresholds, \(\gamma_0 = -\infty, \gamma_1\),
+\(\gamma_2\), \(\dots, \gamma_{(m-1)}\), \(\gamma_m = +\infty\) on the
+\(R^*\) scale, such that if \(R^*\) falls between two thresholds, the
+observed ordinal variable \(R\) falls into the corresponding category.
+The thresholds are set such that \(\gamma_0 < \gamma_1\) \textless{}
+\(\gamma_2\) \textless{} \(\dots < \gamma_{(m-1)}\) \(<\gamma_m\).
+
+The ordinal category is determined by \(R^*\) based on the thresholds:
+
+\begin{itemize}
+\tightlist
+\item
+  \(R = r_1\) if \(R^* \leq \gamma_1\)
+\item
+  \(R = r_2\) if \(\gamma_1 < R^* \leq \gamma_2\)
+\item
+  \(R = r_j\) if \(\gamma_{(j-1)} < R^* \leq \gamma_j\)
+\item
+  \(R = r_m\) if \(R^* > \gamma_{(m-1)}\)
+\end{itemize}
+
+\includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-8-1.pdf}
+
+If we assume that the error \(\epsilon\) follows a standard logistic
+distribution, it can be shown that this structure leads directly to the
+form of the cumulative logit model:
+
+\[
+\text{logit}[P \leq r_j | \boldsymbol{X})] = (\gamma_j - \beta_0^*) - \beta_1^*X_1 - \dots - \beta_k^*X_k,
+\]
+
+which clearly matches the cumulative logit model form given in
+Equation~\ref{eq-cumlogit3} if we define the model intercept
+\(\alpha_j = \gamma_j - \beta_0^*\) and the model's coefficients
+\(\beta_i = -\beta_i^*\).
+
+In this latent variable framework, the Proportional Odds assumption
+means two things:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The thresholds on the \(R^*\) scale are fixed and do not depend on the
+  predictor variables \(X\).
+\item
+  The effect of each predictor \(X_i\)(represented by is simply to shift
+  the entire distribution of the latent variable \(R^*\) along the
+  continuous scale. This shift is the same magnitude regardless of where
+  the fixed thresholds \(\gamma_j\) are located.
+\end{enumerate}
+
+This parallel shif'' of the latent distribution is the reason why the
+odds ratios for cumulative probabilities are proportional across all
+thresholds.
+
+\hypertarget{testing-the-proportional-odds-assumption}{%
+\subsubsection*{Testing the Proportional Odds
+Assumption}\label{testing-the-proportional-odds-assumption}}
+\addcontentsline{toc}{subsubsection}{Testing the Proportional Odds
+Assumption}
+
+Violating the Proportional Odds assumption can lead to inaccurate
+conclusions about the effects of the predictors. The most robust and
+commonly recommended way to test the Proportional Odds assumption with
+is by using a Likelihood Ratio Test to compare a constrained model (the
+PO model) with a more flexible, unconstrained model (where the PO
+assumption is relaxed for a specific predictor).
+
+The \texttt{clm()} function from the ordinal package allows you to relax
+the PO assumption for specific predictors using the
+\texttt{nominal\ =\ \textasciitilde{}\ predictor} argument. This creates
+a ``partial proportional odds'' model (also known as a generalized
+ordinal logit model). We then compare this more complex model (where the
+assumption is relaxed) to our original, simpler proportional odds model
+using \texttt{anova()}, which performs a Likelihood Ratio Test.
+
+\begin{itemize}
+\item
+  \textbf{Null Hypothesis (\(H_0\))}: The Proportional Odds assumption
+  holds for the specified predictor (i.e., its coefficient is constant
+  across all thresholds).
+\item
+  \textbf{Alternative Hypothesis (\(h_1\))}: The Proportional Odds
+  assumption does not hold for the specified predictor (i.e., its
+  coefficient varies across thresholds).
+\end{itemize}
+
+Imagine we have an ordinal outcome Response (e.g., `Low', `Medium',
+`High') and a continuous predictor Experience.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ordinal) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning: il pacchetto 'ordinal' è stato creato con R versione 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+
+Caricamento pacchetto: 'ordinal'
+\end{verbatim}
+
+\begin{verbatim}
+Il seguente oggetto è mascherato da 'package:dplyr':
+
+    slice
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2) }
+\FunctionTok{library}\NormalTok{(tidyr)   }
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{456}\NormalTok{)}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Response =} \FunctionTok{factor}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Low"}\NormalTok{, }\StringTok{"Medium"}\NormalTok{, }\StringTok{"High"}\NormalTok{), }\DecValTok{100}\NormalTok{, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{),}
+                    \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Low"}\NormalTok{, }\StringTok{"Medium"}\NormalTok{, }\StringTok{"High"}\NormalTok{), }\AttributeTok{ordered =} \ConstantTok{TRUE}\NormalTok{),}
+  \AttributeTok{Experience =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\# Fit a standard Proportional Odds model}
+\NormalTok{po\_model\_hypo }\OtherTok{\textless{}{-}} \FunctionTok{clm}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Experience, }\AttributeTok{data =}\NormalTok{ data)}
+\FunctionTok{summary}\NormalTok{(po\_model\_hypo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+formula: Response ~ Experience
+data:    data
+
+ link  threshold nobs logLik  AIC    niter max.grad cond.H 
+ logit flexible  100  -109.55 225.10 3(0)  1.49e-10 4.6e+02
+
+Coefficients:
+           Estimate Std. Error z value Pr(>|z|)
+Experience -0.08062    0.10394  -0.776    0.438
+
+Threshold coefficients:
+            Estimate Std. Error z value
+Low|Medium   -1.0554     0.5491  -1.922
+Medium|High   0.3228     0.5390   0.599
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit a model where the PO assumption is relaxed for \textquotesingle{}Experience\textquotesingle{}}
+\NormalTok{non\_po\_model\_hypo }\OtherTok{\textless{}{-}} \FunctionTok{clm}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Experience, }\AttributeTok{nominal =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ Experience, }\AttributeTok{data =}\NormalTok{ data)}
+\FunctionTok{summary}\NormalTok{(non\_po\_model\_hypo) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+formula: Response ~ Experience
+nominal: ~Experience
+data:    data
+
+ link  threshold nobs logLik  AIC    niter max.grad cond.H 
+ logit flexible  100  -109.55 227.09 3(0)  1.87e-09 7.0e+02
+
+Coefficients: (1 not defined because of singularities)
+           Estimate Std. Error z value Pr(>|z|)
+Experience       NA         NA      NA       NA
+
+Threshold coefficients:
+                        Estimate Std. Error z value
+Low|Medium.(Intercept)  -1.03724    0.64650  -1.604
+Medium|High.(Intercept)  0.30635    0.62133   0.493
+Low|Medium.Experience    0.07697    0.12457   0.618
+Medium|High.Experience   0.08416    0.12352   0.681
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compare the models using anova()}
+\FunctionTok{anova}\NormalTok{(po\_model\_hypo, non\_po\_model\_hypo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Likelihood ratio tests of cumulative link models:
+ 
+                  formula:              nominal:    link: threshold:
+po_model_hypo     Response ~ Experience ~1          logit flexible  
+non_po_model_hypo Response ~ Experience ~Experience logit flexible  
+
+                  no.par    AIC  logLik LR.stat df Pr(>Chisq)
+po_model_hypo          3 225.10 -109.55                      
+non_po_model_hypo      4 227.09 -109.55  0.0028  1     0.9576
+\end{verbatim}
+
+\textbf{Interpretation of the results}
+
+\texttt{po\_model\_hypo} is the Proportional Odds model, where the
+effect of \texttt{Experience} is assumed to be constant across all
+thresholds. \texttt{non\_po\_model\_hypo} is the generalized ordinal
+logit model (or partial proportional odds model), where the effect of
+\texttt{Experience} is allowed to vary across the thresholds.
+
+The AIC is 225.10 for \texttt{po\_model\_hypo} and 227.09 for
+\texttt{non\_po\_model\_hypo}, this already suggest that the simpler
+model should be preferred.
+
+\texttt{LR.stat} (Likelihood Ratio Statistic) is the test statistic for
+comparing the two nested models. It's calculated as
+\(2 \cdot (logLik_{unconstrained} −logLik_{constrained})\).
+
+In this example, \texttt{LR.stat} = 0.0028. This indicates that the
+unconstrained model doesn't provide a much better fit than the
+constrained model.
+
+\texttt{Pr(\textgreater{}Chisq)} (p-value) is the p-value associated
+with the LR.stat.
+
+Based on this Likelihood Ratio Test, there is no statistically
+significant evidence to suggest that the Proportional Odds assumption is
+violated for the Experience predictor in the data. The effect of
+Experience on the log-odds of cumulative probabilities does not appear
+to vary significantly across the different thresholds.
+
+\hypertarget{graphical-inspection}{%
+\subsubsection*{Graphical Inspection}\label{graphical-inspection}}
+\addcontentsline{toc}{subsubsection}{Graphical Inspection}
+
+While statistically rigorous, formal tests can be overly sensitive,
+especially in large datasets. A statistically significant p-value might
+indicate a violation that is numerically very small and practically
+insignificant. This is where graphical inspection becomes invaluable.
+
+Graphical inspection provides a visual assessment of whether the
+coefficients for a given predictor truly remain constant across
+thresholds. This involves fitting a more flexible model and then
+plotting the estimated coefficients for each predictor across the
+different thresholds.
+
+\hypertarget{violation-of-the-proportional-odds-assumption}{%
+\subsubsection*{Violation of the Proportional Odds
+Assumption}\label{violation-of-the-proportional-odds-assumption}}
+\addcontentsline{toc}{subsubsection}{Violation of the Proportional Odds
+Assumption}
+
+When the Proportional Odds assumption is violated for a predictor, the
+effect of that predictor on the cumulative log-odds is not constant
+across thresholds. Graphically, this means the lines for different
+cumulative probabilities would not be parallel. Their slopes would
+differ, meaning the \(\beta\) coefficients are not the same for each
+threshold.
+
+\includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-10-1.pdf}
+
+When the formal tests and especially the graphical inspection indicate a
+statistically and practically significant violation, it is not possible
+to proceed with the standard Proportional Odds model, as the coefficient
+estimates would be biased and their interpretation misleading.
+
+There are two main alternative models to handle this problem:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Generalized Ordinal Logit Models} (or Partial Proportional
+  Odds Models): are a flexible extension of the proportional odds model.
+  They allow the coefficients of specific predictor variables to vary
+  across the cumulative logit equations (i.e., across the thresholds),
+  while still forcing other predictors (those that do satisfy the
+  Proportional Odds assumption) to have constant effects. When only a
+  subset of coefficients is allowed to vary, it's specifically called a
+  Partial Proportional Odds (PPO) model. Instead of estimating a single
+  \(\beta_i\) for a predictor \(X_i\), a PPO model estimates a separate
+  \(\beta_{ij}\) for each cumulative logit \(r_j\).\\
+  The advantages are:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Flexibility}: It directly addresses the violation by allowing
+  coefficients to differ where necessary.
+\item
+  \emph{Parsimony} (relative to Multinomial): It retains some of the
+  efficiency of the ordinal model. If only a few predictors violate the
+  Proportional Odds assumption, it is possible to estimate fewer
+  parameters than a full multinomial logit model, making it more
+  parsimonious and potentially more stable.
+\item
+  \emph{Maintains Ordinality}: Crucially, it still respects the inherent
+  ordering of the outcome categories. This means that the
+  interpretations are still about ``moving up or down'' the ordered
+  scale, but the strength of that effect can differ at various points
+  along the scale.
+\item
+  \emph{Interpretation}: While more complex than the Proportional Odds
+  model, the interpretation of varying coefficients provides a richer
+  understanding. You might find that a predictor has a strong effect in
+  distinguishing ``Low'' from ``Medium/High'' but a much weaker effect
+  in distinguishing ``Medium'' from ``High''.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \textbf{Multinomial Logit Model}: A multinomial (or polytomous) logit
+  model treats the outcome categories as purely nominal (unordered),
+  even if they are inherently ordinal. It fits a separate binary
+  logistic regression model for each category, comparing it to a chosen
+  reference category. Advantages are:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{No PO Assumption}: It makes no assumption about the effects of
+  predictors being constant across categories; therefore, it
+  automatically handles any PO violation.
+\item
+  \emph{Maximum Flexibility}: It is the most flexible approach for
+  categorical outcomes, as it allows for completely different effects
+  for each category comparison.
+\end{itemize}
+
+However, thre are some disadvantages: - \emph{Loss of Ordinal
+Information}: This can lead to less precise estimates and
+interpretations that don't fully reflect the nature of your outcome. -
+\emph{Increased Complexity and Reduced Parsimony}: \((m−1)\cdot k\)
+coefficients (where \(k\) is the number of predictors), which is more
+than a Proportional Odds model (\(k\) predictors) or even a PPO model.
+This increased number of parameters can lead to: - \emph{Larger standard
+errors}: Less statistical power. - \emph{Difficulty in interpretation}:
+Interpreting multiple sets of coefficients and odds ratios can be
+cumbersome. - \emph{Overfitting}: Especially with smaller sample sizes,
+estimating too many parameters can lead to models that fit the current
+data well but generalize poorly.
+
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, opacityback=0, colframe=quarto-callout-note-color-frame, bottomrule=.15mm, toprule=.15mm, bottomtitle=1mm, arc=.35mm, left=2mm, opacitybacktitle=0.6, colback=white, leftrule=.75mm, titlerule=0mm, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, breakable, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}]
+
+It is crucial to recognize that a statistically significant p-value from
+a formal test, such as the Likelihood Ratio Test, does not always
+signify a practically meaningful violation of the Proportional Odds
+assumption, especially in large datasets where even trivial deviations
+can be flagged. Therefore, graphical inspection becomes invaluable: if
+the estimated coefficients for a predictor across thresholds are very
+similar and their confidence intervals largely overlap (indicating
+near-parallelism), then despite a statistical rejection, the practical
+implication of the violation might be minimal, allowing one to retain
+the more parsimonious standard PO model. Conversely, if coefficients
+vary widely with little to no overlap in their confidence intervals,
+indicating both statistical and practical significance, then adopting a
+more flexible model like a Partial Proportional Odds model or, as a last
+resort, a Multinomial Logit model, becomes necessary to accurately
+reflect the data.
+
+\end{tcolorbox}
+
+\hypertarget{coefficients-interpretation}{%
+\subsection{Coefficients
+interpretation}\label{coefficients-interpretation}}
+
+Consider the effect of changing a single predictor, \(X_i\), by one
+unit, while holding all other predictors constant. The change in the
+cumulative log-odds for a one-unit increase in \(X_i\) is simply the
+coefficient \(\beta_i\).
+
+So, \(\beta_i\) is the change in the cumulative log-odds for a one-unit
+increase in \(X_i\), holding other predictors constant.
+
+To get the Odds Ratio, we exponentiate the coefficient:
+\(OR_i = \text{exp}(\beta_i)\).
+
+This \(OR_i\) is the multiplicative change in the cumulative odds for a
+one-unit increase in \(X_i\).
+
+For a one-unit increase in the predictor \(X_i\), while holding all
+other predictors constant, the odds of being in category \(r_j\) or any
+category below it, versus being in a category above \(r_j\), are
+multiplied by \(\text{exp}(\beta_i)\).
+
+\textbf{Note} Due to the Proportional Odds assumption, this
+multiplicative effect, \(\text{exp}(\beta_i)\), is the same for all
+\(m-1\) thresholds.
+
+\begin{itemize}
+\item
+  If \(\beta_i > 0\) (and thus \(\text{exp}(\beta_i)>1\)): A one-unit
+  increase in \(X_i\) increases the cumulative log-odds. This means it
+  increases the odds of being in category \(r_j\) or below.\\
+  Therefore, a positive \(\beta_i\) indicates that higher values of
+  \(X_i\) are associated with a greater likelihood of being in the lower
+  (or earlier) categories of the ordinal variable \(R\). Equivalently,
+  it's associated with a lower likelihood of being in the higher
+  categories.
+\item
+  If \(\beta_i <0\) (and thus \(\text{exp}(\beta_i)<1\)): A one-unit
+  increase in \(X_i\) decreases the cumulative log-odds. This means it
+  decreases the odds of being in category \(r_j\) or below.\\
+  Therefore, a negative \(\beta_i\) indicates that higher values of
+  \(X_i\) are associated with a greater likelihood of being in the
+  higher (or later) categories of the ordinal variable Y. Equivalently,
+  it's associated with a lower likelihood of being in the lower
+  categories.
+\end{itemize}
+
+\hypertarget{connection-with-the-latent-variable-interpretation}{%
+\subsubsection*{Connection with the Latent Variable
+interpretation}\label{connection-with-the-latent-variable-interpretation}}
+\addcontentsline{toc}{subsubsection}{Connection with the Latent Variable
+interpretation}
+
+In the latent variable model
+\(R^* = \beta_0^* + \beta_1^*X_1 + \dots + \beta_k^*X_k + \epsilon\), a
+positive \(\beta_i^*\) means that increasing \(X_i\) increases the value
+of the latent variable \(R^*\). Since higher values of \(R^*\)
+correspond to higher ordinal categories, \(\beta_i>0\) implies a shift
+towards higher categories. As we saw in the derivation, the cumulative
+logit model coefficient \(\beta_I\) (for \(P(Y \leq r_j)\)) is typically
+\(-\beta_i^*\). So, if \(\beta_i^*>0\), then \(\beta_i<0\) in the
+cumulative logit model, which is associated with higher ordinal
+categories. This confirms the consistency between the two
+interpretations, although the sign convention can be tricky.
+
+To avoid confusion, it is generally easiest and most standard to
+interpret the results directly from the estimated coefficients
+(\(\beta_i\)) and Odds Ratios (\(\text{exp}(\beta_i)\)) from the
+cumulative logit model output:
+
+\begin{itemize}
+\item
+  \(\text{exp}(\beta_i)>1\): Higher values of \(X_i\) are associated
+  with increased odds of being in a lower category (or equivalently,
+  decreased odds of being in a higher category). The shift is towards
+  the beginning of the ordered scale.
+\item
+  \(\text{exp}(\beta_i)<1\): Higher values of \(X_i\) are associated
+  with decreased odds of being in a lower category (or equivalently,
+  increased odds of being in a higher category). The shift is towards
+  the end of the ordered scale.
+\end{itemize}
+
+\hypertarget{including-and-interpreting-qualitative-predictors}{%
+\paragraph*{Including and Interpreting Qualitative
+Predictors}\label{including-and-interpreting-qualitative-predictors}}
+\addcontentsline{toc}{paragraph}{Including and Interpreting Qualitative
+Predictors}
+
+Categorical predictors (nominal or ordinal, when used as predictors)
+cannot be entered directly into the model as single numbers. Instead, we
+use dummy variables. For a categorical predictor with \(m\) categories,
+\(m−1\) dummy variables will be created. One category is designated as
+the ``reference category''. This category does not get its own dummy
+variable; its effect is absorbed into the intercept (\(\alpha_j\)). All
+other categories are then compared to this reference category.
+
+Choice Considerations:
+
+\begin{itemize}
+\item
+  Clinical/Logical Baseline: a naturally occurring baseline (e.g., ``No
+  exposure,'' ``Placebo group,'' ``Male gender'' if female is the group
+  of interest).
+\item
+  Largest Category: often chosen for statistical stability, as there's
+  more data for comparison.
+\item
+  First or Last Category: convenient for software defaults. Category of
+  Primary Interest: if you want to compare all other groups to a
+  specific group. Example: Gender Predictor (Male, Female)
+\end{itemize}
+
+Let's assume ``Female'' is the reference category, and the ordinal
+dependent variable is ``Self-Rated Health'' (1=Poor to 5=Excellent). We
+create one dummy variable for ``Male''.
+
+\(X_{\text{male}}=1\) if Gender = Male
+
+\(X_{\text{male}}=0\) if Gender = Female
+
+The proportional odds model incorporating Gender would look like:
+
+\[\text{logit}[P(R\leq r_j∣Gender,Other Predictors)] = \alpha_j + \beta_{male}X_{male} + \beta_{OthPred}X_{OthPred} \]
+
+The coefficient for a dummy variable represents the difference in the
+cumulative log-odds between the category represented by the dummy
+variable and the reference category, holding all other predictors
+constant.
+
+The Odds Ratio for a dummy variable is \(e^{\beta_{\text{dummy}}}\).
+This Odds Ratio represents the ratio of the odds of being in a lower
+outcome category for the dummy variable group compared to the reference
+group, holding other predictors constant.
+
+Example: Gender Predictor (Male, Female) for Self-Rated Health
+
+Let's continue with ``Self-Rated Health'' (1=Poor to 5=Excellent).
+Assume ``Female'' is the reference category.
+
+In our example, keeping Female as the reference category, if the
+estimated \(\beta_{male}\) is 0.4, the Odds Ratio for Male would be
+\(e^{0.4}\approx 1.49\).
+
+Interpretation:
+
+\begin{itemize}
+\item
+  Coefficient (\(\beta_{male}=0.4\)): Males have, on average, 0.4 units
+  higher cumulative log-odds of being in a lower self-rated health
+  category (e.g., Poor, Fair, Good, Very Good) compared to females,
+  holding other predictors constant.
+\item
+  Odds Ratio (\$OR\_\{male\}=1.49): The odds of a male reporting ``Poor
+  or Fair or Good or Very Good Health'' vs.~``Excellent Health'' are
+  1.49 times the odds for a female, holding all other predictors
+  constant. Similarly, the odds of a male reporting ``Poor or Fair or
+  Good Health'' vs.~``Very Good or Excellent Health'' are 1.49 times the
+  odds for a female, and so on, across all cumulative splits.
+\end{itemize}
+
+In simpler terms, males have a higher odds of being in the less healthy
+(lower) categories of self-rated health compared to females. This effect
+is assumed to be consistent across the entire range of health
+categories.
+
+\hypertarget{inference-on-parameters}{%
+\subsubsection*{Inference on Parameters}\label{inference-on-parameters}}
+\addcontentsline{toc}{subsubsection}{Inference on Parameters}
+
+Once the model is fitted using Maximum Likelihood Estimation, it is
+necessary to understand the statistical significance and precision of
+the parameter estimates.
+
+\hypertarget{significance-tests-for-individual-predictors}{%
+\paragraph*{Significance Tests for Individual
+Predictors}\label{significance-tests-for-individual-predictors}}
+\addcontentsline{toc}{paragraph}{Significance Tests for Individual
+Predictors}
+
+To determine if an individual predictor variable has a statistically
+significant effect on the ordinal outcome, most statistical software
+packages provide a Wald Test for each predictor. The Wald test
+calculates a z-statistic for each coefficient:
+\(Z= \frac{Estimate}{Std Error}\). This z-statistic is then squared to
+get \(\chi^2\) statistic with 1 degree of freedom:
+\(Wald\chi^2 = Z^2\).\\
+A p-value is then calculated based on this \(\chi^2\) statistic. The
+\emph{Null Hypothesis} (\(H_0\)) is that the coefficient for this
+predictor is zero (i.e., the predictor has no effect on the cumulative
+log-odds). The \emph{Alternative Hypothesis} (\(H_1\)) is that the
+coefficient for this predictor is not zero (i.e., the predictor has a
+significant effect).\\
+If the p-value \((Pr(>|z|))\) is small (typically less than 0.05), the
+null hypothesis is rejected. This suggests that the predictor has a
+statistically significant effect on the ordinal outcome. If the p-value
+is large, we fail to reject the null hypothesis. There's insufficient
+evidence to conclude that the predictor has a significant effect.
+
+\hypertarget{confidence-intervals-for-the-coefficients-and-the-odds-ratios}{%
+\paragraph*{Confidence Intervals for the coefficients and the Odds
+Ratios}\label{confidence-intervals-for-the-coefficients-and-the-odds-ratios}}
+\addcontentsline{toc}{paragraph}{Confidence Intervals for the
+coefficients and the Odds Ratios}
+
+While p-values give about statistical significance, confidence intervals
+(CIs) provide a range of plausible values for the true population
+parameter, giving information about the precision of our estimates.\\
+Interpretation for coefficients (\(\beta\)): A 95\% CI for a coefficient
+means that if we were to repeat the study many times, 95\% of the
+calculated CIs would contain the true population coefficient. If a CI
+for \(\beta\) does not include 0, then the coefficient is statistically
+significant at the corresponding alpha level (e.g., 0.05 for a 95\%
+CI).\\
+Interpretation for Odds Ratios (\(exp^\beta\))): A 95\% CI for an OR
+means that we are 95\% confident that the true population OR lies within
+this range. If a CI for an OR does not include 1, then the effect is
+statistically significant.\\
+If the CI is entirely above 1, the predictor significantly increases the
+odds of a lower outcome.\\
+If the CI is entirely below 1, the predictor significantly decreases the
+odds of a lower outcome (i.e., increases the odds of a higher outcome).
+
+\hypertarget{evaluating-model-fit-and-performance}{%
+\paragraph*{Evaluating Model Fit and
+Performance}\label{evaluating-model-fit-and-performance}}
+\addcontentsline{toc}{paragraph}{Evaluating Model Fit and Performance}
+
+There are several statistics to evaluate the Goodness of Fit of a
+Proportional Odds Model.
+
+In linear regression, the \(R^2\) is commonly used to describe the
+proportion of variance in the dependent variable explained by the
+independent variables. However, for ordinal logistic regression (and
+other generalized linear models), the concept of explained variance is
+more complex, and the traditional \(R^2\) is not appropriate because the
+model relies on a non-linear link function.\\
+Instead, \textbf{Pseudo R-squared} measures are commonly used and they
+attempt to provide an analogous quantification of how well the model
+fits the data, or how much variance it ``explains'', relative to a null
+model.\\
+They typically compare the log-likelihood of the fitted model
+(\(L_{model}\)) to the log-likelihood of a null (intercept-only) model
+(\(L_{null}\)).\\
+Common types of Pseudo R-squared include: * McFadden's \(R^2\):
+\(1−\Big(\frac{L_{model}}{L_{null}}\Big)\)
+
+\begin{verbatim}
+* Cox & Snell's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)^{\frac{2}{n}}$
+\end{verbatim}
+
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, opacityback=0, colframe=quarto-callout-warning-color-frame, bottomrule=.15mm, toprule=.15mm, bottomtitle=1mm, arc=.35mm, left=2mm, opacitybacktitle=0.6, colback=white, leftrule=.75mm, titlerule=0mm, toptitle=1mm, colbacktitle=quarto-callout-warning-color!10!white, rightrule=.15mm, breakable, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}]
+
+Do NOT compare directly to linear regression \(R^2\): Pseudo R-squared
+values are typically much lower than \(R^2\) values from linear
+regression models, even for models that fit the data very well. A
+McFadden's \(R^2\) of 0.20 might be considered very good in an ordinal
+logistic regression context, whereas a linear \(R^2\) of 0.20 would
+often be considered weak.
+
+\end{tcolorbox}
+
+Another widely used statistics is the \textbf{Likelihood Ratio Test},
+which is used for comparing two nested models: the likelihood of a
+simpler model (the null hypothesis model) to the likelihood of a more
+complex model (the alternative hypothesis model) that contains all the
+parameters of the simpler model plus some additional parameters. If the
+more complex model significantly improves the likelihood, it suggests
+that the additional parameters are meaningful.
+
+Let \(L_{restricted}\) be the maximum likelihood of the simpler (nested)
+model, and L \(L_{full}\) be the maximum likelihood of the more complex
+(full) model. The likelihood ratio test statistic (\(\Lambda\)) is:
+
+\[
+\Lambda = - 2 \cdot \log \Bigg(\frac{L_{restricted}}{L_{full}}\Bigg)
+\]
+
+Which simplifies to (due to properties of logarithms):
+
+\[
+\Lambda = -2 \cdot [\log(L_{restricted})-\log(L_{full})]
+\]
+
+The Null Hypothesis (\(H_0\)) of this test is that the additional
+parameters in the full model do not significantly improve the fit, so
+the simpler model is enough. The Alternative Hypothesis (\(H_1\)) is
+that the more complex model provides a significantly better fit. Under
+the null hypothesis, \(\Lambda\) asymptotically follows a chi-squared
+distribution with degrees of freedom equal to the difference in the
+number of parameters between the two models.\\
+A large \(\Lambda\) value (and small p-value) indicates that the more
+complex model fits the data significantly better than the simpler model,
+leading to rejection of \(H_0\).
+
+\textbf{Information criteria} provide a way to balance model fit with
+model complexity. They are particularly useful for comparing non-nested
+models or when there are multiple competing models. Lower values
+generally indicate a better model. The goal is to find a model that
+explains the data well without being overly complex.
+
+\begin{itemize}
+\tightlist
+\item
+  AIC = \(-2 \log(L_{model})+2k\)\\
+  where
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(L_{model}\) is the maximum likelihood of the fitted model
+  \item
+    \(k\) is the is the number of parameters in the model,including the
+    intercept and any cut-points in ordinal regression
+  \end{itemize}
+\item
+  BIC = \(-2 \log(L_{model})+k\log(n)\)\\
+  where
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(L_{model}\) is the maximum likelihood of the fitted model
+  \item
+    \(k\) is the is the number of parameters in the model,including the
+    intercept and any cut-points in ordinal regression
+  \item
+    \(n\) is the sample size
+  \end{itemize}
+\end{itemize}
+
+AIC tends to favor more complex models and is generally better for
+prediction accuracy. BIC tends to favor simpler, more parsimonious
+models and is often preferred for model selection when the goal is to
+identify the ``true'' underlying model.
+
+\hypertarget{beyond-the-proportional-odds-logit-model}{%
+\subsection{Beyond the Proportional Odds Logit
+Model}\label{beyond-the-proportional-odds-logit-model}}
+
+The Proportional Odds Model using the logit link function is the most
+common and often the default choice for analyzing ordinal data due to
+its interpretability (log-odds) and computational stability. However,
+the Proportional Odds Model is just one member of a broader family of
+models for ordinal outcomes. The specific choice of model can influence
+the interpretation and the fit to the data. Several alternatives exist.
+
+\hypertarget{alternative-link-functions-for-cumulative-models}{%
+\subsubsection{Alternative Link Functions for Cumulative
+Models}\label{alternative-link-functions-for-cumulative-models}}
+
+In a Proportional Odds Model, the ``link function'' transforms the
+cumulative probabilities to a linear scale, where they are modeled by
+your predictors.
+
+The general form of a cumulative model is:
+
+\[
+g[P(R \leq r_j)] = \alpha_j - \boldsymbol{\beta}^T\boldsymbol{X}
+\] where - \(P(R \leq r_j)\) is the cumulative probability of being in
+category \(j\) or lower - \(g(\cdot)\) is the link function -
+\(\alpha_j\) are the category-specific intercepts -
+\(\boldsymbol{\beta}\) is the vector of regression coefficients for the
+predictors - \(\boldsymbol{X}\) is the vector of predictor variables
+
+The link function can be a logit function, as shown previously, but it
+may be another function.
+
+\textbf{Probit Link}
+
+The probit link uses the inverse of the standard normal cumulative
+distribution function (\(\Phi^{-1}\)) and it models the cumulative
+probabilities on a scale that corresponds to the normal distribution
+
+\[
+\text{probit}[P(R\leq r_j)] = \Phi^{-1}[P(R\leq r_j)] =  \alpha_j - \boldsymbol{\beta}^T\boldsymbol{X}
+\] The coefficients are interpreted in terms of standard deviation units
+of the underlying latent normal variable. A one-unit increase in \(X_k\)
+leads to a \(\beta_k\) standard deviation change in the latent variable.
+They don't have the direct odds ratio interpretation of the logit model.
+
+This link function is often preferred when there's a theoretical belief
+that the underlying continuous variable driving the ordinal outcome is
+normally distributed.
+
+\textbf{Log-log Link}
+
+The Log-Log link is defined as follows:
+
+\[
+\text{loglog}[P(R\leq r_j)] =  \log(-\log(P(R\leq r_j))) =  \alpha_j - \boldsymbol{\beta}^T\boldsymbol{X}
+\]
+
+This link is used when the probability of the lowest category is
+expected to decrease very quickly, or when the process leading to higher
+categories accelerates rapidly.
+
+The interpretation is less straightforward than logit. It's more
+sensitive to changes in the upper tail of the probability distribution.
+It implies that the probability of being in a lower category decreases
+rapidly.
+
+\hypertarget{alternative-model-structures}{%
+\subsection{Alternative Model
+Structures}\label{alternative-model-structures}}
+
+Beyond altering the link function for cumulative probabilities, it is
+possible to change what probabilities the model is trying to explain.
+
+\textbf{Adjacent Categories Logit Model}
+
+Instead of modeling cumulative probabilities, the adjacent categories
+model focuses on the log-odds of being in category \(r_j\) versus the
+next adjacent category \(r_{j+1}\):
+
+\[
+\log \Bigg(\frac{P(R = r_j)}{P(R = r_{j+1})}\Bigg) = \alpha_j - \boldsymbol{\beta}^T\boldsymbol{X} \qquad \text{for} \qquad j = 1,\dots,m-1
+\] In this model, the coefficients are not constrained to be the same
+across all adjacent log-odds comparisons. This means it does not assume
+the proportional odds assumption. Each \(\alpha_j\) is a separate
+intercept for that specific adjacent comparison, and each \(\beta_j\) is
+a separate vector of coefficients. So, for each pair of adjacent
+categories \(j\) and \(j+1\), \(\text{exp}(\beta_k)\) is the odds ratio
+of being in category \(j\) versus \(j+1\) for a one-unit change in
+\(X_k\).
+
+The advantage of this model is that it does not impose the proportional
+odds assumption, so it is more flexible compared to the Proportional
+Odds Model. However, it leads to the estimation of \(m-1\) sets of
+predictors which are many more parameters compared to the Proportional
+Odds Model; this can lead ot larger standard errors and require larger
+sample sizes.
+
+\textbf{Continuation Ratio Logit Model}
+
+This model focuses on the log-odds of being in category \(j\) versus
+being in a higher category, given that the outcome is at least \(j\).
+It's a sequential modeling approach. The model is expressed as: \[ 
+\log\left(\frac{P(R = r_j \mid R \ge r_j)}{P(R > r_j \mid R \ge r_j)}\right) = \alpha_j - \boldsymbol{\beta}_j^T \mathbf{X} \quad \text{for } j=1, \dots, m-1 
+\] Where:
+
+\begin{itemize}
+\tightlist
+\item
+  \(P(Y = j \mid Y \ge j)\) is the conditional probability of observing
+  outcome category \(j\), given that the outcome is in category \(j\) or
+  higher.
+\item
+  \(P(Y > j \mid Y \ge j)\) is the conditional probability of observing
+  an outcome category higher than \(j\), given that the outcome is in
+  category \(j\) or higher.
+\item
+  \(\alpha_j\) is the category-specific intercept for the \(j\)-th
+  comparison.
+\item
+  \(\boldsymbol{\beta}_j\) is the vector of regression coefficients for
+  the predictors \(\mathbf{x}\) for the \(j\)-th comparison.
+\end{itemize}
+
+The exponential of a coefficient, \(\exp(\beta_{jk})\), represents the
+odds ratio of observing category \(j\) versus observing a category
+higher than \(j\), given that the outcome is at least \(j\), for a
+one-unit increase in predictor \(x_k\). Crucially, the coefficients
+\(\boldsymbol{\beta}_j\) can vary across these sequential comparisons
+(i.e., for different values of \(j\)). This means the effect of a
+predictor might differ depending on which step of the ordinal scale is
+examined.
+
+Similar to the adjacent categories model, the continuation ratio model
+typically does not assume proportional odds. This means it does not
+constrain the \(\boldsymbol{\beta}\) coefficients to be constant across
+all sequential comparisons. However, a ``proportional odds'' variant can
+be imposed on the continuation ratios by forcing \(\boldsymbol{\beta}\)
+to be constant across all \(j\).
+
+This model is especially suited for situations where the ordinal
+categories represent a natural progression or a series of choices.
+Common applications include:
+
+\begin{itemize}
+\item
+  \textbf{Educational Attainment}: Modeling the odds of graduating from
+  high school versus continuing to college, then the odds of completing
+  college versus pursuing graduate studies, and so on.
+\item
+  \textbf{Disease Progression}: Analyzing the odds of a patient staying
+  at their current disease stage versus progressing to the next, more
+  severe stage.
+\item
+  \textbf{Consumer Behavior}: Understanding the odds of a customer
+  making a basic purchase versus upgrading to a premium version.
+\end{itemize}
+
+\hypertarget{beyond-standard-approaches-modeling-ordinal-data-with-cub-models}{%
+\section{Beyond Standard Approaches: Modeling Ordinal Data with CUB
+Models}\label{beyond-standard-approaches-modeling-ordinal-data-with-cub-models}}
+
+While powerful and widely used, Ordered logit models operate under
+specific assumptions:
+
+\begin{itemize}
+\item
+  \textbf{Proportional Odds Assumption}: This assumption can be
+  restrictive and, if violated, can lead to misleading conclusions.
+\item
+  \textbf{Latent Variable Interpretation}: While mathematically
+  convenient, the interpretation of the latent variable might not always
+  align perfectly with the psychological process of how an individual
+  actually chooses an ordered category. The continuous latent variable
+  often represents an underlying ``utility'' or ``propensity,'' but it
+  doesn't explicitly account for aspects like uncertainty or indecision
+  in the response process.
+\end{itemize}
+
+These limitations highlight a need for alternative modeling frameworks
+that can capture the nuanced complexities inherent in how individuals
+respond to ordinal scales.
+
+There is a clear and compelling need for specialized statistical models
+designed to capture the unique characteristics of ordinal data and,
+importantly, to reflect the underlying cognitive and psychological
+processes through which individuals select a particular ordered
+category. This is where CUB models (Combination of a Uniform and a
+shifted Binomial random variable) come into play.
+
+CUB models, primarily developed by Domenico Piccolo and collaborators
+starting in the early 2000s, offer a distinct and innovative approach to
+modeling ordinal data. They stand apart from traditional methods by
+explicitly incorporating psychological interpretations into their
+statistical structure.
+
+At their core, CUB models are mixture models specifically tailored for
+ordinal data. The fundamental idea is that a respondent's observed
+rating is not solely a direct and deterministic mapping of their true
+``feeling'' or ``utility.'' Instead, it is also significantly affected
+by an element of ``uncertainty'' or ``indecision'' that can influence
+the final choice. This acknowledgment of psychological complexity in the
+response process is what makes CUB models particularly insightful for
+rating data.
+
+\hypertarget{the-psychological-reasons-behind-the-cub-model}{%
+\subsection{The Psychological Reasons Behind the CUB
+Model}\label{the-psychological-reasons-behind-the-cub-model}}
+
+The innovation of the CUB model lies in its attempt to statistically
+represent two fundamental psychological components that influence a
+respondent's choice on an ordinal scale. The model posits that an
+observed rating \(R\) is a probabilistic outcome of a decision process
+that weighs two components.
+
+\textbf{1. Feeling (or Attraction/Preference)}
+
+This component represents the conscious, rational, and deliberative
+aspect of the decision-making process. It reflects the respondent's
+genuine evaluation, opinion, or perception regarding the item being
+rated. The ``feeling'' directs the respondent towards a specific
+category on the scale that best aligns with their internal assessment.
+This is the component that captures the respondent's true position or
+stance on the matter at hand.
+
+Depending on the specific context of the rating, ``feeling'' can be
+interpreted as:
+
+\begin{itemize}
+\item
+  \textbf{Agreement/Disagreement}: How much a person agrees or disagrees
+  with a statement.
+\item
+  \textbf{Satisfaction/Dissatisfaction}: The level of contentment or
+  discontent with a product, service, or experience.
+\item
+  \textbf{Liking/Disliking}: The degree of preference or aversion
+  towards an item.
+\item
+  \textbf{Perceived quality, importance, risk, etc.}: The subjective
+  assessment of various attributes.
+\end{itemize}
+
+In essence, the feeling component drives the respondent towards a
+particular region of the ordinal scale, reflecting their underlying
+preference or ``attraction'' to certain categories.
+
+\textbf{2. Uncertainty (or Indecision/Fuzziness)}
+
+This component captures the hesitation, randomness, or lack of
+decisiveness that can accompany the choice process. It acknowledges a
+crucial psychological reality: respondents may not always have a
+perfectly clear and precise mapping of their internal feeling onto the
+provided scale categories. This can introduce a degree of randomness or
+``noise'' into the selection process.
+
+Sources of this uncertainty can be varied and include:
+
+\begin{itemize}
+\item
+  \textbf{Lack of Information or Knowledge}: The respondent might not
+  have sufficient information to form a strong opinion about the item
+  being rated.
+\item
+  \textbf{Ambiguity}: The question wording or the definition of the
+  scale categories might be unclear, leading to confusion.
+\item
+  \textbf{Personal Tendencies}: Some individuals may inherently be more
+  indecisive or tend to use certain parts of a scale (e.g., sticking to
+  the middle categories).
+\item
+  \textbf{Cognitive Effort/Satisficing}: In long surveys or under time
+  pressure, respondents might engage in ``satisficing'' behavior.
+  Instead of expending full mental energy to find the optimal category,
+  they might pick a plausible but not necessarily precise one to save
+  cognitive effort.
+\item
+  \textbf{Time Pressure or Fatigue}: Being rushed or tired can reduce
+  the ability to make a precise decision.
+\item
+  \textbf{Emotional State or Mood}: A respondent's transient emotional
+  state can also introduce variability into their choices.
+\end{itemize}
+
+The uncertainty component effectively describes the probability that the
+respondent's choice is influenced by random factors rather than a
+specific preference.
+
+\hypertarget{the-cub-model-statistical-formulation}{%
+\subsection{The CUB Model: Statistical
+Formulation}\label{the-cub-model-statistical-formulation}}
+
+The basic CUB model, designed for m ordered categories (typically
+\(r=1,2,\dots,m\)), is a finite mixture of two discrete probability
+distributions:
+
+\begin{itemize}
+\tightlist
+\item
+  A shifted Binomial distribution to model the feeling (or
+  attraction/preference) component.
+\item
+  A discrete Uniform distribution to model the uncertainty (or
+  indecision/fuzziness) component.
+\end{itemize}
+
+The Probability Mass Function (PMF) for an observed rating \(R=r\) is
+given by:
+
+\[
+P(R = r \mid \pi,\xi) = \pi B(r \mid\xi) + (1-\pi)U(r)
+\] where the elements of the mixture are:
+
+\begin{itemize}
+\item
+  \(m\): This is the number of ordered categories on the scale. For
+  instance, if a scale ranges from ``1 = Strongly Disagree'' to ``5 =
+  Strongly Agree,'' then \(m=5\).
+\item
+  \(r\): This denotes the selected category by a respondent, where
+  \(r\in \{ 1,2,…,m\}\).
+\item
+  \(\pi \in (0,1]\), acts as a mixture weight. \(\pi\) represents the
+  probability that the observed choice is driven by the feeling
+  component (i.e., the shifted Binomial distribution).\\
+  Consequently, \((1−\pi)\) is called \textbf{Uncertainty parameter} and
+  represents the probability that the observed choice is driven by the
+  uncertainty component (i.e., the discrete Uniform distribution). A
+  higher value of \((1−\pi)\) means greater indecision or randomness in
+  the response, indicating that the uniform component has a stronger
+  influence.
+\item
+  \(\xi \in [0,1]\), is directly related to the shifted Binomial
+  distribution and determines the location of the ``feeling''.\\
+  More intuitively, \((1−\xi)\) is often considered the direct measure
+  of ``feeling'', indeed it is called \textbf{Feeling parameter}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If \((1−\xi)\) is high (e.g., close to 1, meaning \(\xi\) is close
+    to 0), there's a strong underlying feeling towards the higher end of
+    the scale.
+  \item
+    If \((1−\xi)\) is low (e.g., close to 0, meaning \(\xi\) is close to
+    1), there's a strong underlying feeling towards the lower end of the
+    scale.
+  \item
+    If \((1−\xi) = 0.5\) (meaning \(\xi=0.5\)), the feeling component is
+    neutral or centered, implying a symmetric preference if not for the
+    influence of uncertainty.
+  \end{itemize}
+\item
+  \(U(r)\): This is the probability of choosing category \(r\) according
+  to a discrete Uniform distribution.\\
+  For any category \(r\in\{1,2,…,m\}\), \(U(r)= \frac{1}{m}\).\\
+  This component represents complete randomness or a lack of specific
+  preference among the \(m\) categories. If a respondent is entirely
+  uncertain or indecisive, their response is essentially a random pick
+  from the available options.
+\item
+  \(B(r∣\xi)\): This is the probability of choosing category \(r\)
+  according to a shifted Binomial distribution.\\
+  Specifically, this refers to \(P(X=r−1)\) where
+  \(X\sim Bin(m−1,1−\xi)\). The ``shifted'' aspect arises because the
+  rating scale typically starts from 1, while a standard Binomial
+  distribution's trials start from 0. Thus, to model a choice of \(r\)
+  on a scale \(1,…,m\), we consider \(r−1\) successes out of \(m−1\)
+  trials.\\
+  So, the PMF is:
+\end{itemize}
+
+\[
+B(r\mid\xi)=\binom{m-1}{r-1}(1-\xi)^{r-1}\xi^{m-r}
+\]
+
+This component models the feeling towards a particular category,
+allowing for various shapes (unimodal, skewed left/right, or even
+U-shaped if \((1−\xi)\) is extremely close to 0 or 1, though the latter
+is less common in direct ``feeling'' interpretation). It captures where
+the respondent's underlying preference lies on the scale.
+
+Finally, the CUB model can be written as: \[
+P(R = r \mid \pi,\xi) = \pi \binom{m-1}{r-1}(1-\xi)^{r-1}\xi^{m-r} + (1-\pi) \frac{1}{m}
+\]
+
+\hypertarget{interpretation-of-parameters}{%
+\subsubsection{Interpretation of
+Parameters}\label{interpretation-of-parameters}}
+
+The feeling \((1-\xi)\) and the uncertainty \((1-\pi)\) parameters are
+not merely statistical quantities; they have direct psychological
+meanings related to the respondent's decision process.
+
+\textbf{The Uncertainty Parameter}
+
+It directly quantifies the level of uncertainty or indecision in the
+respondent's choice.
+
+\begin{itemize}
+\item
+  If \((1-\pi = 0)\) (i.e., \(\pi = 1\)) it means that the observed
+  choice is entirely determined by the feeling, modeled by the binomial
+  component. There is no uncertainty. The distribution of responses will
+  reflect the shape of the Binomial.
+\item
+  If \((1−\pi)=1\) (i.e., \(\pi=0\)) it means that the observed choice
+  is entirely determined by ``uncertainty'' (Uniform component). The
+  respondent's feeling plays no role. The distribution of responses will
+  be perfectly flat, meaning each category is chosen with equal
+  probability.
+\item
+  Values between 0 and 1 indicate a mix of the two components. A higher
+  value of \((1−\pi)\) effectively ``flattens'' the observed
+  distribution of responses towards a uniform shape, as the random
+  component gains more influence.
+\end{itemize}
+
+\textbf{The Feeling Parameter}
+
+The quantity \((1−\xi)\) measures the underlying ``feeling'',
+``preference'', or ``attraction'' of the respondent. It dictates the
+skewness and location of the Binomial component.
+
+\begin{itemize}
+\item
+  If \((1−\xi)\) is high (close to 1, so \(\xi\) is close to 0), it
+  means that there's a strong attraction towards higher-valued
+  categories. The Binomial component will be skewed to the right, with
+  its mode (most frequent value) located at or near the maximum category
+  \(m\).
+\item
+  If \((1−\xi)\) is low (close to 0, so \(\xi\) is close to 1) it means
+  that there's a strong attraction towards lower-valued categories. The
+  Binomial component will be skewed to the left, with its mode located
+  at or near the minimum category 1.
+\item
+  If \((1−\xi)=0.5\) (so \(\xi=0.5\)), the Binomial component is
+  symmetric around the center of the scale, indicating a neutral or
+  balanced feeling.
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth,height=\textheight]{images/CUBgrid.jpg}
+
+}
+
+\caption{Probability distribution functions of the CUB model, for
+\(m = 7\) and 9 combinations of feeling and uncertainty.}
+
+\end{figure}
+
+\hypertarget{model-identifiability-and-estimation}{%
+\subsubsection{Model identifiability and
+Estimation}\label{model-identifiability-and-estimation}}
+
+The CUB model is identifiable (i.e., different sets of parameter values
+lead to different probability distributions for the observed data) if
+the number of categories \(m > 3\).
+
+The parameters \((\pi, \xi)\) of the CUB model are typically estimated
+using the Maximum Likelihood Estimation (MLE) method. MLE search for the
+parameter values that maximize the likelihood of observing the given
+data.
+
+Since the CUB model is a mixture model, direct maximization of this
+log-likelihood function can be complex due to its non-linear nature.
+Therefore, the Expectation-Maximization (EM) algorithm is a common and
+robust iterative method for finding the MLEs.
+
+\hypertarget{assessing-the-goodness-of-fit}{%
+\subsubsection{Assessing the Goodness of
+Fit}\label{assessing-the-goodness-of-fit}}
+
+A particularly common and intuitive measure for assessing how well a CUB
+model fits the observed data is the Dissimilarity (\(Diss\)) Index. It
+quantifies the absolute difference between the observed and fitted
+proportions for each category. The \(Diss\) index is defined as follows:
+
+\[
+Diss = \frac{1}{2}\sum_{r = 1}^{m} \mid f_r - p_r(\hat{\boldsymbol{\theta}})\mid
+\] where \(f_r\) are the observed relative frequencies and
+\(p_r(\hat{\boldsymbol{\theta}})\) are the estimated probabilities for
+the response categories.
+
+\begin{itemize}
+\tightlist
+\item
+  Values of \(Diss\) closer to 0 indicate a better fit, with a perfect
+  fit yielding \(Diss = 0\).
+\item
+  The maximum value of \(Diss\) is 1 when there is no overlap between
+  observed and fitted distributions.
+\end{itemize}
+
+The Dissimilarity Index is popular because it provides a direct and
+easily interpretable measure of the overall discrepancy between the
+observed data distribution and the distribution predicted by the CUB
+model. In other words, it measures the proportion of responses to be
+changed to achieve a perfect fit.\\
+It is less sensitive to low expected frequencies than the Pearson
+Chi-squared test and gives a clear indication of prediction accuracy.
+
+\hypertarget{parameter-space-visualization}{%
+\subsubsection{Parameter Space
+Visualization}\label{parameter-space-visualization}}
+
+CUB models offer a highly intuitive way to visualize the joint
+interpretation of their parameters: the parameter space visualization.
+This is typically represented on a unit square where:
+
+The x-axis represents \((1−\pi)\), the uncertainty level. The y-axis
+represents \((1−\xi)\), the feeling or attraction level. This ``CUB
+plot'' is incredibly helpful for comparing different datasets,
+subgroups, or even changes within a single group over time. Key regions
+of this plot offer immediate insights:
+
+\begin{itemize}
+\item
+  \textbf{Bottom-left corner} (\((1−\pi)\approx0,(1−\xi)\approx0\)):
+  This indicates very low uncertainty (respondents are very certain in
+  their choices) and a strong feeling towards low scores (e.g., strong
+  disagreement, high dissatisfaction).
+\item
+  \textbf{Top-left corner} (\((1−\pi)\approx0,(1−\xi)\approx1\)): This
+  signifies very low uncertainty and a strong feeling towards high
+  scores (e.g., strong agreement, high satisfaction).
+\item
+  \textbf{Right side} (\((1−\pi)\approx1\)): This region represents very
+  high uncertainty. In this scenario, the feeling component becomes less
+  influential, and responses tend to be closer to a uniform
+  distribution, indicating a significant degree of randomness in the
+  choices.
+\end{itemize}
+
+This graphical representation provides a powerful diagnostic tool for
+understanding the underlying psychological processes at play in rating
+data.
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\textwidth,height=\textheight]{images/cartesian_agg.jpg}
+
+}
+
+\caption{Graphical representation of the parameter space of the CUB
+model}
+
+\end{figure}
+
+\hypertarget{extensions-of-the-cub-model-incorporating-covariates}{%
+\subsection{Extensions of the CUB Model: Incorporating
+Covariates}\label{extensions-of-the-cub-model-incorporating-covariates}}
+
+The basic CUB model, as discussed in Chapter 2, provides a powerful
+framework for understanding the underlying feeling and uncertainty in
+rating data. However, the basic formulation assumes a homogeneity in the
+population, meaning that the parameters are constant for all
+individuals. While useful for initial descriptive analysis, this
+assumption often oversimplifies the complex reality of human responses.
+
+In real-world applications, it is almost always more realistic to assume
+that the psychological components driving responses (the feeling and
+uncertainty components) vary across different individuals or groups.
+These variations are often systematically related to observable
+characteristics of the respondents or the context in which the ratings
+are collected.
+
+The introduction of covariates into the CUB model allows us to move
+beyond a simple description of the overall population's feeling and
+uncertainty, enabling a much more nuanced and insightful analysis.
+Specifically, introducing covariates allows us to:
+
+\begin{itemize}
+\item
+  \textbf{Explain heterogeneity in response patterns}: Instead of
+  treating differences in responses as random noise, covariates enable
+  us to identify systematic factors that explain why different
+  individuals or groups exhibit different levels of feeling and
+  uncertainty.
+\item
+  \textbf{Understand how specific characteristics influence feeling and
+  uncertainty}: This is perhaps the most powerful advantage. We can
+  quantify the impact of a 10-year age increase on the probability of
+  certainty (π) or the effect of a higher education level on the
+  tendency to rate highly (1−ξ). This moves from mere description to
+  explanation and inference.
+\end{itemize}
+
+\hypertarget{statistical-formulation-of-cub-model-with-covariates}{%
+\subsubsection{Statistical Formulation of CUB Model with
+Covariates}\label{statistical-formulation-of-cub-model-with-covariates}}
+
+Formulation of CUB with Covariates In a CUB model with covariates, the
+core idea is that the parameters \(\pi\) and \(\xi\) are no longer fixed
+constants across all individuals. Instead, they are modeled as functions
+of a set of explanatory variables. Let \(y_i\) be a vector of covariates
+for subject \(i\) specifically influencing their uncertainty, and
+\(w_i\) be a vector of covariates for subject \(i\) influencing their
+feeling. These covariate vectors can be the same, overlap, or be
+entirely different.
+
+To ensure that the parameters \(\pi_i\) and \(\xi_i\) remain within
+their valid range of \([0,1]\), a link function is employed, typically a
+logistic (logit) function, which is standard practice for modeling
+probabilities in generalized linear models.
+
+\textbf{Modeling the uncertainty}
+
+Since \(\pi_i\in [0,1]\), we model it using a logistic link. It's often
+more intuitive to model \((1-\pi_i)\), which represents the probability
+that the choice is driven by the uniform component.
+
+The log-odds of uncertainty are linked to the covariates \(y_i\):
+
+\[
+\text{logit}(1-\pi_i) = \log \Bigg(\frac{1-\pi_i}{\pi_i}\Bigg) = \boldsymbol{y}^{T}_i\boldsymbol{\beta}
+\] where \(\boldsymbol{\beta}\) is a vector of coefficients
+corresponding to the covariates \(\boldsymbol{y}_i\).
+
+From this, we can derive the direct relationships for \((1−\pi_i)\) and
+\(\pi_i\)
+
+\[
+(1-\pi_i)=\frac{\exp(\boldsymbol{y}^{T}_i\boldsymbol{\beta})}{1+\exp(\boldsymbol{y}^{T}_i\boldsymbol{\beta})}
+\]
+
+And consequently, for \(\pi_i\):
+
+\[
+\pi_i = 1-(1-\pi_i) = 1- \frac{\exp(\boldsymbol{y}^{T}_i\boldsymbol{\beta})}{1+\exp(\boldsymbol{y}^{T}_i\boldsymbol{\beta})} = \frac{1}{1+\exp(\boldsymbol{y}^{T}_i\boldsymbol{\beta})}
+\]
+
+\textbf{Modeling the feeling}
+
+Similarly, for \(\xi_i\in [0,1]\), a logit link is applied. It's often
+more insightful to directly model \((1-\xi_i)\), which represents the
+feeling towards higher scores on the scale.
+
+The log-odds of feeling for higher scores are linked to the covariates
+\(w_i\) :
+
+\[
+\text{logit}(1-\xi_i) = \log \Bigg(\frac{1-\xi_i}{\xi_i}\Bigg) = \boldsymbol{w}^{T}_i\boldsymbol{\gamma}
+\] where \(\boldsymbol{\gamma}\) is a vector of coefficients
+corresponding to the covariates \(\boldsymbol{w}_i\).
+
+This implies the following fo \((1−\xi_i)\):
+
+\[
+(1-\xi_i)=\frac{\exp(\boldsymbol{w}^{T}_i\boldsymbol{\gamma})}{1+\exp(\boldsymbol{w}^{T}_i\boldsymbol{\gamma})}
+\]
+
+And for \(\xi_i\):
+
+\[
+\xi_i = 1-(1-\xi_i) = 1- \frac{\exp(\boldsymbol{w}^{T}_i\boldsymbol{\gamma})}{1+\exp(\boldsymbol{w}^{T}_i\boldsymbol{\gamma})} = \frac{1}{1+\exp(\boldsymbol{w}^{T}_i\boldsymbol{\gamma})}
+\]
+
+With these formulations, the overall probability mass function for an
+observed rating R=r for subject i becomes:
+
+\[
+P(R_i = r \mid \pi_i,\xi_i) = \pi_i \binom{m-1}{r-1}(1-\xi_i)^{r-1}\xi_i^{m-r} + (1-\pi_i) \frac{1}{m}
+\]
+
+where \(\pi_i\) and \(\xi_i\) are determined by the covariates as
+defined above.
+
+\hypertarget{interpretation-of-covariate-effects}{%
+\subsubsection{Interpretation of Covariate
+Effects}\label{interpretation-of-covariate-effects}}
+
+Interpreting the coefficients (\(\beta\) and \(\gamma\)) in a CUB model
+with covariates is crucial for understanding how specific
+characteristics influence the psychological components of rating.
+Remember that these coefficients operate on the log-odds scale due to
+the logistic link.
+
+\textbf{Coefficients \(\beta\)}
+
+These coefficients describe the impact of covariates on the log-odds of
+uncertainty.
+
+A positive coefficient \(\beta_k\) implies that an increase in the
+\(k\)-th covariate \(y_{ik}\), holding other covariates constant,
+increases the log-odds of uncertainty. Therefore \((1−\pi_i)\) increases
+and makes the respondent's choice more driven by the uniform component.
+This suggests that as \(y_{ik}\) increases, the individual is more
+indecisive or random in their rating.
+
+A negative \(\beta_k\) implies that an increase in \(y_{ik}\) decreases
+the log-odds of uncertainty, thus decreasing \((1−\pi_i)\) and making
+the respondent's choice more driven by their underlying feeling. This
+suggests that as \(y_{ik}\) increases, the individual becomes more
+certain in their rating.
+
+\textbf{Coefficients \(\gamma\)}
+
+These coefficients describe the impact of covariates \(w_i\) on the
+log-odds of feeling towards higher scores.
+
+A positive \(\gamma_k\) implies that an increase in the \(k\)-th
+covariate \(w_{ik}\), holding other covariates constant, increases the
+log-odds of feeling for higher scores, thus increasing \((1-\xi_i)\).
+This means that as \(w_{ik}\) increases, the individual's underlying
+preference shifts towards the higher end of the rating scale.
+
+A negative \(\gamma_k\) implies that an increase in \(w_{ik}\) decreases
+the log-odds of feeling for higher scores, thus decreasing
+\((1-\xi_i)\). This means that as \(w_{ik}\) increases, the individual's
+underlying preference shifts towards the lower end of the rating scale.
+
+\textbf{Important Note}: CUB models with covariates are not Generalized
+Linear Models (GLMs) in the strict sense. While the parameters \(\pi_i\)
+and \(\xi_i\) are linked to covariates using GLM-like structures
+(specifically, logistic regressions), the response variable itself (the
+mixture of Binomial and Uniform distributions) does not belong to the
+exponential family.
+
+\hypertarget{cub-model-with-shelter-option}{%
+\subsection{CUB Model with Shelter
+Option}\label{cub-model-with-shelter-option}}
+
+While the basic CUB model effectively captures the feeling and
+uncertainty in ordinal responses, real-world rating data often exhibit
+additional complexities.
+
+One such common phenomenon is the tendency for respondents to
+disproportionately select a specific category, not entirely explained by
+their true underlying feeling or by simple random guessing. This
+over-selection of a particular category suggests it acts as a
+``shelter'' or ``refuge'' for some respondents.
+
+The shelter effect describes a situation where a specific category on an
+ordinal scale receives an ``extra'' probability mass, beyond what would
+be predicted solely by the respondent's underlying feeling or by pure
+random uncertainty. This happens because some respondents might
+gravitate towards this category for reasons unrelated to their precise
+preference or indecision.
+
+Reasons for this ``shelter-seeking'' behavior have been extensively
+discussed in the literature (e.g., Iannario, 2012; Piccolo \& Simone,
+2019):
+
+\begin{itemize}
+\item
+  \textbf{Cognitive Simplification}: Respondents may choose an easy, or
+  cognitively less demanding option to reduce mental effort. This could
+  be the middle category (e.g., ``Neutral''), a neutral option
+  specifically provided, or even the first/last option if it serves as
+  an easy default.
+\item
+  \textbf{Fatigue or Boredom}: Especially prevalent in long
+  questionnaires or surveys, fatigue can lead respondents to disengage
+  and simply pick a convenient category rather than carefully
+  considering their true response.
+\item
+  \textbf{Social Desirability or Privacy Concerns}: Individuals might
+  select a ``safe'', non-committal, or socially acceptable answer to
+  avoid expressing a strong or controversial opinion, or to protect
+  their privacy. The neutral option often serves this purpose.
+\item
+  \textbf{Questionnaire Design}: Poorly worded questions, ambiguous
+  scale anchors, or an overwhelming number of options might
+  inadvertently guide respondents towards a default or ambiguous middle
+  ground.
+\item
+  \textbf{Satisficing}: This refers to the tendency to select a
+  minimally acceptable response rather than the optimal one, often to
+  save cognitive resources. The shelter option becomes the ``good
+  enough'' answer.
+\end{itemize}
+
+The critical implication of the shelter effect is that the chosen
+category \(c\) has an ``extra'' probability mass. This means the
+observed frequency for category \(c\) is higher than what a standard
+two-component CUB model would predict. Effectively, a subset of
+respondents might be selecting \(c\) directly, bypassing the usual
+feeling-uncertainty decision process.
+
+\hypertarget{defining-the-shelter-category}{%
+\subsubsection{Defining the shelter
+category}\label{defining-the-shelter-category}}
+
+The shelter category, denoted by \(c\) (where \(c \in \{1,2,…,m\}\)), is
+a specific category on the ordinal scale that exhibits this inflated
+probability mass. Identifying this category is a crucial preliminary
+step. It can be:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Hypothesized a priori}: In many cases, the shelter category
+  can be hypothesized beforehand based on the scale's design. For
+  instance, on a 5-point Likert scale (1=Strongly Disagree, 5=Strongly
+  Agree), the central category \(c=3\) (``Neutral'' or ``Neither agree
+  nor disagree'') is a very common candidate for a shelter option. Other
+  possibilities could be the minimum (\(c=1\)) or maximum (\(c=m\))
+  category if they function as easy ``opt-out'' or default choices.
+\item
+  \textbf{Identified Empirically}: If no a priori hypothesis exists, the
+  shelter category can be identified empirically. This involves
+  observing an unusually high frequency for a particular category that
+  is not well explained by a simple CUB model. A large positive residual
+  for a specific category from a basic CUB fit can point towards a
+  potential shelter effect.
+\end{itemize}
+
+Once identified, the shelter category \(c\) is treated as fixed in the
+model estimation.
+
+\hypertarget{statistical-formulation-of-cub-model-with-shelter-option}{%
+\subsubsection{Statistical Formulation of CUB Model with Shelter
+Option}\label{statistical-formulation-of-cub-model-with-shelter-option}}
+
+To account for the shelter effect, the basic CUB model is extended into
+a three-component mixture model. A common and highly interpretable
+approach is the CUB with Shelter (CUSH) model. This model introduces a
+third component: a degenerate distribution that assigns all probability
+mass exclusively to the shelter category \(c\).
+
+The probability mass function (PMF) for the CUSH model for a rating
+\(R=r\) is given by:
+
+\[
+ P(R = r\mid \pi, \xi, \delta) = \delta \Big[D_c(r)\Big] + (1-\delta)\Big[\pi B(r \mid \xi) + (1-\pi)U(r)\Big]
+\]
+
+where there is an additional component, compared to the basic CUB model:
+the degenerate distribution fir the shelter category \(c\), \(D_c(r)\):
+
+\[
+D_c(r) =
+\begin{cases}
+    1, & \text{if } r = s; \\
+    0, & \text{otherwise;}
+\end{cases}
+\qquad r = 1, \dots, m.
+\]
+
+The parameter \(\delta \in [0,1]\) represents the probability of
+choosing the shelter category \(c\) directly. This is the weight
+assigned to the degenerate distribution. A higher \(\delta\) indicates a
+stronger tendency for respondents to opt for the designated shelter
+category, irrespective of their true feeling or general uncertainty.
+
+\textbf{Model selection}
+
+Model selection is crucial when deciding whether a CUSH model offers a
+significantly better fit than a simpler CUB model. Standard statistical
+criteria can be used:
+
+Information criteria like Akaike Information Criterion and Bayesian
+information Criterion are widely used to balance model fit with model
+complexity.
+
+Lower values for AIC and BIC indicate a better-fitting model. BIC is
+often preferred in model selection for CUB models as it penalizes model
+complexity more heavily, which can help in choosing more parsimonious
+models.
+
+After fitting a basic CUB model, it's good practice to examine the
+residuals, which are the differences between observed and fitted
+probabilities/frequencies. If a simple CUB model shows a large positive
+residual for a specific category, it strongly suggests the presence of a
+shelter effect for that category. The Dissimilarity Index (\(Diss\)) can
+also be used to compare the overall fit improvement when a shelter
+component is added.
+
+\hypertarget{treatment-of-dont-know-dk-options-within-the-cub-framework}{%
+\subsection{Treatment of ``Don't Know'' (DK) Options within the CUB
+Framework}\label{treatment-of-dont-know-dk-options-within-the-cub-framework}}
+
+Beyond the core rating scale, surveys often include an option for
+respondents to indicate ``Don't Know'' (DK), ``No Opinion'', ``Not
+Applicable'', or similar non-substantive responses. While seemingly
+innocuous, the handling of these responses presents a significant
+challenge for traditional statistical modeling, as they often don't fit
+neatly into standard analytical frameworks.
+
+The CUB framework, however, offers a theoretically robust and
+psychologically insightful approach to incorporating information from DK
+responses.
+
+``Don't Know'' responses are common in surveys, and their treatment is
+critical for valid statistical inference. They are not merely missing
+data points; rather, they represent an active choice that reflects a
+specific cognitive or attitudinal state of the respondent.
+
+DK responses are problematic for several reasons:
+
+\begin{itemize}
+\item
+  \textbf{Not Simply Missing Data}: Treating DKs as simple missing
+  values and discarding them (listwise deletion) can lead to biased
+  samples and results. If respondents who choose DK differ
+  systematically from those who provide substantive ratings, removing
+  them can distort the representativeness of the remaining sample,
+  affecting parameter estimates and generalizability.
+\item
+  \textbf{Imputation Issues}: Imputing a value for a DK response is
+  inherently difficult and often relies on strong, untestable
+  assumptions. Assigning a central value (e.g., the mean or median of
+  the substantive responses) might mask genuine uncertainty, while more
+  complex imputation methods (e.g., multiple imputation) can be
+  challenging to implement and interpret accurately in the context of
+  ordinal data.
+\item
+  \textbf{Adding DK as a Category}: A seemingly straightforward approach
+  is to include DK as just another category on the ordinal scale.
+  However, this fundamentally breaks the ordinal nature of the scale.
+  For example, a sequence like ``Strongly Disagree, Disagree, DK, Agree,
+  Strongly Agree'' is conceptually problematic. The DK option is not
+  naturally ordered between ``Disagree'' and ``Agree''; it represents a
+  different type of response altogether. Its inclusion disrupts the
+  monotonic relationship implied by ordinal categories.
+\end{itemize}
+
+To properly handle DK responses, it is essential to understand their
+underlying meanings. Research suggests that ``Don't Know'' can have
+several psychological interpretations:
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{True Lack of Knowledge/Opinion}: The respondent genuinely has no
+  information, experience, or hasn't formed an opinion on the topic.
+  Unwillingness to Answer: The respondent might have an opinion but
+  chooses not to express it due to a sensitive topic, privacy concerns,
+  or wanting to appear socially desirable (e.g., not wanting to seem
+  extreme or uninformed).
+\item
+  \emph{Inability to Map Opinion to Scale}: The respondent might have an
+  opinion but feels the provided scale categories are inadequate, too
+  vague, or don't quite fit their nuanced view. They might feel their
+  true sentiment falls ``between'' categories or doesn't align with any.
+\item
+  \emph{Question Ambiguity}: The respondent simply might not understand
+  the question, its underlying assumptions, or the terms used, leading
+  them to pick DK as a way out.
+\end{itemize}
+
+The varied meanings of DK emphasize that it's a rich source of
+information, not just data to be thrown away or arbitrarily filled in.
+
+The approach for handling DK responses in the CUB framework is to think
+of the total population as having two unobserved (latent) groups:
+
+\begin{itemize}
+\item
+  Group A=0: Those who can give a substantive rating on the m-point
+  scale. These people have a genuine underlying feeling or are able to
+  make a choice, even if that choice has some general uncertainty.
+\item
+  Group A=1: Those who cannot (or would not) and would genuinely choose
+  DK if it were an option. This group essentially represents the
+  ``true'' non-responders when it comes to having a substantive opinion.
+\end{itemize}
+
+We'll use \(p_{DK}\) to represent the proportion of individuals in the
+population who would choose DK.
+
+\hypertarget{modeling-assumptions-for-latent-groups}{%
+\subsubsection{Modeling Assumptions for Latent
+Groups}\label{modeling-assumptions-for-latent-groups}}
+
+This approach makes specific assumptions about how each latent group
+generates responses:
+
+For those who can answer (Group A=0, proportion \((1-p_{DK})\)): When
+these individuals provide a substantive rating (\(R=r\)), their
+responses are assumed to follow a standard CUB model. This CUB model has
+its own parameters, \(\pi_0\) (for uncertainty within this group) and
+\(\xi_0\) (for feeling within this group), which describe the feeling
+and uncertainty among those capable of providing an opinion.
+
+\[
+P(R = r \mid A = 0, \pi_0, \xi_0) = \pi_0B(r\mid\xi_0) + (1-\pi_0)U(r)
+\]
+
+For those who would choose DK (Group A=1, proportion \(p_{DK}\)), if
+these individuals are forced to pick a category from the m-point scale
+(e.g., if the DK option isn't available, or if their preference for DK
+is part of their general uncertainty), their choice isn't based on a
+genuine ``feeling''. Instead, their responses are driven purely by
+randomness or uncertainty across the available options. So, their
+responses are modeled by a discrete Uniform distribution.
+
+\[
+P(R = r\mid A =1) =U(r)= \frac{1}{m}
+\]
+
+The overall observed distribution of ratings, if all respondents are
+forced to choose from the m-point scale (meaning no explicit DK option
+is given, or if we consider the hypothetical responses of those who
+would pick DK if it were there), is a mix of the CUB model for
+``knowers'' and the Uniform distribution for those ``forced'' to choose.
+
+\hypertarget{adjusting-cub-parameters-using-observed-dks}{%
+\subsubsection{Adjusting CUB Parameters using Observed
+DKs}\label{adjusting-cub-parameters-using-observed-dks}}
+
+The method proposed in this framework uses the presence of DKs to adjust
+the fundamental uncertainty in the main CUB model.
+
+When DK responses are explicitly allowed in a survey and are present in
+the data the approach proceeds as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Estimate \(p_{DK}\): This is simply the observed proportion of DK
+  responses in the sample.
+\end{enumerate}
+
+\[
+ \hat{p}_{DK} = \frac{Total\, number\, of\, DK\, responses}{Total\, number\, of\, responses}
+ \]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Focus on \textbf{Substantive Responders}: The remaining
+  \((1- \hat{p}_{DK})\) proportion of the sample consists of individuals
+  who gave a rating on the m-point ordinal scale (i.e., they picked a
+  category from \(1,…,m\)). Let \(N_{sub}\) be the number of these
+  substantive responders.
+\item
+  \textbf{Model for Substantive Responses}: A standard CUB model is then
+  fitted only to these \(N_{sub}\) substantive responses. This fitting
+  process gives us estimates for their underlying parameters, called
+  \(\pi_S\) and \(\xi_S\). This model describes the probability
+  distribution of ratings given that a substantive response was
+  provided: \[
+   P(R = r \mid Substantive) = \pi_SB(r\mid\xi_S) + (1-\pi_S)U(r)
+   \]
+\item
+  \textbf{Relating to the Overall Population Parameters}: The crucial
+  step is to link these parameters \((\pi_S, \xi_S)\) back to the
+  overall population's true feeling and uncertainty, taking into account
+  the proportion of DKs.
+
+  \begin{itemize}
+  \item
+    The feeling parameter for the overall population, \((1-\xi)\), is
+    considered to be best represented by the feeling of those who
+    actually gave a substantive rating. This is based on the idea that
+    people who genuinely say ``Don't Know'' don't contribute to the
+    ``feeling'' aspect of the scale. So: \[
+    (1-\xi) = (1-\xi_S)
+    \]
+  \item
+    The overall uncertainty parameter for the population, \((1-\pi)\),
+    comes from two sources:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      The inherent uncertainty among those who could answer (captured by
+      \(1-\pi_S\)).
+    \item
+      The complete uncertainty of those who chose DK (who are considered
+      100\% uncertain regarding the m-point scale). The overall \(\pi\)
+      for the population (the probability that a response is driven by
+      feeling) is then calculated as:
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\[
+\pi = (1-\hat{p}_{DK})\cdot\pi_S
+\]
+
+This means the overall probability that a response is based on feeling
+(\(\pi\)) is the probability that a respondent isn't a DK type
+\((1-\hat{p}_{DK})\) multiplied by the probability that, given they
+aren't a DK type, they respond based on feeling \((\pi_S)\).
+
+Consequently, the overall uncertainty for the population is:
+
+\[
+(1-\pi) = 1-(1-\hat{p}_{DK})\cdot\pi_S
+\]
+
+This can be rewritten as:
+
+\[
+(1-\pi) = \hat{p}_{DK} + (1-\hat{p}_{DK})\cdot(1-\pi_S)
+\]
+
+This last equation shows that the overall uncertainty in the population
+is the sum of the proportion of individuals who selected DK
+\((\hat{p}_{DK})\) and the proportion of uncertainty among those who
+provided a substantive response \((1-\pi_S)\), weighted by their share
+of the total population \((1-\hat{p}_{DK})\).
+
+
+
+\end{document}
