@@ -217,7 +217,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, interior hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, breakable, boxrule=0pt, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, breakable, interior hidden, boxrule=0pt, enhanced]}{\end{tcolorbox}}\fi
 
 Description of the course
 
@@ -541,7 +541,7 @@ following aspects:
   reliability.
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-caution-color!10!white, left=2mm, opacityback=0, colback=white, arc=.35mm, titlerule=0mm, opacitybacktitle=0.6, colframe=quarto-callout-caution-color-frame, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Caution}, coltitle=black, breakable, rightrule=.15mm, toptitle=1mm, bottomtitle=1mm, toprule=.15mm, bottomrule=.15mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, leftrule=.75mm, colbacktitle=quarto-callout-caution-color!10!white, opacitybacktitle=0.6, left=2mm, colframe=quarto-callout-caution-color-frame, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Caution}, titlerule=0mm, toptitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, coltitle=black, opacityback=0]
 
 Reversing the wording of items (also known as reversed polarity) can
 confuse respondents, especially if the items are complex or abstract, ot
@@ -613,7 +613,7 @@ Likert scales are extensively applied in surveys to assess employee
 engagement, customer satisfaction, product feedback, and clinical
 evaluations.
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-warning-color!10!white, left=2mm, opacityback=0, colback=white, arc=.35mm, titlerule=0mm, opacitybacktitle=0.6, colframe=quarto-callout-warning-color-frame, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, coltitle=black, breakable, rightrule=.15mm, toptitle=1mm, bottomtitle=1mm, toprule=.15mm, bottomrule=.15mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, leftrule=.75mm, colbacktitle=quarto-callout-warning-color!10!white, opacitybacktitle=0.6, left=2mm, colframe=quarto-callout-warning-color-frame, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, titlerule=0mm, toptitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, coltitle=black, opacityback=0]
 
 Although Likert scale data is often numerically coded to facilitate
 analysis, it's essential to remember their ordinal nature and approach
@@ -994,102 +994,7 @@ each category and the overall tendency of agreement or disagreement.
 \CommentTok{\# Install and load required package}
 \CommentTok{\# install.packages("HH")}
 \FunctionTok{library}\NormalTok{(HH)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-Caricamento del pacchetto richiesto: lattice
-\end{verbatim}
-
-\begin{verbatim}
-Caricamento del pacchetto richiesto: grid
-\end{verbatim}
-
-\begin{verbatim}
-Caricamento del pacchetto richiesto: latticeExtra
-\end{verbatim}
-
-\begin{verbatim}
-
-Caricamento pacchetto: 'latticeExtra'
-\end{verbatim}
-
-\begin{verbatim}
-Il seguente oggetto è mascherato da 'package:ggplot2':
-
-    layer
-\end{verbatim}
-
-\begin{verbatim}
-Caricamento del pacchetto richiesto: multcomp
-\end{verbatim}
-
-\begin{verbatim}
-Caricamento del pacchetto richiesto: mvtnorm
-\end{verbatim}
-
-\begin{verbatim}
-Caricamento del pacchetto richiesto: survival
-\end{verbatim}
-
-\begin{verbatim}
-Caricamento del pacchetto richiesto: TH.data
-\end{verbatim}
-
-\begin{verbatim}
-Caricamento del pacchetto richiesto: MASS
-\end{verbatim}
-
-\begin{verbatim}
-
-Caricamento pacchetto: 'MASS'
-\end{verbatim}
-
-\begin{verbatim}
-Il seguente oggetto è mascherato da 'package:dplyr':
-
-    select
-\end{verbatim}
-
-\begin{verbatim}
-
-Caricamento pacchetto: 'TH.data'
-\end{verbatim}
-
-\begin{verbatim}
-Il seguente oggetto è mascherato da 'package:MASS':
-
-    geyser
-\end{verbatim}
-
-\begin{verbatim}
-Caricamento del pacchetto richiesto: gridExtra
-\end{verbatim}
-
-\begin{verbatim}
-
-Caricamento pacchetto: 'gridExtra'
-\end{verbatim}
-
-\begin{verbatim}
-Il seguente oggetto è mascherato da 'package:dplyr':
-
-    combine
-\end{verbatim}
-
-\begin{verbatim}
-
-Caricamento pacchetto: 'HH'
-\end{verbatim}
-
-\begin{verbatim}
-Il seguente oggetto è mascherato da 'package:base':
-
-    is.R
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# Frequency data for three items (rows) on a 5{-}point Likert scale}
 \NormalTok{likert\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
   \StringTok{"Easy"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{20}\NormalTok{),}
@@ -2034,7 +1939,7 @@ cumbersome. - \emph{Overfitting}: Especially with smaller sample sizes,
 estimating too many parameters can lead to models that fit the current
 data well but generalize poorly.
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-note-color!10!white, left=2mm, opacityback=0, colback=white, arc=.35mm, titlerule=0mm, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, coltitle=black, breakable, rightrule=.15mm, toptitle=1mm, bottomtitle=1mm, toprule=.15mm, bottomrule=.15mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6, left=2mm, colframe=quarto-callout-note-color-frame, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, titlerule=0mm, toptitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, coltitle=black, opacityback=0]
 
 It is crucial to recognize that a statistically significant p-value from
 a formal test, such as the Likelihood Ratio Test, does not always
@@ -2306,7 +2211,7 @@ Common types of Pseudo R-squared include: * McFadden's \(R^2\):
 * Cox & Snell's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)^{\frac{2}{n}}$
 \end{verbatim}
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-warning-color!10!white, left=2mm, opacityback=0, colback=white, arc=.35mm, titlerule=0mm, opacitybacktitle=0.6, colframe=quarto-callout-warning-color-frame, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, coltitle=black, breakable, rightrule=.15mm, toptitle=1mm, bottomtitle=1mm, toprule=.15mm, bottomrule=.15mm, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, leftrule=.75mm, colbacktitle=quarto-callout-warning-color!10!white, opacitybacktitle=0.6, left=2mm, colframe=quarto-callout-warning-color-frame, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, titlerule=0mm, toptitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, coltitle=black, opacityback=0]
 
 Do NOT compare directly to linear regression \(R^2\): Pseudo R-squared
 values are typically much lower than \(R^2\) values from linear
