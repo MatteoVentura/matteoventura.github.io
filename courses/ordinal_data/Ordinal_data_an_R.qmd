@@ -587,7 +587,7 @@ They effectively illustrate the balance between positive and negative responses 
 
 Divergent stacked bar charts are the recommended visualization for Likert-type scales as they clearly show the proportion of responses in each category and the overall tendency of agreement or disagreement.
 
-```{r warning=FALSE}
+```{r warning=FALSE, message = F, error = F}
 # Install and load required package
 # install.packages("HH")
 library(HH)
