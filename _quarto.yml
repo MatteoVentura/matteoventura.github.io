@@ -11,7 +11,7 @@ website:
         text: About
       - href: publications.qmd
         text: Publications
-      - href: lectures.qmd
+      - href: courses.qmd
         text: Courses
       - href: contacts.qmd
         text: Contacts
