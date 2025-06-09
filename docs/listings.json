@@ -18,5 +18,11 @@
   {
     "listing": "/courses/ordinal_data/Ordinal_data_an_R.html",
     "items": []
+  },
+  {
+    "listing": "/courses.html",
+    "items": [
+      "/courses/ordinal_data/Ordinal_data_an_R.html"
+    ]
   }
 ]

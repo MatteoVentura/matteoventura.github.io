@@ -12,7 +12,7 @@ website:
       - href: publications.qmd
         text: Publications
       - href: lectures.qmd
-        text: Lectures
+        text: Courses
       - href: contacts.qmd
         text: Contacts
 deployment:

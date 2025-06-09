@@ -2,7 +2,7 @@
 title: "Ordinal Data Analysis in R"
 subtitle: "Measuring Human Perceptions from Surveys"
 author: "Matteo Ventura"
-date: "04/16/2025"
+date: "09/06/2025"
 draft: false
 listing: true
 categories: [ordinal data, CUB, survey]
