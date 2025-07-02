@@ -217,7 +217,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, breakable, interior hidden, boxrule=0pt, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, borderline west={3pt}{0pt}{shadecolor}, sharp corners, frame hidden, interior hidden, boxrule=0pt, enhanced]}{\end{tcolorbox}}\fi
 
 Description of the course
 
@@ -541,7 +541,7 @@ following aspects:
   reliability.
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, leftrule=.75mm, colbacktitle=quarto-callout-caution-color!10!white, opacitybacktitle=0.6, left=2mm, colframe=quarto-callout-caution-color-frame, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Caution}, titlerule=0mm, toptitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, coltitle=black, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, opacitybacktitle=0.6, breakable, toprule=.15mm, rightrule=.15mm, coltitle=black, opacityback=0, colbacktitle=quarto-callout-caution-color!10!white, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Caution}, colback=white, left=2mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, colframe=quarto-callout-caution-color-frame, toptitle=1mm, bottomtitle=1mm]
 
 Reversing the wording of items (also known as reversed polarity) can
 confuse respondents, especially if the items are complex or abstract, ot
@@ -613,7 +613,7 @@ Likert scales are extensively applied in surveys to assess employee
 engagement, customer satisfaction, product feedback, and clinical
 evaluations.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, leftrule=.75mm, colbacktitle=quarto-callout-warning-color!10!white, opacitybacktitle=0.6, left=2mm, colframe=quarto-callout-warning-color-frame, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, titlerule=0mm, toptitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, coltitle=black, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, opacitybacktitle=0.6, breakable, toprule=.15mm, rightrule=.15mm, coltitle=black, opacityback=0, colbacktitle=quarto-callout-warning-color!10!white, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, colback=white, left=2mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, colframe=quarto-callout-warning-color-frame, toptitle=1mm, bottomtitle=1mm]
 
 Although Likert scale data is often numerically coded to facilitate
 analysis, it's essential to remember their ordinal nature and approach
@@ -1172,6 +1172,15 @@ relative positions.
 }
 
 \end{figure}
+
+\textbf{References}
+
+\begin{itemize}
+\tightlist
+\item
+  DeVellis, R. F., \& Thorpe, C. T. (2021). Scale development: Theory
+  and applications. Sage publications.
+\end{itemize}
 
 \hypertarget{classical-models-for-ordinal-data}{%
 \section{Classical Models for Ordinal
@@ -1939,7 +1948,7 @@ cumbersome. - \emph{Overfitting}: Especially with smaller sample sizes,
 estimating too many parameters can lead to models that fit the current
 data well but generalize poorly.
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6, left=2mm, colframe=quarto-callout-note-color-frame, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, titlerule=0mm, toptitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, coltitle=black, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, opacitybacktitle=0.6, breakable, toprule=.15mm, rightrule=.15mm, coltitle=black, opacityback=0, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, colback=white, left=2mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, colframe=quarto-callout-note-color-frame, toptitle=1mm, bottomtitle=1mm]
 
 It is crucial to recognize that a statistically significant p-value from
 a formal test, such as the Likelihood Ratio Test, does not always
@@ -2113,7 +2122,7 @@ Interpretation:
   category (e.g., Poor, Fair, Good, Very Good) compared to females,
   holding other predictors constant.
 \item
-  Odds Ratio (\$OR\_\{male\}=1.49): The odds of a male reporting ``Poor
+  Odds Ratio (\(OR_{male}=1.49\)): The odds of a male reporting ``Poor
   or Fair or Good or Very Good Health'' vs.~``Excellent Health'' are
   1.49 times the odds for a female, holding all other predictors
   constant. Similarly, the odds of a male reporting ``Poor or Fair or
@@ -2207,11 +2216,14 @@ They typically compare the log-likelihood of the fitted model
 Common types of Pseudo R-squared include: * McFadden's \(R^2\):
 \(1−\Big(\frac{L_{model}}{L_{null}}\Big)\)
 
-\begin{verbatim}
-* Cox & Snell's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)^{\frac{2}{n}}$
-\end{verbatim}
+\begin{itemize}
+\tightlist
+\item
+  Cox \& Snell's \(R^2\):
+  \(1−\Big(\frac{L_{model}}{L_{null}}\Big)^{\frac{2}{n}}\)
+\end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, leftrule=.75mm, colbacktitle=quarto-callout-warning-color!10!white, opacitybacktitle=0.6, left=2mm, colframe=quarto-callout-warning-color-frame, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, titlerule=0mm, toptitle=1mm, arc=.35mm, rightrule=.15mm, toprule=.15mm, coltitle=black, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, opacitybacktitle=0.6, breakable, toprule=.15mm, rightrule=.15mm, coltitle=black, opacityback=0, colbacktitle=quarto-callout-warning-color!10!white, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, colback=white, left=2mm, leftrule=.75mm, bottomrule=.15mm, titlerule=0mm, colframe=quarto-callout-warning-color-frame, toptitle=1mm, bottomtitle=1mm]
 
 Do NOT compare directly to linear regression \(R^2\): Pseudo R-squared
 values are typically much lower than \(R^2\) values from linear
@@ -2295,6 +2307,528 @@ AIC tends to favor more complex models and is generally better for
 prediction accuracy. BIC tends to favor simpler, more parsimonious
 models and is often preferred for model selection when the goal is to
 identify the ``true'' underlying model.
+
+\hypertarget{case-study-analyzing-disciplinary-decisions-in-professional-soccer}{%
+\subsection{Case Study: Analyzing Disciplinary Decisions in Professional
+Soccer}\label{case-study-analyzing-disciplinary-decisions-in-professional-soccer}}
+
+You are working as a data analyst for a sports broadcaster preparing an
+in-depth segment on referee decisions and player discipline in
+professional soccer. Your task is to investigate which factors may
+influence the likelihood and severity of disciplinary actions taken
+against players during matches.
+
+To support this analysis, you have access to a dataset containing
+information on over 2000 player-match observations. The key variable of
+interest is the level of disciplinary action taken by the referee, which
+is recorded as an ordinal outcome with three ordered categories:
+
+\begin{itemize}
+\item
+  None: no disciplinary action,
+\item
+  Yellow: the player received a yellow card (warning),
+\item
+  Red: the player received a red card (ejection from the game).
+\end{itemize}
+
+In addition to the outcome, the dataset includes the following
+explanatory variables:
+
+\begin{itemize}
+\item
+  \texttt{n\_yellow\_25}: number of yellow cards received by the player
+  in the 25 games prior to the current match.
+\item
+  \texttt{n\_red\_25}: number of red cards received by the player in the
+  previous 25 games.
+\item
+  \texttt{position}: player's position in the game --- `D' for defender
+  or goalkeeper, `M' for midfielder, `S' for striker.
+\item
+  \texttt{level}: competitive level of the match --- 1 for higher-tier
+  games, 2 for lower-tier games.
+\item
+  \texttt{country}: country where the match was played --- England or
+  Germany.
+\item
+  \texttt{result}: result of the game for the player's team --- `W'
+  (win), `L' (loss), or `D' (draw).
+\end{itemize}
+
+Your objective is to model the disciplinary outcome and identify whether
+past player behavior, position, game context, and other covariates are
+associated with the referee's decision, using statistical techniques
+suitable for ordinal response data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# download data}
+\NormalTok{url }\OtherTok{\textless{}{-}} \StringTok{"http://peopleanalytics{-}regression{-}book.org/data/soccer.csv"}
+\NormalTok{soccer }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(url)}
+\FunctionTok{head}\NormalTok{(soccer)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  discipline n_yellow_25 n_red_25 position result country level
+1       None           4        1        S      D England     1
+2       None           2        2        D      W England     2
+3       None           2        1        M      D England     1
+4       None           2        1        M      L Germany     1
+5       None           2        0        S      W Germany     1
+6       None           3        2        M      W England     1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(soccer)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   2291 obs. of  7 variables:
+ $ discipline : chr  "None" "None" "None" "None" ...
+ $ n_yellow_25: int  4 2 2 2 2 3 4 3 4 3 ...
+ $ n_red_25   : int  1 2 1 1 0 2 2 0 3 3 ...
+ $ position   : chr  "S" "D" "M" "M" ...
+ $ result     : chr  "D" "W" "D" "L" ...
+ $ country    : chr  "England" "England" "England" "Germany" ...
+ $ level      : int  1 2 1 1 1 1 2 1 1 1 ...
+\end{verbatim}
+
+Before proceeding with the modeling phase, we need to ensure that the
+variables in our dataset are correctly specified in terms of data type.
+In particular, since our outcome variable \texttt{discipline} represents
+ordered categories---ranging from no punishment to a red card---we need
+to explicitly define it as an ordered factor in R. This is essential
+because many models for ordinal data (e.g., proportional odds models)
+rely on the natural ordering of the response variable.
+
+We can perform this conversion using the \texttt{ordered()} function,
+specifying the levels in increasing order of severity:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# convert discipline to ordered factor}
+\NormalTok{soccer}\SpecialCharTok{$}\NormalTok{discipline }\OtherTok{\textless{}{-}} \FunctionTok{ordered}\NormalTok{(soccer}\SpecialCharTok{$}\NormalTok{discipline, }
+                             \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"None"}\NormalTok{, }\StringTok{"Yellow"}\NormalTok{, }\StringTok{"Red"}\NormalTok{))}
+
+\CommentTok{\# check conversion}
+\FunctionTok{str}\NormalTok{(soccer)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   2291 obs. of  7 variables:
+ $ discipline : Ord.factor w/ 3 levels "None"<"Yellow"<..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ n_yellow_25: int  4 2 2 2 2 3 4 3 4 3 ...
+ $ n_red_25   : int  1 2 1 1 0 2 2 0 3 3 ...
+ $ position   : chr  "S" "D" "M" "M" ...
+ $ result     : chr  "D" "W" "D" "L" ...
+ $ country    : chr  "England" "England" "England" "Germany" ...
+ $ level      : int  1 2 1 1 1 1 2 1 1 1 ...
+\end{verbatim}
+
+In addition to the response variable, several explanatory variables in
+our dataset are also categorical in nature. Specifically, the variables
+\texttt{position}, \texttt{country}, \texttt{result}, and \texttt{level}
+represent categories rather than continuous measurements, and should
+therefore be converted to factors in R.
+
+While some of these variables could conceptually be treated as
+ordered---for example, result might be interpreted as ``win
+\textgreater{} draw \textgreater{} loss'', and level as ``level 1
+\textgreater{} level 2'' in terms of competition quality---this is not
+strictly necessary when using them as predictor variables in a model. In
+practice, treating them as nominal (unordered) factors often leads to
+more interpretable model outputs.
+
+We can convert them as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Convert categorical predictors to factors}
+\NormalTok{soccer}\SpecialCharTok{$}\NormalTok{position }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(soccer}\SpecialCharTok{$}\NormalTok{position)}
+\NormalTok{soccer}\SpecialCharTok{$}\NormalTok{result   }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(soccer}\SpecialCharTok{$}\NormalTok{result)}
+\NormalTok{soccer}\SpecialCharTok{$}\NormalTok{country  }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(soccer}\SpecialCharTok{$}\NormalTok{country)}
+\NormalTok{soccer}\SpecialCharTok{$}\NormalTok{level    }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(soccer}\SpecialCharTok{$}\NormalTok{level)}
+\end{Highlighting}
+\end{Shaded}
+
+We are now ready to fit the model using all available predictors. The
+\texttt{clm()} function within the \texttt{ordinal} package will
+automatically handle the creation of dummy variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ordinal)}
+
+\CommentTok{\# Fit the full model}
+\NormalTok{model\_clm }\OtherTok{\textless{}{-}} \FunctionTok{clm}\NormalTok{(}
+\NormalTok{  discipline }\SpecialCharTok{\textasciitilde{}}\NormalTok{ n\_yellow\_25 }\SpecialCharTok{+}\NormalTok{ n\_red\_25 }\SpecialCharTok{+}\NormalTok{ position }\SpecialCharTok{+} 
+\NormalTok{               result }\SpecialCharTok{+}\NormalTok{ country }\SpecialCharTok{+}\NormalTok{ level,}
+  \AttributeTok{data =}\NormalTok{ soccer}
+\NormalTok{)}
+
+\CommentTok{\# View summary}
+\FunctionTok{summary}\NormalTok{(model\_clm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+formula: 
+discipline ~ n_yellow_25 + n_red_25 + position + result + country + level
+data:    soccer
+
+ link  threshold nobs logLik   AIC     niter max.grad cond.H 
+ logit flexible  2291 -1722.27 3464.53 5(0)  4.43e-12 7.5e+02
+
+Coefficients:
+               Estimate Std. Error z value Pr(>|z|)    
+n_yellow_25     0.32236    0.03308   9.746  < 2e-16 ***
+n_red_25        0.38324    0.04051   9.462  < 2e-16 ***
+positionM       0.19685    0.11649   1.690   0.0911 .  
+positionS      -0.68534    0.15011  -4.566 4.98e-06 ***
+resultL         0.48303    0.11195   4.315 1.60e-05 ***
+resultW        -0.73947    0.12129  -6.097 1.08e-09 ***
+countryGermany  0.13297    0.09360   1.421   0.1554    
+level2          0.09097    0.09355   0.972   0.3308    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+            Estimate Std. Error z value
+None|Yellow   2.5085     0.1918   13.08
+Yellow|Red    3.9257     0.2057   19.08
+\end{verbatim}
+
+As expected, the summary displays:
+
+\begin{itemize}
+\item
+  A single set of regression coefficients for the predictor variables,
+  assuming the proportional odds assumption holds (i.e., the effects are
+  constant across the thresholds of the ordinal response).
+\item
+  Two intercepts (also called cutpoints or thresholds) corresponding to
+  the boundaries between the three ordered categories of the response
+  variable (None, Yellow, Red).
+\end{itemize}
+
+While the intercepts are required for model estimation, they are
+typically not the focus of interpretation. Instead, we concentrate on
+the coefficients of the predictors, which quantify the change in the
+(log) odds of receiving a higher level of discipline.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Odds ratios}
+\FunctionTok{exp}\NormalTok{(}\FunctionTok{coef}\NormalTok{(model\_clm))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   None|Yellow     Yellow|Red    n_yellow_25       n_red_25      positionM 
+    12.2865823     50.6896260      1.3803820      1.4670350      1.2175573 
+     positionS        resultL        resultW countryGermany         level2 
+     0.5039204      1.6209823      0.4773655      1.1422177      1.0952321 
+\end{verbatim}
+
+Based on the p-values, we can now interpret the estimated coefficients
+for the significant predictors. In each case, we interpret the effect on
+the odds of receiving a more severe disciplinary action, holding all
+other variables constant.
+
+\begin{itemize}
+\item
+  \texttt{n\_yellow\_25}: Each additional yellow card received in the
+  previous 25 games is associated with a 38\% increase in the odds of
+  receiving more severe discipline from the referee. (Odds ratio ≈ 1.38)
+\item
+  \texttt{n\_red\_25}: Each additional red card in the last 25 games
+  corresponds to a 47\% increase in the odds of greater disciplinary
+  action. (Odds ratio ≈ 1.47)
+\item
+  \texttt{position}: Players in the Striker (S) role have about 50\%
+  lower odds of receiving greater disciplinary action compared to
+  Defenders (D), the reference category. (Odds ratio ≈ 0.50)
+\end{itemize}
+
+We can conclude that:
+
+\begin{itemize}
+\item
+  Players on teams that lost have 62\% higher odds of greater
+  disciplinary action than those whose team drew. (Odds ratio ≈ 1.62)
+\item
+  Players on teams that won have 52\% lower odds compared to those on
+  teams that drew. (Odds ratio ≈ 0.48)
+\end{itemize}
+
+\hypertarget{simplifying-the-model}{%
+\subsubsection*{Simplifying the Model}\label{simplifying-the-model}}
+\addcontentsline{toc}{subsubsection}{Simplifying the Model}
+
+We may choose to simplify the model by removing predictors that are not
+statistically significant and do not substantially improve model fit. In
+this case, both level and country show little impact, either in terms of
+coefficient size or statistical significance.
+
+We can refit the model without these variables and compare the AIC
+(Akaike Information Criterion) values. If the simpler model yields a
+comparable AIC, we may prefer it for interpretability and parsimony:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Reduced model (without level and country)}
+\NormalTok{model\_clm\_reduced }\OtherTok{\textless{}{-}} \FunctionTok{clm}\NormalTok{(}
+\NormalTok{  discipline }\SpecialCharTok{\textasciitilde{}}\NormalTok{ n\_yellow\_25 }\SpecialCharTok{+}\NormalTok{ n\_red\_25 }\SpecialCharTok{+}\NormalTok{ position }\SpecialCharTok{+}\NormalTok{ result,}
+  \AttributeTok{data =}\NormalTok{ soccer}
+\NormalTok{)}
+
+\CommentTok{\# Compare AICs}
+\FunctionTok{AIC}\NormalTok{(model\_clm, model\_clm\_reduced)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                  df      AIC
+model_clm         10 3464.534
+model_clm_reduced  8 3463.485
+\end{verbatim}
+
+Since the reduced model shows no meaningful degradation in fit, we
+proceed with it for the remainder of our analysis.
+
+\hypertarget{goodness-of-fit}{%
+\subsubsection*{Goodness of Fit}\label{goodness-of-fit}}
+\addcontentsline{toc}{subsubsection}{Goodness of Fit}
+
+We can assess the fit and parsimony of a proportional odds model using
+pseudo-\(R^2\) measures and AIC.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Log{-}likelihoods}
+\NormalTok{ll\_full }\OtherTok{\textless{}{-}} \FunctionTok{logLik}\NormalTok{(model\_clm\_reduced)}
+\NormalTok{ll\_null }\OtherTok{\textless{}{-}} \FunctionTok{logLik}\NormalTok{(}\FunctionTok{update}\NormalTok{(model\_clm\_reduced, . }\SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{))}
+
+\CommentTok{\# Sample size}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nobs}\NormalTok{(model\_clm\_reduced)}
+
+\CommentTok{\# McFadden\textquotesingle{}s R2}
+\NormalTok{r2\_mcfadden }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ (}\FunctionTok{as.numeric}\NormalTok{(ll\_full) }\SpecialCharTok{/} \FunctionTok{as.numeric}\NormalTok{(ll\_null))}
+
+\CommentTok{\# Cox{-}Snell\textquotesingle{}s R2}
+\NormalTok{r2\_coxsnell }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{exp}\NormalTok{((}\DecValTok{2} \SpecialCharTok{/}\NormalTok{ n) }\SpecialCharTok{*}\NormalTok{ (}\FunctionTok{as.numeric}\NormalTok{(ll\_null) }\SpecialCharTok{{-}} \FunctionTok{as.numeric}\NormalTok{(ll\_full)))}
+
+\CommentTok{\# Report}
+\FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{McFadden =}\NormalTok{ r2\_mcfadden,}
+  \AttributeTok{CoxSnell =}\NormalTok{ r2\_coxsnell,}
+  \AttributeTok{AIC =} \FunctionTok{AIC}\NormalTok{(model\_clm\_reduced)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   McFadden  CoxSnell      AIC
+1 0.1001707 0.1542375 3463.485
+\end{verbatim}
+
+\begin{itemize}
+\item
+  McFadden's \(R^2\) is conceptually similar to \(R^2\) in linear models
+  but usually much smaller in value.
+\item
+  Cox--Snell and Nagelkerke are rescaled to be more interpretable on a
+  0--1 scale.
+\item
+  AIC helps compare models: lower values indicate better parsimony.
+\end{itemize}
+
+\hypertarget{testing-the-proportional-odds-assumption-1}{%
+\subsubsection*{Testing the proportional odds
+assumption}\label{testing-the-proportional-odds-assumption-1}}
+\addcontentsline{toc}{subsubsection}{Testing the proportional odds
+assumption}
+
+As we discussed earlier, the suitability of a proportional odds logistic
+regression model depends on the assumption that each input variable has
+a similar effect on the different levels of the ordinal outcome
+variable. It is very important to check that this assumption is not
+violated before proceeding to declare the results of a proportional odds
+model valid. There are two common approaches to validating the
+proportional odds assumption, and we will go through each of them here.
+
+\begin{itemize}
+\tightlist
+\item
+  Nominal Test: use \texttt{nominal\_test()}:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nominal\_test}\NormalTok{(model\_clm\_reduced)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Tests of nominal effects
+
+formula: discipline ~ n_yellow_25 + n_red_25 + position + result
+            Df  logLik    AIC    LRT Pr(>Chi)  
+<none>         -1723.7 3463.5                  
+n_yellow_25  1 -1723.0 3464.1 1.3933  0.23785  
+n_red_25     1 -1723.0 3463.9 1.5467  0.21363  
+position     2 -1719.6 3459.1 8.3656  0.01526 *
+result       2 -1722.7 3465.4 2.0968  0.35049  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{itemize}
+\item
+  Null hypothesis (\(H_0\)): PO assumption holds
+\item
+  A small p-value (e.g.~\textless{} 0.05) indicates violation of the
+  assumption for that variable.
+\item
+  Graphical Inspection
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ordinal)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+
+\CommentTok{\# Supponiamo che model\_clm sia già il tuo modello "semplice"}
+\NormalTok{model\_clm }\OtherTok{\textless{}{-}} \FunctionTok{clm}\NormalTok{(discipline }\SpecialCharTok{\textasciitilde{}}\NormalTok{ n\_yellow\_25 }\SpecialCharTok{+}\NormalTok{ n\_red\_25 }\SpecialCharTok{+}\NormalTok{ position }\SpecialCharTok{+}\NormalTok{ result, }\AttributeTok{data =}\NormalTok{ soccer)}
+
+\CommentTok{\# Estrai coefficienti}
+\NormalTok{thresholds }\OtherTok{\textless{}{-}}\NormalTok{ model\_clm}\SpecialCharTok{$}\NormalTok{Theta              }\CommentTok{\# soglie (intercette cumulative)}
+\NormalTok{beta\_n\_yellow }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(model\_clm)[}\StringTok{"n\_yellow\_25"}\NormalTok{]  }\CommentTok{\# coefficiente principale}
+
+\CommentTok{\# Simula una sequenza di valori del predittore continuo}
+\NormalTok{x\_vals }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FunctionTok{min}\NormalTok{(soccer}\SpecialCharTok{$}\NormalTok{n\_yellow\_25), }\FunctionTok{max}\NormalTok{(soccer}\SpecialCharTok{$}\NormalTok{n\_yellow\_25), }\AttributeTok{length.out =} \DecValTok{100}\NormalTok{)}
+
+\CommentTok{\# Calcola le log{-}odds cumulative per ogni soglia}
+\NormalTok{plot\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{x =}\NormalTok{ x\_vals,}
+  \AttributeTok{Threshold\_1 =}\NormalTok{ thresholds[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ beta\_n\_yellow }\SpecialCharTok{*}\NormalTok{ x\_vals,}
+  \AttributeTok{Threshold\_2 =}\NormalTok{ thresholds[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ beta\_n\_yellow }\SpecialCharTok{*}\NormalTok{ x\_vals}
+\NormalTok{)}
+
+\CommentTok{\# Porta in formato long}
+\NormalTok{plot\_data\_long }\OtherTok{\textless{}{-}}\NormalTok{ plot\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}
+    \AttributeTok{cols =} \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"Threshold\_"}\NormalTok{),}
+    \AttributeTok{names\_to =} \StringTok{"Cumulative\_Log\_Odds\_Curve"}\NormalTok{,}
+    \AttributeTok{values\_to =} \StringTok{"Log\_Odds"}
+\NormalTok{  )}
+
+\CommentTok{\# Grafico}
+\FunctionTok{ggplot}\NormalTok{(plot\_data\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ Log\_Odds, }\AttributeTok{color =}\NormalTok{ Cumulative\_Log\_Odds\_Curve)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{size =} \FloatTok{1.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Verifica grafica dell’assunzione di proportional odds"}\NormalTok{,}
+    \AttributeTok{subtitle =} \StringTok{"Linee parallele delle log{-}odds cumulative → assunzione plausibile"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Numero di cartellini gialli nelle 25 partite precedenti"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Log{-}odds cumulative"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Soglia cumulativa"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set1"}\NormalTok{, }\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"P(Disciplina ≤ Yellow)"}\NormalTok{, }\StringTok{"P(Disciplina ≤ Red)"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-19-1.pdf}
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ordinal)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+
+\CommentTok{\# Prepara i dati con valori medi per le variabili continue, e livelli per position}
+\NormalTok{new\_data }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}
+  \AttributeTok{position =} \FunctionTok{levels}\NormalTok{(soccer}\SpecialCharTok{$}\NormalTok{position),}
+  \AttributeTok{n\_yellow\_25 =} \FunctionTok{mean}\NormalTok{(soccer}\SpecialCharTok{$}\NormalTok{n\_yellow\_25, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+  \AttributeTok{n\_red\_25 =} \FunctionTok{mean}\NormalTok{(soccer}\SpecialCharTok{$}\NormalTok{n\_red\_25, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+  \AttributeTok{result =} \FunctionTok{levels}\NormalTok{(soccer}\SpecialCharTok{$}\NormalTok{result)[}\DecValTok{1}\NormalTok{]  }\CommentTok{\# primo livello di result, ad es. "D"}
+\NormalTok{)}
+
+\CommentTok{\# Predici le probabilità cumulative (attenzione al tipo "cum.prob")}
+\NormalTok{pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model\_clm\_reduced, }\AttributeTok{newdata =}\NormalTok{ new\_data, }\AttributeTok{type =} \StringTok{"cum.prob"}\NormalTok{)}
+
+\CommentTok{\# Trasforma in data frame, aggiungi la posizione}
+\NormalTok{plot\_data }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(pred)}
+\NormalTok{plot\_data}\SpecialCharTok{$}\NormalTok{position }\OtherTok{\textless{}{-}}\NormalTok{ new\_data}\SpecialCharTok{$}\NormalTok{position}
+
+\CommentTok{\# Metti in formato long per ggplot}
+\NormalTok{plot\_data\_long }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(plot\_data, }\AttributeTok{cols =} \SpecialCharTok{{-}}\NormalTok{position,}
+                              \AttributeTok{names\_to =} \StringTok{"Threshold"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"Cumulative\_Prob"}\NormalTok{)}
+
+\CommentTok{\# Ordina posizione come fattore}
+\NormalTok{plot\_data\_long}\SpecialCharTok{$}\NormalTok{position }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(plot\_data\_long}\SpecialCharTok{$}\NormalTok{position, }\AttributeTok{levels =} \FunctionTok{levels}\NormalTok{(soccer}\SpecialCharTok{$}\NormalTok{position))}
+
+\CommentTok{\# Calcola log{-}odds}
+\NormalTok{plot\_data\_long }\OtherTok{\textless{}{-}}\NormalTok{ plot\_data\_long }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Log\_Odds =} \FunctionTok{log}\NormalTok{(Cumulative\_Prob }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ Cumulative\_Prob)))}
+
+\CommentTok{\# Grafico}
+\FunctionTok{ggplot}\NormalTok{(plot\_data\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ position, }\AttributeTok{y =}\NormalTok{ Log\_Odds, }\AttributeTok{group =}\NormalTok{ Threshold, }\AttributeTok{color =}\NormalTok{ Threshold)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{linetype =}\NormalTok{ Threshold), }\AttributeTok{size =} \FloatTok{1.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Log{-}odds cumulative per soglia in funzione di \textquotesingle{}position\textquotesingle{}"}\NormalTok{,}
+    \AttributeTok{subtitle =} \StringTok{"Verifica grafica dell’assunzione di proportional odds"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Posizione"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Log{-}odds cumulative"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Soglia cumulativa"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Dark2"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-20-1.pdf}
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{confint}\NormalTok{(model\_clm\_reduced, }\AttributeTok{type =} \StringTok{"Wald"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                  2.5 %     97.5 %
+None|Yellow  2.04607487  2.7520921
+Yellow|Red   3.43369100  4.1959994
+n_yellow_25  0.25732251  0.3870545
+n_red_25     0.30204387  0.4606422
+positionM   -0.02744177  0.4290013
+positionS   -0.97101327 -0.3829654
+resultL      0.26472851  0.7029830
+resultW     -0.97178750 -0.4967697
+\end{verbatim}
 
 \hypertarget{beyond-the-proportional-odds-logit-model}{%
 \subsection{Beyond the Proportional Odds Logit
@@ -2451,6 +2985,17 @@ Common applications include:
 \item
   \textbf{Consumer Behavior}: Understanding the odds of a customer
   making a basic purchase versus upgrading to a premium version.
+\end{itemize}
+
+\textbf{References}
+
+\begin{itemize}
+\item
+  Agresti, A. (2010). Analysis of ordinal categorical data. John Wiley
+  \& Sons.
+\item
+  McNulty, K. (2021). Handbook of regression modeling in people
+  analytics: with examples in R and Python. Chapman and Hall/CRC.
 \end{itemize}
 
 \hypertarget{beyond-standard-approaches-modeling-ordinal-data-with-cub-models}{%
@@ -3016,6 +3561,481 @@ and \(\xi_i\) are linked to covariates using GLM-like structures
 mixture of Binomial and Uniform distributions) does not belong to the
 exponential family.
 
+\hypertarget{case-study-universitys-students-satisfaction}{%
+\subsubsection{Case Study: University's students
+satisfaction}\label{case-study-universitys-students-satisfaction}}
+
+This case study demonstrates the application of CUB (Combination of
+Uniform and a shifted Binomial) models for analyzing ordinal data, using
+the CUB package in R. The \texttt{univer} dataset comes from a survey
+administered to students at the University of Naples Federico II to
+evaluate orientation services.
+
+\textbf{Dataset Description}
+
+The \texttt{univer} dataset from 2002 contains 2,179 observations,
+including responses to evaluation questions on a 7-point Likert scale
+(from 1 = ``very unsatisfied'' to 7 = ``extremely satisfied''). The
+ordinal variables of interest are:
+
+\begin{itemize}
+\item
+  \texttt{informat}: Satisfaction level with the information received.
+\item
+  \texttt{willingn}: Satisfaction level with the staff's willingness.
+\item
+  \texttt{officeho}: Satisfaction level with office opening hours.
+\item
+  \texttt{competen}: Satisfaction level with staff competence.
+\item
+  \texttt{global}: Overall satisfaction level.
+\end{itemize}
+
+The dataset also includes covariates:
+
+\begin{itemize}
+\item
+  \texttt{Faculty}: A factor variable, with levels ranging from 1 to 13
+  indicating the coding for the different university faculties
+\item
+  \texttt{Freqserv}: A factor with levels: 0 = for not regular users, 1
+  = for regular users
+\item
+  \texttt{Age}: Variable indicating the age of the respondent in years
+\item
+  \texttt{Gender}: A factor with levels: 0 = man, 1 = woman
+\item
+  \texttt{Diploma}: A factor with levels: 1 = classic studies, 2 =
+  scientific studies, 3 = linguistic, 4 = Professional, 5 =
+  Technical/Accountancy, 6 = others
+\item
+  \texttt{Residence}: A factor with levels: 1 = city NA, 2 = district
+  NA, 3 = others
+\item
+  \texttt{ChangeFa}: A factor with levels: 1 = changed faculty, 2 = not
+  changed faculty
+\end{itemize}
+
+\textbf{Exploratory Analysis}
+
+As a first step, it is helpful to visualize the estimated CUB models for
+all ordinal variables simultaneously. The \texttt{multicub()} function
+fits a CUB model to each variable and plots the estimated parameters for
+uncertainty (1 - \(\hat{\pi}\)) and feeling (1 - \(\hat{\xi}\)) in the
+parameter space. The ``feeling'' (1 - \(\xi\)) represents the preference
+for higher scores on the rating scale.
+
+Note that \texttt{multicub()} is especially useful for a comparative
+visual analysis of rating data vectors, even with different scale
+lengths. It requires the variables to be stored in a list.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(CUB)}
+\FunctionTok{data}\NormalTok{(univer)}
+
+\CommentTok{\# Select only the columns with ordinal variables}
+\NormalTok{listord }\OtherTok{\textless{}{-}}\NormalTok{ univer[, }\DecValTok{8}\SpecialCharTok{:}\DecValTok{12}\NormalTok{]}
+\CommentTok{\# Assign labels for the plot}
+\NormalTok{labels }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(univer)[}\DecValTok{8}\SpecialCharTok{:}\DecValTok{12}\NormalTok{]}
+
+\CommentTok{\# Visualize CUB models for each ordinal variable}
+\FunctionTok{multicub}\NormalTok{(listord, }\AttributeTok{labels =}\NormalTok{ labels,}
+         \AttributeTok{caption =} \StringTok{"CUB models on Univer data set"}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{,}
+         \AttributeTok{pos =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{rep}\NormalTok{(}\DecValTok{3}\NormalTok{, }\FunctionTok{ncol}\NormalTok{(listord) }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.75}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-23-1.pdf}
+
+}
+
+\end{figure}
+
+From the visual analysis, it appears that the \texttt{officeho} item
+(satisfaction with opening hours) has the highest uncertainty. For this
+reason, the subsequent analysis will focus on this variable.
+
+\textbf{CUB Model without Covariates for \texttt{officeho}}
+
+First, a basic CUB model is estimated for the officeho variable without
+including any covariates. This serves as a baseline to understand the
+variable's distribution.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# CUB model without covariates for "officeho"}
+\NormalTok{cub\_00 }\OtherTok{\textless{}{-}} \FunctionTok{GEM}\NormalTok{(}\FunctionTok{Formula}\NormalTok{(officeho }\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{|} \DecValTok{0} \SpecialCharTok{|} \DecValTok{0}\NormalTok{), }\AttributeTok{family =} \StringTok{"cub"}\NormalTok{, }\AttributeTok{data =}\NormalTok{ univer)}
+
+\CommentTok{\# Display a detailed summary of the estimated model}
+\FunctionTok{summary}\NormalTok{(cub\_00, }\AttributeTok{digits =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+======================================================================= 
+=====>>> CUB  model    <<<=====   ML-estimates via E-M algorithm   
+======================================================================= 
+ m= 7  Sample size: n= 2179  Iterations= 28  Maxiter= 500 
+======================================================================= 
+Uncertainty                                            
+    Estimates   StdErr   Wald
+pai   0.68019 0.019349 35.153
+======================================================================= 
+Feeling                                            
+    Estimates    StdErr   Wald
+csi   0.19714 0.0058822 33.515
+======================================================================= 
+Log-lik            = -3759.917 
+Mean Log-likelihood= -1.72552 
+Log-lik(UNIFORM)   = -4240.138 
+Log-lik(saturated) = -3706.922 
+Deviance           = 105.9914 
+----------------------------------------------------------------------- 
+AIC       = 7523.834 
+BIC       = 7535.208 
+ICOMP     = 7521.135 
+======================================================================= 
+Elapsed time= 0.01 seconds =====>>> Wed Jul  2 20:49:19 2025 
+======================================================================= 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Extract and print the estimated parameters}
+\NormalTok{param }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(cub\_00, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)}
+\NormalTok{param}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         
+pai 0.680
+csi 0.197
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate and print the uncertainty and feeling estimates}
+\NormalTok{uncertainty }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ param[}\DecValTok{1}\NormalTok{]}
+\NormalTok{uncertainty}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.32
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{feeling }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ param[}\DecValTok{2}\NormalTok{]}
+\NormalTok{feeling}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.803
+\end{verbatim}
+
+The \texttt{makeplot()} function can be used to compare the observed
+relative frequencies with the theoretical probabilities predicted by the
+estimated model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Create a comparison plot}
+\FunctionTok{makeplot}\NormalTok{(cub\_00)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-25-1.pdf}
+
+}
+
+\end{figure}
+
+\textbf{CUB Models with Covariates} To improve the model's fit and
+interpretation, covariates can be introduced. In this example, we
+consider the dichotomous covariate freqserv (0 = non-regular users, 1 =
+regular users), which indicates the service usage frequency.
+
+A model is estimated where the feeling component depends on the freqserv
+covariate, while the uncertainty remains constant. The model formula is
+\texttt{officeho\ \textasciitilde{}\ 0\ \textbar{}\ freqserv\ \textbar{}\ 0},
+indicating that the feeling component is modeled as a function of
+\texttt{freqserv} (\texttt{\textasciitilde{}\ freqserv}), while the
+other components are constant (\texttt{\textasciitilde{}\ 0}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Estimate the CUB model with freqserv as a covariate on feeling}
+\NormalTok{cub\_csi }\OtherTok{\textless{}{-}} \FunctionTok{GEM}\NormalTok{(}\FunctionTok{Formula}\NormalTok{(officeho }\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{|}\NormalTok{ freqserv }\SpecialCharTok{|} \DecValTok{0}\NormalTok{), }\AttributeTok{family =} \StringTok{"cub"}\NormalTok{, }\AttributeTok{data =}\NormalTok{ univer)}
+
+\CommentTok{\# Display the model summary}
+\FunctionTok{summary}\NormalTok{(cub\_csi, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+======================================================================= 
+=====>>> CUB  model    <<<=====   ML-estimates via E-M algorithm   
+======================================================================= 
+ m= 7  Sample size: n= 2179  Iterations= 24  Maxiter= 500 
+======================================================================= 
+Uncertainty                                            
+    Estimates StdErr Wald
+pai     0.687 0.0192 35.9
+======================================================================= 
+Feeling                                            
+         Estimates StdErr   Wald
+constant    -1.152 0.0403 -28.58
+freqserv    -0.811 0.0850  -9.55
+======================================================================= 
+Log-lik            = -3704.357 
+Mean Log-likelihood= -1.7 
+----------------------------------------------------------------------- 
+AIC       = 7414.714 
+BIC       = 7431.773 
+ICOMP     = 7410.96 
+======================================================================= 
+Elapsed time= 0.58 seconds =====>>> Wed Jul  2 20:49:20 2025 
+======================================================================= 
+\end{verbatim}
+
+The regression coefficients for the logistic link of the ``feeling'' can
+be extracted and analyzed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Extract the regression coefficients}
+\NormalTok{gama }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(cub\_csi)[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\NormalTok{gama}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] -1.151942 -0.811228
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Separate the intercept from the covariate\textquotesingle{}s coefficient}
+\NormalTok{gama0 }\OtherTok{\textless{}{-}}\NormalTok{ gama[}\DecValTok{1}\NormalTok{] }\CommentTok{\# Intercept term}
+\NormalTok{gama1 }\OtherTok{\textless{}{-}}\NormalTok{ gama[}\DecValTok{2}\NormalTok{] }\CommentTok{\# Coefficient for freqserv}
+\end{Highlighting}
+\end{Shaded}
+
+Using these coefficients, you can calculate the feeling parameter for
+each group of users (regular and non-regular). The \texttt{logis()}
+function calculates the inverse logistic transformation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate the csi parameter for non{-}regular users (freqserv = 0)}
+\NormalTok{csi\_nru }\OtherTok{\textless{}{-}} \FunctionTok{logis}\NormalTok{(}\DecValTok{0}\NormalTok{, gama)}
+\NormalTok{csi\_nru}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.2401346
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate the csi parameter for regular users (freqserv = 1)}
+\NormalTok{csi\_ru }\OtherTok{\textless{}{-}} \FunctionTok{logis}\NormalTok{(}\DecValTok{1}\NormalTok{, gama)}
+\NormalTok{csi\_ru}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.1231244
+\end{verbatim}
+
+In this model, the feeling component is specified by:
+
+\[
+logit(1-\xi_i) = - \gamma_0 - \gamma_1 freqserv_i, \quad i = 1,\dots,n
+\] A plot can be generated to compare the fitted probability
+distributions for the two groups.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compare the fitted probability distributions for the two user groups}
+\FunctionTok{makeplot}\NormalTok{(cub\_csi)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-29-1.pdf}
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{BIC}\NormalTok{(cub\_00); }\FunctionTok{BIC}\NormalTok{(cub\_csi)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 7535.208
+\end{verbatim}
+
+\begin{verbatim}
+[1] 7431.773
+\end{verbatim}
+
+the reduction in BIC index from \texttt{BIC(cub\_00)=\ 7535.208} to
+\texttt{BIC(cub\_csi)=\ 7431.773} strongly supports the inclusion of the
+covariate freqserv in the model.
+
+\textbf{CUB Model with Covariates on Both Uncertainty and Feeling}
+
+In this more complex example, two covariates are considered jointly:
+\texttt{lage} (the deviation from the mean of the logarithmic transform
+of age) and \texttt{gender}. The variable \texttt{lage} is used to
+explain both uncertainty and feeling, while \texttt{gender} is used for
+uncertainty and \texttt{freqserv} for feeling.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(univer)}
+\CommentTok{\# Calculate the deviation from the mean of log(age)}
+\NormalTok{age }\OtherTok{\textless{}{-}}\NormalTok{ univer}\SpecialCharTok{$}\NormalTok{age}
+\NormalTok{lage }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(age) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(}\FunctionTok{log}\NormalTok{(age))}
+
+\CommentTok{\# Estimate the CUB model with covariates on both parameters}
+\NormalTok{cub\_pai\_csi }\OtherTok{\textless{}{-}} \FunctionTok{GEM}\NormalTok{(}\FunctionTok{Formula}\NormalTok{(officeho }\SpecialCharTok{\textasciitilde{}}\NormalTok{ lage }\SpecialCharTok{+}\NormalTok{ gender }\SpecialCharTok{|}\NormalTok{ lage }\SpecialCharTok{+}\NormalTok{ freqserv }\SpecialCharTok{|} \DecValTok{0}\NormalTok{), }\AttributeTok{family =} \StringTok{"cub"}\NormalTok{, }\AttributeTok{data =}\NormalTok{ univer)}
+
+\CommentTok{\# Display the summary with coefficient correlations}
+\FunctionTok{summary}\NormalTok{(cub\_pai\_csi, }\AttributeTok{correlation =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+======================================================================= 
+=====>>> CUB  model    <<<=====   ML-estimates via E-M algorithm   
+======================================================================= 
+ m= 7  Sample size: n= 2179  Iterations= 23  Maxiter= 500 
+======================================================================= 
+Uncertainty                                            
+         Estimates StdErr Wald
+constant     0.563  0.118 4.78
+lage         1.240  0.613 2.02
+gender       0.495  0.169 2.94
+======================================================================= 
+Feeling                                            
+         Estimates StdErr   Wald
+constant    -1.147 0.0404 -28.41
+lage        -0.590 0.2410  -2.45
+freqserv    -0.824 0.0851  -9.68
+======================================================================= 
+Parameters Correlation matrix 
+           constant       lage     gender   constant       lage   freqserv
+constant  1.0000000 -0.0506498 -0.6428539  0.1733713  0.0186039  0.1264982
+lage     -0.0506498  1.0000000  0.0915196 -0.0064633  0.2750023 -0.0028018
+gender   -0.6428539  0.0915196  1.0000000 -0.0158130 -0.0255944  0.0369170
+constant  0.1733713 -0.0064633 -0.0158130  1.0000000 -0.0992397 -0.4153292
+lage      0.0186039  0.2750023 -0.0255944 -0.0992397  1.0000000  0.0802712
+freqserv  0.1264982 -0.0028018  0.0369170 -0.4153292  0.0802712  1.0000000
+======================================================================= 
+Log-lik            = -3693.888 
+Mean Log-likelihood= -1.695 
+----------------------------------------------------------------------- 
+AIC       = 7399.776 
+BIC       = 7433.895 
+ICOMP     = 7396.68 
+======================================================================= 
+Elapsed time= 2.02 seconds =====>>> Wed Jul  2 20:49:22 2025 
+======================================================================= 
+\end{verbatim}
+
+The estimated coefficients correspond to the logistic regression
+coefficients for the uncertainty and feeling components.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Print the estimated coefficients for both logistic models}
+\FunctionTok{coef}\NormalTok{(cub\_pai\_csi, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+               
+constant  0.563
+lage      1.240
+gender    0.495
+constant -1.147
+lage     -0.590
+freqserv -0.824
+\end{verbatim}
+
+Then, the resulting cub model can be summarized by:
+
+\[
+\text{logit}(1 - \pi_i) = -\beta_0 - \beta_1 \cdot \text{lage}_i - \beta_2 \cdot \text{gender}_i
+\]
+
+\[
+\text{logit}(1 - \xi_i) = -\gamma_0 - \gamma_1 \cdot \text{lage}_i - \gamma_2 \cdot \text{freqserv}_i
+\]
+
+Since no plot is directly provided as output, the performance of the cub
+model with significant covariates on feeling and uncertainty parameters
+may be summarized as in the following figure, obtained by the following
+code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(univer)}
+\NormalTok{age}\OtherTok{\textless{}{-}}\NormalTok{univer}\SpecialCharTok{$}\NormalTok{age}
+\NormalTok{average}\OtherTok{\textless{}{-}}\FunctionTok{mean}\NormalTok{(}\FunctionTok{log}\NormalTok{(age))}
+\NormalTok{ageseq}\OtherTok{\textless{}{-}}\FunctionTok{log}\NormalTok{(}\FunctionTok{seq}\NormalTok{(}\DecValTok{17}\NormalTok{, }\DecValTok{51}\NormalTok{, }\AttributeTok{by =} \FloatTok{0.1}\NormalTok{))}\SpecialCharTok{{-}}\NormalTok{average}
+\NormalTok{param}\OtherTok{\textless{}{-}}\FunctionTok{coef}\NormalTok{(cub\_pai\_csi)}
+\DocumentationTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\NormalTok{paicov0}\OtherTok{\textless{}{-}}\FunctionTok{logis}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(ageseq, }\DecValTok{0}\NormalTok{), param[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{])}
+\NormalTok{paicov1}\OtherTok{\textless{}{-}}\FunctionTok{logis}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(ageseq, }\DecValTok{1}\NormalTok{), param[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{])}
+\NormalTok{csicov0}\OtherTok{\textless{}{-}}\FunctionTok{logis}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(ageseq, }\DecValTok{0}\NormalTok{), param[}\DecValTok{4}\SpecialCharTok{:}\DecValTok{6}\NormalTok{])}
+\NormalTok{csicov1}\OtherTok{\textless{}{-}}\FunctionTok{logis}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(ageseq, }\DecValTok{1}\NormalTok{), param[}\DecValTok{4}\SpecialCharTok{:}\DecValTok{6}\NormalTok{])}
+\DocumentationTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\FunctionTok{plot}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{paicov0, }\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{csicov0, }\AttributeTok{type =} \StringTok{"n"}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{cex =} \DecValTok{1}\NormalTok{,}
+\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.6}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.4}\NormalTok{, }\FloatTok{0.9}\NormalTok{), }\AttributeTok{font.main =} \DecValTok{4}\NormalTok{, }\AttributeTok{las =} \DecValTok{1}\NormalTok{,}
+\AttributeTok{main =} \StringTok{"CUB models with covariates"}\NormalTok{,}
+\AttributeTok{xlab =} \FunctionTok{expression}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Uncertainty "}\NormalTok{, (}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{pi))),}
+\AttributeTok{ylab =} \FunctionTok{expression}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Feeling "}\NormalTok{, (}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{xi))), }\AttributeTok{cex.main =} \FloatTok{0.9}\NormalTok{,}
+\AttributeTok{cex.lab =} \FloatTok{0.9}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{paicov1, }\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{csicov1, }\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{4}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{paicov0, }\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{csicov0, }\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{4}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{paicov0, }\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{csicov1, }\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{4}\NormalTok{, }\AttributeTok{col =} \StringTok{"black"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{paicov1, }\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{csicov0, }\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{4}\NormalTok{, }\AttributeTok{col =} \StringTok{"green"}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"bottomleft"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Man{-}User"}\NormalTok{, }\StringTok{"Man{-}Not User"}\NormalTok{,}
+\StringTok{"Woman{-}User"}\NormalTok{, }\StringTok{"Woman{-}Not User"}\NormalTok{), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{),}
+\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{text.col =} \FunctionTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{), }\AttributeTok{cex =} \FloatTok{0.6}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.85}\NormalTok{, }\AttributeTok{labels =} \StringTok{"Young"}\NormalTok{, }\AttributeTok{offset =} \FloatTok{0.3}\NormalTok{, }\AttributeTok{cex =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{font =} \DecValTok{4}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\AttributeTok{labels =} \StringTok{"Elderly"}\NormalTok{, }\AttributeTok{offset =} \FloatTok{0.3}\NormalTok{, }\AttributeTok{cex =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{font =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-33-1.pdf}
+
+}
+
+\end{figure}
+
+Summarizing, the sketch of analysis so pursued indicates that
+satisfaction increase with age whereas indecision decreases, and that
+men are more satisfied than women across all profiles.
+
 \hypertarget{cub-model-with-shelter-option}{%
 \subsection{CUB Model with Shelter
 Option}\label{cub-model-with-shelter-option}}
@@ -3165,6 +4185,214 @@ residual for a specific category, it strongly suggests the presence of a
 shelter effect for that category. The Dissimilarity Index (\(Diss\)) can
 also be used to compare the overall fit improvement when a shelter
 component is added.
+
+\hypertarget{case-study-the-reelgoods-dataset}{%
+\subsubsection{Case study: the reelgoods
+dataset}\label{case-study-the-reelgoods-dataset}}
+
+The CUB model with shelter option is shown with the \texttt{relgoods}
+dataset, a survey designed to assess the importance of relational goods
+and involvement in leisure time activities.
+
+This dataset contains the results of a survey conducted in December 2014
+in the metropolitan area of Naples, Italy. The survey's primary goal was
+to measure people's evaluation of relational goods (e.g., time spent
+with friends and family) and leisure time activities. The dataset
+includes both demographic information about the respondents and their
+evaluations on various topics.
+
+The survey used two main types of scales to collect data:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  10-Point Ordinal Scale (Likert-type): Respondents rated several items
+  on a 10-point scale (from 1 to 10). The interpretation of the scale
+  endpoints varied slightly:
+\end{enumerate}
+
+\begin{itemize}
+\item
+  For relational goods: 1 = ``never, at all'' to 10 = ``always, a lot''.
+\item
+  For leisure time activities: 1 = ``At all, nothing, never'' to 10 =
+  ``Totally, extremely important, always''. This scale captures the
+  frequency or importance of a given activity.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Continuous Happiness Scale: To measure happiness, respondents marked a
+  sign on a 110mm horizontal line (left = ``extremely unhappy'', right =
+  ``extremely happy''). This is treated as a continuous variable.
+\end{enumerate}
+
+The dataset includes the following types of variables:
+
+\begin{itemize}
+\item
+  Subject Covariates (Demographics): These provide background
+  information about each respondent (e.g., ID, Gender, BirthMonth,
+  EducationDegree, MaritalStatus, job, Smoking, Pets).
+\item
+  Relational Goods and General Evaluations (10-Point Scale): These
+  variables capture aspects of social life and the environment (e.g.,
+  WalkOut, RelFriends, Safety).
+\item
+  Leisure Time Activities (10-Point Scale): These measure involvement or
+  enjoyment of various activities (e.g., Reading, Cinema, Sport,
+  Internet, MusicInstr).
+\item
+  Continuous Happiness Score: The self-reported happiness score
+  (Happiness).
+\end{itemize}
+
+Let's inspect the distribution of the variable \texttt{Writing}, which
+asks respondents to rate their involvement in writing on a 10-point
+scale.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(CUB)}
+\FunctionTok{data}\NormalTok{(relgoods)}
+
+\CommentTok{\# Plot the frequency distribution of the \textquotesingle{}MusicInstr\textquotesingle{} variable}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{table}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(relgoods}\SpecialCharTok{$}\NormalTok{Writing)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-34-1.pdf}
+
+}
+
+\end{figure}
+
+Let's apply the CUB model to the Writing variable to illustrate the
+shelter effect. This variable asks about involvement in writing on a
+10-point scale.
+
+First, we fit a standard CUB model without the shelter option to the
+Writing variable. This serves as a baseline for comparison.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit a standard CUB model to the \textquotesingle{}Writing\textquotesingle{} variable}
+\NormalTok{cub\_writing }\OtherTok{\textless{}{-}} \FunctionTok{GEM}\NormalTok{(}\FunctionTok{Formula}\NormalTok{(Writing }\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{|} \DecValTok{0} \SpecialCharTok{|} \DecValTok{0}\NormalTok{), }\AttributeTok{family =} \StringTok{"cub"}\NormalTok{,}
+                  \AttributeTok{maxiter =} \DecValTok{500}\NormalTok{, }\AttributeTok{toler =} \FloatTok{1e{-}3}\NormalTok{, }\AttributeTok{data =}\NormalTok{ relgoods)}
+\FunctionTok{summary}\NormalTok{(cub\_writing)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+======================================================================= 
+=====>>> CUB  model    <<<=====   ML-estimates via E-M algorithm   
+======================================================================= 
+ m= 10  Sample size: n= 2449  Iterations= 18  Maxiter= 500 
+======================================================================= 
+Uncertainty                                            
+    Estimates     StdErr     Wald
+pai   0.37887 0.01354622 27.96869
+======================================================================= 
+Feeling                                            
+    Estimates     StdErr    Wald
+csi   0.98052 0.00275681 355.672
+======================================================================= 
+Log-lik            = -4920.633 
+Mean Log-likelihood= -2.009242 
+Log-lik(UNIFORM)   = -5639.031 
+Log-lik(saturated) = -4859.017 
+Deviance           = 123.2317 
+----------------------------------------------------------------------- 
+AIC       = 9845.266 
+BIC       = 9856.873 
+ICOMP     = 9843.336 
+======================================================================= 
+Elapsed time= 0 seconds =====>>> Wed Jul  2 20:49:22 2025 
+======================================================================= 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{makeplot}\NormalTok{(cub\_writing)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-35-1.pdf}
+
+}
+
+\end{figure}
+
+Now, we introduce the shelter parameter, which models the probability of
+selecting a specific category as a refuge. In this case, we specify
+\texttt{shelter\ =\ 1}, which indicates that the first category (score
+of 1) is the shelter category.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit a CUB model with a shelter option on category 1}
+\NormalTok{cub\_she }\OtherTok{\textless{}{-}} \FunctionTok{GEM}\NormalTok{(}\FunctionTok{Formula}\NormalTok{(Writing }\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{|} \DecValTok{0} \SpecialCharTok{|} \DecValTok{0}\NormalTok{), }\AttributeTok{family =} \StringTok{"cub"}\NormalTok{, }\AttributeTok{shelter =} \DecValTok{1}\NormalTok{,}
+               \AttributeTok{maxiter =} \DecValTok{500}\NormalTok{, }\AttributeTok{toler =} \FloatTok{1e{-}3}\NormalTok{, }\AttributeTok{data =}\NormalTok{ relgoods)}
+\FunctionTok{summary}\NormalTok{(cub\_she)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+======================================================================= 
+=====>>> CUB  model    <<<=====   ML-estimates via E-M algorithm   
+======================================================================= 
+ m= 10  Sample size: n= 2449  Iterations= 77  Maxiter= 500 
+======================================================================= 
+======================================================================= 
+     Estimates     StdErr     Wald
+pai1 0.1922306 0.01652574 11.63219
+pai2 0.4902216 0.01907354 25.70166
+csi  0.7518936 0.01433876 52.43784
+======================================================================= 
+Alternative parameterization 
+        Estimates     StdErr     Wald
+paistar 0.2816762 0.02422031 11.62975
+csi     0.7518936 0.01433876 52.43784
+delta   0.3175478 0.01121160 28.32315
+======================================================================= 
+Log-lik            = -4887.843 
+Mean Log-likelihood= -1.995853 
+Log-lik(UNIFORM)   = -5639.031 
+Log-lik(saturated) = -4859.017 
+Deviance           = 57.65222 
+----------------------------------------------------------------------- 
+AIC       = 9781.686 
+BIC       = 9799.096 
+ICOMP     = 9776.957 
+======================================================================= 
+Elapsed time= 0 seconds =====>>> Wed Jul  2 20:49:22 2025 
+======================================================================= 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{makeplot}\NormalTok{(cub\_she)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-36-1.pdf}
+
+}
+
+\end{figure}
+
+If we look at the value of \(\delta\), it indicates that there is a
+medium tendency to opt for the shelter category.
 
 \hypertarget{treatment-of-dont-know-dk-options-within-the-cub-framework}{%
 \subsection{Treatment of ``Don't Know'' (DK) Options within the CUB
@@ -3394,6 +4622,605 @@ is the sum of the proportion of individuals who selected DK
 \((\hat{p}_{DK})\) and the proportion of uncertainty among those who
 provided a substantive response \((1-\pi_S)\), weighted by their share
 of the total population \((1-\hat{p}_{DK})\).
+
+\hypertarget{case-study-eurobarometers-data}{%
+\subsubsection{Case study Eurobarometer's
+data}\label{case-study-eurobarometers-data}}
+
+In this section, we examine data from Standard Eurobarometer 81, a
+cross-national public opinion survey carried out in 2014 among citizens
+aged 15 and over across the 28 member states of the European Union (EU).
+
+The goal is to investigate how European citizens perceive the
+functioning, role, and future of the EU, with a particular focus on the
+treatment of Don't Know (DK) responses in the analysis of ordinal data.
+Our attention is centered on a block of six attitudinal items
+(QA19.1--QA19.6), in which respondents rated their agreement on a
+four-point ordinal scale (totally disagree, tend to disagree, tend to
+agree, totally agree), with the possibility to select a DK option
+indicating uncertainty or lack of opinion. These items are intended to
+capture both cognitive understanding and emotional evaluation of the EU
+and related issues, such as globalization and European integration. By
+explicitly modeling DK responses, we gain insight not only into the
+direction of public opinion but also into the levels of uncertainty and
+ambivalence that shape attitudes toward complex political institutions
+like the EU.
+
+The attitudinal items are:
+
+\begin{itemize}
+\item
+  QA19.1: I understand how the EU works
+\item
+  QA19.2: Globalisation is an opportunity for economic growth
+\item
+  QA19.3: (OUR COUNTRY) could better face the future outside the EU
+\item
+  QA19.4: The EU should develop further into a federation of nation
+  states
+\item
+  QA19.5: More decisions should be taken at EU level
+\item
+  QA19.6: We need a united Europe in today's world
+\end{itemize}
+
+Let's start with the fitting of a CUB model for each variable by
+excluding the DK option.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(CUB)}
+\CommentTok{\# Load the data}
+\FunctionTok{load}\NormalTok{(}\StringTok{"materials//microdata\_eurobarometer.Rdata"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(eurobarometer)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   2800 obs. of  7 variables:
+ $ Country: chr  "BE" "BE" "BE" "BE" ...
+ $ D19-1  : chr  "2" "2" "3" "4" ...
+ $ D19-2  : chr  "dk" "2" "dk" "3" ...
+ $ D19-3  : chr  "4" "3" "3" "4" ...
+ $ D19-4  : chr  "3" "dk" "2" "4" ...
+ $ D19-5  : chr  "2" "1" "3" "2" ...
+ $ D19-6  : chr  "4" "1" "1" "1" ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{\# Estimate a CUB model for each item}
+\NormalTok{CUB\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{ ()}
+\NormalTok{pi }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+\NormalTok{xi }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{2}\SpecialCharTok{:}\DecValTok{7}\NormalTok{)\{}
+\NormalTok{  ordinal }\OtherTok{\textless{}{-}}\NormalTok{ eurobarometer[,i]}
+\NormalTok{  ordinal }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(ordinal[}\SpecialCharTok{{-}}\FunctionTok{which}\NormalTok{(ordinal }\SpecialCharTok{==} \StringTok{"dk"}\NormalTok{)])}
+\NormalTok{  CUB\_list[[i}\DecValTok{{-}1}\NormalTok{]] }\OtherTok{\textless{}{-}} \FunctionTok{GEM}\NormalTok{(}\FunctionTok{Formula}\NormalTok{(ordinal }\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{|} \DecValTok{0} \SpecialCharTok{|} \DecValTok{0}\NormalTok{), }\AttributeTok{family =} \StringTok{"cub"}\NormalTok{)}
+\NormalTok{  pi[i}\DecValTok{{-}1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ CUB\_list[[i}\DecValTok{{-}1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{estimates[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  xi[i}\DecValTok{{-}1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ CUB\_list[[i}\DecValTok{{-}1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{estimates[}\DecValTok{2}\NormalTok{]}
+\NormalTok{\}}
+
+\NormalTok{param }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"QA19.1"}\NormalTok{, }\StringTok{"QA19.2"}\NormalTok{,}
+                            \StringTok{"QA19.3"}\NormalTok{, }\StringTok{"QA19.4"}\NormalTok{,}
+                            \StringTok{"QA19.5"}\NormalTok{, }\StringTok{"QA19.6"}\NormalTok{), pi, xi))}
+
+\FunctionTok{colnames}\NormalTok{(param) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"label"}\NormalTok{, }\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{)}
+
+
+\NormalTok{param}\SpecialCharTok{$}\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(param}\SpecialCharTok{$}\NormalTok{x)}
+\NormalTok{param}\SpecialCharTok{$}\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(param}\SpecialCharTok{$}\NormalTok{y)}
+
+
+\NormalTok{plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(param, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{x), }\AttributeTok{y =}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{y), }\AttributeTok{label =}\NormalTok{ label)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \FunctionTok{expression}\NormalTok{((}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{pi)), }\AttributeTok{y =} \FunctionTok{expression}\NormalTok{((}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{xi))) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.grid =} \FunctionTok{element\_blank}\NormalTok{())}
+\NormalTok{plot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-38-1.pdf}
+
+}
+
+\end{figure}
+
+Now, let's see how the estimates of \(\pi\) change by considering the DK
+option. First of all we have to compute the following quantity for each
+item:
+
+\[
+\hat{p}_{DK} = \frac{Total\, number\, of\, DK\, responses}{Total\, number\, of\, responses}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p\_DK }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+
+\CommentTok{\# Loop over the 6 items}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{2}\SpecialCharTok{:}\DecValTok{7}\NormalTok{) \{}
+\NormalTok{  item\_responses }\OtherTok{\textless{}{-}}\NormalTok{ eurobarometer[, i]}
+\NormalTok{  total\_responses }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(item\_responses)}
+\NormalTok{  dk\_count }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(item\_responses }\SpecialCharTok{==} \StringTok{"dk"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  p\_DK[i }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ dk\_count }\SpecialCharTok{/}\NormalTok{ total\_responses}
+\NormalTok{\}}
+
+\CommentTok{\# Assign labels to the vector}
+\FunctionTok{names}\NormalTok{(p\_DK) }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"QA19."}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{)}
+
+\CommentTok{\# Display the result}
+\NormalTok{p\_DK}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    QA19.1     QA19.2     QA19.3     QA19.4     QA19.5     QA19.6 
+0.03821429 0.14964286 0.10500000 0.21928571 0.10107143 0.07000000 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{param}\SpecialCharTok{$}\NormalTok{p\_DK }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(p\_DK)}
+\end{Highlighting}
+\end{Shaded}
+
+The ``corrected'' \(\pi\) is computed as
+\(\pi = (1-\hat{p}_{DK})\cdot\pi_S\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{param}\SpecialCharTok{$}\NormalTok{x\_cor }\OtherTok{\textless{}{-}}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{ param}\SpecialCharTok{$}\NormalTok{p\_DK)}\SpecialCharTok{*}\NormalTok{param}\SpecialCharTok{$}\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+Then we can plot the estimated models by considering the DK option:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{param}\SpecialCharTok{$}\NormalTok{x\_old }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ param}\SpecialCharTok{$}\NormalTok{x}
+\NormalTok{param}\SpecialCharTok{$}\NormalTok{x\_new }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ param}\SpecialCharTok{$}\NormalTok{x\_cor}
+\NormalTok{param}\SpecialCharTok{$}\NormalTok{y\_val }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ param}\SpecialCharTok{$}\NormalTok{y}
+
+\FunctionTok{ggplot}\NormalTok{(param) }\SpecialCharTok{+}
+  \FunctionTok{geom\_segment}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x\_old, }\AttributeTok{y =}\NormalTok{ y\_val, }\AttributeTok{xend =}\NormalTok{ x\_new}\FloatTok{{-}0.015}\NormalTok{, }\AttributeTok{yend =}\NormalTok{ y\_val),}
+               \AttributeTok{arrow =} \FunctionTok{arrow}\NormalTok{(}\AttributeTok{length =} \FunctionTok{unit}\NormalTok{(}\FloatTok{0.2}\NormalTok{, }\StringTok{"cm"}\NormalTok{)), }\AttributeTok{color =} \StringTok{"darkgray"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x\_old, }\AttributeTok{y =}\NormalTok{ y\_val), }\AttributeTok{color =} \StringTok{"gray30"}\NormalTok{, }\AttributeTok{size =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x\_new, }\AttributeTok{y =}\NormalTok{ y\_val), }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x\_new, }\AttributeTok{y =}\NormalTok{ y\_val, }\AttributeTok{label =}\NormalTok{ label),}
+            \AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \FloatTok{3.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \FunctionTok{expression}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ pi), }\AttributeTok{y =} \FunctionTok{expression}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ xi)) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.grid =} \FunctionTok{element\_blank}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Ordinal_data_an_R_files/figure-pdf/unnamed-chunk-41-1.pdf}
+
+}
+
+\end{figure}
+
+This plot shows that globally Europeans have quite negative feelings
+against Europe, since by looking at the results related to question
+QA19.6 people have a low feeling and low uncertainty, meaning that they
+generally don't think that we need a united europe today and they are
+almost sure about that. A similar opinion is confirmed by the high
+feeling shown for item QA19.3 which suggest that people globally think
+that their own country could better face the future outside the EU.
+
+The other items show a medium level of feeling, especially QA19.2 and
+QA19.4, the consideration of the DK option shifts relevantly the level
+of uncertainty, meaning that the interviewees are not always able to say
+whether globalization is perceived as an opportunity for economic growth
+and are not able to express their perception about the possible
+development of the EU into a federation of nation states.
+
+\textbf{References and additional information}
+
+For those interested in learning more about CUB models, I suggest
+\href{https://link.springer.com/article/10.1007/s10260-019-00461-1}{this
+paper}, which provides a good overview of the main developments within
+the class of CUB models. Additional contributions and developments from
+my research group can be found on
+\href{https://bodai.unibs.it/cub/}{this page}.
+
+\textbf{Main References}
+
+The main references used for this module are:
+
+\begin{itemize}
+\item
+  D'Elia, A., \& Piccolo, D. (2005). A mixture model for preferences
+  data analysis. \emph{Computational Statistics \& Data Analysis},
+  49(3), 917-934.
+\item
+  Iannario, M. (2012). Modelling shelter choices in a class of mixture
+  models for ordinal responses. \emph{Statistical Methods \&
+  Applications}, 21(1), 1-22.
+\item
+  Manisera, M., \& Zuccolotto, P. (2014). Modeling ``don't know''
+  responses in rating scales. \emph{Pattern Recognition Letters}, 45,
+  226-234.
+\item
+  Piccolo, D., \& Simone, R. (2019). The class of CUB models:
+  statistical foundations, inferential issues and empirical evidence.
+  \emph{Statistical Methods \& Applications}, 28, 389-435.
+\end{itemize}
+
+\textbf{R Packages}
+
+The models and datasets (\texttt{univer}, \texttt{relgoods}) used in
+this module are provided in the R package
+\href{https://rdrr.io/cran/CUB/}{CUB}
+
+\hypertarget{models-for-multivariate-ordinal-data}{%
+\section{Models for Multivariate Ordinal
+Data}\label{models-for-multivariate-ordinal-data}}
+
+In previous modules, we explored what ordinal data are and how they can
+be modeled using approaches such as Proportional Odds Models and CUB
+models. These methods are well-suited for analyzing one or a few ordinal
+variables, especially when the interest lies in explaining or predicting
+an outcome. However, in many real-world settings, researchers are faced
+with multivariate ordinal data; that is, multiple ordinal variables
+collected simultaneously on each individual or unit.
+
+Think, for example, of a customer satisfaction survey where participants
+rate a range of services or products. Or consider a psychological
+questionnaire measuring various aspects of well-being or attitude. In
+such cases, the goal is often not to model a single response, but rather
+to uncover patterns, similarities, or latent structures in the data.
+This calls for multivariate methods.
+
+Before we delve into specific multivariate methods, it's helpful to
+briefly define two fundamental goals in multivariate data analysis that
+we will address:
+
+\begin{itemize}
+\item
+  \textbf{Dimensionality Reduction}: Imagine you have a dataset with a
+  very large number of variables, or ``dimensions'', for each
+  observation. This can make the data difficult to understand,
+  visualize, and analyze. Dimensionality reduction is the process of
+  transforming high-dimensional data into a lower-dimensional space
+  (fewer variables) while trying to retain as much of the original,
+  important information and relationships as possible. The aim is to
+  simplify the data, making it more manageable for visualization,
+  interpretation, and subsequent analyses, often by uncovering
+  underlying ``latent'' variables or themes.
+\item
+  **Clustering*: In contrast to dimensionality reduction, clustering is
+  an unsupervised learning technique aimed at finding natural groupings
+  or segments within a dataset. It involves organizing a set of
+  observations (e.g., individuals, items) into groups (called
+  ``clusters'') such that observations within the same group are more
+  similar to each other than to those in other groups. Clustering helps
+  to uncover hidden patterns, identify distinct segments, and simplify
+  complex datasets by categorizing observations based on their inherent
+  similarities, without any prior knowledge of what those groups might
+  be.
+\end{itemize}
+
+These two concepts, though distinct, often complement each other in data
+analysis workflows. Dimensionality reduction can make data more amenable
+to clustering, for instance, by projecting it into a space where true
+similarities are more apparent.
+
+While classical multivariate techniques, such as Principal Component
+Analysis (PCA) and K-means clustering, are powerful tools for continuous
+data, they encounter significant limitations when applied to ordinal
+data. The core challenge lies in the inherent nature of ordinal scales:
+their numeric labels represent ordered categories rather than true
+measurable quantities with uniform intervals. Respecting this
+fundamental distinction is paramount to avoid drawing misleading or
+erroneous conclusions from our analyses. In this chapter, we will
+explore several alternative approaches that are better suited to
+analyzing both multivariate ordinal data and mixed-type datasets (those
+combining nominal, ordinal, and continuous variables).
+
+\hypertarget{why-classical-multivariate-methods-fall-short}{%
+\subsection{Why Classical Multivariate Methods Fall
+Short}\label{why-classical-multivariate-methods-fall-short}}
+
+The inadequacy of classical multivariate methods for ordinal data stems
+from their underlying assumptions, which are typically violated by the
+properties of ordinal scales.
+
+\hypertarget{principal-component-analysis-pca}{%
+\subsubsection{Principal Component Analysis
+(PCA)}\label{principal-component-analysis-pca}}
+
+Classical PCA is a dimensionality reduction technique built upon the
+covariance or correlation matrix of the variables. Its objective is to
+identify a set of orthogonal linear combinations of the original
+variables (principal components) that capture the maximum variance in
+the data. The method inherently assumes that the data are numerical and
+that the distances between values are meaningful and consistent.
+
+When PCA is applied directly to ordinal data (even after assigning
+numerical labels like 1, 2, 3, etc.), it treats these labels as if they
+represent continuous, interval-scaled quantities. This creates a
+critical misrepresentation. For example, PCA would treat the numerical
+``distance'' between ``agree'' (e.g., coded as 4) and ``strongly agree''
+(e.g., coded as 5) as identical to the ``distance'' between ``neutral''
+(e.g., coded as 3) and ``agree'' (e.g., coded as 4). As previously
+discussed, these perceived ``distances'' on an ordinal scale are rarely
+equal in their true conceptual or psychological magnitude. By treating
+these non-uniform intervals as equal, PCA can generate principal
+components that distort the true underlying structure of the ordinal
+relationships, leading to potentially misleading interpretations of the
+latent dimensions.
+
+\hypertarget{k-means-clustering}{%
+\subsubsection{K-Means Clustering}\label{k-means-clustering}}
+
+Similarly, standard clustering algorithms like K-means rely heavily on
+Euclidean distances to quantify similarity or dissimilarity between data
+points. Euclidean distance, by its very definition, assumes
+interval-scaled variables where differences between values are direct
+and comparable.
+
+Applying K-means directly to numerically coded ordinal data leads to
+similar problems as with PCA. The calculated Euclidean distances between
+response profiles will be based on the arbitrary numerical assignments,
+not on the true, often unequal, conceptual distances between ordered
+categories. This can result in the formation of artificial clusters that
+do not genuinely reflect meaningful patterns or homogeneous groups
+within the ordinal data. Consequently, relevant patterns might be
+masked, or spurious groupings might emerge, hindering accurate
+segmentation and interpretation.
+
+Therefore, when confronted with multivariate ordinal data, it becomes
+important to use analytical tools that account for their ordered nature.
+
+\hypertarget{techniques-for-dimensionality-reduction-and-visualization-of-ordinal-data}{%
+\subsection{Techniques for Dimensionality Reduction and Visualization of
+Ordinal
+Data}\label{techniques-for-dimensionality-reduction-and-visualization-of-ordinal-data}}
+
+The methods discussed in this section---Nonlinear PCA, Correspondence
+Analysis, and Multiple Correspondence Analysis---all share a common
+overarching goal: to reduce the dimensionality of complex multivariate
+data and to provide insightful graphical representations of the
+relationships within the data. While they achieve this through different
+mechanisms and for slightly different data structures, they collectively
+aim to uncover latent structures and visualize patterns in a
+lower-dimensional space.
+
+\hypertarget{nonlinear-principal-component-analysis-nlpca}{%
+\subsubsection{Nonlinear Principal Component Analysis
+(NLPCA)}\label{nonlinear-principal-component-analysis-nlpca}}
+
+Nonlinear Principal Component Analysis (NLPCA) represents a significant
+advancement over classical PCA, extending its framework to accommodate
+diverse data types, including ordinal variables. When applied to ordinal
+data, NLPCA addresses the core challenge by transforming the original
+categorical responses into optimal scores.
+
+The fundamental idea behind NLPCA is to ``translate'' ordinal data into
+a numerical scale in a way that maximizes the variance explained by the
+resulting principal components, much like traditional PCA. However,
+unlike classical PCA, this ``translation'' is not fixed or arbitrary.
+Instead, NLPCA iteratively determines the most appropriate numerical
+values (optimal scores) for each category. These optimal scores are
+derived such that they best preserve the order of the categories and
+maximize the explained variance in the transformed data, effectively
+capturing potentially nonlinear relationships.
+
+By employing optimal scaling, NLPCA can effectively handle data that are
+a mix of continuous, nominal, and ordinal variables, offering a flexible
+and powerful dimensionality reduction technique for heterogeneous
+datasets. The output of NLPCA is a set of principal components that
+reflect the major sources of variability, but crucially, they do so
+while respecting the intrinsic nature of the ordinal data. NLPCA is
+particularly valuable when one suspects that the latent constructs
+driving the data exhibit nonlinear relationships or are multidimensional
+in a non-Euclidean sense.
+
+\hypertarget{correspondence-analysis-ca}{%
+\subsubsection{Correspondence Analysis
+(CA)}\label{correspondence-analysis-ca}}
+
+Correspondence Analysis (CA) is a statistical technique primarily
+designed for exploring the association between two categorical
+variables, typically presented in a contingency table (a
+cross-tabulation). CA's strength lies in its ability to graphically
+represent the relationships between the row and column categories in a
+common low-dimensional space, usually two dimensions, where their
+proximity visually reflects their association.
+
+For example, if we have a contingency table cross-tabulating ``Education
+Level'' (an ordinal variable) with ``Preferred News Source'' (a nominal
+or ordinal variable), CA can visually reveal if specific education
+levels are strongly associated with particular news sources. Points
+representing categories that are close together on the CA map indicate a
+strong tendency to co-occur.
+
+While CA is most commonly associated with nominal data, it can also be
+applied to ordinal variables. However, it's important to note that in
+its standard form, CA does not explicitly leverage or enforce the order
+information of ordinal variables. Consequently, while CA can be highly
+useful for detecting general patterns and visualizing broad
+relationships in the data, it should be applied with caution when the
+precise ordinal nature and monotonicity of the data are central to the
+research question. Nevertheless, CA remains a valuable exploratory tool,
+offering useful insights into co-occurrence structures and showing which
+categories of different variables are more likely to appear together,
+particularly in the initial phases of data exploration.
+
+\hypertarget{multiple-correspondence-analysis-mca}{%
+\subsubsection{Multiple Correspondence Analysis
+(MCA)}\label{multiple-correspondence-analysis-mca}}
+
+Multiple Correspondence Analysis (MCA) extends the principles of CA to
+analyze the relationships among more than two categorical variables
+simultaneously. This makes MCA particularly well-suited for large survey
+datasets where respondents provide answers across numerous items, often
+using Likert-type scales.
+
+Similar to CA, MCA represents both the categories of the variables and
+the individual respondents in a low-dimensional space (e.g., a 2D
+scatter plot). This visual representation greatly facilitates the
+detection of latent structures and the visualization of similarities
+among individuals and variables. For instance, MCA can help identify
+clusters of individuals who exhibit similar response profiles across
+multiple survey questions. It can also reveal the underlying dimensions
+or ``themes'' that explain the relationships among the survey items
+themselves.
+
+A key point to remember about standard MCA is that it traditionally
+treats all variables as nominal, thereby disregarding the inherent
+ordered nature of ordinal variables. To mitigate this limitation,
+several extensions of MCA have been proposed. These include methods like
+ordinal MCA or nonlinear MCA, which incorporate specific coding and
+weighting schemes for responses that explicitly account for their
+ordering. These advanced versions strive to preserve the monotonicity of
+ordinal scales and to produce more meaningful and interpretable
+dimensions that are faithful to the data's original structure.
+
+In practice, MCA is widely employed in the social sciences, marketing
+research, and psychology due to its powerful ability to simplify complex
+datasets into interpretable patterns. It is an invaluable tool for
+dimensionality reduction and visualization, often preceding or
+complementing other analyses by providing a simplified, meaningful
+representation of the data.
+
+\hypertarget{clustering-with-ordinal-and-mixed-data}{%
+\subsection{Clustering with Ordinal and Mixed
+Data}\label{clustering-with-ordinal-and-mixed-data}}
+
+Clustering is a milestone of unsupervised learning since it allows to
+discover natural groupings or segments within a dataset. However, as
+anticipated, standard clustering algorithms like K-means are poorly
+suited for ordinal or mixed-type data due to their reliance on distance
+metrics that assume continuous, interval-scaled variables.
+
+\hypertarget{distance-based-clustering}{%
+\subsubsection{Distance-Based
+Clustering}\label{distance-based-clustering}}
+
+To perform clustering on ordinal data, the critical first step is to
+define distance measures that genuinely respect the ordinal nature of
+the variables. One of the most widely adopted and versatile approaches
+is to use Gower's distance (or Gower's coefficient of similarity).
+Gower's distance can handle mixed data types, including nominal,
+ordinal, and continuous variables, within a single dissimilarity metric.
+For ordinal variables specifically, Gower's metric calculates distances
+in a way that preserves the order and accounts for the number of
+categories separating two responses, without assuming equal intervals.
+
+Another option involves using other ordinal-specific dissimilarity
+measures, such as those based on ranks, monotonic transformations, or
+agreement/disagreement counts. These measures are designed to avoid the
+pitfalls of assuming equal spacing between categories.
+
+Once an appropriate dissimilarity matrix is computed (e.g., using
+Gower's distance), clustering algorithms that do not rely on Euclidean
+geometry or mean centroids can be effectively employed.
+
+Some examples are:
+
+\begin{itemize}
+\item
+  Hierarchical clustering: Builds a hierarchy of clusters from
+  individual data points, based on their dissimilarities.
+\item
+  Partitioning Around Medoids (PAM): A robust alternative to K-means
+  that uses actual data points (medoids) as cluster centers, minimizing
+  the sum of dissimilarities rather than squared Euclidean distances.
+\end{itemize}
+
+\hypertarget{model-based-clustering}{%
+\subsubsection{Model-Based Clustering}\label{model-based-clustering}}
+
+Beyond distance-based approaches, model-based clustering offers a
+probabilistic framework for identifying clusters. Instead of relying
+only on distance metrics, model-based clustering assumes that the data
+points within each cluster are generated from a specific probability
+distribution, and the entire dataset is a mixture of these
+distributions. The goal is to estimate the parameters of these component
+distributions and assign observations to the clusters that they are most
+likely to belong to.
+
+For ordinal data, model-based clustering often employs specialized
+distributions that are designed for ordered categories. For example,
+some approaches might use latent class models, where each latent class
+represents a cluster, and within each cluster, the ordinal responses
+follow a specific discrete probability distribution (e.g., a multinomial
+distribution or a specific ordinal-friendly distribution like the Binary
+Ordinal Search (BOS) model). This allows for a more rigorous statistical
+inference on the number of clusters and the characteristics of each
+cluster.
+
+An important advantage of model-based clustering is its ability to:
+
+\begin{itemize}
+\item
+  Provide a statistical basis for clustering: This allows for formal
+  tests and information criteria (like BIC or AIC) to select the optimal
+  number of clusters.
+\item
+  Handle uncertainty in cluster membership: Instead of hard assignments,
+  observations are often assigned to clusters probabilistically.
+\end{itemize}
+
+This approach allows researchers to segment individuals into genuinely
+homogeneous groups, revealing hidden patterns in the data that might not
+be evident through classical analyses while also providing a framework
+for statistical inference about the clustering solution.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Final notes}
+
+This course has offered a comprehensive introduction to the analysis of
+ordinal data, a type of data that lies between nominal and continuous
+variables and is frequently encountered in social sciences, psychology,
+marketing, and many applied domains.
+
+We have covered the following main topics:
+
+\begin{itemize}
+\item
+  Definition and characteristics of ordinal data, and the importance of
+  treating them appropriately rather than assuming interval or
+  continuous scale properties.
+\item
+  Survey and scale design.
+\item
+  Statistical models for ordinal data, such as the Proportional Odds
+  Model and CUB models..
+\item
+  Multivariate methods for ordinal and mixed data, including nonlinear
+  PCA, Correspondence Analysis, Multiple Correspondence Analysis, and
+  clustering approaches based on ordinal or mixed-type dissimilarities.
+\end{itemize}
+
+Throughout the course, a common thread has been the need to respect the
+nature of ordinal data, choosing analytical methods that reflect their
+structure and meaning. Applying models designed for other types of data
+may lead to invalid interpretations, while appropriate methods can
+provide valuable insights into individual preferences, attitudes, and
+behaviors.
 
 
 

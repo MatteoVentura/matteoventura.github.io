@@ -11,6 +11,8 @@ title: "Publications"
 
 ### Published Articles
 
+- Simonetto A., Ventura M. (2025) Distance Measures for Unweighted Undirected Networks: a comparison study. *Australian and New Zealand Journal of Statistics*
+
 - Ventura, M., Macis, A., Manisera, M., & Zuccolotto, P. (2024). On the equivalence of two mixture models for rating data. *Advances in Statistical Analysis*, *1*(25), 70–86.
 
 - Manisera, M., Migliorati, M., Ventura, M., & Zuccolotto, P. (2024). A mixture model for the analysis of categorical variables measured on five-point semantic differential scales. *Austrian Journal of Statistics*, *53*(3), 70–86.
@@ -22,7 +24,9 @@ title: "Publications"
 
 ### Conference Proceedings
 
-- Ventura, M., Jacques, J., & Zuccolotto, P. (2024). Clustering multivariate rating data within the CUB framework. In A. Pollice & P. Mariani (Eds.), *52nd Scientific Meeting of the Italian Statistical Society – Bari, 17-20 June 2024*. In press.
+- Ventura, M., Jacques, J., & Zuccolotto, P. (2025). Clustering multivariate rating data within the CUB framework. In A. Pollice & P. Mariani (Eds.), *IES 2025 - Statistical Methods for Evaluation and Quality*. (pp. 637-642). Cleup sc. ISBN: 9788854958494.
+
+- Ventura, M., Jacques, J., & Zuccolotto, P. (2025). Clustering multivariate rating data within the CUB framework. In A. Pollice & P. Mariani (Eds.), *52nd Scientific Meeting of the Italian Statistical Society – Bari, 17-20 June 2024*. (pp. 637-642). Springer. ISBN: 9783031644467.
 
 - Simonetto, A., Ventura, M., & Gilioli, G. (2022). An explorative analysis of different distance metrics to compare unweighted undirected networks. In A. Balzanella, M. Bini, C. Cavicchia, & R. Verde (Eds.), *51st Scientific Meeting of the Italian Statistical Society – Caserta, 22-24 June 2022* (pp. 1522-1527). Pearson. ISBN: 9788891932310.
 
@@ -37,6 +41,7 @@ title: "Publications"
 
 - Ventura M., Macis A., Manisera M., Zuccolotto P., Measuring Synesthetic Experience of Museum Visitors using Multi-point Semantic Differential Scales
 
-- Simonetto A., Ventura M., Distance Measures for Unweighted Undirected Networks: a comparison study
+- Carloni E., Codini A. P., Ventura M., Does country of origin extend to sustainable products? The case of sustainable Made in Italy
+
 
 <div>
