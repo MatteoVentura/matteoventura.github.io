@@ -1128,7 +1128,7 @@ The `clm()` function from the ordinal package allows you to relax the PO assumpt
  
 Imagine we have an ordinal outcome Response (e.g., 'Low', 'Medium', 'High') and a continuous predictor Experience.
 
-```{r}
+```{r warning=F, error=F, message=F}
 library(ordinal) 
 library(ggplot2) 
 library(tidyr)   
@@ -1176,7 +1176,7 @@ While statistically rigorous, formal tests can be overly sensitive, especially i
 Graphical inspection provides a visual assessment of whether the coefficients for a given predictor truly remain constant across thresholds. This involves fitting a more flexible model and then plotting the estimated coefficients for each predictor across the different thresholds.
 
 
-<!-- ```{r} -->
+<!-- ```{r warning=F, error=F, message=F} -->
 <!-- # Ensure necessary packages are loaded -->
 <!-- library(ordinal) -->
 <!-- library(ggplot2) -->
@@ -1441,9 +1441,10 @@ In linear regression, the $R^2$ is commonly used to describe the proportion of v
 Instead, **Pseudo R-squared** measures are commonly used and they attempt to provide an analogous quantification of how well the model fits the data, or how much variance it "explains", relative to a null model.  
 They typically compare the log-likelihood of the fitted model ($L_{model}$) to the log-likelihood of a null (intercept-only) model ($L_{null}$).  
 Common types of Pseudo R-squared include:
-  * McFadden's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)$
-  
-  * Cox & Snell's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)^{\frac{2}{n}}$
+
+* McFadden's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)$
+
+* Cox & Snell's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)^{\frac{2}{n}}$
  
  
 ::: {.callout-warning}
@@ -1452,8 +1453,7 @@ Common types of Pseudo R-squared include:
 
 Another widely used statistics is the **Likelihood Ratio Test**, which is used for comparing two nested models: the likelihood of a simpler model (the null hypothesis model) to the likelihood of a more complex model (the alternative hypothesis model) that contains all the parameters of the simpler model plus some additional parameters. If the more complex model significantly improves the likelihood, it suggests that the additional parameters are meaningful.
 
-Let $L_{restricted}$ be the maximum likelihood of the simpler (nested) model, and L 
-$L_{full}$ be the maximum likelihood of the more complex (full) model.
+Let $L_{restricted}$ be the maximum likelihood of the simpler (nested) model, and $L_{full}$ be the maximum likelihood of the more complex (full) model.
 The likelihood ratio test statistic ($\Lambda$) is:
 
 $$
@@ -1519,18 +1519,18 @@ In addition to the outcome, the dataset includes the following explanatory varia
 
 Your objective is to model the disciplinary outcome and identify whether past player behavior, position, game context, and other covariates are associated with the referee’s decision, using statistical techniques suitable for ordinal response data.
 
-```{r}
+```{r warning=F, error=F, message=F}
 # download data
 url <- "http://peopleanalytics-regression-book.org/data/soccer.csv"
 soccer <- read.csv(url)
 head(soccer)
 str(soccer)
 ```
-Before proceeding with the modeling phase, we need to ensure that the variables in our dataset are correctly specified in terms of data type. In particular, since our outcome variable `discipline` represents ordered categories—ranging from no punishment to a red card—we need to explicitly define it as an ordered factor in R. This is essential because many models for ordinal data (e.g., proportional odds models) rely on the natural ordering of the response variable.
+Before proceeding with the modeling phase, we need to ensure that the variables in our dataset are correctly specified in terms of data type. In particular, since our outcome variable `discipline` represents ordered categories (ranging from no punishment to a red card) we need to explicitly define it as an ordered factor in R. This is essential because many models for ordinal data (e.g., proportional odds models) rely on the natural ordering of the response variable.
 
 We can perform this conversion using the `ordered()` function, specifying the levels in increasing order of severity:
 
-```{r}
+```{r warning=F, error=F, message=F}
 # convert discipline to ordered factor
 soccer$discipline <- ordered(soccer$discipline, 
                              levels = c("None", "Yellow", "Red"))
@@ -1541,10 +1541,10 @@ str(soccer)
 
 In addition to the response variable, several explanatory variables in our dataset are also categorical in nature. Specifically, the variables `position`, `country`, `result`, and `level` represent categories rather than continuous measurements, and should therefore be converted to factors in R.
 
-While some of these variables could conceptually be treated as ordered—for example, result might be interpreted as "win > draw > loss", and level as "level 1 > level 2" in terms of competition quality—this is not strictly necessary when using them as predictor variables in a model. In practice, treating them as nominal (unordered) factors often leads to more interpretable model outputs.
+While some of these variables could conceptually be treated as ordered (for example, result might be interpreted as "win > draw > loss", and level as "level 1 > level 2" in terms of competition quality) this is not strictly necessary when using them as predictor variables in a model. In practice, treating them as nominal (unordered) factors often leads to more interpretable model outputs.
 
 We can convert them as follows:
-```{r}
+```{r warning=F, error=F, message=F}
 # Convert categorical predictors to factors
 soccer$position <- factor(soccer$position)
 soccer$result   <- factor(soccer$result)
@@ -1554,7 +1554,7 @@ soccer$level    <- factor(soccer$level)
 
 We are now ready to fit the model using all available predictors. The `clm()` function within the `ordinal` package will automatically handle the creation of dummy variables.
 
-```{r}
+```{r warning=F, error=F, message=F}
 library(ordinal)
 
 # Fit the full model
@@ -1577,7 +1577,7 @@ As expected, the summary displays:
 While the intercepts are required for model estimation, they are typically not the focus of interpretation. Instead, we concentrate on the coefficients of the predictors, which quantify the change in the (log) odds of receiving a higher level of discipline.
 
 
-```{r}
+```{r warning=F, error=F, message=F}
 # Odds ratios
 exp(coef(model_clm))
 ```
@@ -1606,7 +1606,7 @@ We may choose to simplify the model by removing predictors that are not statisti
 
 We can refit the model without these variables and compare the AIC (Akaike Information Criterion) values. If the simpler model yields a comparable AIC, we may prefer it for interpretability and parsimony:
 
-```{r}
+```{r warning=F, error=F, message=F}
 # Reduced model (without level and country)
 model_clm_reduced <- clm(
   discipline ~ n_yellow_25 + n_red_25 + position + result,
@@ -1623,7 +1623,7 @@ Since the reduced model shows no meaningful degradation in fit, we proceed with 
 
 We can assess the fit and parsimony of a proportional odds model using pseudo-$R^2$ measures and AIC.
 
-```{r}
+```{r warning=F, error=F, message=F}
 # Log-likelihoods
 ll_full <- logLik(model_clm_reduced)
 ll_null <- logLik(update(model_clm_reduced, . ~ 1))
@@ -1653,19 +1653,33 @@ data.frame(
  - AIC helps compare models: lower values indicate better parsimony.
 
 ### Testing the proportional odds assumption {.unnumbered .toc-ignore}
+
 As we discussed earlier, the suitability of a proportional odds logistic regression model depends on the assumption that each input variable has a similar effect on the different levels of the ordinal outcome variable. It is very important to check that this assumption is not violated before proceeding to declare the results of a proportional odds model valid. There are two common approaches to validating the proportional odds assumption, and we will go through each of them here.
 
  - Nominal Test: use `nominal_test()`:
-```{r}
+```{r warning=F, error=F, message=F}
 nominal_test(model_clm_reduced)
 ```
   * Null hypothesis ($H_0$): PO assumption holds
 
   * A small p-value (e.g. < 0.05) indicates violation of the assumption for that variable.
 
+Let's look at the Confidence Intervals:
+
+```{r warning=F, error=F, message=F}
+confint(model_clm_reduced, type = "Wald")
+```
+
+The confidence interval for `positionM` includes zero, meaning it's not statistically significant in this Proportional Odds (PO) model.
+
+This finding, combined with the `nominal_test` (which showed a violation of the PO assumption for position), is crucial. It means the assumption that position's effect is constant across all outcome categories is likely false.
+
+Therefore, the single coefficient for `positionM` from this model is an 'average' effect, which might not accurately represent its true influence at different outcome thresholds. Interpret this insignificance with caution.
+
+For a more accurate understanding of position's impact, we should use a Generalized Ordinal Logistic Model (Partial PO Model), allowing its effect to vary across categories.
 
 <!-- - Graphical Inspection -->
-<!-- ```{r} -->
+<!-- ```{r warning=F, error=F, message=F} -->
 <!-- library(ordinal) -->
 <!-- library(ggplot2) -->
 <!-- library(dplyr) -->
@@ -1714,7 +1728,7 @@ nominal_test(model_clm_reduced)
 <!-- ``` -->
 
 
-<!-- ```{r} -->
+<!-- ```{r warning=F, error=F, message=F} -->
 <!-- library(ordinal) -->
 <!-- library(ggplot2) -->
 <!-- library(dplyr) -->
@@ -1763,9 +1777,6 @@ nominal_test(model_clm_reduced)
 
 <!-- ``` -->
 
-```{r}
-confint(model_clm_reduced, type = "Wald")
-```
 
 
 ## Beyond the Proportional Odds Logit Model
@@ -2293,7 +2304,7 @@ feeling
 
 The `makeplot()` function can be used to compare the observed relative frequencies with the theoretical probabilities predicted by the estimated model.
 
-```{r}
+```{r warning=F, error=F, message=F}
 ## Create a comparison plot
 makeplot(cub_00)
 ```
@@ -2342,13 +2353,13 @@ logit(1-\xi_i) = - \gamma_0 - \gamma_1 freqserv_i, \quad i = 1,\dots,n
 $$
 A plot can be generated to compare the fitted probability distributions for the two groups.
 
-```{r}
+```{r warning=F, error=F, message=F}
 # Compare the fitted probability distributions for the two user groups
 makeplot(cub_csi)
 ```
 
 
-```{r}
+```{r warning=F, error=F, message=F}
 BIC(cub_00); BIC(cub_csi)
 ```
 the reduction in BIC index from `BIC(cub_00)= 7535.208` to `BIC(cub_csi)= 7431.773` strongly supports the inclusion of the covariate freqserv in the model.
@@ -2391,7 +2402,7 @@ $$
 
 Since no plot is directly provided as output, the performance of the cub model with significant covariates on feeling and uncertainty parameters may be summarized as in the following figure, obtained by the following code:
 
-```{r}
+```{r warning=F, error=F, message=F}
 data(univer)
 age<-univer$age
 average<-mean(log(age))
@@ -2782,12 +2793,12 @@ param$p_DK <- as.numeric(p_DK)
 ```
 The "corrected" $\pi$ is computed as $\pi = (1-\hat{p}_{DK})\cdot\pi_S$.
 
-```{r}
+```{r warning=F, error=F, message=F}
 param$x_cor <- (1- param$p_DK)*param$x
 ```
 
 Then we can plot the estimated models by considering the DK option:
-```{r}
+```{r warning=F, error=F, message=F}
 param$x_old <- 1 - param$x
 param$x_new <- 1 - param$x_cor
 param$y_val <- 1 - param$y
@@ -2833,6 +2844,14 @@ The models and datasets (`univer`, `relgoods`) used in this module are provided 
 
 # Models for Multivariate Ordinal Data
 
+::: {.content-visible when-format="html"}
+::: column-margin
+<!-- <p><a href="materials/Script_plots_examples.R" download style="margin-right: 5px;"> <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i> [R Script]{style="margin-left: 2px; vertical-align: middle;"} </a></p> -->
+
+<p><a href="materials/Ordinal Data Analysis in R - Module 4.pdf" download> <i class="bi bi-file-earmark-slides-fill" style="font-size: 0.9em; vertical-align: middle;"></i> [Slides]{style="margin-left: 2px; vertical-align: middle;"} </a></p>
+:::
+:::
+
 In previous modules, we explored what ordinal data are and how they can be modeled using approaches such as Proportional Odds Models and CUB models. These methods are well-suited for analyzing one or a few ordinal variables, especially when the interest lies in explaining or predicting an outcome. However, in many real-world settings, researchers are faced with multivariate ordinal data; that is, multiple ordinal variables collected simultaneously on each individual or unit.
 
 Think, for example, of a customer satisfaction survey where participants rate a range of services or products. Or consider a psychological questionnaire measuring various aspects of well-being or attitude. In such cases, the goal is often not to model a single response, but rather to uncover patterns, similarities, or latent structures in the data. This calls for multivariate methods.
@@ -2842,7 +2861,7 @@ Before we delve into specific multivariate methods, it's helpful to briefly defi
  - **Dimensionality Reduction**: Imagine you have a dataset with a very large number of variables, or "dimensions", for each observation. This can make the data difficult to understand, visualize, and analyze. Dimensionality reduction is the process of transforming high-dimensional data into a lower-dimensional space (fewer variables) while trying to retain as much of the original, important information and relationships as possible. The aim is to simplify the data, making it more manageable for visualization, interpretation, and subsequent analyses, often by uncovering underlying "latent" variables or themes.
 
 
- - **Clustering*: In contrast to dimensionality reduction, clustering is an unsupervised learning technique aimed at finding natural groupings or segments within a dataset. It involves organizing a set of observations (e.g., individuals, items) into groups (called "clusters") such that observations within the same group are more similar to each other than to those in other groups. Clustering helps to uncover hidden patterns, identify distinct segments, and simplify complex datasets by categorizing observations based on their inherent similarities, without any prior knowledge of what those groups might be.
+ - **Clustering**: In contrast to dimensionality reduction, clustering is an unsupervised learning technique aimed at finding natural groupings or segments within a dataset. It involves organizing a set of observations (e.g., individuals, items) into groups (called "clusters") such that observations within the same group are more similar to each other than to those in other groups. Clustering helps to uncover hidden patterns, identify distinct segments, and simplify complex datasets by categorizing observations based on their inherent similarities, without any prior knowledge of what those groups might be.
 
 
 These two concepts, though distinct, often complement each other in data analysis workflows. Dimensionality reduction can make data more amenable to clustering, for instance, by projecting it into a space where true similarities are more apparent.
@@ -2934,16 +2953,16 @@ This approach allows researchers to segment individuals into genuinely homogeneo
 **Final notes**
 :::
 
-This course has offered a comprehensive introduction to the analysis of ordinal data, a type of data that lies between nominal and continuous variables and is frequently encountered in social sciences, psychology, marketing, and many applied domains.
+This course has offered an introduction to the analysis of ordinal data, a type of data that is often used in social sciences, psychology, marketing, and many applied domains.
 
 We have covered the following main topics:
 
-- Definition and characteristics of ordinal data, and the importance of treating them appropriately rather than assuming interval or continuous scale properties.
+ - Definition and characteristics of ordinal data, and the importance of treating them appropriately rather than assuming interval or continuous scale properties.
 
-- Survey and scale design.
+ - Survey and scale design.
 
- - Statistical models for ordinal data, such as the Proportional Odds Model and CUB models..
+ - Statistical models for ordinal data, such as the Proportional Odds Model and CUB models.
 
- - Multivariate methods for ordinal and mixed data, including nonlinear PCA, Correspondence Analysis, Multiple Correspondence Analysis, and clustering approaches based on ordinal or mixed-type dissimilarities. 
+ - Multivariate methods for ordinal and mixed data. 
 
 Throughout the course, a common thread has been the need to respect the nature of ordinal data, choosing analytical methods that reflect their structure and meaning. Applying models designed for other types of data may lead to invalid interpretations, while appropriate methods can provide valuable insights into individual preferences, attitudes, and behaviors.
