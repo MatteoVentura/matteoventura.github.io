@@ -1493,6 +1493,12 @@ BIC tends to favor simpler, more parsimonious models and is often preferred for 
 
 ## Case Study: Analyzing Disciplinary Decisions in Professional Soccer
 
+::: {.content-visible when-format="html"}
+::: column-margin
+<p><a href="materials/script_soccer.R" download style="margin-right: 5px;"> <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i> [R Script]{style="margin-left: 2px; vertical-align: middle;"} </a></p>
+:::
+:::
+
 You are working as a data analyst for a sports broadcaster preparing an in-depth segment on referee decisions and player discipline in professional soccer. Your task is to investigate which factors may influence the likelihood and severity of disciplinary actions taken against players during matches.
 
 To support this analysis, you have access to a dataset containing information on over 2000 player-match observations. The key variable of interest is the level of disciplinary action taken by the referee, which is recorded as an ordinal outcome with three ordered categories:

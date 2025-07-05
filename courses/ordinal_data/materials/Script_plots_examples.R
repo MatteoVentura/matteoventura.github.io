@@ -150,51 +150,32 @@ ggplot(semantic_pct, aes(x = dimension, y = percentage, fill = rating_label)) +
 
 # --- Divergent Stacked Bar Chart: Likert Scale Survey Responses ---
 
-# Create sample Likert scale data for multiple questions
-likert_data_multi <- data.frame(
-  question = c("The product is easy to use",
-               "The customer service was helpful",
-               "I would recommend this product to others"),
-  strongly_disagree = c(5, 10, 8),
-  disagree = c(15, 18, 12),
-  neutral = c(20, 25, 15),
-  agree = c(40, 30, 35),
-  strongly_agree = c(20, 17, 30)
+# Install and load required package
+# install.packages("HH")
+library(HH)
+
+# Frequency data for three items (rows) on a 5-point Likert scale
+likert_data <- data.frame(
+  "Easy" = c(5, 15, 20, 40, 20),
+  "Helpful" = c(10, 18, 25, 30, 17),
+  "Recommend" = c(8, 12, 15, 35, 30)
 )
 
-# Reshape data for ggplot
-likert_long_multi <- likert_data_multi %>%
-  pivot_longer(cols = -question,
-               names_to = "response",
-               values_to = "count") %>%
-  mutate(response = factor(response,
-                           levels = c("strongly_disagree", "disagree", "neutral",
-                                      "agree", "strongly_agree")),
-         response_type = ifelse(response %in% c("strongly_disagree", "disagree"),
-                                "negative",
-                                ifelse(response == "neutral", "neutral", "positive")),
-         # Negative values for disagreement
-         plot_value = ifelse(response_type == "negative", -count, count),
-         # For neutral, split half to each side (as per original code)
-         plot_value = ifelse(response_type == "neutral", count/2, plot_value))
+# Set column names (Likert scale labels)
+rownames(likert_data) <- c("Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree")
+likert_data <- t(likert_data)  # Transpose: items as columns, scale points as rows
+
+# Create the Likert plot
+likert_plot <- likert(likert_data,
+                      main = "Customer Feedback on Product Experience",
+                      xlab = "Percentage of Responses",
+                      ylab = NULL,
+                      positive.order = TRUE,
+                      reference = 0)
 
 
-# Create divergent stacked bar chart
-ggplot(likert_long_multi, aes(x = question, y = plot_value, fill = response)) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_manual(values = c("strongly_disagree" = "darkred",
-                               "disagree" = "lightcoral",
-                               "neutral" = "lightgrey",
-                               "agree" = "lightblue",
-                               "strongly_agree" = "darkblue")) +
-  coord_flip() +
-  theme_minimal() +
-  labs(title = "Responses to Product Survey",
-       x = "",
-       y = "Count",
-       fill = "Response") +
-  theme(legend.position = "bottom")
-
+# Display the plot
+print(likert_plot)
 
 
 # --- Mosaic Plot: Education Level and Job Satisfaction ---
@@ -218,22 +199,12 @@ mosaic_data <- data.frame(
 
 # Generate satisfaction levels with some correlation to education
 for (i in 1:n) {
-  # Higher education levels tend to have higher satisfaction probabilities
   edu_level <- which(education_levels == mosaic_data$education[i])
-  
-  # Adjust probabilities based on education level
   probs <- c(0.25, 0.25, 0.2, 0.2, 0.1) # Base probabilities
-  
-  # Shift probabilities based on education level
   shift <- (edu_level - 3) * 0.05 # Shift factor based on education
-  
-  # Adjust probabilities (higher education gets more weight for higher satisfaction)
   adjusted_probs <- probs + c(-0.1, -0.05, 0, 0.05, 0.1) * edu_level
-  
-  # Ensure probabilities are valid
   adjusted_probs <- pmax(adjusted_probs, 0.01)
   adjusted_probs <- adjusted_probs / sum(adjusted_probs)
-  
   mosaic_data$satisfaction[i] <- sample(satisfaction_levels, 1, prob = adjusted_probs)
 }
 
