@@ -213,11 +213,11 @@
 \makeatother
 \subtitle{Measuring Human Perceptions from Surveys}
 \author{Matteo Ventura}
-\date{2025-07-02}
+\date{2025-07-06}
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, sharp corners, breakable, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, enhanced, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, interior hidden, sharp corners, borderline west={3pt}{0pt}{shadecolor}, breakable, boxrule=0pt, enhanced]}{\end{tcolorbox}}\fi
 
 Description of the course
 
@@ -541,7 +541,7 @@ following aspects:
   reliability.
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Caution}, leftrule=.75mm, colbacktitle=quarto-callout-caution-color!10!white, colback=white, left=2mm, breakable, arc=.35mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, toptitle=1mm, rightrule=.15mm, colframe=quarto-callout-caution-color-frame, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-caution-color-frame, leftrule=.75mm, breakable, toprule=.15mm, rightrule=.15mm, colbacktitle=quarto-callout-caution-color!10!white, bottomrule=.15mm, colback=white, opacityback=0, titlerule=0mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Caution}, coltitle=black, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, arc=.35mm, left=2mm]
 
 Reversing the wording of items (also known as reversed polarity) can
 confuse respondents, especially if the items are complex or abstract, ot
@@ -613,7 +613,7 @@ Likert scales are extensively applied in surveys to assess employee
 engagement, customer satisfaction, product feedback, and clinical
 evaluations.
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, leftrule=.75mm, colbacktitle=quarto-callout-warning-color!10!white, colback=white, left=2mm, breakable, arc=.35mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, toptitle=1mm, rightrule=.15mm, colframe=quarto-callout-warning-color-frame, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-warning-color-frame, leftrule=.75mm, breakable, toprule=.15mm, rightrule=.15mm, colbacktitle=quarto-callout-warning-color!10!white, bottomrule=.15mm, colback=white, opacityback=0, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, coltitle=black, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, arc=.35mm, left=2mm]
 
 Although Likert scale data is often numerically coded to facilitate
 analysis, it's essential to remember their ordinal nature and approach
@@ -877,6 +877,8 @@ providing insights into how distributions differ between categories.
 \FunctionTok{library}\NormalTok{(dplyr)}
 \FunctionTok{library}\NormalTok{(tidyr)}
 
+\CommentTok{\# {-}{-}{-} Stacked Bar Chart: Semantic Differential Scale Evaluations {-}{-}{-}}
+
 \CommentTok{\# Create sample semantic differential scale data}
 \CommentTok{\# This represents evaluations of three different smartphones on five dimensions}
 \NormalTok{semantic\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
@@ -919,6 +921,7 @@ providing insights into how distributions differ between categories.
 \NormalTok{        rating\_number }\SpecialCharTok{==} \DecValTok{5} \SpecialCharTok{\textasciitilde{}} \StringTok{"5 (Positive)"}
 \NormalTok{      ),}
       \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"1 (Negative)"}\NormalTok{, }\StringTok{"2"}\NormalTok{, }\StringTok{"3 (Neutral)"}\NormalTok{, }\StringTok{"4"}\NormalTok{, }\StringTok{"5 (Positive)"}\NormalTok{)}
+      \CommentTok{\# levels = c("5 (Positive)", "4", "3 (Neutral)", "2", "1 (Negative)")}
 \NormalTok{    )}
 \NormalTok{  )}
 
@@ -933,7 +936,7 @@ providing insights into how distributions differ between categories.
 
 \CommentTok{\# Create stacked bar chart}
 \FunctionTok{ggplot}\NormalTok{(semantic\_pct, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ dimension, }\AttributeTok{y =}\NormalTok{ percentage, }\AttributeTok{fill =}\NormalTok{ rating\_label)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \FunctionTok{position\_stack}\NormalTok{(}\AttributeTok{reverse =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{+}
   \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ product) }\SpecialCharTok{+}
   \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"1 (Negative)"} \OtherTok{=} \StringTok{"\#d7191c"}\NormalTok{,}
                                \StringTok{"2"} \OtherTok{=} \StringTok{"\#fdae61"}\NormalTok{,}
@@ -947,6 +950,7 @@ providing insights into how distributions differ between categories.
        \AttributeTok{x =} \StringTok{""}\NormalTok{,}
        \AttributeTok{y =} \StringTok{"Percentage of Responses"}\NormalTok{,}
        \AttributeTok{fill =} \StringTok{"Rating"}\NormalTok{) }\SpecialCharTok{+}
+  \CommentTok{\# guides(fill = guide\_legend(reverse = TRUE)) +}
   \FunctionTok{theme}\NormalTok{(}
     \AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
     \AttributeTok{strip.background =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{, }\AttributeTok{color =} \ConstantTok{NA}\NormalTok{),}
@@ -1928,7 +1932,7 @@ cumbersome. - \emph{Overfitting}: Especially with smaller sample sizes,
 estimating too many parameters can lead to models that fit the current
 data well but generalize poorly.
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, colback=white, left=2mm, breakable, arc=.35mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, toptitle=1mm, rightrule=.15mm, colframe=quarto-callout-note-color-frame, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, leftrule=.75mm, breakable, toprule=.15mm, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, colback=white, opacityback=0, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Note}, coltitle=black, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, arc=.35mm, left=2mm]
 
 It is crucial to recognize that a statistically significant p-value from
 a formal test, such as the Likelihood Ratio Test, does not always
@@ -2203,7 +2207,7 @@ Common types of Pseudo R-squared include:
   \(1−\Big(\frac{L_{model}}{L_{null}}\Big)^{\frac{2}{n}}\)
 \end{itemize}
 
-\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, leftrule=.75mm, colbacktitle=quarto-callout-warning-color!10!white, colback=white, left=2mm, breakable, arc=.35mm, toprule=.15mm, bottomtitle=1mm, titlerule=0mm, toptitle=1mm, rightrule=.15mm, colframe=quarto-callout-warning-color-frame, bottomrule=.15mm, coltitle=black, opacitybacktitle=0.6, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-warning-color-frame, leftrule=.75mm, breakable, toprule=.15mm, rightrule=.15mm, colbacktitle=quarto-callout-warning-color!10!white, bottomrule=.15mm, colback=white, opacityback=0, titlerule=0mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Warning}, coltitle=black, opacitybacktitle=0.6, bottomtitle=1mm, toptitle=1mm, arc=.35mm, left=2mm]
 
 Do NOT compare directly to linear regression \(R^2\): Pseudo R-squared
 values are typically much lower than \(R^2\) values from linear
@@ -3581,7 +3585,7 @@ AIC       = 7523.834
 BIC       = 7535.208 
 ICOMP     = 7521.135 
 ======================================================================= 
-Elapsed time= 0.01 seconds =====>>> Thu Jul  3 20:43:22 2025 
+Elapsed time= 0.02 seconds =====>>> Sun Jul  6 23:38:00 2025 
 ======================================================================= 
 \end{verbatim}
 
@@ -3685,7 +3689,7 @@ AIC       = 7414.714
 BIC       = 7431.773 
 ICOMP     = 7410.96 
 ======================================================================= 
-Elapsed time= 0.58 seconds =====>>> Thu Jul  3 20:43:23 2025 
+Elapsed time= 0.55 seconds =====>>> Sun Jul  6 23:38:00 2025 
 ======================================================================= 
 \end{verbatim}
 
@@ -3837,7 +3841,7 @@ AIC       = 7399.776
 BIC       = 7433.895 
 ICOMP     = 7396.68 
 ======================================================================= 
-Elapsed time= 2.03 seconds =====>>> Thu Jul  3 20:43:25 2025 
+Elapsed time= 2.01 seconds =====>>> Sun Jul  6 23:38:03 2025 
 ======================================================================= 
 \end{verbatim}
 
@@ -4196,7 +4200,7 @@ AIC       = 9845.266
 BIC       = 9856.873 
 ICOMP     = 9843.336 
 ======================================================================= 
-Elapsed time= 0 seconds =====>>> Thu Jul  3 20:43:26 2025 
+Elapsed time= 0.01 seconds =====>>> Sun Jul  6 23:38:03 2025 
 ======================================================================= 
 \end{verbatim}
 
@@ -4256,7 +4260,7 @@ AIC       = 9781.686
 BIC       = 9799.096 
 ICOMP     = 9776.957 
 ======================================================================= 
-Elapsed time= 0.01 seconds =====>>> Thu Jul  3 20:43:26 2025 
+Elapsed time= 0 seconds =====>>> Sun Jul  6 23:38:03 2025 
 ======================================================================= 
 \end{verbatim}
 

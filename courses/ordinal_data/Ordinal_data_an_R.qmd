@@ -2,7 +2,7 @@
 title: "Ordinal Data Analysis in R"
 subtitle: "Measuring Human Perceptions from Surveys"
 author: "Matteo Ventura"
-date: "06/09/2025"
+date: "07/06/2025"
 draft: false
 listing: true
 categories: [ordinal data, CUB, survey]
@@ -498,6 +498,8 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 
+# --- Stacked Bar Chart: Semantic Differential Scale Evaluations ---
+
 # Create sample semantic differential scale data
 # This represents evaluations of three different smartphones on five dimensions
 semantic_data <- data.frame(
@@ -540,6 +542,7 @@ semantic_long <- semantic_data %>%
         rating_number == 5 ~ "5 (Positive)"
       ),
       levels = c("1 (Negative)", "2", "3 (Neutral)", "4", "5 (Positive)")
+      # levels = c("5 (Positive)", "4", "3 (Neutral)", "2", "1 (Negative)")
     )
   )
 
@@ -554,7 +557,7 @@ semantic_pct <- semantic_long %>%
 
 # Create stacked bar chart
 ggplot(semantic_pct, aes(x = dimension, y = percentage, fill = rating_label)) +
-  geom_bar(stat = "identity") +
+  geom_bar(stat = "identity", position = position_stack(reverse = TRUE)) +
   facet_wrap(~ product) +
   scale_fill_manual(values = c("1 (Negative)" = "#d7191c",
                                "2" = "#fdae61",
@@ -568,6 +571,7 @@ ggplot(semantic_pct, aes(x = dimension, y = percentage, fill = rating_label)) +
        x = "",
        y = "Percentage of Responses",
        fill = "Rating") +
+  # guides(fill = guide_legend(reverse = TRUE)) +
   theme(
     legend.position = "bottom",
     strip.background = element_rect(fill = "lightblue", color = NA),
@@ -728,6 +732,9 @@ ggplot(rankings, aes(x = quarter, y = rank,
 ```
 
 
+**References**
+
+- DeVellis, R. F., & Thorpe, C. T. (2021). Scale development: Theory and applications. Sage publications.
 
 # Classical Models for Ordinal Data
 
@@ -1125,7 +1132,7 @@ The `clm()` function from the ordinal package allows you to relax the PO assumpt
  
 Imagine we have an ordinal outcome Response (e.g., 'Low', 'Medium', 'High') and a continuous predictor Experience.
 
-```{r}
+```{r warning=F, error=F, message=F}
 library(ordinal) 
 library(ggplot2) 
 library(tidyr)   
@@ -1173,7 +1180,7 @@ While statistically rigorous, formal tests can be overly sensitive, especially i
 Graphical inspection provides a visual assessment of whether the coefficients for a given predictor truly remain constant across thresholds. This involves fitting a more flexible model and then plotting the estimated coefficients for each predictor across the different thresholds.
 
 
-<!-- ```{r} -->
+<!-- ```{r warning=F, error=F, message=F} -->
 <!-- # Ensure necessary packages are loaded -->
 <!-- library(ordinal) -->
 <!-- library(ggplot2) -->
@@ -1438,9 +1445,10 @@ In linear regression, the $R^2$ is commonly used to describe the proportion of v
 Instead, **Pseudo R-squared** measures are commonly used and they attempt to provide an analogous quantification of how well the model fits the data, or how much variance it "explains", relative to a null model.  
 They typically compare the log-likelihood of the fitted model ($L_{model}$) to the log-likelihood of a null (intercept-only) model ($L_{null}$).  
 Common types of Pseudo R-squared include:
-  * McFadden's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)$
-  
-  * Cox & Snell's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)^{\frac{2}{n}}$
+
+* McFadden's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)$
+
+* Cox & Snell's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)^{\frac{2}{n}}$
  
  
 ::: {.callout-warning}
@@ -1449,8 +1457,7 @@ Common types of Pseudo R-squared include:
 
 Another widely used statistics is the **Likelihood Ratio Test**, which is used for comparing two nested models: the likelihood of a simpler model (the null hypothesis model) to the likelihood of a more complex model (the alternative hypothesis model) that contains all the parameters of the simpler model plus some additional parameters. If the more complex model significantly improves the likelihood, it suggests that the additional parameters are meaningful.
 
-Let $L_{restricted}$ be the maximum likelihood of the simpler (nested) model, and L 
-$L_{full}$ be the maximum likelihood of the more complex (full) model.
+Let $L_{restricted}$ be the maximum likelihood of the simpler (nested) model, and $L_{full}$ be the maximum likelihood of the more complex (full) model.
 The likelihood ratio test statistic ($\Lambda$) is:
 
 $$
@@ -1488,7 +1495,13 @@ BIC tends to favor simpler, more parsimonious models and is often preferred for 
 
 
 
-Case Study: Analyzing Disciplinary Decisions in Professional Soccer
+## Case Study: Analyzing Disciplinary Decisions in Professional Soccer
+
+::: {.content-visible when-format="html"}
+::: column-margin
+<p><a href="materials/script_soccer.R" download style="margin-right: 5px;"> <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i> [R Script]{style="margin-left: 2px; vertical-align: middle;"} </a></p>
+:::
+:::
 
 You are working as a data analyst for a sports broadcaster preparing an in-depth segment on referee decisions and player discipline in professional soccer. Your task is to investigate which factors may influence the likelihood and severity of disciplinary actions taken against players during matches.
 
@@ -1516,18 +1529,18 @@ In addition to the outcome, the dataset includes the following explanatory varia
 
 Your objective is to model the disciplinary outcome and identify whether past player behavior, position, game context, and other covariates are associated with the referee’s decision, using statistical techniques suitable for ordinal response data.
 
-```{r}
-# if needed, download data
+```{r warning=F, error=F, message=F}
+# download data
 url <- "http://peopleanalytics-regression-book.org/data/soccer.csv"
 soccer <- read.csv(url)
 head(soccer)
 str(soccer)
 ```
-Before proceeding with the modeling phase, we need to ensure that the variables in our dataset are correctly specified in terms of data type. In particular, since our outcome variable `discipline` represents ordered categories—ranging from no punishment to a red card—we need to explicitly define it as an ordered factor in R. This is essential because many models for ordinal data (e.g., proportional odds models) rely on the natural ordering of the response variable.
+Before proceeding with the modeling phase, we need to ensure that the variables in our dataset are correctly specified in terms of data type. In particular, since our outcome variable `discipline` represents ordered categories (ranging from no punishment to a red card) we need to explicitly define it as an ordered factor in R. This is essential because many models for ordinal data (e.g., proportional odds models) rely on the natural ordering of the response variable.
 
 We can perform this conversion using the `ordered()` function, specifying the levels in increasing order of severity:
 
-```{r}
+```{r warning=F, error=F, message=F}
 # convert discipline to ordered factor
 soccer$discipline <- ordered(soccer$discipline, 
                              levels = c("None", "Yellow", "Red"))
@@ -1538,10 +1551,10 @@ str(soccer)
 
 In addition to the response variable, several explanatory variables in our dataset are also categorical in nature. Specifically, the variables `position`, `country`, `result`, and `level` represent categories rather than continuous measurements, and should therefore be converted to factors in R.
 
-While some of these variables could conceptually be treated as ordered—for example, result might be interpreted as "win > draw > loss", and level as "level 1 > level 2" in terms of competition quality—this is not strictly necessary when using them as predictor variables in a model. In practice, treating them as nominal (unordered) factors often leads to more interpretable model outputs.
+While some of these variables could conceptually be treated as ordered (for example, result might be interpreted as "win > draw > loss", and level as "level 1 > level 2" in terms of competition quality) this is not strictly necessary when using them as predictor variables in a model. In practice, treating them as nominal (unordered) factors often leads to more interpretable model outputs.
 
 We can convert them as follows:
-```{r}
+```{r warning=F, error=F, message=F}
 # Convert categorical predictors to factors
 soccer$position <- factor(soccer$position)
 soccer$result   <- factor(soccer$result)
@@ -1551,7 +1564,7 @@ soccer$level    <- factor(soccer$level)
 
 We are now ready to fit the model using all available predictors. The `clm()` function within the `ordinal` package will automatically handle the creation of dummy variables.
 
-```{r}
+```{r warning=F, error=F, message=F}
 library(ordinal)
 
 # Fit the full model
@@ -1574,7 +1587,7 @@ As expected, the summary displays:
 While the intercepts are required for model estimation, they are typically not the focus of interpretation. Instead, we concentrate on the coefficients of the predictors, which quantify the change in the (log) odds of receiving a higher level of discipline.
 
 
-```{r}
+```{r warning=F, error=F, message=F}
 # Odds ratios
 exp(coef(model_clm))
 ```
@@ -1598,12 +1611,12 @@ We can conclude that:
  - Players on teams that won have 52% lower odds compared to those on teams that drew.
 (Odds ratio ≈ 0.48)
 
-### Simplifying the Model
+### Simplifying the Model {.unnumbered .toc-ignore}
 We may choose to simplify the model by removing predictors that are not statistically significant and do not substantially improve model fit. In this case, both level and country show little impact, either in terms of coefficient size or statistical significance.
 
 We can refit the model without these variables and compare the AIC (Akaike Information Criterion) values. If the simpler model yields a comparable AIC, we may prefer it for interpretability and parsimony:
 
-```{r}
+```{r warning=F, error=F, message=F}
 # Reduced model (without level and country)
 model_clm_reduced <- clm(
   discipline ~ n_yellow_25 + n_red_25 + position + result,
@@ -1616,13 +1629,11 @@ AIC(model_clm, model_clm_reduced)
 
 Since the reduced model shows no meaningful degradation in fit, we proceed with it for the remainder of our analysis.
 
-### Goodness of Fit
+### Goodness of Fit {.unnumbered .toc-ignore}
 
-Re can assess the fit and parsimony of a proportional odds model using pseudo-$R^2$ measures and AIC.
+We can assess the fit and parsimony of a proportional odds model using pseudo-$R^2$ measures and AIC.
 
-In R, the `DescTools::PseudoR2()` function provides several such measures:
-
-```{r}
+```{r warning=F, error=F, message=F}
 # Log-likelihoods
 ll_full <- logLik(model_clm_reduced)
 ll_null <- logLik(update(model_clm_reduced, . ~ 1))
@@ -1636,14 +1647,10 @@ r2_mcfadden <- 1 - (as.numeric(ll_full) / as.numeric(ll_null))
 # Cox-Snell's R2
 r2_coxsnell <- 1 - exp((2 / n) * (as.numeric(ll_null) - as.numeric(ll_full)))
 
-# Nagelkerke's R2
-r2_nagelkerke <- r2_coxsnell / (1 - exp((2 / n) * as.numeric(ll_null)))
-
 # Report
 data.frame(
   McFadden = r2_mcfadden,
   CoxSnell = r2_coxsnell,
-  Nagelkerke = r2_nagelkerke,
   AIC = AIC(model_clm_reduced)
 )
 
@@ -1655,125 +1662,136 @@ data.frame(
 
  - AIC helps compare models: lower values indicate better parsimony.
 
-### Testing the proportional odds assumption
+### Testing the proportional odds assumption {.unnumbered .toc-ignore}
+
 As we discussed earlier, the suitability of a proportional odds logistic regression model depends on the assumption that each input variable has a similar effect on the different levels of the ordinal outcome variable. It is very important to check that this assumption is not violated before proceeding to declare the results of a proportional odds model valid. There are two common approaches to validating the proportional odds assumption, and we will go through each of them here.
 
  - Nominal Test: use `nominal_test()`:
-```{r}
+```{r warning=F, error=F, message=F}
 nominal_test(model_clm_reduced)
 ```
-  * Null hypothesis (H₀): PO assumption holds
+  * Null hypothesis ($H_0$): PO assumption holds
 
   * A small p-value (e.g. < 0.05) indicates violation of the assumption for that variable.
 
+Let's look at the Confidence Intervals:
 
-- Graphical Inspection
-```{r}
-library(ordinal)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-
-# Supponiamo che model_clm sia già il tuo modello "semplice"
-model_clm <- clm(discipline ~ n_yellow_25 + n_red_25 + position + result, data = soccer)
-
-# Estrai coefficienti
-thresholds <- model_clm$Theta              # soglie (intercette cumulative)
-beta_n_yellow <- coef(model_clm)["n_yellow_25"]  # coefficiente principale
-
-# Simula una sequenza di valori del predittore continuo
-x_vals <- seq(min(soccer$n_yellow_25), max(soccer$n_yellow_25), length.out = 100)
-
-# Calcola le log-odds cumulative per ogni soglia
-plot_data <- data.frame(
-  x = x_vals,
-  Threshold_1 = thresholds[1] - beta_n_yellow * x_vals,
-  Threshold_2 = thresholds[2] - beta_n_yellow * x_vals
-)
-
-# Porta in formato long
-plot_data_long <- plot_data %>%
-  pivot_longer(
-    cols = starts_with("Threshold_"),
-    names_to = "Cumulative_Log_Odds_Curve",
-    values_to = "Log_Odds"
-  )
-
-# Grafico
-ggplot(plot_data_long, aes(x = x, y = Log_Odds, color = Cumulative_Log_Odds_Curve)) +
-  geom_line(size = 1.2) +
-  labs(
-    title = "Verifica grafica dell’assunzione di proportional odds",
-    subtitle = "Linee parallele delle log-odds cumulative → assunzione plausibile",
-    x = "Numero di cartellini gialli nelle 25 partite precedenti",
-    y = "Log-odds cumulative",
-    color = "Soglia cumulativa"
-  ) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Set1", labels = c("P(Disciplina ≤ Yellow)", "P(Disciplina ≤ Red)")) +
-  theme(legend.position = "bottom")
-
-
-```
-
-
-```{r}
-library(ordinal)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-
-# Prepara i dati con valori medi per le variabili continue, e livelli per position
-new_data <- expand.grid(
-  position = levels(soccer$position),
-  n_yellow_25 = mean(soccer$n_yellow_25, na.rm = TRUE),
-  n_red_25 = mean(soccer$n_red_25, na.rm = TRUE),
-  result = levels(soccer$result)[1]  # primo livello di result, ad es. "D"
-)
-
-# Predici le probabilità cumulative (attenzione al tipo "cum.prob")
-pred <- predict(model_clm_reduced, newdata = new_data, type = "cum.prob")
-
-# Trasforma in data frame, aggiungi la posizione
-plot_data <- as.data.frame(pred)
-plot_data$position <- new_data$position
-
-# Metti in formato long per ggplot
-plot_data_long <- pivot_longer(plot_data, cols = -position,
-                              names_to = "Threshold", values_to = "Cumulative_Prob")
-
-# Ordina posizione come fattore
-plot_data_long$position <- factor(plot_data_long$position, levels = levels(soccer$position))
-
-# Calcola log-odds
-plot_data_long <- plot_data_long %>%
-  mutate(Log_Odds = log(Cumulative_Prob / (1 - Cumulative_Prob)))
-
-# Grafico
-ggplot(plot_data_long, aes(x = position, y = Log_Odds, group = Threshold, color = Threshold)) +
-  geom_line(aes(linetype = Threshold), size = 1.2) +
-  geom_point(size = 2) +
-  labs(
-    title = "Log-odds cumulative per soglia in funzione di 'position'",
-    subtitle = "Verifica grafica dell’assunzione di proportional odds",
-    x = "Posizione",
-    y = "Log-odds cumulative",
-    color = "Soglia cumulativa"
-  ) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Dark2") +
-  theme(legend.position = "bottom")
-
-```
-
-```{r}
+```{r warning=F, error=F, message=F}
 confint(model_clm_reduced, type = "Wald")
 ```
+
+The confidence interval for `positionM` includes zero, meaning it's not statistically significant in this Proportional Odds (PO) model.
+
+This finding, combined with the `nominal_test` (which showed a violation of the PO assumption for position), is crucial. It means the assumption that position's effect is constant across all outcome categories is likely false.
+
+Therefore, the single coefficient for `positionM` from this model is an 'average' effect, which might not accurately represent its true influence at different outcome thresholds. Interpret this insignificance with caution.
+
+For a more accurate understanding of position's impact, we should use a Generalized Ordinal Logistic Model (Partial PO Model), allowing its effect to vary across categories.
+
+<!-- - Graphical Inspection -->
+<!-- ```{r warning=F, error=F, message=F} -->
+<!-- library(ordinal) -->
+<!-- library(ggplot2) -->
+<!-- library(dplyr) -->
+<!-- library(tidyr) -->
+
+<!-- # Supponiamo che model_clm sia già il tuo modello "semplice" -->
+<!-- model_clm <- clm(discipline ~ n_yellow_25 + n_red_25 + position + result, data = soccer) -->
+
+<!-- # Estrai coefficienti -->
+<!-- thresholds <- model_clm$Theta              # soglie (intercette cumulative) -->
+<!-- beta_n_yellow <- coef(model_clm)["n_yellow_25"]  # coefficiente principale -->
+
+<!-- # Simula una sequenza di valori del predittore continuo -->
+<!-- x_vals <- seq(min(soccer$n_yellow_25), max(soccer$n_yellow_25), length.out = 100) -->
+
+<!-- # Calcola le log-odds cumulative per ogni soglia -->
+<!-- plot_data <- data.frame( -->
+<!--   x = x_vals, -->
+<!--   Threshold_1 = thresholds[1] - beta_n_yellow * x_vals, -->
+<!--   Threshold_2 = thresholds[2] - beta_n_yellow * x_vals -->
+<!-- ) -->
+
+<!-- # Porta in formato long -->
+<!-- plot_data_long <- plot_data %>% -->
+<!--   pivot_longer( -->
+<!--     cols = starts_with("Threshold_"), -->
+<!--     names_to = "Cumulative_Log_Odds_Curve", -->
+<!--     values_to = "Log_Odds" -->
+<!--   ) -->
+
+<!-- # Grafico -->
+<!-- ggplot(plot_data_long, aes(x = x, y = Log_Odds, color = Cumulative_Log_Odds_Curve)) + -->
+<!--   geom_line(size = 1.2) + -->
+<!--   labs( -->
+<!--     title = "Verifica grafica dell’assunzione di proportional odds", -->
+<!--     subtitle = "Linee parallele delle log-odds cumulative → assunzione plausibile", -->
+<!--     x = "Numero di cartellini gialli nelle 25 partite precedenti", -->
+<!--     y = "Log-odds cumulative", -->
+<!--     color = "Soglia cumulativa" -->
+<!--   ) + -->
+<!--   theme_minimal() + -->
+<!--   scale_color_brewer(palette = "Set1", labels = c("P(Disciplina ≤ Yellow)", "P(Disciplina ≤ Red)")) + -->
+<!--   theme(legend.position = "bottom") -->
+
+
+<!-- ``` -->
+
+
+<!-- ```{r warning=F, error=F, message=F} -->
+<!-- library(ordinal) -->
+<!-- library(ggplot2) -->
+<!-- library(dplyr) -->
+<!-- library(tidyr) -->
+
+<!-- # Prepara i dati con valori medi per le variabili continue, e livelli per position -->
+<!-- new_data <- expand.grid( -->
+<!--   position = levels(soccer$position), -->
+<!--   n_yellow_25 = mean(soccer$n_yellow_25, na.rm = TRUE), -->
+<!--   n_red_25 = mean(soccer$n_red_25, na.rm = TRUE), -->
+<!--   result = levels(soccer$result)[1]  # primo livello di result, ad es. "D" -->
+<!-- ) -->
+
+<!-- # Predici le probabilità cumulative (attenzione al tipo "cum.prob") -->
+<!-- pred <- predict(model_clm_reduced, newdata = new_data, type = "cum.prob") -->
+
+<!-- # Trasforma in data frame, aggiungi la posizione -->
+<!-- plot_data <- as.data.frame(pred) -->
+<!-- plot_data$position <- new_data$position -->
+
+<!-- # Metti in formato long per ggplot -->
+<!-- plot_data_long <- pivot_longer(plot_data, cols = -position, -->
+<!--                               names_to = "Threshold", values_to = "Cumulative_Prob") -->
+
+<!-- # Ordina posizione come fattore -->
+<!-- plot_data_long$position <- factor(plot_data_long$position, levels = levels(soccer$position)) -->
+
+<!-- # Calcola log-odds -->
+<!-- plot_data_long <- plot_data_long %>% -->
+<!--   mutate(Log_Odds = log(Cumulative_Prob / (1 - Cumulative_Prob))) -->
+
+<!-- # Grafico -->
+<!-- ggplot(plot_data_long, aes(x = position, y = Log_Odds, group = Threshold, color = Threshold)) + -->
+<!--   geom_line(aes(linetype = Threshold), size = 1.2) + -->
+<!--   geom_point(size = 2) + -->
+<!--   labs( -->
+<!--     title = "Log-odds cumulative per soglia in funzione di 'position'", -->
+<!--     subtitle = "Verifica grafica dell’assunzione di proportional odds", -->
+<!--     x = "Posizione", -->
+<!--     y = "Log-odds cumulative", -->
+<!--     color = "Soglia cumulativa" -->
+<!--   ) + -->
+<!--   theme_minimal() + -->
+<!--   scale_color_brewer(palette = "Dark2") + -->
+<!--   theme(legend.position = "bottom") -->
+
+<!-- ``` -->
+
 
 
 ## Beyond the Proportional Odds Logit Model
 
-The Proportional Odds Model using the logit link function is the most common and often the default choice for analyzing ordinal data due to its interpretability (log-odds) and computational stability. However, the Proportional Odds Model is just one member of a broader family of models for ordinal outcomes. The specific choice of model can influence the interpretation and the fit to the data. Several alternatives exist.
+The  Proportional Odds Model using the logit link function is the most common and often the default choice for analyzing ordinal data due to its interpretability (log-odds) and computational stability. However, the Proportional Odds Model is just one member of a broader family of models for ordinal outcomes. The specific choice of model can influence the interpretation and the fit to the data. Several alternatives exist.
 
 ### Alternative Link Functions for Cumulative Models
 
@@ -1861,7 +1879,13 @@ This model is especially suited for situations where the ordinal categories repr
   - **Disease Progression**: Analyzing the odds of a patient staying at their current disease stage versus progressing to the next, more severe stage.
   
   - **Consumer Behavior**: Understanding the odds of a customer making a basic purchase versus upgrading to a premium version.
-  
+
+
+**References**
+
+- Agresti, A. (2010). Analysis of ordinal categorical data. John Wiley & Sons.
+
+- McNulty, K. (2021). Handbook of regression modeling in people analytics: with examples in R and Python. Chapman and Hall/CRC.
   
 #  Beyond Standard Approaches: Modeling Ordinal Data with CUB Models
 
@@ -1891,7 +1915,7 @@ At their core, CUB models are mixture models specifically tailored for ordinal d
 
 The innovation of the CUB model lies in its attempt to statistically represent two fundamental psychological components that influence a respondent's choice on an ordinal scale. The model posits that an observed rating $R$ is a probabilistic outcome of a decision process that weighs two components.
 
-**1. Feeling**
+**1. Feeling (or Attraction/Preference)**
 
 This component represents the conscious, rational, and deliberative aspect of the decision-making process. It reflects the respondent's genuine evaluation, opinion, or perception regarding the item being rated. The "feeling" directs the respondent towards a specific category on the scale that best aligns with their internal assessment. This is the component that captures the respondent's true position or stance on the matter at hand.
 
@@ -1907,7 +1931,7 @@ Depending on the specific context of the rating, "feeling" can be interpreted as
 
 In essence, the feeling component drives the respondent towards a particular region of the ordinal scale, reflecting their underlying preference or "attraction" to certain categories.
 
-**2. Uncertainty**
+**2. Uncertainty (or Indecision/Fuzziness)**
 
 This component captures the hesitation, randomness, or lack of decisiveness that can accompany the choice process. It acknowledges a crucial psychological reality: respondents may not always have a perfectly clear and precise mapping of their internal feeling onto the provided scale categories. This can introduce a degree of randomness or "noise" into the selection process.
 
@@ -2199,6 +2223,228 @@ A negative $\gamma_k$ implies that an increase in $w_{ik}$ decreases the log-odd
 
 **Important Note**: CUB models with covariates are not Generalized Linear Models (GLMs) in the strict sense. While the parameters $\pi_i$ and $\xi_i$ are linked to covariates using GLM-like structures (specifically, logistic regressions), the response variable itself (the mixture of Binomial and Uniform distributions) does not belong to the exponential family.
 
+
+### Case Study: University's students satisfaction
+
+::: {.content-visible when-format="html"}
+::: column-margin
+<p><a href="materials/script_univer.R" download style="margin-right: 5px;"> <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i> [R Script]{style="margin-left: 2px; vertical-align: middle;"} </a></p>
+:::
+:::
+
+This case study demonstrates the application of CUB (Combination of Uniform and a shifted Binomial) models for analyzing ordinal data, using the CUB package in R. The `univer` dataset comes from a survey administered to students at the University of Naples Federico II to evaluate orientation services.
+
+**Dataset Description**
+
+The `univer` dataset from 2002 contains 2,179 observations, including responses to evaluation questions on a 7-point Likert scale (from 1 = “very unsatisfied” to 7 = “extremely satisfied”). The ordinal variables of interest are:
+
+- `informat`: Satisfaction level with the information received.
+
+- `willingn`: Satisfaction level with the staff's willingness.
+
+- `officeho`: Satisfaction level with office opening hours.
+
+- `competen`: Satisfaction level with staff competence.
+
+- `global`: Overall satisfaction level.
+
+The dataset also includes covariates:
+
+- `Faculty`: A factor variable, with levels ranging from 1 to 13 indicating the coding for the different university faculties
+
+- `Freqserv`: A factor with levels: 0 = for not regular users, 1 = for regular users
+
+- `Age`: Variable indicating the age of the respondent in years
+
+- `Gender`: A factor with levels: 0 = man, 1 = woman
+
+- `Diploma`: A factor with levels: 1 = classic studies, 2 = scientific studies, 3 = linguistic, 4 = Professional, 5 = Technical/Accountancy, 6 = others
+
+- `Residence`: A factor with levels: 1 = city NA, 2 = district NA, 3 = others
+
+- `ChangeFa`: A factor with levels: 1 = changed faculty, 2 = not changed faculty
+
+**Exploratory Analysis**
+
+As a first step, it is helpful to visualize the estimated CUB models for all ordinal variables simultaneously. The `multicub()` function fits a CUB model to each variable and plots the estimated parameters for uncertainty (1 - $\hat{\pi}$) and feeling (1 - $\hat{\xi}$) in the parameter space. The "feeling" (1 - $\xi$) represents the preference for higher scores on the rating scale.
+
+Note that `multicub()` is especially useful for a comparative visual analysis of rating data vectors, even with different scale lengths. It requires the variables to be stored in a list.
+
+```{r warning = F, error=F, message= F}
+library(CUB)
+data(univer)
+
+# Select only the columns with ordinal variables
+listord <- univer[, 8:12]
+# Assign labels for the plot
+labels <- names(univer)[8:12]
+
+# Visualize CUB models for each ordinal variable
+multicub(listord, labels = labels,
+         caption = "CUB models on Univer data set", pch = 19,
+         pos = c(1, rep(3, ncol(listord) - 1)), ylim = c(0.75, 1), xlim = c(0, 0.4))
+```
+
+
+From the visual analysis, it appears that the `officeho` item (satisfaction with opening hours) has the highest uncertainty. For this reason, the subsequent analysis will focus on this variable.
+
+**CUB Model without Covariates for `officeho`**
+
+First, a basic CUB model is estimated for the officeho variable without including any covariates. This serves as a baseline to understand the variable's distribution.
+
+```{r warning = F, message = F, error = F}
+## CUB model without covariates for "officeho"
+cub_00 <- GEM(Formula(officeho ~ 0 | 0 | 0), family = "cub", data = univer)
+
+# Display a detailed summary of the estimated model
+summary(cub_00, digits = 5)
+
+# Extract and print the estimated parameters
+param <- coef(cub_00, digits = 3)
+param
+
+# Calculate and print the uncertainty and feeling estimates
+uncertainty <- 1 - param[1]
+uncertainty
+
+feeling <- 1 - param[2]
+feeling
+```
+
+
+The `makeplot()` function can be used to compare the observed relative frequencies with the theoretical probabilities predicted by the estimated model.
+
+```{r warning=F, error=F, message=F}
+## Create a comparison plot
+makeplot(cub_00)
+```
+
+**CUB Models with Covariates**
+To improve the model's fit and interpretation, covariates can be introduced. In this example, we consider the dichotomous covariate freqserv (0 = non-regular users, 1 = regular users), which indicates the service usage frequency.
+
+A model is estimated where the feeling component depends on the freqserv covariate, while the uncertainty remains constant. The model formula is `officeho ~ 0 | freqserv | 0`, indicating that the feeling component is modeled as a function of `freqserv` (`~ freqserv`), while the other components are constant (`~ 0`).
+
+
+```{r message=F, warning=F, error=F}
+# Estimate the CUB model with freqserv as a covariate on feeling
+cub_csi <- GEM(Formula(officeho ~ 0 | freqserv | 0), family = "cub", data = univer)
+
+# Display the model summary
+summary(cub_csi, digits = 3)
+```
+The regression coefficients for the logistic link of the "feeling" can be extracted and analyzed.
+```{r message = F, error = F, warning = F}
+# Extract the regression coefficients
+gama <- coef(cub_csi)[2:3]
+gama
+
+# Separate the intercept from the covariate's coefficient
+gama0 <- gama[1] # Intercept term
+gama1 <- gama[2] # Coefficient for freqserv
+```
+
+
+Using these coefficients, you can calculate the feeling parameter for each group of users (regular and non-regular). The `logis()` function calculates the inverse logistic transformation.
+
+```{r message = F, error = F, warning=F}
+# Calculate the csi parameter for non-regular users (freqserv = 0)
+csi_nru <- logis(0, gama)
+csi_nru
+
+# Calculate the csi parameter for regular users (freqserv = 1)
+csi_ru <- logis(1, gama)
+csi_ru
+```
+
+In this model, the feeling component is specified by:
+
+$$
+logit(1-\xi_i) = - \gamma_0 - \gamma_1 freqserv_i, \quad i = 1,\dots,n
+$$
+A plot can be generated to compare the fitted probability distributions for the two groups.
+
+```{r warning=F, error=F, message=F}
+# Compare the fitted probability distributions for the two user groups
+makeplot(cub_csi)
+```
+
+
+```{r warning=F, error=F, message=F}
+BIC(cub_00); BIC(cub_csi)
+```
+the reduction in BIC index from `BIC(cub_00)= 7535.208` to `BIC(cub_csi)= 7431.773` strongly supports the inclusion of the covariate freqserv in the model.
+
+**CUB Model with Covariates on Both Uncertainty and Feeling**
+
+In this more complex example, two covariates are considered jointly: `lage` (the deviation from the mean of the logarithmic transform of age) and `gender`. The variable `lage` is used to explain both uncertainty and feeling, while `gender` is used for uncertainty and `freqserv` for feeling.
+
+
+```{r warning = F, error=F, message=F}
+data(univer)
+# Calculate the deviation from the mean of log(age)
+age <- univer$age
+lage <- log(age) - mean(log(age))
+
+# Estimate the CUB model with covariates on both parameters
+cub_pai_csi <- GEM(Formula(officeho ~ lage + gender | lage + freqserv | 0), family = "cub", data = univer)
+
+# Display the summary with coefficient correlations
+summary(cub_pai_csi, correlation = TRUE, digits = 3)
+```
+
+
+The estimated coefficients correspond to the logistic regression coefficients for the uncertainty and feeling components.
+
+```{r message = F, error = F, warning=F}
+# Print the estimated coefficients for both logistic models
+coef(cub_pai_csi, digits = 3)
+```
+
+Then, the resulting cub model can be summarized by:
+
+$$
+\text{logit}(1 - \pi_i) = -\beta_0 - \beta_1 \cdot \text{lage}_i - \beta_2 \cdot \text{gender}_i
+$$
+
+$$
+\text{logit}(1 - \xi_i) = -\gamma_0 - \gamma_1 \cdot \text{lage}_i - \gamma_2 \cdot \text{freqserv}_i
+$$ 
+
+Since no plot is directly provided as output, the performance of the cub model with significant covariates on feeling and uncertainty parameters may be summarized as in the following figure, obtained by the following code:
+
+```{r warning=F, error=F, message=F}
+data(univer)
+age<-univer$age
+average<-mean(log(age))
+ageseq<-log(seq(17, 51, by = 0.1))-average
+param<-coef(cub_pai_csi)
+####################
+paicov0<-logis(cbind(ageseq, 0), param[1:3])
+paicov1<-logis(cbind(ageseq, 1), param[1:3])
+csicov0<-logis(cbind(ageseq, 0), param[4:6])
+csicov1<-logis(cbind(ageseq, 1), param[4:6])
+####################
+plot(1-paicov0, 1-csicov0, type = "n", col = "blue", cex = 1,
+xlim = c(0, 0.6), ylim = c(0.4, 0.9), font.main = 4, las = 1,
+main = "CUB models with covariates",
+xlab = expression(paste("Uncertainty ", (1-pi))),
+ylab = expression(paste("Feeling ", (1-xi))), cex.main = 0.9,
+cex.lab = 0.9)
+lines(1-paicov1, 1-csicov1, lty = 1, lwd = 4, col = "red")
+lines(1-paicov0, 1-csicov0, lty = 1, lwd = 4, col = "blue")
+lines(1-paicov0, 1-csicov1, lty = 1, lwd = 4, col = "black")
+lines(1-paicov1, 1-csicov0, lty = 1, lwd = 4, col = "green")
+legend("bottomleft", legend = c("Man-User", "Man-Not User",
+"Woman-User", "Woman-Not User"), col = c("black", "blue", "red", "green"),
+lty = 1, text.col = c("black", "blue", "red", "green"), cex = 0.6)
+text(0.1, 0.85, labels = "Young", offset = 0.3, cex = 0.8, font = 4)
+text(0.5, 0.5, labels = "Elderly", offset = 0.3, cex = 0.8, font = 4)
+```
+
+Summarizing, the sketch of analysis so pursued indicates that satisfaction increase with age
+whereas indecision decreases, and that men are more satisfied than women across all profiles.
+
+
 ## CUB Model with Shelter Option
 
 While the basic CUB model effectively captures the feeling and uncertainty in ordinal responses, real-world rating data often exhibit additional complexities. 
@@ -2265,6 +2511,78 @@ Lower values for AIC and BIC indicate a better-fitting model. BIC is often prefe
 
 After fitting a basic CUB model, it's good practice to examine the residuals, which are the differences between observed and fitted probabilities/frequencies. If a simple CUB model shows a large positive residual for a specific category, it strongly suggests the presence of a shelter effect for that category. The Dissimilarity Index ($Diss$) can also be used to compare the overall fit improvement when a shelter component is added.
 
+### Case study: the reelgoods dataset
+
+::: {.content-visible when-format="html"}
+::: column-margin
+<p><a href="materials/script_relgoods.R" download style="margin-right: 5px;"> <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i> [R Script]{style="margin-left: 2px; vertical-align: middle;"} </a></p>
+:::
+:::
+
+
+The CUB model with shelter option is shown with the `relgoods` dataset, a survey designed to assess the importance of relational goods and involvement in leisure time activities.
+
+This dataset contains the results of a survey conducted in December 2014 in the metropolitan area of Naples, Italy. The survey's primary goal was to measure people's evaluation of relational goods (e.g., time spent with friends and family) and leisure time activities. The dataset includes both demographic information about the respondents and their evaluations on various topics.
+
+The survey used two main types of scales to collect data:
+
+1. 10-Point Ordinal Scale (Likert-type): Respondents rated several items on a 10-point scale (from 1 to 10). The interpretation of the scale endpoints varied slightly:
+
+* For relational goods: 1 = "never, at all" to 10 = "always, a lot".
+
+* For leisure time activities: 1 = "At all, nothing, never" to 10 = "Totally, extremely important, always".
+This scale captures the frequency or importance of a given activity.
+
+2. Continuous Happiness Scale: To measure happiness, respondents marked a sign on a 110mm horizontal line (left = "extremely unhappy", right = "extremely happy"). This is treated as a continuous variable.
+
+The dataset includes the following types of variables:
+
+- Subject Covariates (Demographics): These provide background information about each respondent (e.g., ID, Gender, BirthMonth, EducationDegree, MaritalStatus, job, Smoking, Pets).
+
+- Relational Goods and General Evaluations (10-Point Scale): These variables capture aspects of social life and the environment (e.g., WalkOut, RelFriends, Safety).
+
+- Leisure Time Activities (10-Point Scale): These measure involvement or enjoyment of various activities (e.g., Reading, Cinema, Sport, Internet, MusicInstr).
+
+- Continuous Happiness Score: The self-reported happiness score (Happiness).
+
+
+Let's inspect the distribution of the variable `Writing`, which asks respondents to rate their involvement in writing on a 10-point scale.
+
+```{r warning = F, error = F, message= F}
+library(CUB)
+data(relgoods)
+
+# Plot the frequency distribution of the 'MusicInstr' variable
+plot(table(as.factor(relgoods$Writing)))
+
+```
+
+
+Let's apply the CUB model to the Writing variable to illustrate the shelter effect. This variable asks about involvement in writing on a 10-point scale.
+
+First, we fit a standard CUB model without the shelter option to the Writing variable. This serves as a baseline for comparison.
+
+```{r warning = F, error = F, message= F}
+# Fit a standard CUB model to the 'Writing' variable
+cub_writing <- GEM(Formula(Writing ~ 0 | 0 | 0), family = "cub",
+                  maxiter = 500, toler = 1e-3, data = relgoods)
+summary(cub_writing)
+makeplot(cub_writing)
+```
+
+
+
+Now, we introduce the shelter parameter, which models the probability of selecting a specific category as a refuge. In this case, we specify `shelter = 1`, which indicates that the first category (score of 1) is the shelter category.
+
+```{r warning = F, error = F, message= F}
+# Fit a CUB model with a shelter option on category 1
+cub_she <- GEM(Formula(Writing ~ 0 | 0 | 0), family = "cub", shelter = 1,
+               maxiter = 500, toler = 1e-3, data = relgoods)
+summary(cub_she)
+makeplot(cub_she)
+
+```
+If we look at the value of $\delta$, it indicates that there is a medium tendency to opt for the shelter category.
 
 ## Treatment of "Don't Know" (DK) Options within the CUB Framework
 
@@ -2376,3 +2694,285 @@ $$
 
 
 This last equation shows that the overall uncertainty in the population is the sum of the proportion of individuals who selected DK $(\hat{p}_{DK})$ and the proportion of uncertainty among those who provided a substantive response $(1-\pi_S)$, weighted by their share of the total population $(1-\hat{p}_{DK})$.
+
+
+### Case study Eurobarometer's data
+
+::: {.content-visible when-format="html"}
+::: column-margin
+<p><a href="materials/script_eurobarometer.R" download style="margin-right: 5px;"> <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i> [R Script]{style="margin-left: 2px; vertical-align: middle;"} </a></p>
+
+<p><a href="materials/microdata_eurobarometer.Rdata" download style="margin-right: 5px;"> <i class="bi bi-database-fill-down" style="font-size: 0.9em; vertical-align: middle;"></i> [R Data]{style="margin-left: 2px; vertical-align: middle;"} </a></p>
+:::
+:::
+
+In this section, we examine data from Standard Eurobarometer 81, a cross-national public opinion survey carried out in 2014 among citizens aged 15 and over across the 28 member states of the European Union (EU).
+
+The goal is to investigate how European citizens perceive the functioning, role, and future of the EU, with a particular focus on the treatment of Don’t Know (DK) responses in the analysis of ordinal data. Our attention is centered on a block of six attitudinal items (QA19.1–QA19.6), in which respondents rated their agreement on a four-point ordinal scale (totally disagree, tend to disagree, tend to agree, totally agree), with the possibility to select a DK option indicating uncertainty or lack of opinion. These items are intended to capture both cognitive understanding and emotional evaluation of the EU and related issues, such as globalization and European integration. By explicitly modeling DK responses, we gain insight not only into the direction of public opinion but also into the levels of uncertainty and ambivalence that shape attitudes toward complex political institutions like the EU.
+
+The attitudinal items are:
+
+- QA19.1: I understand how the EU works
+
+- QA19.2: Globalisation is an opportunity for economic growth
+
+- QA19.3: (OUR COUNTRY) could better face the future outside
+the EU
+
+- QA19.4: The EU should develop further into a federation of nation
+states
+
+- QA19.5: More decisions should be taken at EU level
+
+- QA19.6: We need a united Europe in today’s world
+
+Let's start with the fitting of a CUB model for each variable by excluding the DK option.
+
+```{r warning = F, error = F, message = F}
+library(ggplot2)
+library(CUB)
+# Load the data
+load("materials//microdata_eurobarometer.Rdata")
+```
+```{r warning = F, error = F, message = F}
+str(eurobarometer)
+
+ # Estimate a CUB model for each item
+CUB_list <- list ()
+pi <- c()
+xi <- c()
+for (i in 2:7){
+  ordinal <- eurobarometer[,i]
+  ordinal <- as.numeric(ordinal[-which(ordinal == "dk")])
+  CUB_list[[i-1]] <- GEM(Formula(ordinal ~ 0 | 0 | 0), family = "cub")
+  pi[i-1] <- CUB_list[[i-1]]$estimates[1]
+  xi[i-1] <- CUB_list[[i-1]]$estimates[2]
+}
+
+param <- data.frame(cbind(c("QA19.1", "QA19.2",
+                            "QA19.3", "QA19.4",
+                            "QA19.5", "QA19.6"), pi, xi))
+
+colnames(param) <- c("label", "x", "y")
+
+
+param$x <- as.numeric(param$x)
+param$y <- as.numeric(param$y)
+
+
+plot <- ggplot(param, aes(x = (1-x), y = (1-y), label = label)) +
+  geom_point(size = 3) +
+  geom_text(vjust = -1, hjust = 0.5) +
+  geom_vline(xintercept = 0.5, linetype = "dashed") +
+  geom_hline(yintercept = 0.5, linetype = "dashed") +
+  coord_cartesian(xlim = c(0, 1), ylim = c(0, 1)) +
+  theme_bw() +
+  labs(x = expression((1-pi)), y = expression((1-xi))) +
+  theme(panel.grid = element_blank())
+plot
+```
+
+
+Now, let's see how the estimates of $\pi$ change by considering the DK option.
+First of all we have to compute the following quantity for each item:
+
+$$
+\hat{p}_{DK} = \frac{Total\, number\, of\, DK\, responses}{Total\, number\, of\, responses}
+$$
+
+
+
+```{r warning = F, message = F, error = F}
+p_DK <- c()
+
+# Loop over the 6 items
+for (i in 2:7) {
+  item_responses <- eurobarometer[, i]
+  total_responses <- length(item_responses)
+  dk_count <- sum(item_responses == "dk", na.rm = TRUE)
+  p_DK[i - 1] <- dk_count / total_responses
+}
+
+# Assign labels to the vector
+names(p_DK) <- paste0("QA19.", 1:6)
+
+# Display the result
+p_DK
+
+param$p_DK <- as.numeric(p_DK)
+```
+The "corrected" $\pi$ is computed as $\pi = (1-\hat{p}_{DK})\cdot\pi_S$.
+
+```{r warning=F, error=F, message=F}
+param$x_cor <- (1- param$p_DK)*param$x
+```
+
+Then we can plot the estimated models by considering the DK option:
+```{r warning=F, error=F, message=F}
+param$x_old <- 1 - param$x
+param$x_new <- 1 - param$x_cor
+param$y_val <- 1 - param$y
+
+ggplot(param) +
+  geom_segment(aes(x = x_old, y = y_val, xend = x_new-0.015, yend = y_val),
+               arrow = arrow(length = unit(0.2, "cm")), color = "darkgray") +
+  geom_point(aes(x = x_old, y = y_val), color = "gray30", size = 2) +
+  geom_point(aes(x = x_new, y = y_val), color = "black", size = 3) +
+  geom_text(aes(x = x_new, y = y_val, label = label),
+            vjust = -1, hjust = 0.5, size = 3.5) +
+  geom_vline(xintercept = 0.5, linetype = "dashed") +
+  geom_hline(yintercept = 0.5, linetype = "dashed") +
+  coord_cartesian(xlim = c(0, 1), ylim = c(0, 1)) +
+  theme_bw() +
+  labs(x = expression(1 - pi), y = expression(1 - xi)) +
+  theme(panel.grid = element_blank())
+```
+
+This plot shows that globally Europeans have quite negative feelings against Europe, since by looking at the results related to question QA19.6 people have a low feeling and low uncertainty, meaning that they generally don't think that we need a united europe today and they are almost sure about that. A similar opinion is confirmed by the high feeling shown for item QA19.3 which suggest that people globally think that their own country could better face the future outside the EU.
+
+The other items show a medium level of feeling, especially QA19.2 and QA19.4, the consideration of the DK option shifts relevantly the level of uncertainty, meaning that the interviewees are not always able to say whether globalization is perceived as an opportunity for economic growth and are not able to express their perception about the possible development of the EU into a federation of nation states.
+
+**References and additional information**
+
+For those interested in learning more about CUB models, I suggest [this paper](https://link.springer.com/article/10.1007/s10260-019-00461-1){target="_blank"}, which provides a good overview of the main developments within the class of CUB models. Additional contributions and developments from my research group can be found on [this page](https://bodai.unibs.it/cub/){target="_blank"}.
+
+**Main References**
+
+The main references used for this module are:
+
+- D'Elia, A., & Piccolo, D. (2005). A mixture model for preferences data analysis. *Computational Statistics & Data Analysis*, 49(3), 917-934.
+
+- Iannario, M. (2012). Modelling shelter choices in a class of mixture models for ordinal responses. *Statistical Methods & Applications*, 21(1), 1-22.
+
+- Manisera, M., & Zuccolotto, P. (2014). Modeling “don’t know” responses in rating scales. *Pattern Recognition Letters*, 45, 226-234.
+
+- Piccolo, D., & Simone, R. (2019). The class of CUB models: statistical foundations, inferential issues and empirical evidence. *Statistical Methods & Applications*, 28, 389-435.
+
+**R Packages**
+
+The models and datasets (`univer`, `relgoods`) used in this module are provided in the R package [CUB](https://rdrr.io/cran/CUB/){target="_blank"} 
+
+# Models for Multivariate Ordinal Data
+
+::: {.content-visible when-format="html"}
+::: column-margin
+<!-- <p><a href="materials/Script_plots_examples.R" download style="margin-right: 5px;"> <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i> [R Script]{style="margin-left: 2px; vertical-align: middle;"} </a></p> -->
+
+<p><a href="materials/Ordinal Data Analysis in R - Module 4.pdf" download> <i class="bi bi-file-earmark-slides-fill" style="font-size: 0.9em; vertical-align: middle;"></i> [Slides]{style="margin-left: 2px; vertical-align: middle;"} </a></p>
+:::
+:::
+
+In previous modules, we explored what ordinal data are and how they can be modeled using approaches such as Proportional Odds Models and CUB models. These methods are well-suited for analyzing one or a few ordinal variables, especially when the interest lies in explaining or predicting an outcome. However, in many real-world settings, researchers are faced with multivariate ordinal data; that is, multiple ordinal variables collected simultaneously on each individual or unit.
+
+Think, for example, of a customer satisfaction survey where participants rate a range of services or products. Or consider a psychological questionnaire measuring various aspects of well-being or attitude. In such cases, the goal is often not to model a single response, but rather to uncover patterns, similarities, or latent structures in the data. This calls for multivariate methods.
+
+Before we delve into specific multivariate methods, it's helpful to briefly define two fundamental goals in multivariate data analysis that we will address:
+
+ - **Dimensionality Reduction**: Imagine you have a dataset with a very large number of variables, or "dimensions", for each observation. This can make the data difficult to understand, visualize, and analyze. Dimensionality reduction is the process of transforming high-dimensional data into a lower-dimensional space (fewer variables) while trying to retain as much of the original, important information and relationships as possible. The aim is to simplify the data, making it more manageable for visualization, interpretation, and subsequent analyses, often by uncovering underlying "latent" variables or themes.
+
+
+ - **Clustering**: In contrast to dimensionality reduction, clustering is an unsupervised learning technique aimed at finding natural groupings or segments within a dataset. It involves organizing a set of observations (e.g., individuals, items) into groups (called "clusters") such that observations within the same group are more similar to each other than to those in other groups. Clustering helps to uncover hidden patterns, identify distinct segments, and simplify complex datasets by categorizing observations based on their inherent similarities, without any prior knowledge of what those groups might be.
+
+
+These two concepts, though distinct, often complement each other in data analysis workflows. Dimensionality reduction can make data more amenable to clustering, for instance, by projecting it into a space where true similarities are more apparent.
+
+While classical multivariate techniques, such as Principal Component Analysis (PCA) and K-means clustering, are powerful tools for continuous data, they encounter significant limitations when applied to ordinal data. The core challenge lies in the inherent nature of ordinal scales: their numeric labels represent ordered categories rather than true measurable quantities with uniform intervals. Respecting this fundamental distinction is paramount to avoid drawing misleading or erroneous conclusions from our analyses. In this chapter, we will explore several alternative approaches that are better suited to analyzing both multivariate ordinal data and mixed-type datasets (those combining nominal, ordinal, and continuous variables).
+
+## Why Classical Multivariate Methods Fall Short
+The inadequacy of classical multivariate methods for ordinal data stems from their underlying assumptions, which are typically violated by the properties of ordinal scales.
+
+### Principal Component Analysis (PCA)
+
+Classical PCA is a dimensionality reduction technique built upon the covariance or correlation matrix of the variables. Its objective is to identify a set of orthogonal linear combinations of the original variables (principal components) that capture the maximum variance in the data. The method inherently assumes that the data are numerical and that the distances between values are meaningful and consistent.
+
+When PCA is applied directly to ordinal data (even after assigning numerical labels like 1, 2, 3, etc.), it treats these labels as if they represent continuous, interval-scaled quantities. This creates a critical misrepresentation. For example, PCA would treat the numerical "distance" between "agree" (e.g., coded as 4) and "strongly agree" (e.g., coded as 5) as identical to the "distance" between "neutral" (e.g., coded as 3) and "agree" (e.g., coded as 4). As previously discussed, these perceived "distances" on an ordinal scale are rarely equal in their true conceptual or psychological magnitude. By treating these non-uniform intervals as equal, PCA can generate principal components that distort the true underlying structure of the ordinal relationships, leading to potentially misleading interpretations of the latent dimensions.
+
+### K-Means Clustering
+Similarly, standard clustering algorithms like K-means rely heavily on Euclidean distances to quantify similarity or dissimilarity between data points. Euclidean distance, by its very definition, assumes interval-scaled variables where differences between values are direct and comparable.
+
+Applying K-means directly to numerically coded ordinal data leads to similar problems as with PCA. The calculated Euclidean distances between response profiles will be based on the arbitrary numerical assignments, not on the true, often unequal, conceptual distances between ordered categories. This can result in the formation of artificial clusters that do not genuinely reflect meaningful patterns or homogeneous groups within the ordinal data. Consequently, relevant patterns might be masked, or spurious groupings might emerge, hindering accurate segmentation and interpretation.
+
+Therefore, when confronted with multivariate ordinal data, it becomes important to use analytical tools that account for their ordered nature.
+
+## Techniques for Dimensionality Reduction and Visualization of Ordinal Data
+
+The methods discussed in this section—Nonlinear PCA, Correspondence Analysis, and Multiple Correspondence Analysis—all share a common overarching goal: to reduce the dimensionality of complex multivariate data and to provide insightful graphical representations of the relationships within the data. While they achieve this through different mechanisms and for slightly different data structures, they collectively aim to uncover latent structures and visualize patterns in a lower-dimensional space.
+
+
+### Nonlinear Principal Component Analysis (NLPCA)
+
+Nonlinear Principal Component Analysis (NLPCA) represents a significant advancement over classical PCA, extending its framework to accommodate diverse data types, including ordinal variables. When applied to ordinal data, NLPCA addresses the core challenge by transforming the original categorical responses into optimal scores.
+
+The fundamental idea behind NLPCA is to "translate" ordinal data into a numerical scale in a way that maximizes the variance explained by the resulting principal components, much like traditional PCA. However, unlike classical PCA, this "translation" is not fixed or arbitrary. Instead, NLPCA iteratively determines the most appropriate numerical values (optimal scores) for each category. These optimal scores are derived such that they best preserve the order of the categories and maximize the explained variance in the transformed data, effectively capturing potentially nonlinear relationships.
+
+By employing optimal scaling, NLPCA can effectively handle data that are a mix of continuous, nominal, and ordinal variables, offering a flexible and powerful dimensionality reduction technique for heterogeneous datasets. The output of NLPCA is a set of principal components that reflect the major sources of variability, but crucially, they do so while respecting the intrinsic nature of the ordinal data. NLPCA is particularly valuable when one suspects that the latent constructs driving the data exhibit nonlinear relationships or are multidimensional in a non-Euclidean sense.
+
+### Correspondence Analysis (CA)
+
+Correspondence Analysis (CA) is a statistical technique primarily designed for exploring the association between two categorical variables, typically presented in a contingency table (a cross-tabulation). CA's strength lies in its ability to graphically represent the relationships between the row and column categories in a common low-dimensional space, usually two dimensions, where their proximity visually reflects their association.
+
+For example, if we have a contingency table cross-tabulating "Education Level" (an ordinal variable) with "Preferred News Source" (a nominal or ordinal variable), CA can visually reveal if specific education levels are strongly associated with particular news sources. Points representing categories that are close together on the CA map indicate a strong tendency to co-occur.
+
+While CA is most commonly associated with nominal data, it can also be applied to ordinal variables. However, it's important to note that in its standard form, CA does not explicitly leverage or enforce the order information of ordinal variables. Consequently, while CA can be highly useful for detecting general patterns and visualizing broad relationships in the data, it should be applied with caution when the precise ordinal nature and monotonicity of the data are central to the research question. Nevertheless, CA remains a valuable exploratory tool, offering useful insights into co-occurrence structures and showing which categories of different variables are more likely to appear together, particularly in the initial phases of data exploration.
+
+### Multiple Correspondence Analysis (MCA)
+Multiple Correspondence Analysis (MCA) extends the principles of CA to analyze the relationships among more than two categorical variables simultaneously. This makes MCA particularly well-suited for large survey datasets where respondents provide answers across numerous items, often using Likert-type scales.
+
+Similar to CA, MCA represents both the categories of the variables and the individual respondents in a low-dimensional space (e.g., a 2D scatter plot). This visual representation greatly facilitates the detection of latent structures and the visualization of similarities among individuals and variables. For instance, MCA can help identify clusters of individuals who exhibit similar response profiles across multiple survey questions. It can also reveal the underlying dimensions or "themes" that explain the relationships among the survey items themselves.
+
+A key point to remember about standard MCA is that it traditionally treats all variables as nominal, thereby disregarding the inherent ordered nature of ordinal variables. To mitigate this limitation, several extensions of MCA have been proposed. These include methods like ordinal MCA or nonlinear MCA, which incorporate specific coding and weighting schemes for responses that explicitly account for their ordering. These advanced versions strive to preserve the monotonicity of ordinal scales and to produce more meaningful and interpretable dimensions that are faithful to the data's original structure.
+
+In practice, MCA is widely employed in the social sciences, marketing research, and psychology due to its powerful ability to simplify complex datasets into interpretable patterns. It is an invaluable tool for dimensionality reduction and visualization, often preceding or complementing other analyses by providing a simplified, meaningful representation of the data.
+
+## Clustering with Ordinal and Mixed Data
+
+Clustering is a milestone of unsupervised learning since it allows to discover natural groupings or segments within a dataset. However, as anticipated, standard clustering algorithms like K-means are poorly suited for ordinal or mixed-type data due to their reliance on distance metrics that assume continuous, interval-scaled variables.
+
+### Distance-Based Clustering
+
+To perform clustering on ordinal data, the critical first step is to define distance measures that genuinely respect the ordinal nature of the variables. One of the most widely adopted and versatile approaches is to use Gower's distance (or Gower's coefficient of similarity). Gower's distance can handle mixed data types, including nominal, ordinal, and continuous variables, within a single dissimilarity metric. For ordinal variables specifically, Gower's metric calculates distances in a way that preserves the order and accounts for the number of categories separating two responses, without assuming equal intervals.
+
+Another option involves using other ordinal-specific dissimilarity measures, such as those based on ranks, monotonic transformations, or agreement/disagreement counts. These measures are designed to avoid the pitfalls of assuming equal spacing between categories.
+
+Once an appropriate dissimilarity matrix is computed (e.g., using Gower's distance), clustering algorithms that do not rely on Euclidean geometry or mean centroids can be effectively employed. 
+
+Some examples are:
+
+- Hierarchical clustering: Builds a hierarchy of clusters from individual data points, based on their dissimilarities.
+
+- Partitioning Around Medoids (PAM): A robust alternative to K-means that uses actual data points (medoids) as cluster centers, minimizing the sum of dissimilarities rather than squared Euclidean distances.
+
+
+### Model-Based Clustering
+
+Beyond distance-based approaches, model-based clustering offers a probabilistic framework for identifying clusters. Instead of relying only on distance metrics, model-based clustering assumes that the data points within each cluster are generated from a specific probability distribution, and the entire dataset is a mixture of these distributions. The goal is to estimate the parameters of these component distributions and assign observations to the clusters that they are most likely to belong to.
+
+For ordinal data, model-based clustering often employs specialized distributions that are designed for ordered categories. For example, some approaches might use latent class models, where each latent class represents a cluster, and within each cluster, the ordinal responses follow a specific discrete probability distribution (e.g., a multinomial distribution or a specific ordinal-friendly distribution like the Binary Ordinal Search (BOS) model). This allows for a more rigorous statistical inference on the number of clusters and the characteristics of each cluster.
+
+An important advantage of model-based clustering is its ability to:
+
+- Provide a statistical basis for clustering: This allows for formal tests and information criteria (like BIC or AIC) to select the optimal number of clusters.
+
+- Handle uncertainty in cluster membership: Instead of hard assignments, observations are often assigned to clusters probabilistically.
+
+This approach allows researchers to segment individuals into genuinely homogeneous groups, revealing hidden patterns in the data that might not be evident through classical analyses while also providing a framework for statistical inference about the clustering solution.
+
+---
+
+::: {.centered}
+**Final notes**
+:::
+
+This course has offered an introduction to the analysis of ordinal data, a type of data that is often used in social sciences, psychology, marketing, and many applied domains.
+
+We have covered the following main topics:
+
+ - Definition and characteristics of ordinal data, and the importance of treating them appropriately rather than assuming interval or continuous scale properties.
+
+ - Survey and scale design.
+
+ - Statistical models for ordinal data, such as the Proportional Odds Model and CUB models.
+
+ - Multivariate methods for ordinal and mixed data. 
+
+Throughout the course, a common thread has been the need to respect the nature of ordinal data, choosing analytical methods that reflect their structure and meaning. Applying models designed for other types of data may lead to invalid interpretations, while appropriate methods can provide valuable insights into individual preferences, attitudes, and behaviors.

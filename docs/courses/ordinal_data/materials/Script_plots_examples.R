@@ -112,6 +112,7 @@ semantic_long <- semantic_data %>%
         rating_number == 5 ~ "5 (Positive)"
       ),
       levels = c("1 (Negative)", "2", "3 (Neutral)", "4", "5 (Positive)")
+      # levels = c("5 (Positive)", "4", "3 (Neutral)", "2", "1 (Negative)")
     )
   )
 
@@ -126,7 +127,7 @@ semantic_pct <- semantic_long %>%
 
 # Create stacked bar chart
 ggplot(semantic_pct, aes(x = dimension, y = percentage, fill = rating_label)) +
-  geom_bar(stat = "identity") +
+  geom_bar(stat = "identity", position = position_stack(reverse = TRUE)) +
   facet_wrap(~ product) +
   scale_fill_manual(values = c("1 (Negative)" = "#d7191c",
                                "2" = "#fdae61",
@@ -140,6 +141,7 @@ ggplot(semantic_pct, aes(x = dimension, y = percentage, fill = rating_label)) +
        x = "",
        y = "Percentage of Responses",
        fill = "Rating") +
+  # guides(fill = guide_legend(reverse = TRUE)) +
   theme(
     legend.position = "bottom",
     strip.background = element_rect(fill = "lightblue", color = NA),
