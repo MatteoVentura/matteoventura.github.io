@@ -24,7 +24,7 @@ title: "Publications"
 
 ### Conference Proceedings
 
-- Ventura, M., Jacques, J., & Zuccolotto, P. (2025). Clustering multivariate rating data within the CUB framework. In A. Pollice & P. Mariani (Eds.), *IES 2025 - Statistical Methods for Evaluation and Quality*. (pp. 637-642). Cleup sc. ISBN: 9788854958494.
+- Ventura, M., Jacques, J., & Zuccolotto, P. (2025). Model-Based Clustering of Multivariate Rating Data to Evaluate Consumer Perceptions on Sustainability. In G. Boccuzzo, E. Bovo, M. Manisera, & L. Salmaso (Eds.), *IES 2025 - Statistical Methods for Evaluation and Quality*. (pp. 637-642). Cleup sc. ISBN: 9788854958494.
 
 - Ventura, M., Jacques, J., & Zuccolotto, P. (2025). Clustering multivariate rating data within the CUB framework. In A. Pollice & P. Mariani (Eds.), *52nd Scientific Meeting of the Italian Statistical Society – Bari, 17-20 June 2024*. (pp. 637-642). Springer. ISBN: 9783031644467.
 

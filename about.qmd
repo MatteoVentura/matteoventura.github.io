@@ -8,14 +8,25 @@ title: "About"
 
 ### Graphical Models with Applications in Ecology
 
-Application of Gaussian Graphical Models for investigating the structure of soil arthropods communities, and for studying the impact of various factors on the edaphic biodiversity of agroecosystems, in order to provide useful tools to support the decisions in the management and protection of biodiversity.
+Application of Gaussian Graphical Models to study the structure of soil arthropod communities and to analyze the impact of various factors on belowground biodiversity in agroecosystems. The goal is to provide tools that can support decision-making in the management and protection of biodiversity.
+A first methodological contribution in this area focused on the simulation-based assessment of different distance measures used to compare unweighted and undirected graphical models.
 
 ### Mixture Models for Ordinal Data
 
-Improvement and application of models within the so-called CUB (Combination of discrete Uniform and shifted Binomial random variables) class of Models, which allows for the measurement of two latent traits: feeling and uncertainty. These models have broad applications, including in the fields of measuring visitor experience, sports analytics, and sensory analysis. 
+Extension and application of models belonging to the CUB class (Combination of discrete Uniform and shifted Binomial random variables), which allow for the measurement of two latent components: feeling and uncertainty. CUB models have wide-ranging applications, including visitor and consumer experience measurement, sports analytics, and sensory analysis. The main methodological contributions in this area include:
+
+- the extension of the CUM model (Combination of discrete Uniform and linearly transformed Multinomial random variables) for the analysis of ordinal variables derived from semantic differential scales with five response categories;
+
+- the definition and study of the equivalence between the basic CUB model and the CUM model;
+
+- the development of a clustering model within the CUB framework for the analysis of multivariate rating data;
+
+- the current development of a multivariate CUB model that accounts for the dependence structure among variables through the use of copulas. In particular, the goal is to develop more computationally efficient estimation methods for copulas.
 <!-- A first contribution in this field consisted in defining and studying the equivalence between the basic CUB and the CUM (Combination of discrete Uniform and linearly transformed Multinomial random variables). The second contribution consisted in developing a Multivariate CUB Model and a Model-based Clustering based on it. -->
 
+### Clustering and Mixture-models
 
+An initial contribution concerned the development of a mixture model for the analysis of multivariate rating data within the CUB framework, named MLC-CUB. The multivariate CUB model currently under development, along with its estimation methods, will be used to design a clustering model that takes into account the dependence structure among variables and ensures computational efficiency.
 
 ## Education
 
