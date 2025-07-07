@@ -3,9 +3,11 @@
 # ======================================
 
 # Load necessary packages
-library(ordinal)  # For clm()
-library(ggplot2)  # Optional: for visualization
-library(dplyr)    # For data manipulation
+library(ordinal)   # For clm()
+library(ggplot2)   # Optional: for visualization
+library(dplyr)     # For data manipulation
+library(nnet)      # For multinom()
+library(broom)     # For tidy summaries
 
 # --------------------------------------
 # Step 1: Load and Inspect the Data
@@ -35,49 +37,57 @@ soccer$level    <- factor(soccer$level)
 str(soccer)
 
 # --------------------------------------
-# Step 3: Fit Full Proportional Odds Model
-# --------------------------------------
-model_clm <- clm(
-  discipline ~ n_yellow_25 + n_red_25 + position + 
-    result + country + level,
-  data = soccer
-)
-
-# View model summary
-summary(model_clm)
-
-# Odds Ratios for interpretation
-exp(coef(model_clm))
-
-# --------------------------------------
-# Step 4: Simplify Model by Removing Non-significant Predictors
+# Step 3: Proportional Odds Model (Reduced)
 # --------------------------------------
 model_clm_reduced <- clm(
   discipline ~ n_yellow_25 + n_red_25 + position + result,
   data = soccer
 )
 
-# Compare AICs
-AIC(model_clm, model_clm_reduced)
+summary(model_clm_reduced)
+exp(coef(model_clm_reduced))
 
 # --------------------------------------
-# Step 5: Goodness of Fit Evaluation
+# Step 4: Linear Regression (not appropriate, for comparison)
 # --------------------------------------
+model_lm <- lm(as.numeric(discipline) ~ n_yellow_25 + n_red_25 + position + result, data = soccer)
+summary(model_lm)
 
-# Log-likelihoods
+# --------------------------------------
+# Step 5: Binary Logistic Regression (None vs Yellow/Red)
+# --------------------------------------
+soccer$discipline_bin <- ifelse(soccer$discipline == "None", "No", "Yes")
+soccer$discipline_bin <- factor(soccer$discipline_bin)
+
+model_logit <- glm(discipline_bin ~ n_yellow_25 + n_red_25 + position + result, 
+                   data = soccer, family = "binomial")
+summary(model_logit)
+exp(coef(model_logit))
+
+# --------------------------------------
+# Step 6: Multinomial Logistic Regression (Non-Ordinal)
+# --------------------------------------
+model_multinom <- multinom(discipline ~ n_yellow_25 + n_red_25 + position + result, data = soccer)
+summary(model_multinom)
+
+# Odds Ratios for multinomial model
+exp(coef(model_multinom))
+
+# --------------------------------------
+# Step 7: Model Comparison (AIC and BIC)
+# --------------------------------------
+BIC(model_clm_reduced, model_logit, model_multinom, model_lm)
+
+# --------------------------------------
+# Step 8: Goodness-of-Fit for Ordinal Model
+# --------------------------------------
 ll_full <- logLik(model_clm_reduced)
 ll_null <- logLik(update(model_clm_reduced, . ~ 1))
-
-# Sample size
 n <- nobs(model_clm_reduced)
 
-# McFadden's R^2
 r2_mcfadden <- 1 - (as.numeric(ll_full) / as.numeric(ll_null))
-
-# Cox-Snell's R^2
 r2_coxsnell <- 1 - exp((2 / n) * (as.numeric(ll_null) - as.numeric(ll_full)))
 
-# Summarize results
 data.frame(
   McFadden = r2_mcfadden,
   CoxSnell = r2_coxsnell,
@@ -85,11 +95,11 @@ data.frame(
 )
 
 # --------------------------------------
-# Step 6: Test the Proportional Odds Assumption
+# Step 9: Proportional Odds Assumption
 # --------------------------------------
 nominal_test(model_clm_reduced)
 
 # --------------------------------------
-# Step 7: Confidence Intervals (Wald)
+# Step 10: Confidence Intervals (Wald)
 # --------------------------------------
 confint(model_clm_reduced, type = "Wald")
