@@ -10,7 +10,7 @@ website:
     right: "Built with [Quarto](https://quarto.org/)"
   
   navbar:
-    background: primary # "primary" usa il colore principale del tema Flatly
+    background: "#3c4a3e" # "primary" usa il colore principale del tema Flatly
     search: true        # Attiva la barra di ricerca interna (molto utile!)
     left:
       - href: index.qmd  # Assicurati che la home sia accessibile

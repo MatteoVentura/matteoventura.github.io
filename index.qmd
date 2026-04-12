@@ -1,6 +1,6 @@
 ---
 title: "Matteo Ventura"
-image: me.jpg 
+image: me2.jpg 
 toc: false
 # Questo rimuove le barre laterali vuote e allarga l'area del testo
 page-layout: full 
@@ -31,22 +31,13 @@ I am a **Post-doc in Statistics** at the University of Calabria.
 My methodological research focuses on Mixture Models for ordinal, with applications in sensory analysis, consumer behavior, and psychology.
 
 
-## Research interests
+## Research Interests
 
-### Graphical Models with Applications in Ecology
-Application of Gaussian Graphical Models to study the structure of soil arthropod communities and to analyze the impact of various factors on belowground biodiversity in agroecosystems. The goal is to provide tools that can support decision-making in the management and protection of biodiversity. A first methodological contribution in this area focused on the simulation-based assessment of different distance measures used to compare unweighted and undirected graphical models.
+* **Mixture Models for Ordinal Data:** Development and extension of the CUB (Combination of Uniform and Binomial) model class to measure latent components such as feeling and uncertainty. My work includes methodological advancements applied to diverse fields such as sensory analysis, sports analytics, and consumer experience.
 
-### Mixture Models for Ordinal Data
-Extension and application of models belonging to the CUB class (Combination of discrete Uniform and shifted Binomial random variables), which allow for the measurement of two latent components: feeling and uncertainty. CUB models have wide-ranging applications, including visitor and consumer experience measurement, sports analytics, and sensory analysis. The main methodological contributions in this area include:
+* **Model-Based Clustering & Mixture Models:** Design and implementation of clustering algorithms for multivariate rating data. My research aims at developing computationally efficient methods that accurately account for the dependence structure among variables.
 
-* The extension of the CUM model (Combination of discrete Uniform and linearly transformed Multinomial random variables) for the analysis of ordinal variables derived from semantic differential scales with five response categories;
-* The definition and study of the equivalence between the basic CUB model and the CUM model;
-* The development of a clustering model within the CUB framework for the analysis of multivariate rating data;
-* The current development of a multivariate CUB model that accounts for the dependence structure among variables through the use of copulas. In particular, the goal is to develop more computationally efficient estimation methods for copulas.
-
-### Clustering and Mixture-models
-An initial contribution concerned the development of a mixture model for the analysis of multivariate rating data within the CUB framework, named MLC-CUB. The multivariate CUB model currently under development, along with its estimation methods, will be used to design a clustering model that takes into account the dependence structure among variables and ensures computational efficiency.
-
+* **Graphical Models with Applications in Ecology:** Application of Gaussian Graphical Models to study belowground biodiversity and the structure of soil arthropod communities in agroecosystems. The goal is to provide statistical tools to support environmental management and decision-making.
 
 ## Education & Visiting
 
@@ -57,11 +48,11 @@ Supervisors: Prof. Ivy Liu and Richard Arnold
 
 
 **PhD in Analytics for Economics and Management** | 2021 - 2024  
-*University of Brescia, Italy* Thesis title: *Advances in Mixture Models for Ordinal Data: Theoretical Insights and Model-based Clustering*
+*University of Brescia, Italy* Thesis title: *Advances in Mixture Models for Ordinal Data: Theoretical Insights and Model-based Clustering*<br>
 Supervisor: Prof. Paola Zuccolotto | Co-supervisor: Prof. Julien Jacques
 
 **Visiting PhD student** | Sep. 2023 - Jun. 2024     
-*University Lumière Lyon 2, France* 
+*University Lumière Lyon 2, France*<br>
 Supervisor: Prof. Julien Jacques
 
 

@@ -1,56 +1,111 @@
-/* css styles */
+/* ==========================================================================
+   STILE SITO ACCADEMICO: MATTEO VENTURA
+   Palette: Bosco Scuro (#3c4a3e), Foresta Notturna (#1c211d), Ocra (#c8932f)
+   ========================================================================== */
+
+/* --- 1. IMPOSTAZIONI BASE E FONT --- */
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-body {
-  font-family: 'Roboto', sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto', serif;
-}
-
-code, pre {
-  font-family: 'Fira Code', monospace;
-}
-
-p, li {
-  text-align: justify;
-}
-
+body { font-family: 'Roboto', sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Roboto', serif; }
+code, pre { font-family: 'Fira Code', monospace; }
+p, li { text-align: justify; }
 ol { reversed: reversed; }
 
-
-
-
-
-
-/* Spazio tra le pubblicazioni */
-ol li {
-  margin-bottom: 1em; /* Aumenta lo spazio tra un paper e l'altro */
-  line-height: 1.3;     /* Rende le righe del singolo paper più leggibili */
+/* --- 2. MODALITÀ SCURA (Integrazione morbida in palette) --- */
+/* Sostituisce il nero di default con un "Grigio Foresta Notturno" */
+html[data-bs-theme="dark"] {
+  --bs-body-bg: #1c211d !important; 
+}
+html[data-bs-theme="dark"] body,
+html[data-bs-theme="dark"] .quarto-about-trestles,
+html[data-bs-theme="dark"] .quarto-about-jolla {
+  background-color: var(--bs-body-bg) !important;
 }
 
-/* Stile sobrio per i link DOI, PDF e ISBN */
-.pub-link {
-  font-size: 0.85em;
+/* --- 3. LINK E TESTI (Accento Ocra Universale) --- */
+a {
+  color: #c8932f; /* L'ocra funziona benissimo sia sul bianco che sullo scuro */
+  text-decoration: none; 
+}
+a:hover {
+  color: #a67822; /* Ocra più scuro/intenso */
+  text-decoration: underline; 
+}
+
+/* --- 4. NAVBAR SUPERIORE (Sfondo Verde Bosco #3c4a3e fisso) --- */
+/* Dato che lo sfondo è scuro, forziamo il testo a essere chiaro in entrambe le modalità */
+.navbar-brand, .navbar-title {
+  color: #ffffff !important;
+  transition: color 0.3s ease;
+}
+.navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.8) !important; /* Bianco leggermente trasparente */
+}
+/* Effetto passaggio del mouse sulla Navbar: diventa Ocra */
+.navbar-brand:hover, 
+.navbar-title:hover, 
+.navbar-nav .nav-link:hover, 
+.navbar-nav .nav-link.active {
+  color: #c8932f !important;
+}
+
+/* --- 5. INDICE LATERALE (TOC) --- */
+/* Usa il colore del testo predefinito di Quarto (grigio di giorno, grigio chiaro di notte) */
+#TOC a, nav[role="doc-toc"] a, #quarto-toc-sidebar .nav-link {
+  color: var(--bs-body-color) !important;
+  opacity: 0.7;
+}
+/* Voce dell'indice attiva e barra laterale: Ocra */
+#TOC a.active, 
+nav[role="doc-toc"] a.active,
+#quarto-toc-sidebar .nav-link.active {
+  color: #c8932f !important;
+  border-left-color: #c8932f !important;
+  opacity: 1;
+}
+#TOC a:hover, nav[role="doc-toc"] a:hover {
+  color: #c8932f !important;
+  opacity: 1;
   text-decoration: none;
-  margin-left: 12px;
-  color: #495057; /* Grigio scuro sobrio */
-  border: 1px solid #dee2e6; /* Bordino leggero */
-  padding: 2px 8px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
 }
 
-.pub-link:hover {
-  background-color: #f8f9fa;
-  color: #000;
-  border-color: #adb5bd;
+/* --- 6. PUBBLICAZIONI E BOTTONI MINORI --- */
+ol li {
+  margin-bottom: 1em; 
+  line-height: 1.3;     
 }
-
 .pub-isbn {
   font-size: 0.85em;
   color: #6c757d;
   margin-left: 10px;
-  font-style: normal;
+}
+/* Bottoncini PDF/DOI: Bordo grigio che si adatta a luce/buio */
+.pub-link {
+  font-size: 0.85em;
+  text-decoration: none;
+  margin-left: 12px;
+  color: var(--bs-body-color) !important; 
+  border: 1px solid var(--bs-body-color) !important; 
+  padding: 2px 8px;
+  border-radius: 4px;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+/* --- 7. EFFETTO HOVER PULSANTI PRINCIPALI E MINORI --- */
+/* Bottoni pagina contatti (CV, Scholar) */
+.about-link {
+  color: #c8932f !important;
+  border-color: #c8932f !important;
+  background-color: transparent !important;
+  transition: all 0.3s ease;
+}
+/* Quando passi il mouse sopra i bottoni (sia CV che PDF) si riempiono di Ocra */
+.about-link:hover, .pub-link:hover {
+  background-color: #c8932f !important;
+  color: #1c211d !important; /* Il testo diventa scuro per leggersi meglio sull'ocra! */
+  border-color: #c8932f !important;
+  opacity: 1;
+  text-decoration: none !important;
 }
