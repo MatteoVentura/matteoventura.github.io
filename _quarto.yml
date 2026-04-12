@@ -4,21 +4,17 @@ project:
 
 website:
   title: "Matteo Ventura"
-  header-includes: |
-    <meta name="google-site-verification" content="_16aVagmOVOK8TPjsoCVyHo1Wo8Ef_u_sb5LXEiP3kw" />
   # Aggiungiamo un footer per dare un aspetto finito
   page-footer:
     left: "© 2026 Matteo Ventura"
     right: "Built with [Quarto](https://quarto.org/)"
   
   navbar:
-    background: "#3c4a3e" # "primary" usa il colore principale del tema Flatly
-    search: true        # Attiva la barra di ricerca interna (molto utile!)
+    background: "#3c4a3e" 
+    search: true        
     left:
-      - href: index.qmd  # Assicurati che la home sia accessibile
+      - href: index.qmd  
         text: Home
-      # - href: about.qmd
-      #   text: About
       - href: publications.qmd
         text: Publications
       - href: courses.qmd
@@ -33,8 +29,11 @@ format:
   html:
     theme: 
       light: flatly
-      dark: darkly     # Permette agli utenti di switchare in modalità notte
-    # Suggerimento font: Inter o Roboto sono più moderni del Lucida Console
+      dark: darkly     
     mainfont: "Inter, system-ui, sans-serif" 
     css: styles.css
-    toc: true          # Attivalo per le pagine lunghe (es. corsi o pubblicazioni)
+    toc: true
+    # SPOSTATO QUI E RINOMINATO:
+    include-in-header:
+      text: |
+        <meta name="google-site-verification" content="_16aVagmOVOK8TPjsoCVyHo1Wo8Ef_u_sb5LXEiP3kw" />
