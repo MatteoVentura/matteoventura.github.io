@@ -4,6 +4,8 @@ project:
 
 website:
   title: "Matteo Ventura"
+  header-includes: |
+    <meta name="google-site-verification" content="_16aVagmOVOK8TPjsoCVyHo1Wo8Ef_u_sb5LXEiP3kw" />
   # Aggiungiamo un footer per dare un aspetto finito
   page-footer:
     left: "© 2026 Matteo Ventura"
