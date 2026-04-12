@@ -18,9 +18,9 @@ about:
     - icon: google
       text: Scholar
       href: https://scholar.google.com/citations?user=aRhtf3kAAAAJ&hl=en
-    - icon: mortarboard-fill
-      text: University
-      href: https://www.unibs.it/en/ugov/person/145546
+    # - icon: mortarboard-fill
+    #   text: University
+    #   href: https://www.unibs.it/en/ugov/person/145546
     - icon: file-earmark-pdf
       text: CV
       href: CV_VENTURA_ENG.pdf
