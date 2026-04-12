@@ -12,3 +12,45 @@ h1, h2, h3, h4, h5, h6 {
 code, pre {
   font-family: 'Fira Code', monospace;
 }
+
+p, li {
+  text-align: justify;
+}
+
+ol { reversed: reversed; }
+
+
+
+
+
+
+/* Spazio tra le pubblicazioni */
+ol li {
+  margin-bottom: 1em; /* Aumenta lo spazio tra un paper e l'altro */
+  line-height: 1.3;     /* Rende le righe del singolo paper più leggibili */
+}
+
+/* Stile sobrio per i link DOI, PDF e ISBN */
+.pub-link {
+  font-size: 0.85em;
+  text-decoration: none;
+  margin-left: 12px;
+  color: #495057; /* Grigio scuro sobrio */
+  border: 1px solid #dee2e6; /* Bordino leggero */
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.pub-link:hover {
+  background-color: #f8f9fa;
+  color: #000;
+  border-color: #adb5bd;
+}
+
+.pub-isbn {
+  font-size: 0.85em;
+  color: #6c757d;
+  margin-left: 10px;
+  font-style: normal;
+}

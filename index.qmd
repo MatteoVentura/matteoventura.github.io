@@ -1,28 +1,76 @@
 ---
 title: "Matteo Ventura"
-image: me.jpg
+image: me.jpg 
+toc: false
+# Questo rimuove le barre laterali vuote e allarga l'area del testo
+page-layout: full 
 about:
-  template: jolla
+  template: solana # Sfrutta meglio la larghezza rispetto a trestles
   image-width: 15em
   image-shape: round
   links:
     - icon: github
-      # text: Github
+      text: GitHub
       href: https://github.com/MatteoVentura
     - icon: linkedin
-      # text: LinkedIn
+      text: LinkedIn
       href: https://www.linkedin.com/in/matteo-ventura-770037171/
-    - icon: globe2
-      # text: University
-      href: https://www.unibs.it/en/ugov/person/145546
     - icon: google
-      # text: Google Scholar
+      text: Scholar
       href: https://scholar.google.com/citations?user=aRhtf3kAAAAJ&hl=en
-    - icon: layout-text-sidebar
+    - icon: mortarboard-fill
+      text: University
+      href: https://www.unibs.it/en/ugov/person/145546
+    - icon: file-earmark-pdf
+      text: CV
       href: CV_VENTURA_ENG.pdf
-
 ---
 
-<h4>Researcher in Statistics</h4>
 
-Univeristy of Brescia
+I am a **Post-doc in Statistics** at the University of Calabria. 
+My methodological research focuses on Mixture Models for ordinal, with applications in sensory analysis, consumer behavior, and psychology.
+
+
+## Research interests
+
+### Graphical Models with Applications in Ecology
+Application of Gaussian Graphical Models to study the structure of soil arthropod communities and to analyze the impact of various factors on belowground biodiversity in agroecosystems. The goal is to provide tools that can support decision-making in the management and protection of biodiversity. A first methodological contribution in this area focused on the simulation-based assessment of different distance measures used to compare unweighted and undirected graphical models.
+
+### Mixture Models for Ordinal Data
+Extension and application of models belonging to the CUB class (Combination of discrete Uniform and shifted Binomial random variables), which allow for the measurement of two latent components: feeling and uncertainty. CUB models have wide-ranging applications, including visitor and consumer experience measurement, sports analytics, and sensory analysis. The main methodological contributions in this area include:
+
+* The extension of the CUM model (Combination of discrete Uniform and linearly transformed Multinomial random variables) for the analysis of ordinal variables derived from semantic differential scales with five response categories;
+* The definition and study of the equivalence between the basic CUB model and the CUM model;
+* The development of a clustering model within the CUB framework for the analysis of multivariate rating data;
+* The current development of a multivariate CUB model that accounts for the dependence structure among variables through the use of copulas. In particular, the goal is to develop more computationally efficient estimation methods for copulas.
+
+### Clustering and Mixture-models
+An initial contribution concerned the development of a mixture model for the analysis of multivariate rating data within the CUB framework, named MLC-CUB. The multivariate CUB model currently under development, along with its estimation methods, will be used to design a clustering model that takes into account the dependence structure among variables and ensures computational efficiency.
+
+
+## Education & Visiting
+
+**Visiting Researcher** | Sep. 2025 – Oct. 2025   
+*Victoria University of Wellington, New Zealand*   
+Supervisors: Prof. Ivy Liu and Richard Arnold 
+
+
+
+**PhD in Analytics for Economics and Management** | 2021 - 2024  
+*University of Brescia, Italy* Thesis title: *Advances in Mixture Models for Ordinal Data: Theoretical Insights and Model-based Clustering*
+Supervisor: Prof. Paola Zuccolotto | Co-supervisor: Prof. Julien Jacques
+
+**Visiting PhD student** | Sep. 2023 - Jun. 2024     
+*University Lumière Lyon 2, France* 
+Supervisor: Prof. Julien Jacques
+
+
+## Awards & Honors
+
+**Marie Skłodowska-Curie Action Seal of Excellence** (Feb. 2026)   
+*European Commission* | Score: 91.60 / 100   
+<a href="docs\Seal of Excellence.pdf" download class="pub-link" style="margin-left: 0px;">
+    <i class="bi bi-download"></i> Download Certificate
+  </a>
+  <br>
+  Awarded for the project proposal *ACHIEVE*.

@@ -4,37 +4,35 @@ project:
 
 website:
   title: "Matteo Ventura"
+  # Aggiungiamo un footer per dare un aspetto finito
+  page-footer:
+    left: "© 2024 Matteo Ventura"
+    right: "Built with [Quarto](https://quarto.org/)"
+  
   navbar:
-    background: light
+    background: primary # "primary" usa il colore principale del tema Flatly
+    search: true        # Attiva la barra di ricerca interna (molto utile!)
     left:
-      - href: about.qmd
-        text: About
+      - href: index.qmd  # Assicurati che la home sia accessibile
+        text: Home
+      # - href: about.qmd
+      #   text: About
       - href: publications.qmd
         text: Publications
       - href: courses.qmd
         text: Courses
       - href: contacts.qmd
         text: Contacts
-deployment:
-    targets:
-      - id: primary
-        type: github-pages
-        url: "https://MatteoVentura.github.io" # Assicurati che sia il tuo URL corretto di GitHub Pages
-        branch: main # O gh-pages, a seconda della configurazione del tuo repository
-        dir: docs # Corrisponde al tuo output-dir
-        include:
-          - "**/*.qmd"
-          - "**/*.md"
-        exclude:
-          - "**/*_files"
-          - "**/*_cache"
-          - "**/_*"
-          - "**/*.tmp"
-          - "_site"
-          - "**/draft: true" # Esclude i file con draft: true
+    right:
+      - icon: github
+        href: https://github.com/MatteoVentura
+
 format:
   html:
-    theme: flatly
-    mainfont: "Lucida Console"
+    theme: 
+      light: flatly
+      dark: darkly     # Permette agli utenti di switchare in modalità notte
+    # Suggerimento font: Inter o Roboto sono più moderni del Lucida Console
+    mainfont: "Inter, system-ui, sans-serif" 
     css: styles.css
-    toc: false
+    toc: true          # Attivalo per le pagine lunghe (es. corsi o pubblicazioni)

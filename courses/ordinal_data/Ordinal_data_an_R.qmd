@@ -731,13 +731,11 @@ ggplot(rankings, aes(x = quarter, y = rank,
   theme(legend.position = "bottom")
 ```
 
-
 **References**
 
-- DeVellis, R. F., & Thorpe, C. T. (2021). Scale development: Theory and applications. Sage publications.
+-   DeVellis, R. F., & Thorpe, C. T. (2021). Scale development: Theory and applications. Sage publications.
 
 # Classical Models for Ordinal Data
-
 
 ::: {.content-visible when-format="html"}
 ::: column-margin
@@ -927,30 +925,25 @@ in this equation:
 
 To demonstrate the proportional odds assumption, let's consider the cumulative odds for two distinct sets of predictor values: $\boldsymbol{X}^{(1)} = (X_1^{(1)}, \dots, X_k^{(1)})$ and $\boldsymbol{X}^{(2)} = (X_1^{(2)}, \dots, X_k^{(2)})$.
 
-The cumulative odds at threshold $r_j$ for the first set of predictors $\boldsymbol{X}^{(1)}$ are: 
-$$
+The cumulative odds at threshold $r_j$ for the first set of predictors $\boldsymbol{X}^{(1)}$ are: $$
 \text{Odds}(R \leq r_j | \boldsymbol{X}^{(1)}) =\exp \Bigg( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(1)} \Bigg)
-$$ Similarly, for the second set of predictors $\boldsymbol{X}^{(2)}$: 
+$$ Similarly, for the second set of predictors $\boldsymbol{X}^{(2)}$:
 
 $$
 \text{Odds}(R \leq r_j | \boldsymbol{X}^{(2)}) = \exp \Bigg( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(2)} \Bigg)
-$$ 
-The Odds Ratio (OR) comparing the cumulative odds at $\boldsymbol{X}^{(2)}$ to those at $\boldsymbol{X}^{(1)}$ for the event $R \leq r_j$ is: 
-$$
+$$ The Odds Ratio (OR) comparing the cumulative odds at $\boldsymbol{X}^{(2)}$ to those at $\boldsymbol{X}^{(1)}$ for the event $R \leq r_j$ is: $$
 \text{OR}_j = \frac{\text{Odds}(R \leq r_j | \boldsymbol{X}^{(2)})}{\text{Odds}(R \leq r_j | \boldsymbol{X}^{(1)})}
-$$ 
-Substituting the exponential expressions for the odds: $$
+$$ Substituting the exponential expressions for the odds: $$
 \text{OR}_j = \frac{\exp \Big( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(2)} \Big)}{\exp \Big( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(1)} \Big)}
-$$ Using the property $e^a / e^b = e^{a-b}$, we can simplify the expression: 
-$$
+$$ Using the property $e^a / e^b = e^{a-b}$, we can simplify the expression: $$
 \text{OR}_j = \exp \Bigg( \Big( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(2)} \Big) - \Big( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(1)} \Big) \Bigg)
-$$ 
+$$
 
-Crucially, the intercept term $\alpha_j$ cancels out: 
+Crucially, the intercept term $\alpha_j$ cancels out:
 
 $$
 \text{OR}_j = \exp \Bigg( \sum_{i=1}^{k} \beta_iX_i^{(2)} - \sum_{i=1}^{k} \beta_iX_i^{(1)} \Bigg)
-$$ 
+$$
 
 This can be further condensed:
 
@@ -963,10 +956,15 @@ This signifies that the odds ratio associated with a change in the predictor var
 This inherent consistency in the effect of predictors across the ordinal categories is precisely what defines the proportional odds assumption.
 It means that while the baseline odds change for each category, the multiplicative effect of the predictors on these odds remains the same.
 
+Graphically, this translates to parallelism on the log-odds scale.
+If you were to plot the cumulative log-odds for different levels of a predictor, you would see a set of parallel lines.
+For example, imagine an ordinal outcome with four categories (e.g., 'Low', 'Medium', 'High', 'Very High').
+There would be three cumulative probabilities: $P(R\leq Low)$, $P(R \leq Medium)$, and $P(R \leq High)$.
+If the Proportional Odds assumption holds for a continuous predictor, then the log-odds for each of these cumulative probabilities would change by the same amount for a one-unit increase in that predictor.
 
-Graphically, this translates to parallelism on the log-odds scale. If you were to plot the cumulative log-odds for different levels of a predictor, you would see a set of parallel lines. For example, imagine an ordinal outcome with four categories (e.g., 'Low', 'Medium', 'High', 'Very High'). There would be three cumulative probabilities: $P(R\leq Low)$, $P(R \leq Medium)$, and $P(R \leq High)$. If the Proportional Odds assumption holds for a continuous predictor, then the log-odds for each of these cumulative probabilities would change by the same amount for a one-unit increase in that predictor.
-
-You would visualize three separate curves, one for each cumulative probability, plotted against the predictor on the x-axis, with the y-axis representing the logit of these probabilities. If the Proportional Odds assumption holds, these three curves would run parallel to each other across the entire range of the predictor. They would be shifted vertically relative to each other (due to the different $\alpha_j$, but their slopes (the $\beta$ coefficients) would be identical.
+You would visualize three separate curves, one for each cumulative probability, plotted against the predictor on the x-axis, with the y-axis representing the logit of these probabilities.
+If the Proportional Odds assumption holds, these three curves would run parallel to each other across the entire range of the predictor.
+They would be shifted vertically relative to each other (due to the different $\alpha_j$, but their slopes (the $\beta$ coefficients) would be identical.
 
 ```{r, echo=FALSE, message=F, warning=F, error=F}
 # R Concept: Illustrating Parallel Log-Odds Lines (PO Assumption Holds)
@@ -1023,12 +1021,13 @@ ggplot(plot_data_po_concept_long, aes(x = predictor_x, y = Log_Odds, color = Cum
   theme(legend.position = "bottom")
 ```
 
+The Proportional Odds assumption is useful for two main reason:
 
-The Proportional Odds assumption is useful for two main reason: 
+-   **Parsimony and Simplicity**: This is a major advantage.
+    If the assumption holds, the $\beta$ coefficients are estimated for each predictor, regardless of the number of categories $m$.
+    Fewer parameters make the model easier to estimate, interpret, and potentially more stable, especially with smaller sample sizes.
 
- - **Parsimony and Simplicity**: This is a major advantage. If the assumption holds, the $\beta$ coefficients are estimated for each predictor, regardless of the number of categories $m$.  Fewer parameters make the model easier to estimate, interpret, and potentially more stable, especially with smaller sample sizes.
-
-- **Clear and Consistent Interpretation**: A single Odds Ratio per predictor provides a clear, concise summary of its effect across the entire ordinal scale. 
+-   **Clear and Consistent Interpretation**: A single Odds Ratio per predictor provides a clear, concise summary of its effect across the entire ordinal scale.
 
 <!-- For instance, if $$\text{exp}(\beta_{temp})=0.75$$, we confidently say that increasing temperature by one unit multiplies the odds of being in a lower rating category by 0.75, regardless the categories we are comparing.  -->
 
@@ -1051,8 +1050,6 @@ The ordinal category is determined by $R^*$ based on the thresholds:
 -   $R = r_2$ if $\gamma_1 < R^* \leq \gamma_2$
 -   $R = r_j$ if $\gamma_{(j-1)} < R^* \leq \gamma_j$
 -   $R = r_m$ if $R^* > \gamma_{(m-1)}$
-
-
 
 ```{r warning = F, message= F, error = F, echo=F}
 # Campioniamo dati da una distribuzione normale
@@ -1117,19 +1114,19 @@ In this latent variable framework, the Proportional Odds assumption means two th
 
 This parallel shif" of the latent distribution is the reason why the odds ratios for cumulative probabilities are proportional across all thresholds.
 
-
-
 ### Testing the Proportional Odds Assumption {.unnumbered .toc-ignore}
 
-Violating the Proportional Odds assumption can lead to inaccurate conclusions about the effects of the predictors. The most robust and commonly recommended way to test the Proportional Odds assumption with  is by using a Likelihood Ratio Test to compare a constrained model (the PO model) with a more flexible, unconstrained model (where the PO assumption is relaxed for a specific predictor).
+Violating the Proportional Odds assumption can lead to inaccurate conclusions about the effects of the predictors.
+The most robust and commonly recommended way to test the Proportional Odds assumption with is by using a Likelihood Ratio Test to compare a constrained model (the PO model) with a more flexible, unconstrained model (where the PO assumption is relaxed for a specific predictor).
 
+The `clm()` function from the ordinal package allows you to relax the PO assumption for specific predictors using the `nominal = ~ predictor` argument.
+This creates a "partial proportional odds" model (also known as a generalized ordinal logit model).
+We then compare this more complex model (where the assumption is relaxed) to our original, simpler proportional odds model using `anova()`, which performs a Likelihood Ratio Test.
 
-The `clm()` function from the ordinal package allows you to relax the PO assumption for specific predictors using the `nominal = ~ predictor` argument. This creates a "partial proportional odds" model (also known as a generalized ordinal logit model). We then compare this more complex model (where the assumption is relaxed) to our original, simpler proportional odds model using `anova()`, which performs a Likelihood Ratio Test.
+-   **Null Hypothesis (**$H_0$): The Proportional Odds assumption holds for the specified predictor (i.e., its coefficient is constant across all thresholds).
 
- - **Null Hypothesis ($H_0$)**: The Proportional Odds assumption holds for the specified predictor (i.e., its coefficient is constant across all thresholds).
+-   **Alternative Hypothesis (**$h_1$): The Proportional Odds assumption does not hold for the specified predictor (i.e., its coefficient varies across thresholds).
 
- - **Alternative Hypothesis ($h_1$)**: The Proportional Odds assumption does not hold for the specified predictor (i.e., its coefficient varies across thresholds).
- 
 Imagine we have an ordinal outcome Response (e.g., 'Low', 'Medium', 'High') and a continuous predictor Experience.
 
 ```{r warning=F, error=F, message=F}
@@ -1156,7 +1153,6 @@ summary(non_po_model_hypo)
 anova(po_model_hypo, non_po_model_hypo)
 ```
 
-
 **Interpretation of the results**
 
 `po_model_hypo` is the Proportional Odds model, where the effect of `Experience` is assumed to be constant across all thresholds.
@@ -1164,89 +1160,133 @@ anova(po_model_hypo, non_po_model_hypo)
 
 The AIC is 225.10 for `po_model_hypo` and 227.09 for `non_po_model_hypo`, this already suggest that the simpler model should be preferred.
 
+`LR.stat` (Likelihood Ratio Statistic) is the test statistic for comparing the two nested models.
+It's calculated as $2 \cdot (logLik_{unconstrained} −logLik_{constrained})$.
 
-`LR.stat` (Likelihood Ratio Statistic) is the test statistic for comparing the two nested models. It's calculated as $2 \cdot (logLik_{unconstrained} −logLik_{constrained})$.
-
-In this example, `LR.stat` = 0.0028. This indicates that the unconstrained model doesn't provide a much better fit than the constrained model.
+In this example, `LR.stat` = 0.0028.
+This indicates that the unconstrained model doesn't provide a much better fit than the constrained model.
 
 `Pr(>Chisq)` (p-value) is the p-value associated with the LR.stat.
 
-Based on this Likelihood Ratio Test, there is no statistically significant evidence to suggest that the Proportional Odds assumption is violated for the Experience predictor in the data. The effect of Experience on the log-odds of cumulative probabilities does not appear to vary significantly across the different thresholds.
-
+Based on this Likelihood Ratio Test, there is no statistically significant evidence to suggest that the Proportional Odds assumption is violated for the Experience predictor in the data.
+The effect of Experience on the log-odds of cumulative probabilities does not appear to vary significantly across the different thresholds.
 
 ### Graphical Inspection {.unnumbered .toc-ignore}
-While statistically rigorous, formal tests can be overly sensitive, especially in large datasets. A statistically significant p-value might indicate a violation that is numerically very small and practically insignificant. This is where graphical inspection becomes invaluable.
 
-Graphical inspection provides a visual assessment of whether the coefficients for a given predictor truly remain constant across thresholds. This involves fitting a more flexible model and then plotting the estimated coefficients for each predictor across the different thresholds.
+While statistically rigorous, formal tests can be overly sensitive, especially in large datasets.
+A statistically significant p-value might indicate a violation that is numerically very small and practically insignificant.
+This is where graphical inspection becomes invaluable.
 
+Graphical inspection provides a visual assessment of whether the coefficients for a given predictor truly remain constant across thresholds.
+This involves fitting a more flexible model and then plotting the estimated coefficients for each predictor across the different thresholds.
 
 <!-- ```{r warning=F, error=F, message=F} -->
+
 <!-- # Ensure necessary packages are loaded -->
+
 <!-- library(ordinal) -->
+
 <!-- library(ggplot2) -->
+
 <!-- library(tidyr) # For pivot_longer -->
 
 <!-- # Re-create hypothetical data and models for a clean run -->
+
 <!-- set.seed(456) -->
+
 <!-- hypothetical_data <- data.frame( -->
+
 <!--   Response = factor(sample(c("Low", "Medium", "High"), 100, replace = TRUE), -->
+
 <!--                     levels = c("Low", "Medium", "High"), ordered = TRUE), -->
+
 <!--   Experience = rnorm(100, 5, 2) -->
+
 <!-- ) -->
 
 <!-- po_model_hypo <- clm(Response ~ Experience, data = hypothetical_data) -->
+
 <!-- non_po_model_hypo <- clm(Response ~ Experience, nominal = ~ Experience, data = hypothetical_data) -->
 
 <!-- # Extract coefficients and SEs from the non-PO model -->
+
 <!-- coef_values <- coef(non_po_model_hypo) -->
+
 <!-- vcov_matrix <- vcov(non_po_model_hypo) -->
 
 <!-- # Identify the coefficients related to 'Experience' that vary by threshold. -->
+
 <!-- # These typically have names like 'Experience:1|2', 'Experience:2|3', etc. -->
+
 <!-- # We'll explicitly filter for these nominal coefficients. -->
+
 <!-- nominal_coeffs_names <- names(coef_values)[grep("Experience:", names(coef_values))] -->
 
 <!-- exp_coeffs <- coef_values[nominal_coeffs_names] -->
+
 <!-- exp_ses <- sqrt(diag(vcov_matrix))[nominal_coeffs_names] -->
 
 <!-- # Create a data frame for plotting -->
+
 <!-- plot_data_coeffs <- data.frame( -->
+
 <!--   Threshold = nominal_coeffs_names, # Use the actual names like Experience:1|2 -->
+
 <!--   Estimate = exp_coeffs, -->
+
 <!--   SE = exp_ses -->
+
 <!-- ) -->
 
 <!-- # Add 95% confidence intervals -->
+
 <!-- plot_data_coeffs$Lower <- plot_data_coeffs$Estimate - 1.96 * plot_data_coeffs$SE -->
+
 <!-- plot_data_coeffs$Upper <- plot_data_coeffs$Estimate + 1.96 * plot_data_coeffs$SE -->
 
 <!-- # Add the single PO coefficient for comparison (from po_model_hypo) -->
+
 <!-- po_estimate_x <- coef(po_model_hypo)["Experience"] -->
 
 <!-- # Ensure Threshold is a factor for correct ordering on the plot -->
+
 <!-- plot_data_coeffs$Threshold <- factor(plot_data_coeffs$Threshold, -->
+
 <!--                                      levels = rev(nominal_coeffs_names)) # Reverse for typical plot order -->
 
 <!-- # --- Plotting the coefficients across thresholds --- -->
+
 <!-- ggplot(plot_data_coeffs, aes(x = Threshold, y = Estimate)) + -->
+
 <!--   geom_point(size = 3) + -->
+
 <!--   geom_errorbar(aes(ymin = Lower, ymax = Upper), width = 0.2) + -->
+
 <!--   geom_hline(yintercept = po_estimate_x, linetype = "dashed", color = "blue", size = 0.8) + -->
+
 <!--   labs( -->
+
 <!--     title = "Estimated Coefficients for 'Experience' Across Thresholds", -->
+
 <!--     subtitle = "Dashed line is the PO model estimate (assuming constant effect)", -->
+
 <!--     y = "Coefficient Estimate", -->
+
 <!--     x = "Cumulative Threshold" -->
+
 <!--   ) + -->
+
 <!--   theme_minimal() + -->
+
 <!--   coord_flip() # Flip coordinates for better readability -->
+
 <!-- ``` -->
 
 ### Violation of the Proportional Odds Assumption {.unnumbered .toc-ignore}
 
-
-When the Proportional Odds assumption is violated for a predictor, the effect of that predictor on the cumulative log-odds is not constant across thresholds. Graphically, this means the lines for different cumulative probabilities would not be parallel. Their slopes would differ, meaning the $\beta$ coefficients are not the same for each threshold.
-
+When the Proportional Odds assumption is violated for a predictor, the effect of that predictor on the cumulative log-odds is not constant across thresholds.
+Graphically, this means the lines for different cumulative probabilities would not be parallel.
+Their slopes would differ, meaning the $\beta$ coefficients are not the same for each threshold.
 
 ```{r echo = F, warning = F, error = F, message=F}
 set.seed(789)
@@ -1298,41 +1338,36 @@ ggplot(plot_data_non_po_concept_long, aes(x = predictor_z, y = Log_Odds, color =
   theme(legend.position = "bottom")
 ```
 
-
 When the formal tests and especially the graphical inspection indicate a statistically and practically significant violation, it is not possible to proceed with the standard Proportional Odds model, as the coefficient estimates would be biased and their interpretation misleading.
 
 There are two main alternative models to handle this problem:
 
-1. **Generalized Ordinal Logit Models** (or Partial Proportional Odds Models): are a flexible extension of the proportional odds model. They allow the coefficients of specific predictor variables to vary across the cumulative logit equations (i.e., across the thresholds), while still forcing other predictors (those that do satisfy the Proportional Odds assumption) to have constant effects. When only a subset of coefficients is allowed to vary, it's specifically called a Partial Proportional Odds (PPO) model. 
-Instead of estimating a single $\beta_i$ for a predictor $X_i$, a PPO model estimates a separate $\beta_{ij}$ for each cumulative logit $r_j$.  
-The advantages are:
-  - *Flexibility*: It directly addresses the violation by allowing coefficients to differ where necessary.
-  - *Parsimony* (relative to Multinomial): It retains some of the efficiency of the ordinal model. If only a few predictors violate the Proportional Odds assumption, it is possible to estimate fewer parameters than a full multinomial logit model, making it more parsimonious and potentially more stable.
-  - *Maintains Ordinality*: Crucially, it still respects the inherent ordering of the outcome categories. This means that the interpretations are still about "moving up or down" the ordered scale, but the strength of that effect can differ at various points along the scale.
-  - *Interpretation*: While more complex than the Proportional Odds model, the interpretation of varying coefficients provides a richer understanding. You might find that a predictor has a strong effect in distinguishing "Low" from "Medium/High" but a much weaker effect in distinguishing "Medium" from "High".
-  
-2. **Multinomial Logit Model**: A multinomial (or polytomous) logit model treats the outcome categories as purely nominal (unordered), even if they are inherently ordinal. It fits a separate binary logistic regression model for each category, comparing it to a chosen reference category. Advantages are:
+1.  **Generalized Ordinal Logit Models** (or Partial Proportional Odds Models): are a flexible extension of the proportional odds model. They allow the coefficients of specific predictor variables to vary across the cumulative logit equations (i.e., across the thresholds), while still forcing other predictors (those that do satisfy the Proportional Odds assumption) to have constant effects. When only a subset of coefficients is allowed to vary, it's specifically called a Partial Proportional Odds (PPO) model. Instead of estimating a single $\beta_i$ for a predictor $X_i$, a PPO model estimates a separate $\beta_{ij}$ for each cumulative logit $r_j$.\
+    The advantages are:
 
- - *No PO Assumption*: It makes no assumption about the effects of predictors being constant across categories; therefore, it automatically handles any PO violation.
- - *Maximum Flexibility*: It is the most flexible approach for categorical outcomes, as it allows for completely different effects for each category comparison.
+-   *Flexibility*: It directly addresses the violation by allowing coefficients to differ where necessary.
+-   *Parsimony* (relative to Multinomial): It retains some of the efficiency of the ordinal model. If only a few predictors violate the Proportional Odds assumption, it is possible to estimate fewer parameters than a full multinomial logit model, making it more parsimonious and potentially more stable.
+-   *Maintains Ordinality*: Crucially, it still respects the inherent ordering of the outcome categories. This means that the interpretations are still about "moving up or down" the ordered scale, but the strength of that effect can differ at various points along the scale.
+-   *Interpretation*: While more complex than the Proportional Odds model, the interpretation of varying coefficients provides a richer understanding. You might find that a predictor has a strong effect in distinguishing "Low" from "Medium/High" but a much weaker effect in distinguishing "Medium" from "High".
 
-However, thre are some disadvantages:
- - *Loss of Ordinal Information*: This can lead to less precise estimates and interpretations that don't fully reflect the nature of your outcome. 
- - *Increased Complexity and Reduced Parsimony*: $(m−1)\cdot k$ coefficients (where $k$ is the number of predictors), which is more than a Proportional Odds model ($k$ predictors) or even a PPO model. This increased number of parameters can lead to:
-    - *Larger standard errors*: Less statistical power.
-    - *Difficulty in interpretation*: Interpreting multiple sets of coefficients and odds ratios can be cumbersome.
-    - *Overfitting*: Especially with smaller sample sizes, estimating too many parameters can lead to models that fit the current data well but generalize poorly.
+2.  **Multinomial Logit Model**: A multinomial (or polytomous) logit model treats the outcome categories as purely nominal (unordered), even if they are inherently ordinal. It fits a separate binary logistic regression model for each category, comparing it to a chosen reference category. Advantages are:
 
+-   *No PO Assumption*: It makes no assumption about the effects of predictors being constant across categories; therefore, it automatically handles any PO violation.
+-   *Maximum Flexibility*: It is the most flexible approach for categorical outcomes, as it allows for completely different effects for each category comparison.
 
-::: {.callout-note}
- It is crucial to recognize that a statistically significant p-value from a formal test, such as the Likelihood Ratio Test, does not always signify a practically meaningful violation of the Proportional Odds assumption, especially in large datasets where even trivial deviations can be flagged. Therefore, graphical inspection becomes invaluable: if the estimated coefficients for a predictor across thresholds are very similar and their confidence intervals largely overlap (indicating near-parallelism), then despite a statistical rejection, the practical implication of the violation might be minimal, allowing one to retain the more parsimonious standard PO model. Conversely, if coefficients vary widely with little to no overlap in their confidence intervals, indicating both statistical and practical significance, then adopting a more flexible model like a Partial Proportional Odds model or, as a last resort, a Multinomial Logit model, becomes necessary to accurately reflect the data.
+However, thre are some disadvantages: - *Loss of Ordinal Information*: This can lead to less precise estimates and interpretations that don't fully reflect the nature of your outcome.
+- *Increased Complexity and Reduced Parsimony*: $(m−1)\cdot k$ coefficients (where $k$ is the number of predictors), which is more than a Proportional Odds model ($k$ predictors) or even a PPO model.
+This increased number of parameters can lead to: - *Larger standard errors*: Less statistical power.
+- *Difficulty in interpretation*: Interpreting multiple sets of coefficients and odds ratios can be cumbersome.
+- *Overfitting*: Especially with smaller sample sizes, estimating too many parameters can lead to models that fit the current data well but generalize poorly.
+
+::: callout-note
+It is crucial to recognize that a statistically significant p-value from a formal test, such as the Likelihood Ratio Test, does not always signify a practically meaningful violation of the Proportional Odds assumption, especially in large datasets where even trivial deviations can be flagged.
+Therefore, graphical inspection becomes invaluable: if the estimated coefficients for a predictor across thresholds are very similar and their confidence intervals largely overlap (indicating near-parallelism), then despite a statistical rejection, the practical implication of the violation might be minimal, allowing one to retain the more parsimonious standard PO model.
+Conversely, if coefficients vary widely with little to no overlap in their confidence intervals, indicating both statistical and practical significance, then adopting a more flexible model like a Partial Proportional Odds model or, as a last resort, a Multinomial Logit model, becomes necessary to accurately reflect the data.
 :::
 
-
-
-
-
-## Coefficients interpretation 
+## Coefficients interpretation
 
 Consider the effect of changing a single predictor, $X_i$, by one unit, while holding all other predictors constant.
 The change in the cumulative log-odds for a one-unit increase in $X_i$ is simply the coefficient $\beta_i$.
@@ -1373,21 +1408,27 @@ To avoid confusion, it is generally easiest and most standard to interpret the r
 -   $\text{exp}(\beta_i)<1$: Higher values of $X_i$ are associated with decreased odds of being in a lower category (or equivalently, increased odds of being in a higher category).
     The shift is towards the end of the ordered scale.
 
+#### Including and Interpreting Qualitative Predictors {.unnumbered .toc-ignore}
 
-#### Including and Interpreting Qualitative Predictors  {.unnumbered .toc-ignore}
-Categorical predictors (nominal or ordinal, when used as predictors) cannot be entered directly into the model as single numbers. Instead, we use dummy variables. For a categorical predictor with $m$ categories, $m−1$ dummy variables will be created. One category is designated as the "reference category". This category does not get its own dummy variable; its effect is absorbed into the intercept ($\alpha_j$). All other categories are then compared to this reference category.
+Categorical predictors (nominal or ordinal, when used as predictors) cannot be entered directly into the model as single numbers.
+Instead, we use dummy variables.
+For a categorical predictor with $m$ categories, $m−1$ dummy variables will be created.
+One category is designated as the "reference category".
+This category does not get its own dummy variable; its effect is absorbed into the intercept ($\alpha_j$).
+All other categories are then compared to this reference category.
 
 Choice Considerations:
 
- - Clinical/Logical Baseline: a naturally occurring baseline (e.g., "No exposure," "Placebo group," "Male gender" if female is the group of interest).
- 
- - Largest Category: often chosen for statistical stability, as there's more data for comparison.
- 
- - First or Last Category: convenient for software defaults.
-Category of Primary Interest: if you want to compare all other groups to a specific group.
-Example: Gender Predictor (Male, Female)
+-   Clinical/Logical Baseline: a naturally occurring baseline (e.g., "No exposure," "Placebo group," "Male gender" if female is the group of interest).
 
-Let's assume "Female" is the reference category, and the ordinal dependent variable is "Self-Rated Health" (1=Poor to 5=Excellent). We create one dummy variable for "Male".
+-   Largest Category: often chosen for statistical stability, as there's more data for comparison.
+
+-   First or Last Category: convenient for software defaults.
+    Category of Primary Interest: if you want to compare all other groups to a specific group.
+    Example: Gender Predictor (Male, Female)
+
+Let's assume "Female" is the reference category, and the ordinal dependent variable is "Self-Rated Health" (1=Poor to 5=Excellent).
+We create one dummy variable for "Male".
 
 $X_{\text{male}}=1$ if Gender = Male
 
@@ -1399,7 +1440,8 @@ $$\text{logit}[P(R\leq r_j∣Gender,Other Predictors)] = \alpha_j + \beta_{male}
 
 The coefficient for a dummy variable represents the difference in the cumulative log-odds between the category represented by the dummy variable and the reference category, holding all other predictors constant.
 
-The Odds Ratio for a dummy variable is $e^{\beta_{\text{dummy}}}$. This Odds Ratio represents the ratio of the odds of being in a lower outcome category for the dummy variable group compared to the reference group, holding other predictors constant.
+The Odds Ratio for a dummy variable is $e^{\beta_{\text{dummy}}}$.
+This Odds Ratio represents the ratio of the odds of being in a lower outcome category for the dummy variable group compared to the reference group, holding other predictors constant.
 
 Example: Gender Predictor (Male, Female) for Self-Rated Health
 
@@ -1410,52 +1452,62 @@ In our example, keeping Female as the reference category, if the estimated $\bet
 
 Interpretation:
 
- - Coefficient ($\beta_{male}=0.4$): Males have, on average, 0.4 units higher cumulative log-odds of being in a lower self-rated health category (e.g., Poor, Fair, Good, Very Good) compared to females, holding other predictors constant.
- 
- - Odds Ratio ($OR_{male}=1.49$): The odds of a male reporting "Poor or Fair or Good or Very Good Health" vs. "Excellent Health" are 1.49 times the odds for a female, holding all other predictors constant. Similarly, the odds of a male reporting "Poor or Fair or Good Health" vs. "Very Good or Excellent Health" are 1.49 times the odds for a female, and so on, across all cumulative splits.
- 
-In simpler terms, males have a higher odds of being in the less healthy (lower) categories of self-rated health compared to females. This effect is assumed to be consistent across the entire range of health categories.
+-   Coefficient ($\beta_{male}=0.4$): Males have, on average, 0.4 units higher cumulative log-odds of being in a lower self-rated health category (e.g., Poor, Fair, Good, Very Good) compared to females, holding other predictors constant.
 
+-   Odds Ratio ($OR_{male}=1.49$): The odds of a male reporting "Poor or Fair or Good or Very Good Health" vs. "Excellent Health" are 1.49 times the odds for a female, holding all other predictors constant.
+    Similarly, the odds of a male reporting "Poor or Fair or Good Health" vs. "Very Good or Excellent Health" are 1.49 times the odds for a female, and so on, across all cumulative splits.
+
+In simpler terms, males have a higher odds of being in the less healthy (lower) categories of self-rated health compared to females.
+This effect is assumed to be consistent across the entire range of health categories.
 
 ### Inference on Parameters {.unnumbered .toc-ignore}
-Once the model is fitted using Maximum Likelihood Estimation, it is necessary to understand the statistical significance and precision of the parameter estimates. 
+
+Once the model is fitted using Maximum Likelihood Estimation, it is necessary to understand the statistical significance and precision of the parameter estimates.
 
 #### Significance Tests for Individual Predictors {.unnumbered .toc-ignore}
 
 To determine if an individual predictor variable has a statistically significant effect on the ordinal outcome, most statistical software packages provide a Wald Test for each predictor.
-The Wald test calculates a z-statistic for each coefficient: $Z= \frac{Estimate}{Std Error}$. 
-This z-statistic is then squared to get $\chi^2$ statistic with 1 degree of freedom: $Wald\chi^2 = Z^2$.  
-A p-value is then calculated based on this $\chi^2$ statistic. The *Null Hypothesis* ($H_0$) is that the coefficient for this predictor is zero (i.e., the predictor has no effect on the cumulative log-odds). The *Alternative Hypothesis* ($H_1$) is that the coefficient for this predictor is not zero (i.e., the predictor has a significant effect).  
-If the p-value $(Pr(>|z|))$ is small (typically less than 0.05), the null hypothesis is rejected. This suggests that the predictor has a statistically significant effect on the ordinal outcome.
-If the p-value is large, we fail to reject the null hypothesis. There's insufficient evidence to conclude that the predictor has a significant effect.
+The Wald test calculates a z-statistic for each coefficient: $Z= \frac{Estimate}{Std Error}$.
+This z-statistic is then squared to get $\chi^2$ statistic with 1 degree of freedom: $Wald\chi^2 = Z^2$.\
+A p-value is then calculated based on this $\chi^2$ statistic.
+The *Null Hypothesis* ($H_0$) is that the coefficient for this predictor is zero (i.e., the predictor has no effect on the cumulative log-odds).
+The *Alternative Hypothesis* ($H_1$) is that the coefficient for this predictor is not zero (i.e., the predictor has a significant effect).\
+If the p-value $(Pr(>|z|))$ is small (typically less than 0.05), the null hypothesis is rejected.
+This suggests that the predictor has a statistically significant effect on the ordinal outcome.
+If the p-value is large, we fail to reject the null hypothesis.
+There's insufficient evidence to conclude that the predictor has a significant effect.
 
 #### Confidence Intervals for the coefficients and the Odds Ratios {.unnumbered .toc-ignore}
 
-While p-values give about statistical significance, confidence intervals (CIs) provide a range of plausible values for the true population parameter, giving information about the precision of our estimates.  
-Interpretation for coefficients ($\beta$): A 95% CI for a coefficient means that if we were to repeat the study many times, 95% of the calculated CIs would contain the true population coefficient. If a CI for $\beta$ does not include 0, then the coefficient is statistically significant at the corresponding alpha level (e.g., 0.05 for a 95% CI).  
-Interpretation for Odds Ratios ($exp^\beta$)):  A 95% CI for an OR means that we are 95% confident that the true population OR lies within this range.  If a CI for an OR does not include 1, then the effect is statistically significant.  
-If the CI is entirely above 1, the predictor significantly increases the odds of a lower outcome.  
+While p-values give about statistical significance, confidence intervals (CIs) provide a range of plausible values for the true population parameter, giving information about the precision of our estimates.\
+Interpretation for coefficients ($\beta$): A 95% CI for a coefficient means that if we were to repeat the study many times, 95% of the calculated CIs would contain the true population coefficient.
+If a CI for $\beta$ does not include 0, then the coefficient is statistically significant at the corresponding alpha level (e.g., 0.05 for a 95% CI).\
+Interpretation for Odds Ratios ($exp^\beta$)): A 95% CI for an OR means that we are 95% confident that the true population OR lies within this range.
+If a CI for an OR does not include 1, then the effect is statistically significant.\
+If the CI is entirely above 1, the predictor significantly increases the odds of a lower outcome.\
 If the CI is entirely below 1, the predictor significantly decreases the odds of a lower outcome (i.e., increases the odds of a higher outcome).
 
 #### Evaluating Model Fit and Performance {.unnumbered .toc-ignore}
 
 There are several statistics to evaluate the Goodness of Fit of a Proportional Odds Model.
 
-In linear regression, the $R^2$ is commonly used to describe the proportion of variance in the dependent variable explained by the independent variables. However, for ordinal logistic regression (and other generalized linear models), the concept of explained variance is more complex, and the traditional $R^2$ is not appropriate because the model relies on a non-linear link function.  
-Instead, **Pseudo R-squared** measures are commonly used and they attempt to provide an analogous quantification of how well the model fits the data, or how much variance it "explains", relative to a null model.  
-They typically compare the log-likelihood of the fitted model ($L_{model}$) to the log-likelihood of a null (intercept-only) model ($L_{null}$).  
+In linear regression, the $R^2$ is commonly used to describe the proportion of variance in the dependent variable explained by the independent variables.
+However, for ordinal logistic regression (and other generalized linear models), the concept of explained variance is more complex, and the traditional $R^2$ is not appropriate because the model relies on a non-linear link function.\
+Instead, **Pseudo R-squared** measures are commonly used and they attempt to provide an analogous quantification of how well the model fits the data, or how much variance it "explains", relative to a null model.\
+They typically compare the log-likelihood of the fitted model ($L_{model}$) to the log-likelihood of a null (intercept-only) model ($L_{null}$).\
 Common types of Pseudo R-squared include:
 
-* McFadden's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)$
+-   McFadden's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)$
 
-* Cox & Snell's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)^{\frac{2}{n}}$
- 
- 
-::: {.callout-warning}
- Do NOT compare directly to linear regression $R^2$: Pseudo R-squared values are typically much lower than $R^2$ values from linear regression models, even for models that fit the data very well. A McFadden's $R^2$ of 0.20 might be considered very good in an ordinal logistic regression context, whereas a linear $R^2$ of 0.20 would often be considered weak.
+-   Cox & Snell's $R^2$: $1−\Big(\frac{L_{model}}{L_{null}}\Big)^{\frac{2}{n}}$
+
+::: callout-warning
+Do NOT compare directly to linear regression $R^2$: Pseudo R-squared values are typically much lower than $R^2$ values from linear regression models, even for models that fit the data very well.
+A McFadden's $R^2$ of 0.20 might be considered very good in an ordinal logistic regression context, whereas a linear $R^2$ of 0.20 would often be considered weak.
 :::
 
-Another widely used statistics is the **Likelihood Ratio Test**, which is used for comparing two nested models: the likelihood of a simpler model (the null hypothesis model) to the likelihood of a more complex model (the alternative hypothesis model) that contains all the parameters of the simpler model plus some additional parameters. If the more complex model significantly improves the likelihood, it suggests that the additional parameters are meaningful.
+Another widely used statistics is the **Likelihood Ratio Test**, which is used for comparing two nested models: the likelihood of a simpler model (the null hypothesis model) to the likelihood of a more complex model (the alternative hypothesis model) that contains all the parameters of the simpler model plus some additional parameters.
+If the more complex model significantly improves the likelihood, it suggests that the additional parameters are meaningful.
 
 Let $L_{restricted}$ be the maximum likelihood of the simpler (nested) model, and $L_{full}$ be the maximum likelihood of the more complex (full) model.
 The likelihood ratio test statistic ($\Lambda$) is:
@@ -1464,36 +1516,34 @@ $$
 \Lambda = - 2 \cdot \log \Bigg(\frac{L_{restricted}}{L_{full}}\Bigg)
 $$
 
-
 Which simplifies to (due to properties of logarithms):
 
 $$
 \Lambda = -2 \cdot [\log(L_{restricted})-\log(L_{full})]
 $$
 
-The Null Hypothesis ($H_0$) of this test is that the additional parameters in the full model do not significantly improve the fit, so the simpler model is enough. The Alternative Hypothesis ($H_1$) is that the more complex model provides a significantly better fit.
-Under the null hypothesis, $\Lambda$ asymptotically follows a chi-squared distribution with degrees of freedom equal to the difference in the number of parameters between the two models.  
+The Null Hypothesis ($H_0$) of this test is that the additional parameters in the full model do not significantly improve the fit, so the simpler model is enough.
+The Alternative Hypothesis ($H_1$) is that the more complex model provides a significantly better fit.
+Under the null hypothesis, $\Lambda$ asymptotically follows a chi-squared distribution with degrees of freedom equal to the difference in the number of parameters between the two models.\
 A large $\Lambda$ value (and small p-value) indicates that the more complex model fits the data significantly better than the simpler model, leading to rejection of $H_0$.
 
-**Information criteria** provide a way to balance model fit with model complexity. They are particularly useful for comparing non-nested models or when there are multiple competing models. Lower values generally indicate a better model. The goal is to find a model that explains the data well without being overly complex.
+**Information criteria** provide a way to balance model fit with model complexity.
+They are particularly useful for comparing non-nested models or when there are multiple competing models.
+Lower values generally indicate a better model.
+The goal is to find a model that explains the data well without being overly complex.
 
-
- - AIC = $-2 \log(L_{model})+2k$  
- where
-   * $L_{model}$ is the maximum likelihood of the fitted model
-   * $k$ is the is the number of parameters in the model,including the intercept and any cut-points in ordinal regression
-   
-   
- - BIC = $-2 \log(L_{model})+k\log(n)$  
- where
-   * $L_{model}$ is the maximum likelihood of the fitted model
-   * $k$ is the is the number of parameters in the model,including the intercept and any cut-points in ordinal regression
-   * $n$ is the sample size
+-   AIC = $-2 \log(L_{model})+2k$\
+    where
+    -   $L_{model}$ is the maximum likelihood of the fitted model
+    -   $k$ is the is the number of parameters in the model,including the intercept and any cut-points in ordinal regression
+-   BIC = $-2 \log(L_{model})+k\log(n)$\
+    where
+    -   $L_{model}$ is the maximum likelihood of the fitted model
+    -   $k$ is the is the number of parameters in the model,including the intercept and any cut-points in ordinal regression
+    -   $n$ is the sample size
 
 AIC tends to favor more complex models and is generally better for prediction accuracy.
 BIC tends to favor simpler, more parsimonious models and is often preferred for model selection when the goal is to identify the "true" underlying model.
-
-
 
 ## Case Study: Analyzing Disciplinary Decisions in Professional Soccer
 
@@ -1503,29 +1553,31 @@ BIC tends to favor simpler, more parsimonious models and is often preferred for 
 :::
 :::
 
-You are working as a data analyst for a sports broadcaster preparing an in-depth segment on referee decisions and player discipline in professional soccer. Your task is to investigate which factors may influence the likelihood and severity of disciplinary actions taken against players during matches.
+You are working as a data analyst for a sports broadcaster preparing an in-depth segment on referee decisions and player discipline in professional soccer.
+Your task is to investigate which factors may influence the likelihood and severity of disciplinary actions taken against players during matches.
 
-To support this analysis, you have access to a dataset containing information on over 2000 player-match observations. The key variable of interest is the level of disciplinary action taken by the referee, which is recorded as an ordinal outcome with three ordered categories:
+To support this analysis, you have access to a dataset containing information on over 2000 player-match observations.
+The key variable of interest is the level of disciplinary action taken by the referee, which is recorded as an ordinal outcome with three ordered categories:
 
- - None: no disciplinary action,
+-   None: no disciplinary action,
 
- - Yellow: the player received a yellow card (warning),
+-   Yellow: the player received a yellow card (warning),
 
- - Red: the player received a red card (ejection from the game).
+-   Red: the player received a red card (ejection from the game).
 
 In addition to the outcome, the dataset includes the following explanatory variables:
 
- - `n_yellow_25`: number of yellow cards received by the player in the 25 games prior to the current match.
+-   `n_yellow_25`: number of yellow cards received by the player in the 25 games prior to the current match.
 
- - `n_red_25`: number of red cards received by the player in the previous 25 games.
+-   `n_red_25`: number of red cards received by the player in the previous 25 games.
 
- - `position`: player’s position in the game — ‘D’ for defender or goalkeeper, ‘M’ for midfielder, ‘S’ for striker.
+-   `position`: player’s position in the game — ‘D’ for defender or goalkeeper, ‘M’ for midfielder, ‘S’ for striker.
 
- - `level`: competitive level of the match — 1 for higher-tier games, 2 for lower-tier games.
+-   `level`: competitive level of the match — 1 for higher-tier games, 2 for lower-tier games.
 
- - `country`: country where the match was played — England or Germany.
+-   `country`: country where the match was played — England or Germany.
 
- - `result`: result of the game for the player’s team — ‘W’ (win), ‘L’ (loss), or ‘D’ (draw).
+-   `result`: result of the game for the player’s team — ‘W’ (win), ‘L’ (loss), or ‘D’ (draw).
 
 Your objective is to model the disciplinary outcome and identify whether past player behavior, position, game context, and other covariates are associated with the referee’s decision, using statistical techniques suitable for ordinal response data.
 
@@ -1536,7 +1588,10 @@ soccer <- read.csv(url)
 head(soccer)
 str(soccer)
 ```
-Before proceeding with the modeling phase, we need to ensure that the variables in our dataset are correctly specified in terms of data type. In particular, since our outcome variable `discipline` represents ordered categories (ranging from no punishment to a red card) we need to explicitly define it as an ordered factor in R. This is essential because many models for ordinal data (e.g., proportional odds models) rely on the natural ordering of the response variable.
+
+Before proceeding with the modeling phase, we need to ensure that the variables in our dataset are correctly specified in terms of data type.
+In particular, since our outcome variable `discipline` represents ordered categories (ranging from no punishment to a red card) we need to explicitly define it as an ordered factor in R.
+This is essential because many models for ordinal data (e.g., proportional odds models) rely on the natural ordering of the response variable.
 
 We can perform this conversion using the `ordered()` function, specifying the levels in increasing order of severity:
 
@@ -1549,11 +1604,14 @@ soccer$discipline <- ordered(soccer$discipline,
 str(soccer)
 ```
 
-In addition to the response variable, several explanatory variables in our dataset are also categorical in nature. Specifically, the variables `position`, `country`, `result`, and `level` represent categories rather than continuous measurements, and should therefore be converted to factors in R.
+In addition to the response variable, several explanatory variables in our dataset are also categorical in nature.
+Specifically, the variables `position`, `country`, `result`, and `level` represent categories rather than continuous measurements, and should therefore be converted to factors in R.
 
-While some of these variables could conceptually be treated as ordered (for example, result might be interpreted as "win > draw > loss", and level as "level 1 > level 2" in terms of competition quality) this is not strictly necessary when using them as predictor variables in a model. In practice, treating them as nominal (unordered) factors often leads to more interpretable model outputs.
+While some of these variables could conceptually be treated as ordered (for example, result might be interpreted as "win \> draw \> loss", and level as "level 1 \> level 2" in terms of competition quality) this is not strictly necessary when using them as predictor variables in a model.
+In practice, treating them as nominal (unordered) factors often leads to more interpretable model outputs.
 
 We can convert them as follows:
+
 ```{r warning=F, error=F, message=F}
 # Convert categorical predictors to factors
 soccer$position <- factor(soccer$position)
@@ -1562,7 +1620,8 @@ soccer$country  <- factor(soccer$country)
 soccer$level    <- factor(soccer$level)
 ```
 
-We are now ready to fit the model using all available predictors. The `clm()` function within the `ordinal` package will automatically handle the creation of dummy variables.
+We are now ready to fit the model using all available predictors.
+The `clm()` function within the `ordinal` package will automatically handle the creation of dummy variables.
 
 ```{r warning=F, error=F, message=F}
 library(ordinal)
@@ -1580,41 +1639,45 @@ summary(model_clm)
 
 As expected, the summary displays:
 
- - A single set of regression coefficients for the predictor variables, assuming the proportional odds assumption holds (i.e., the effects are constant across the thresholds of the ordinal response).
+-   A single set of regression coefficients for the predictor variables, assuming the proportional odds assumption holds (i.e., the effects are constant across the thresholds of the ordinal response).
 
- - Two intercepts (also called cutpoints or thresholds) corresponding to the boundaries between the three ordered categories of the response variable (None, Yellow, Red).
+-   Two intercepts (also called cutpoints or thresholds) corresponding to the boundaries between the three ordered categories of the response variable (None, Yellow, Red).
 
-While the intercepts are required for model estimation, they are typically not the focus of interpretation. Instead, we concentrate on the coefficients of the predictors, which quantify the change in the (log) odds of receiving a higher level of discipline.
-
+While the intercepts are required for model estimation, they are typically not the focus of interpretation.
+Instead, we concentrate on the coefficients of the predictors, which quantify the change in the (log) odds of receiving a higher level of discipline.
 
 ```{r warning=F, error=F, message=F}
 # Odds ratios
 exp(coef(model_clm))
 ```
 
-Based on the p-values, we can now interpret the estimated coefficients for the significant predictors. In each case, we interpret the effect on the odds of receiving a more severe disciplinary action, holding all other variables constant.
+Based on the p-values, we can now interpret the estimated coefficients for the significant predictors.
+In each case, we interpret the effect on the odds of receiving a more severe disciplinary action, holding all other variables constant.
 
- - `n_yellow_25`: Each additional yellow card received in the previous 25 games is associated with a 38% increase in the odds of receiving more severe discipline from the referee.
-(Odds ratio ≈ 1.38)
+-   `n_yellow_25`: Each additional yellow card received in the previous 25 games is associated with a 38% increase in the odds of receiving more severe discipline from the referee.
+    (Odds ratio ≈ 1.38)
 
- - `n_red_25`: Each additional red card in the last 25 games corresponds to a 47% increase in the odds of greater disciplinary action.
-(Odds ratio ≈ 1.47)
+-   `n_red_25`: Each additional red card in the last 25 games corresponds to a 47% increase in the odds of greater disciplinary action.
+    (Odds ratio ≈ 1.47)
 
- - `position`: Players in the Striker (S) role have about 50% lower odds of receiving greater disciplinary action compared to Defenders (D), the reference category.
-(Odds ratio ≈ 0.50)
+-   `position`: Players in the Striker (S) role have about 50% lower odds of receiving greater disciplinary action compared to Defenders (D), the reference category.
+    (Odds ratio ≈ 0.50)
 
 We can conclude that:
 
- - Players on teams that lost have 62% higher odds of greater disciplinary action than those whose team drew.
-(Odds ratio ≈ 1.62)
+-   Players on teams that lost have 62% higher odds of greater disciplinary action than those whose team drew.
+    (Odds ratio ≈ 1.62)
 
- - Players on teams that won have 52% lower odds compared to those on teams that drew.
-(Odds ratio ≈ 0.48)
+-   Players on teams that won have 52% lower odds compared to those on teams that drew.
+    (Odds ratio ≈ 0.48)
 
 ### Simplifying the Model {.unnumbered .toc-ignore}
-We may choose to simplify the model by removing predictors that are not statistically significant and do not substantially improve model fit. In this case, both level and country show little impact, either in terms of coefficient size or statistical significance.
 
-We can refit the model without these variables and compare the AIC (Akaike Information Criterion) values. If the simpler model yields a comparable AIC, we may prefer it for interpretability and parsimony:
+We may choose to simplify the model by removing predictors that are not statistically significant and do not substantially improve model fit.
+In this case, both level and country show little impact, either in terms of coefficient size or statistical significance.
+
+We can refit the model without these variables and compare the AIC (Akaike Information Criterion) values.
+If the simpler model yields a comparable AIC, we may prefer it for interpretability and parsimony:
 
 ```{r warning=F, error=F, message=F}
 # Reduced model (without level and country)
@@ -1656,23 +1719,27 @@ data.frame(
 
 ```
 
- - McFadden's $R^2$  is conceptually similar to $R^2$ in linear models but usually much smaller in value.
+-   McFadden's $R^2$ is conceptually similar to $R^2$ in linear models but usually much smaller in value.
 
- - Cox–Snell and Nagelkerke are rescaled to be more interpretable on a 0–1 scale.
+-   Cox–Snell and Nagelkerke are rescaled to be more interpretable on a 0–1 scale.
 
- - AIC helps compare models: lower values indicate better parsimony.
+-   AIC helps compare models: lower values indicate better parsimony.
 
 ### Testing the proportional odds assumption {.unnumbered .toc-ignore}
 
-As we discussed earlier, the suitability of a proportional odds logistic regression model depends on the assumption that each input variable has a similar effect on the different levels of the ordinal outcome variable. It is very important to check that this assumption is not violated before proceeding to declare the results of a proportional odds model valid. There are two common approaches to validating the proportional odds assumption, and we will go through each of them here.
+As we discussed earlier, the suitability of a proportional odds logistic regression model depends on the assumption that each input variable has a similar effect on the different levels of the ordinal outcome variable.
+It is very important to check that this assumption is not violated before proceeding to declare the results of a proportional odds model valid.
+There are two common approaches to validating the proportional odds assumption, and we will go through each of them here.
 
- - Nominal Test: use `nominal_test()`:
+-   Nominal Test: use `nominal_test()`:
+
 ```{r warning=F, error=F, message=F}
 nominal_test(model_clm_reduced)
 ```
-  * Null hypothesis ($H_0$): PO assumption holds
 
-  * A small p-value (e.g. < 0.05) indicates violation of the assumption for that variable.
+-   Null hypothesis ($H_0$): PO assumption holds
+
+-   A small p-value (e.g. \< 0.05) indicates violation of the assumption for that variable.
 
 Let's look at the Confidence Intervals:
 
@@ -1682,116 +1749,180 @@ confint(model_clm_reduced, type = "Wald")
 
 The confidence interval for `positionM` includes zero, meaning it's not statistically significant in this Proportional Odds (PO) model.
 
-This finding, combined with the `nominal_test` (which showed a violation of the PO assumption for position), is crucial. It means the assumption that position's effect is constant across all outcome categories is likely false.
+This finding, combined with the `nominal_test` (which showed a violation of the PO assumption for position), is crucial.
+It means the assumption that position's effect is constant across all outcome categories is likely false.
 
-Therefore, the single coefficient for `positionM` from this model is an 'average' effect, which might not accurately represent its true influence at different outcome thresholds. Interpret this insignificance with caution.
+Therefore, the single coefficient for `positionM` from this model is an 'average' effect, which might not accurately represent its true influence at different outcome thresholds.
+Interpret this insignificance with caution.
 
 For a more accurate understanding of position's impact, we should use a Generalized Ordinal Logistic Model (Partial PO Model), allowing its effect to vary across categories.
 
 <!-- - Graphical Inspection -->
+
 <!-- ```{r warning=F, error=F, message=F} -->
+
 <!-- library(ordinal) -->
+
 <!-- library(ggplot2) -->
+
 <!-- library(dplyr) -->
+
 <!-- library(tidyr) -->
 
 <!-- # Supponiamo che model_clm sia già il tuo modello "semplice" -->
+
 <!-- model_clm <- clm(discipline ~ n_yellow_25 + n_red_25 + position + result, data = soccer) -->
 
 <!-- # Estrai coefficienti -->
+
 <!-- thresholds <- model_clm$Theta              # soglie (intercette cumulative) -->
+
 <!-- beta_n_yellow <- coef(model_clm)["n_yellow_25"]  # coefficiente principale -->
 
 <!-- # Simula una sequenza di valori del predittore continuo -->
+
 <!-- x_vals <- seq(min(soccer$n_yellow_25), max(soccer$n_yellow_25), length.out = 100) -->
 
 <!-- # Calcola le log-odds cumulative per ogni soglia -->
+
 <!-- plot_data <- data.frame( -->
+
 <!--   x = x_vals, -->
+
 <!--   Threshold_1 = thresholds[1] - beta_n_yellow * x_vals, -->
+
 <!--   Threshold_2 = thresholds[2] - beta_n_yellow * x_vals -->
+
 <!-- ) -->
 
 <!-- # Porta in formato long -->
+
 <!-- plot_data_long <- plot_data %>% -->
+
 <!--   pivot_longer( -->
+
 <!--     cols = starts_with("Threshold_"), -->
+
 <!--     names_to = "Cumulative_Log_Odds_Curve", -->
+
 <!--     values_to = "Log_Odds" -->
+
 <!--   ) -->
 
 <!-- # Grafico -->
-<!-- ggplot(plot_data_long, aes(x = x, y = Log_Odds, color = Cumulative_Log_Odds_Curve)) + -->
-<!--   geom_line(size = 1.2) + -->
-<!--   labs( -->
-<!--     title = "Verifica grafica dell’assunzione di proportional odds", -->
-<!--     subtitle = "Linee parallele delle log-odds cumulative → assunzione plausibile", -->
-<!--     x = "Numero di cartellini gialli nelle 25 partite precedenti", -->
-<!--     y = "Log-odds cumulative", -->
-<!--     color = "Soglia cumulativa" -->
-<!--   ) + -->
-<!--   theme_minimal() + -->
-<!--   scale_color_brewer(palette = "Set1", labels = c("P(Disciplina ≤ Yellow)", "P(Disciplina ≤ Red)")) + -->
-<!--   theme(legend.position = "bottom") -->
 
+<!-- ggplot(plot_data_long, aes(x = x, y = Log_Odds, color = Cumulative_Log_Odds_Curve)) + -->
+
+<!--   geom_line(size = 1.2) + -->
+
+<!--   labs( -->
+
+<!--     title = "Verifica grafica dell’assunzione di proportional odds", -->
+
+<!--     subtitle = "Linee parallele delle log-odds cumulative → assunzione plausibile", -->
+
+<!--     x = "Numero di cartellini gialli nelle 25 partite precedenti", -->
+
+<!--     y = "Log-odds cumulative", -->
+
+<!--     color = "Soglia cumulativa" -->
+
+<!--   ) + -->
+
+<!--   theme_minimal() + -->
+
+<!--   scale_color_brewer(palette = "Set1", labels = c("P(Disciplina ≤ Yellow)", "P(Disciplina ≤ Red)")) + -->
+
+<!--   theme(legend.position = "bottom") -->
 
 <!-- ``` -->
 
-
 <!-- ```{r warning=F, error=F, message=F} -->
+
 <!-- library(ordinal) -->
+
 <!-- library(ggplot2) -->
+
 <!-- library(dplyr) -->
+
 <!-- library(tidyr) -->
 
 <!-- # Prepara i dati con valori medi per le variabili continue, e livelli per position -->
+
 <!-- new_data <- expand.grid( -->
+
 <!--   position = levels(soccer$position), -->
+
 <!--   n_yellow_25 = mean(soccer$n_yellow_25, na.rm = TRUE), -->
+
 <!--   n_red_25 = mean(soccer$n_red_25, na.rm = TRUE), -->
+
 <!--   result = levels(soccer$result)[1]  # primo livello di result, ad es. "D" -->
+
 <!-- ) -->
 
 <!-- # Predici le probabilità cumulative (attenzione al tipo "cum.prob") -->
+
 <!-- pred <- predict(model_clm_reduced, newdata = new_data, type = "cum.prob") -->
 
 <!-- # Trasforma in data frame, aggiungi la posizione -->
+
 <!-- plot_data <- as.data.frame(pred) -->
+
 <!-- plot_data$position <- new_data$position -->
 
 <!-- # Metti in formato long per ggplot -->
+
 <!-- plot_data_long <- pivot_longer(plot_data, cols = -position, -->
+
 <!--                               names_to = "Threshold", values_to = "Cumulative_Prob") -->
 
 <!-- # Ordina posizione come fattore -->
+
 <!-- plot_data_long$position <- factor(plot_data_long$position, levels = levels(soccer$position)) -->
 
 <!-- # Calcola log-odds -->
+
 <!-- plot_data_long <- plot_data_long %>% -->
+
 <!--   mutate(Log_Odds = log(Cumulative_Prob / (1 - Cumulative_Prob))) -->
 
 <!-- # Grafico -->
+
 <!-- ggplot(plot_data_long, aes(x = position, y = Log_Odds, group = Threshold, color = Threshold)) + -->
+
 <!--   geom_line(aes(linetype = Threshold), size = 1.2) + -->
+
 <!--   geom_point(size = 2) + -->
+
 <!--   labs( -->
+
 <!--     title = "Log-odds cumulative per soglia in funzione di 'position'", -->
+
 <!--     subtitle = "Verifica grafica dell’assunzione di proportional odds", -->
+
 <!--     x = "Posizione", -->
+
 <!--     y = "Log-odds cumulative", -->
+
 <!--     color = "Soglia cumulativa" -->
+
 <!--   ) + -->
+
 <!--   theme_minimal() + -->
+
 <!--   scale_color_brewer(palette = "Dark2") + -->
+
 <!--   theme(legend.position = "bottom") -->
 
 <!-- ``` -->
 
-
-
 ## Beyond the Proportional Odds Logit Model
 
-The  Proportional Odds Model using the logit link function is the most common and often the default choice for analyzing ordinal data due to its interpretability (log-odds) and computational stability. However, the Proportional Odds Model is just one member of a broader family of models for ordinal outcomes. The specific choice of model can influence the interpretation and the fit to the data. Several alternatives exist.
+The Proportional Odds Model using the logit link function is the most common and often the default choice for analyzing ordinal data due to its interpretability (log-odds) and computational stability.
+However, the Proportional Odds Model is just one member of a broader family of models for ordinal outcomes.
+The specific choice of model can influence the interpretation and the fit to the data.
+Several alternatives exist.
 
 ### Alternative Link Functions for Cumulative Models
 
@@ -1801,27 +1932,21 @@ The general form of a cumulative model is:
 
 $$
 g[P(R \leq r_j)] = \alpha_j - \boldsymbol{\beta}^T\boldsymbol{X}
-$$
-where
- - $P(R \leq r_j)$ is the cumulative probability of being in category $j$ or lower
- - $g(\cdot)$ is the link function
- - $\alpha_j$ are the category-specific intercepts
- - $\boldsymbol{\beta}$ is the vector of regression coefficients for the predictors
- - $\boldsymbol{X}$ is the vector of predictor variables
- 
- The link function can be a logit function, as shown previously, but it may be another function.
- 
- **Probit Link**
+$$ where - $P(R \leq r_j)$ is the cumulative probability of being in category $j$ or lower - $g(\cdot)$ is the link function - $\alpha_j$ are the category-specific intercepts - $\boldsymbol{\beta}$ is the vector of regression coefficients for the predictors - $\boldsymbol{X}$ is the vector of predictor variables
+
+The link function can be a logit function, as shown previously, but it may be another function.
+
+**Probit Link**
 
 The probit link uses the inverse of the standard normal cumulative distribution function ($\Phi^{-1}$) and it models the cumulative probabilities on a scale that corresponds to the normal distribution
 
 $$
 \text{probit}[P(R\leq r_j)] = \Phi^{-1}[P(R\leq r_j)] =  \alpha_j - \boldsymbol{\beta}^T\boldsymbol{X}
-$$
-The coefficients are interpreted in terms of standard deviation units of the underlying latent normal variable. A one-unit increase in $X_k$ leads to a $\beta_k$ standard deviation change in the latent variable. They don't have the direct odds ratio interpretation of the logit model.
+$$ The coefficients are interpreted in terms of standard deviation units of the underlying latent normal variable.
+A one-unit increase in $X_k$ leads to a $\beta_k$ standard deviation change in the latent variable.
+They don't have the direct odds ratio interpretation of the logit model.
 
-This link function is often preferred when there's a theoretical belief that the underlying continuous variable driving the ordinal outcome is normally distributed. 
-
+This link function is often preferred when there's a theoretical belief that the underlying continuous variable driving the ordinal outcome is normally distributed.
 
 **Log-log Link**
 
@@ -1831,12 +1956,13 @@ $$
 \text{loglog}[P(R\leq r_j)] =  \log(-\log(P(R\leq r_j))) =  \alpha_j - \boldsymbol{\beta}^T\boldsymbol{X}
 $$
 
+This link is used when the probability of the lowest category is expected to decrease very quickly, or when the process leading to higher categories accelerates rapidly.
 
-This link is used when the probability of the lowest category is expected to decrease very quickly, or when the process leading to higher categories accelerates rapidly. 
+The interpretation is less straightforward than logit.
+It's more sensitive to changes in the upper tail of the probability distribution.
+It implies that the probability of being in a lower category decreases rapidly.
 
-The interpretation is less straightforward than logit. It's more sensitive to changes in the upper tail of the probability distribution. It implies that the probability of being in a lower category decreases rapidly.
-
-## Alternative Model Structures 
+## Alternative Model Structures
 
 Beyond altering the link function for cumulative probabilities, it is possible to change what probabilities the model is trying to explain.
 
@@ -1846,48 +1972,57 @@ Instead of modeling cumulative probabilities, the adjacent categories model focu
 
 $$
 \log \Bigg(\frac{P(R = r_j)}{P(R = r_{j+1})}\Bigg) = \alpha_j - \boldsymbol{\beta}^T\boldsymbol{X} \qquad \text{for} \qquad j = 1,\dots,m-1
-$$
- In this model, the coefficients are not constrained to be the same across all adjacent log-odds comparisons. This means it does not assume the proportional odds assumption. Each $\alpha_j$ is a separate intercept for that specific adjacent comparison, and each $\beta_j$  is a separate vector of coefficients. So, for each pair of adjacent categories $j$ and $j+1$, $\text{exp}(\beta_k)$ is the odds ratio of being in category $j$ versus $j+1$ for a one-unit change in $X_k$. 
- 
- 
- The advantage of this model is that it does not impose the proportional odds assumption, so it is more flexible compared to the Proportional Odds Model. However, it leads to the estimation of $m-1$ sets of predictors which are many more parameters compared to the Proportional Odds Model; this can lead ot larger standard errors and require larger sample sizes.
- 
- 
+$$ In this model, the coefficients are not constrained to be the same across all adjacent log-odds comparisons.
+This means it does not assume the proportional odds assumption.
+Each $\alpha_j$ is a separate intercept for that specific adjacent comparison, and each $\beta_j$ is a separate vector of coefficients.
+So, for each pair of adjacent categories $j$ and $j+1$, $\text{exp}(\beta_k)$ is the odds ratio of being in category $j$ versus $j+1$ for a one-unit change in $X_k$.
+
+The advantage of this model is that it does not impose the proportional odds assumption, so it is more flexible compared to the Proportional Odds Model.
+However, it leads to the estimation of $m-1$ sets of predictors which are many more parameters compared to the Proportional Odds Model; this can lead ot larger standard errors and require larger sample sizes.
+
 **Continuation Ratio Logit Model**
 
-This model focuses on the log-odds of being in category $j$ versus being in a higher category, given that the outcome is at least $j$. It's a sequential modeling approach.
-The model is expressed as:
-$$ 
+This model focuses on the log-odds of being in category $j$ versus being in a higher category, given that the outcome is at least $j$.
+It's a sequential modeling approach.
+The model is expressed as: $$ 
 \log\left(\frac{P(R = r_j \mid R \ge r_j)}{P(R > r_j \mid R \ge r_j)}\right) = \alpha_j - \boldsymbol{\beta}_j^T \mathbf{X} \quad \text{for } j=1, \dots, m-1 
-$$
-Where:
+$$ Where:
 
-  - $P(Y = j \mid Y \ge j)$ is the conditional probability of observing outcome category $j$, given that the outcome is in category $j$ or higher.
-  - $P(Y > j \mid Y \ge j)$ is the conditional probability of observing an outcome category higher than $j$, given that the outcome is in category $j$ or higher.
-  - $\alpha_j$ is the category-specific intercept for the $j$-th comparison.
-  - $\boldsymbol{\beta}_j$ is the vector of regression coefficients for the predictors $\mathbf{x}$ for the $j$-th comparison.
+-   $P(Y = j \mid Y \ge j)$ is the conditional probability of observing outcome category $j$, given that the outcome is in category $j$ or higher.
+-   $P(Y > j \mid Y \ge j)$ is the conditional probability of observing an outcome category higher than $j$, given that the outcome is in category $j$ or higher.
+-   $\alpha_j$ is the category-specific intercept for the $j$-th comparison.
+-   $\boldsymbol{\beta}_j$ is the vector of regression coefficients for the predictors $\mathbf{x}$ for the $j$-th comparison.
 
-The exponential of a coefficient, $\exp(\beta_{jk})$, represents the odds ratio of observing category $j$ versus observing a category higher than $j$, given that the outcome is at least $j$, for a one-unit increase in predictor $x_k$. Crucially, the coefficients $\boldsymbol{\beta}_j$ can vary across these sequential comparisons (i.e., for different values of $j$). This means the effect of a predictor might differ depending on which step of the ordinal scale is examined.
+The exponential of a coefficient, $\exp(\beta_{jk})$, represents the odds ratio of observing category $j$ versus observing a category higher than $j$, given that the outcome is at least $j$, for a one-unit increase in predictor $x_k$.
+Crucially, the coefficients $\boldsymbol{\beta}_j$ can vary across these sequential comparisons (i.e., for different values of $j$).
+This means the effect of a predictor might differ depending on which step of the ordinal scale is examined.
 
-Similar to the adjacent categories model, the continuation ratio model typically does not assume proportional odds. This means it does not constrain the $\boldsymbol{\beta}$ coefficients to be constant across all sequential comparisons. However, a "proportional odds" variant can be imposed on the continuation ratios by forcing $\boldsymbol{\beta}$ to be constant across all $j$.
+Similar to the adjacent categories model, the continuation ratio model typically does not assume proportional odds.
+This means it does not constrain the $\boldsymbol{\beta}$ coefficients to be constant across all sequential comparisons.
+However, a "proportional odds" variant can be imposed on the continuation ratios by forcing $\boldsymbol{\beta}$ to be constant across all $j$.
 
+This model is especially suited for situations where the ordinal categories represent a natural progression or a series of choices.
+Common applications include:
 
-This model is especially suited for situations where the ordinal categories represent a natural progression or a series of choices. Common applications include:
+-   **Educational Attainment**: Modeling the odds of graduating from high school versus continuing to college, then the odds of completing college versus pursuing graduate studies, and so on.
 
-  - **Educational Attainment**: Modeling the odds of graduating from high school versus continuing to college, then the odds of completing college versus pursuing graduate studies, and so on.
-  
-  - **Disease Progression**: Analyzing the odds of a patient staying at their current disease stage versus progressing to the next, more severe stage.
-  
-  - **Consumer Behavior**: Understanding the odds of a customer making a basic purchase versus upgrading to a premium version.
+-   **Disease Progression**: Analyzing the odds of a patient staying at their current disease stage versus progressing to the next, more severe stage.
 
+-   **Consumer Behavior**: Understanding the odds of a customer making a basic purchase versus upgrading to a premium version.
 
 **References**
 
-- Agresti, A. (2010). Analysis of ordinal categorical data. John Wiley & Sons.
+-   Agresti, A.
+    (2010).
+    Analysis of ordinal categorical data.
+    John Wiley & Sons.
 
-- McNulty, K. (2021). Handbook of regression modeling in people analytics: with examples in R and Python. Chapman and Hall/CRC.
-  
-#  Beyond Standard Approaches: Modeling Ordinal Data with CUB Models
+-   McNulty, K.
+    (2021).
+    Handbook of regression modeling in people analytics: with examples in R and Python.
+    Chapman and Hall/CRC.
+
+# Beyond Standard Approaches: Modeling Ordinal Data with CUB Models
 
 ::: {.content-visible when-format="html"}
 ::: column-margin
@@ -1897,57 +2032,69 @@ This model is especially suited for situations where the ordinal categories repr
 :::
 :::
 
- While powerful and widely used,  Ordered logit models operate under specific assumptions:
+While powerful and widely used, Ordered logit models operate under specific assumptions:
 
- - **Proportional Odds Assumption**: This assumption can be restrictive and, if violated, can lead to misleading conclusions.
- 
- - **Latent Variable Interpretation**: While mathematically convenient, the interpretation of the latent variable might not always align perfectly with the psychological process of how an individual actually chooses an ordered category. The continuous latent variable often represents an underlying "utility" or "propensity," but it doesn't explicitly account for aspects like uncertainty or indecision in the response process.
- 
+-   **Proportional Odds Assumption**: This assumption can be restrictive and, if violated, can lead to misleading conclusions.
+
+-   **Latent Variable Interpretation**: While mathematically convenient, the interpretation of the latent variable might not always align perfectly with the psychological process of how an individual actually chooses an ordered category.
+    The continuous latent variable often represents an underlying "utility" or "propensity," but it doesn't explicitly account for aspects like uncertainty or indecision in the response process.
+
 These limitations highlight a need for alternative modeling frameworks that can capture the nuanced complexities inherent in how individuals respond to ordinal scales.
 
-There is a clear and compelling need for specialized statistical models designed to capture the unique characteristics of ordinal data and, importantly, to reflect the underlying cognitive and psychological processes through which individuals select a particular ordered category. This is where CUB models (Combination of a Uniform and a shifted Binomial random variable) come into play.
+There is a clear and compelling need for specialized statistical models designed to capture the unique characteristics of ordinal data and, importantly, to reflect the underlying cognitive and psychological processes through which individuals select a particular ordered category.
+This is where CUB models (Combination of a Uniform and a shifted Binomial random variable) come into play.
 
-CUB models, primarily developed by Domenico Piccolo and collaborators starting in the early 2000s, offer a distinct and innovative approach to modeling ordinal data. They stand apart from traditional methods by explicitly incorporating psychological interpretations into their statistical structure.
+CUB models, primarily developed by Domenico Piccolo and collaborators starting in the early 2000s, offer a distinct and innovative approach to modeling ordinal data.
+They stand apart from traditional methods by explicitly incorporating psychological interpretations into their statistical structure.
 
-At their core, CUB models are mixture models specifically tailored for ordinal data. The fundamental idea is that a respondent's observed rating is not solely a direct and deterministic mapping of their true "feeling" or "utility." Instead, it is also significantly affected by an element of "uncertainty" or "indecision" that can influence the final choice. This acknowledgment of psychological complexity in the response process is what makes CUB models particularly insightful for rating data.
+At their core, CUB models are mixture models specifically tailored for ordinal data.
+The fundamental idea is that a respondent's observed rating is not solely a direct and deterministic mapping of their true "feeling" or "utility." Instead, it is also significantly affected by an element of "uncertainty" or "indecision" that can influence the final choice.
+This acknowledgment of psychological complexity in the response process is what makes CUB models particularly insightful for rating data.
 
 ## The Psychological Reasons Behind the CUB Model
 
-The innovation of the CUB model lies in its attempt to statistically represent two fundamental psychological components that influence a respondent's choice on an ordinal scale. The model posits that an observed rating $R$ is a probabilistic outcome of a decision process that weighs two components.
+The innovation of the CUB model lies in its attempt to statistically represent two fundamental psychological components that influence a respondent's choice on an ordinal scale.
+The model posits that an observed rating $R$ is a probabilistic outcome of a decision process that weighs two components.
 
 **1. Feeling (or Attraction/Preference)**
 
-This component represents the conscious, rational, and deliberative aspect of the decision-making process. It reflects the respondent's genuine evaluation, opinion, or perception regarding the item being rated. The "feeling" directs the respondent towards a specific category on the scale that best aligns with their internal assessment. This is the component that captures the respondent's true position or stance on the matter at hand.
+This component represents the conscious, rational, and deliberative aspect of the decision-making process.
+It reflects the respondent's genuine evaluation, opinion, or perception regarding the item being rated.
+The "feeling" directs the respondent towards a specific category on the scale that best aligns with their internal assessment.
+This is the component that captures the respondent's true position or stance on the matter at hand.
 
 Depending on the specific context of the rating, "feeling" can be interpreted as:
 
-- **Agreement/Disagreement**: How much a person agrees or disagrees with a statement.
+-   **Agreement/Disagreement**: How much a person agrees or disagrees with a statement.
 
-- **Satisfaction/Dissatisfaction**: The level of contentment or discontent with a product, service, or experience.
+-   **Satisfaction/Dissatisfaction**: The level of contentment or discontent with a product, service, or experience.
 
-- **Liking/Disliking**: The degree of preference or aversion towards an item.
+-   **Liking/Disliking**: The degree of preference or aversion towards an item.
 
-- **Perceived quality, importance, risk, etc.**: The subjective assessment of various attributes.
+-   **Perceived quality, importance, risk, etc.**: The subjective assessment of various attributes.
 
 In essence, the feeling component drives the respondent towards a particular region of the ordinal scale, reflecting their underlying preference or "attraction" to certain categories.
 
 **2. Uncertainty (or Indecision/Fuzziness)**
 
-This component captures the hesitation, randomness, or lack of decisiveness that can accompany the choice process. It acknowledges a crucial psychological reality: respondents may not always have a perfectly clear and precise mapping of their internal feeling onto the provided scale categories. This can introduce a degree of randomness or "noise" into the selection process.
+This component captures the hesitation, randomness, or lack of decisiveness that can accompany the choice process.
+It acknowledges a crucial psychological reality: respondents may not always have a perfectly clear and precise mapping of their internal feeling onto the provided scale categories.
+This can introduce a degree of randomness or "noise" into the selection process.
 
 Sources of this uncertainty can be varied and include:
 
-- **Lack of Information or Knowledge**: The respondent might not have sufficient information to form a strong opinion about the item being rated.
+-   **Lack of Information or Knowledge**: The respondent might not have sufficient information to form a strong opinion about the item being rated.
 
-- **Ambiguity**: The question wording or the definition of the scale categories might be unclear, leading to confusion.
+-   **Ambiguity**: The question wording or the definition of the scale categories might be unclear, leading to confusion.
 
-- **Personal Tendencies**: Some individuals may inherently be more indecisive or tend to use certain parts of a scale (e.g., sticking to the middle categories).
+-   **Personal Tendencies**: Some individuals may inherently be more indecisive or tend to use certain parts of a scale (e.g., sticking to the middle categories).
 
-- **Cognitive Effort/Satisficing**: In long surveys or under time pressure, respondents might engage in "satisficing" behavior. Instead of expending full mental energy to find the optimal category, they might pick a plausible but not necessarily precise one to save cognitive effort.
+-   **Cognitive Effort/Satisficing**: In long surveys or under time pressure, respondents might engage in "satisficing" behavior.
+    Instead of expending full mental energy to find the optimal category, they might pick a plausible but not necessarily precise one to save cognitive effort.
 
-- **Time Pressure or Fatigue**: Being rushed or tired can reduce the ability to make a precise decision.
+-   **Time Pressure or Fatigue**: Being rushed or tired can reduce the ability to make a precise decision.
 
-- **Emotional State or Mood**: A respondent's transient emotional state can also introduce variability into their choices.
+-   **Emotional State or Mood**: A respondent's transient emotional state can also introduce variability into their choices.
 
 The uncertainty component effectively describes the probability that the respondent's choice is influenced by random factors rather than a specific preference.
 
@@ -1955,75 +2102,87 @@ The uncertainty component effectively describes the probability that the respond
 
 The basic CUB model, designed for m ordered categories (typically $r=1,2,\dots,m$), is a finite mixture of two discrete probability distributions:
 
-- A shifted Binomial distribution to model the feeling (or attraction/preference) component.
-- A discrete Uniform distribution to model the uncertainty (or indecision/fuzziness) component.
+-   A shifted Binomial distribution to model the feeling (or attraction/preference) component.
+-   A discrete Uniform distribution to model the uncertainty (or indecision/fuzziness) component.
 
 The Probability Mass Function (PMF) for an observed rating $R=r$ is given by:
 
 $$
 P(R = r \mid \pi,\xi) = \pi B(r \mid\xi) + (1-\pi)U(r)
-$$
-where the elements of the mixture are: 
+$$ where the elements of the mixture are:
 
-- $m$: This is the number of ordered categories on the scale. For instance, if a scale ranges from "1 = Strongly Disagree" to "5 = Strongly Agree," then $m=5$.
- - $r$: This denotes the selected category by a respondent, where $r\in \{ 1,2,…,m\}$.
+-   $m$: This is the number of ordered categories on the scale.
+    For instance, if a scale ranges from "1 = Strongly Disagree" to "5 = Strongly Agree," then $m=5$.
 
- - $\pi \in (0,1]$, acts as a mixture weight. $\pi$ represents the probability that the observed choice is driven by the feeling component (i.e., the shifted Binomial distribution).  
-Consequently, $(1−\pi)$ is called **Uncertainty parameter** and represents the probability that the observed choice is driven by the uncertainty component (i.e., the discrete Uniform distribution). A higher value of $(1−\pi)$ means greater indecision or randomness in the response, indicating that the uniform component has a stronger influence.
+-   $r$: This denotes the selected category by a respondent, where $r\in \{ 1,2,…,m\}$.
 
- - $\xi \in [0,1]$, is directly related to the shifted Binomial distribution and determines the location of the "feeling".  
-More intuitively, $(1−\xi)$ is often considered the direct measure of "feeling", indeed it is called **Feeling parameter**.  
-    * If $(1−\xi)$ is high (e.g., close to 1, meaning $\xi$ is close to 0), there's a strong underlying feeling towards the higher end of the scale.
-    * If $(1−\xi)$ is low (e.g., close to 0, meaning $\xi$ is close to 1), there's a strong underlying feeling towards the lower end of the scale.
-    * If $(1−\xi) = 0.5$ (meaning $\xi=0.5$), the feeling component is neutral or centered, implying a symmetric preference if not for the influence of uncertainty.
- 
- 
-- $U(r)$: This is the probability of choosing category $r$ according to a discrete Uniform distribution.  
-For any category $r\in\{1,2,…,m\}$, $U(r)= \frac{1}{m}$.  
-This component represents complete randomness or a lack of specific preference among the $m$ categories. If a respondent is entirely uncertain or indecisive, their response is essentially a random pick from the available options.
+-   $\pi \in (0,1]$, acts as a mixture weight. $\pi$ represents the probability that the observed choice is driven by the feeling component (i.e., the shifted Binomial distribution).\
+    Consequently, $(1−\pi)$ is called **Uncertainty parameter** and represents the probability that the observed choice is driven by the uncertainty component (i.e., the discrete Uniform distribution).
+    A higher value of $(1−\pi)$ means greater indecision or randomness in the response, indicating that the uniform component has a stronger influence.
 
-- $B(r∣\xi)$: This is the probability of choosing category $r$ according to a shifted Binomial distribution.  
-Specifically, this refers to $P(X=r−1)$ where $X\sim Bin(m−1,1−\xi)$. The "shifted" aspect arises because the rating scale typically starts from 1, while a standard Binomial distribution's trials start from 0. Thus, to model a choice of $r$ on a scale $1,…,m$, we consider $r−1$ successes out of $m−1$ trials.  
-So, the PMF is:
+-   $\xi \in [0,1]$, is directly related to the shifted Binomial distribution and determines the location of the "feeling".\
+    More intuitively, $(1−\xi)$ is often considered the direct measure of "feeling", indeed it is called **Feeling parameter**.
+
+    -   If $(1−\xi)$ is high (e.g., close to 1, meaning $\xi$ is close to 0), there's a strong underlying feeling towards the higher end of the scale.
+    -   If $(1−\xi)$ is low (e.g., close to 0, meaning $\xi$ is close to 1), there's a strong underlying feeling towards the lower end of the scale.
+    -   If $(1−\xi) = 0.5$ (meaning $\xi=0.5$), the feeling component is neutral or centered, implying a symmetric preference if not for the influence of uncertainty.
+
+-   $U(r)$: This is the probability of choosing category $r$ according to a discrete Uniform distribution.\
+    For any category $r\in\{1,2,…,m\}$, $U(r)= \frac{1}{m}$.\
+    This component represents complete randomness or a lack of specific preference among the $m$ categories.
+    If a respondent is entirely uncertain or indecisive, their response is essentially a random pick from the available options.
+
+-   $B(r∣\xi)$: This is the probability of choosing category $r$ according to a shifted Binomial distribution.\
+    Specifically, this refers to $P(X=r−1)$ where $X\sim Bin(m−1,1−\xi)$.
+    The "shifted" aspect arises because the rating scale typically starts from 1, while a standard Binomial distribution's trials start from 0.
+    Thus, to model a choice of $r$ on a scale $1,…,m$, we consider $r−1$ successes out of $m−1$ trials.\
+    So, the PMF is:
 
 $$
 B(r\mid\xi)=\binom{m-1}{r-1}(1-\xi)^{r-1}\xi^{m-r}
 $$
- 
-This component models the feeling towards a particular category, allowing for various shapes (unimodal, skewed left/right, or even U-shaped if $(1−\xi)$ is extremely close to 0 or 1, though the latter is less common in direct "feeling" interpretation). It captures where the respondent's underlying preference lies on the scale.
 
+This component models the feeling towards a particular category, allowing for various shapes (unimodal, skewed left/right, or even U-shaped if $(1−\xi)$ is extremely close to 0 or 1, though the latter is less common in direct "feeling" interpretation).
+It captures where the respondent's underlying preference lies on the scale.
 
-Finally, the CUB model can be written as:
-$$
+Finally, the CUB model can be written as: $$
 P(R = r \mid \pi,\xi) = \pi \binom{m-1}{r-1}(1-\xi)^{r-1}\xi^{m-r} + (1-\pi) \frac{1}{m}
 $$
 
 ### Interpretation of Parameters
+
 The feeling $(1-\xi)$ and the uncertainty $(1-\pi)$ parameters are not merely statistical quantities; they have direct psychological meanings related to the respondent's decision process.
 
 **The Uncertainty Parameter**
 
-
 It directly quantifies the level of uncertainty or indecision in the respondent's choice.
 
- - If  $(1-\pi = 0)$ (i.e., $\pi = 1$) it means that the observed choice is entirely determined by the feeling, modeled by the binomial component. There is no uncertainty. The distribution of responses will reflect the shape of the Binomial.
+-   If $(1-\pi = 0)$ (i.e., $\pi = 1$) it means that the observed choice is entirely determined by the feeling, modeled by the binomial component.
+    There is no uncertainty.
+    The distribution of responses will reflect the shape of the Binomial.
 
-- If $(1−\pi)=1$ (i.e., $\pi=0$) it means that the observed choice is entirely determined by "uncertainty" (Uniform component). The respondent's feeling plays no role. The distribution of responses will be perfectly flat, meaning each category is chosen with equal probability.
+-   If $(1−\pi)=1$ (i.e., $\pi=0$) it means that the observed choice is entirely determined by "uncertainty" (Uniform component).
+    The respondent's feeling plays no role.
+    The distribution of responses will be perfectly flat, meaning each category is chosen with equal probability.
 
-- Values between 0 and 1 indicate a mix of the two components. A higher value of $(1−\pi)$ effectively "flattens" the observed distribution of responses towards a uniform shape, as the random component gains more influence.
-
+-   Values between 0 and 1 indicate a mix of the two components.
+    A higher value of $(1−\pi)$ effectively "flattens" the observed distribution of responses towards a uniform shape, as the random component gains more influence.
 
 **The Feeling Parameter**
 
-The quantity $(1−\xi)$ measures the underlying "feeling", "preference", or "attraction" of the respondent. It dictates the skewness and location of the Binomial component.
+The quantity $(1−\xi)$ measures the underlying "feeling", "preference", or "attraction" of the respondent.
+It dictates the skewness and location of the Binomial component.
 
-- If $(1−\xi)$ is high (close to 1, so $\xi$ is close to 0), it means that there's a strong attraction towards higher-valued categories. The Binomial component will be skewed to the right, with its mode (most frequent value) located at or near the maximum category $m$.
+-   If $(1−\xi)$ is high (close to 1, so $\xi$ is close to 0), it means that there's a strong attraction towards higher-valued categories.
+    The Binomial component will be skewed to the right, with its mode (most frequent value) located at or near the maximum category $m$.
 
-- If $(1−\xi)$ is low (close to 0, so $\xi$ is close to 1) it means that there's a strong attraction towards lower-valued categories. The Binomial component will be skewed to the left, with its mode located at or near the minimum category 1.
+-   If $(1−\xi)$ is low (close to 0, so $\xi$ is close to 1) it means that there's a strong attraction towards lower-valued categories.
+    The Binomial component will be skewed to the left, with its mode located at or near the minimum category 1.
 
-- If $(1−\xi)=0.5$ (so $\xi=0.5$), the Binomial component is symmetric around the center of the scale, indicating a neutral or balanced feeling.
+-   If $(1−\xi)=0.5$ (so $\xi=0.5$), the Binomial component is symmetric around the center of the scale, indicating a neutral or balanced feeling.
 
-![Probability distribution functions of the CUB model, for $m = 7$ and 9 combinations of feeling and uncertainty.](images\CUBgrid.jpg){width=80%}
+![Probability distribution functions of the CUB model, for $m = 7$ and 9 combinations of feeling and uncertainty.](images\CUBgrid.jpg){width="80%"}
+
 ```{r echo = F, message=F, warning=F, eval=F}
 library(CUB)
 library(dplyr)
@@ -2080,80 +2239,91 @@ for (i in 1:9) {
 }
 ```
 
-
 ### Model identifiability and Estimation
 
 The CUB model is identifiable (i.e., different sets of parameter values lead to different probability distributions for the observed data) if the number of categories $m > 3$.
 
-The parameters $(\pi, \xi)$ of the CUB model are typically estimated using the Maximum Likelihood Estimation (MLE) method. MLE search for the parameter values that maximize the likelihood of observing the given data.
+The parameters $(\pi, \xi)$ of the CUB model are typically estimated using the Maximum Likelihood Estimation (MLE) method.
+MLE search for the parameter values that maximize the likelihood of observing the given data.
 
-Since the CUB model is a mixture model, direct maximization of this log-likelihood function can be complex due to its non-linear nature. Therefore, the Expectation-Maximization (EM) algorithm is a common and robust iterative method for finding the MLEs. 
+Since the CUB model is a mixture model, direct maximization of this log-likelihood function can be complex due to its non-linear nature.
+Therefore, the Expectation-Maximization (EM) algorithm is a common and robust iterative method for finding the MLEs.
 
 ### Assessing the Goodness of Fit
 
- A particularly common and intuitive measure for assessing how well a CUB model fits the observed data is the Dissimilarity ($Diss$) Index. It quantifies the absolute difference between the observed and fitted proportions for each category. The $Diss$ index is defined as follows:
+A particularly common and intuitive measure for assessing how well a CUB model fits the observed data is the Dissimilarity ($Diss$) Index.
+It quantifies the absolute difference between the observed and fitted proportions for each category.
+The $Diss$ index is defined as follows:
 
 $$
 Diss = \frac{1}{2}\sum_{r = 1}^{m} \mid f_r - p_r(\hat{\boldsymbol{\theta}})\mid
-$$
-where $f_r$ are the observed relative frequencies and $p_r(\hat{\boldsymbol{\theta}})$ are the estimated probabilities for the response categories.
+$$ where $f_r$ are the observed relative frequencies and $p_r(\hat{\boldsymbol{\theta}})$ are the estimated probabilities for the response categories.
 
-- Values of $Diss$ closer to 0 indicate a better fit, with a perfect fit yielding $Diss = 0$.
-- The maximum value of $Diss$ is 1 when there is no overlap between observed and fitted distributions.
+-   Values of $Diss$ closer to 0 indicate a better fit, with a perfect fit yielding $Diss = 0$.
+-   The maximum value of $Diss$ is 1 when there is no overlap between observed and fitted distributions.
 
-The Dissimilarity Index is popular because it provides a direct and easily interpretable measure of the overall discrepancy between the observed data distribution and the distribution predicted by the CUB model. In other words, it measures the proportion of responses to be changed to achieve a perfect fit.  
+The Dissimilarity Index is popular because it provides a direct and easily interpretable measure of the overall discrepancy between the observed data distribution and the distribution predicted by the CUB model.
+In other words, it measures the proportion of responses to be changed to achieve a perfect fit.\
 It is less sensitive to low expected frequencies than the Pearson Chi-squared test and gives a clear indication of prediction accuracy.
 
-
-
 ### Parameter Space Visualization
-CUB models offer a highly intuitive way to visualize the joint interpretation of their parameters: the parameter space visualization. This is typically represented on a unit square where:
+
+CUB models offer a highly intuitive way to visualize the joint interpretation of their parameters: the parameter space visualization.
+This is typically represented on a unit square where:
 
 The x-axis represents $(1−\pi)$, the uncertainty level.
 The y-axis represents $(1−\xi)$, the feeling or attraction level.
-This "CUB plot" is incredibly helpful for comparing different datasets, subgroups, or even changes within a single group over time. Key regions of this plot offer immediate insights:
+This "CUB plot" is incredibly helpful for comparing different datasets, subgroups, or even changes within a single group over time.
+Key regions of this plot offer immediate insights:
 
-- **Bottom-left corner** ($(1−\pi)\approx0,(1−\xi)\approx0$): This indicates very low uncertainty (respondents are very certain in their choices) and a strong feeling towards low scores (e.g., strong disagreement, high dissatisfaction).
+-   **Bottom-left corner** ($(1−\pi)\approx0,(1−\xi)\approx0$): This indicates very low uncertainty (respondents are very certain in their choices) and a strong feeling towards low scores (e.g., strong disagreement, high dissatisfaction).
 
-- **Top-left corner** ($(1−\pi)\approx0,(1−\xi)\approx1$): This signifies very low uncertainty and a strong feeling towards high scores (e.g., strong agreement, high satisfaction).
+-   **Top-left corner** ($(1−\pi)\approx0,(1−\xi)\approx1$): This signifies very low uncertainty and a strong feeling towards high scores (e.g., strong agreement, high satisfaction).
 
-- **Right side** ($(1−\pi)\approx1$): This region represents very high uncertainty. In this scenario, the feeling component becomes less influential, and responses tend to be closer to a uniform distribution, indicating a significant degree of randomness in the choices.
+-   **Right side** ($(1−\pi)\approx1$): This region represents very high uncertainty.
+    In this scenario, the feeling component becomes less influential, and responses tend to be closer to a uniform distribution, indicating a significant degree of randomness in the choices.
 
 This graphical representation provides a powerful diagnostic tool for understanding the underlying psychological processes at play in rating data.
 
-
-![Graphical representation of the parameter space of the CUB model](images\cartesian_agg.jpg){width=100%}
+![Graphical representation of the parameter space of the CUB model](images\cartesian_agg.jpg){width="100%"}
 
 ## Extensions of the CUB Model: Incorporating Covariates
 
-The basic CUB model, as discussed in Chapter 2, provides a powerful framework for understanding the underlying feeling and uncertainty in rating data. However, the basic formulation assumes a homogeneity in the population, meaning that the parameters are constant for all individuals. While useful for initial descriptive analysis, this assumption often oversimplifies the complex reality of human responses.
+The basic CUB model, as discussed in Chapter 2, provides a powerful framework for understanding the underlying feeling and uncertainty in rating data.
+However, the basic formulation assumes a homogeneity in the population, meaning that the parameters are constant for all individuals.
+While useful for initial descriptive analysis, this assumption often oversimplifies the complex reality of human responses.
 
-In real-world applications, it is almost always more realistic to assume that the psychological components driving responses (the feeling and uncertainty components) vary across different individuals or groups. These variations are often systematically related to observable characteristics of the respondents or the context in which the ratings are collected. 
+In real-world applications, it is almost always more realistic to assume that the psychological components driving responses (the feeling and uncertainty components) vary across different individuals or groups.
+These variations are often systematically related to observable characteristics of the respondents or the context in which the ratings are collected.
 
-The introduction of covariates into the CUB model allows us to move beyond a simple description of the overall population's feeling and uncertainty, enabling a much more nuanced and insightful analysis. Specifically, introducing covariates allows us to:
+The introduction of covariates into the CUB model allows us to move beyond a simple description of the overall population's feeling and uncertainty, enabling a much more nuanced and insightful analysis.
+Specifically, introducing covariates allows us to:
 
- - **Explain heterogeneity in response patterns**: Instead of treating differences in responses as random noise, covariates enable us to identify systematic factors that explain why different individuals or groups exhibit different levels of feeling and uncertainty.
- 
-- **Understand how specific characteristics influence feeling and uncertainty**: This is perhaps the most powerful advantage. We can quantify the impact of a 10-year age increase on the probability of certainty (π) or the effect of a higher education level on the tendency to rate highly (1−ξ). This moves from mere description to explanation and inference.
+-   **Explain heterogeneity in response patterns**: Instead of treating differences in responses as random noise, covariates enable us to identify systematic factors that explain why different individuals or groups exhibit different levels of feeling and uncertainty.
 
+-   **Understand how specific characteristics influence feeling and uncertainty**: This is perhaps the most powerful advantage.
+    We can quantify the impact of a 10-year age increase on the probability of certainty (π) or the effect of a higher education level on the tendency to rate highly (1−ξ).
+    This moves from mere description to explanation and inference.
 
 ### Statistical Formulation of CUB Model with Covariates
 
-Formulation of CUB with Covariates
-In a CUB model with covariates, the core idea is that the parameters $\pi$ and $\xi$  are no longer fixed constants across all individuals. Instead, they are modeled as functions of a set of explanatory variables. Let $y_i$ be a vector of covariates for subject $i$ specifically influencing their uncertainty, and $w_i$ be a vector of covariates for subject $i$ influencing their feeling. These covariate vectors can be the same, overlap, or be entirely different.
+Formulation of CUB with Covariates In a CUB model with covariates, the core idea is that the parameters $\pi$ and $\xi$ are no longer fixed constants across all individuals.
+Instead, they are modeled as functions of a set of explanatory variables.
+Let $y_i$ be a vector of covariates for subject $i$ specifically influencing their uncertainty, and $w_i$ be a vector of covariates for subject $i$ influencing their feeling.
+These covariate vectors can be the same, overlap, or be entirely different.
 
 To ensure that the parameters $\pi_i$ and $\xi_i$ remain within their valid range of $[0,1]$, a link function is employed, typically a logistic (logit) function, which is standard practice for modeling probabilities in generalized linear models.
 
 **Modeling the uncertainty**
 
-Since $\pi_i\in [0,1]$, we model it using a logistic link. It's often more intuitive to model $(1-\pi_i)$, which represents the probability that the choice is driven by the uniform component.
+Since $\pi_i\in [0,1]$, we model it using a logistic link.
+It's often more intuitive to model $(1-\pi_i)$, which represents the probability that the choice is driven by the uniform component.
 
 The log-odds of uncertainty are linked to the covariates $y_i$:
 
 $$
 \text{logit}(1-\pi_i) = \log \Bigg(\frac{1-\pi_i}{\pi_i}\Bigg) = \boldsymbol{y}^{T}_i\boldsymbol{\beta}
-$$
-where $\boldsymbol{\beta}$ is a vector of coefficients corresponding to the covariates $\boldsymbol{y}_i$.
+$$ where $\boldsymbol{\beta}$ is a vector of coefficients corresponding to the covariates $\boldsymbol{y}_i$.
 
 From this, we can derive the direct relationships for $(1−\pi_i)$ and $\pi_i$
 
@@ -2167,17 +2337,16 @@ $$
 \pi_i = 1-(1-\pi_i) = 1- \frac{\exp(\boldsymbol{y}^{T}_i\boldsymbol{\beta})}{1+\exp(\boldsymbol{y}^{T}_i\boldsymbol{\beta})} = \frac{1}{1+\exp(\boldsymbol{y}^{T}_i\boldsymbol{\beta})}
 $$
 
-
 **Modeling the feeling**
 
-Similarly, for $\xi_i\in [0,1]$, a logit link is applied. It's often more insightful to directly model $(1-\xi_i)$, which represents the feeling towards higher scores on the scale.
+Similarly, for $\xi_i\in [0,1]$, a logit link is applied.
+It's often more insightful to directly model $(1-\xi_i)$, which represents the feeling towards higher scores on the scale.
 
 The log-odds of feeling for higher scores are linked to the covariates $w_i$ :
 
 $$
 \text{logit}(1-\xi_i) = \log \Bigg(\frac{1-\xi_i}{\xi_i}\Bigg) = \boldsymbol{w}^{T}_i\boldsymbol{\gamma}
-$$
-where $\boldsymbol{\gamma}$ is a vector of coefficients corresponding to the covariates $\boldsymbol{w}_i$.
+$$ where $\boldsymbol{\gamma}$ is a vector of coefficients corresponding to the covariates $\boldsymbol{w}_i$.
 
 This implies the following fo $(1−\xi_i)$:
 
@@ -2190,7 +2359,6 @@ And for $\xi_i$:
 $$
 \xi_i = 1-(1-\xi_i) = 1- \frac{\exp(\boldsymbol{w}^{T}_i\boldsymbol{\gamma})}{1+\exp(\boldsymbol{w}^{T}_i\boldsymbol{\gamma})} = \frac{1}{1+\exp(\boldsymbol{w}^{T}_i\boldsymbol{\gamma})}
 $$
- 
 
 With these formulations, the overall probability mass function for an observed rating R=r for subject i becomes:
 
@@ -2202,27 +2370,32 @@ where $\pi_i$ and $\xi_i$ are determined by the covariates as defined above.
 
 ### Interpretation of Covariate Effects
 
-Interpreting the coefficients ($\beta$ and $\gamma$) in a CUB model with covariates is crucial for understanding how specific characteristics influence the psychological components of rating. Remember that these coefficients operate on the log-odds scale due to the logistic link.
+Interpreting the coefficients ($\beta$ and $\gamma$) in a CUB model with covariates is crucial for understanding how specific characteristics influence the psychological components of rating.
+Remember that these coefficients operate on the log-odds scale due to the logistic link.
 
-**Coefficients $\beta$**
+**Coefficients** $\beta$
 
 These coefficients describe the impact of covariates on the log-odds of uncertainty.
 
-A positive coefficient $\beta_k$ implies that an increase in the $k$-th covariate $y_{ik}$, holding other covariates constant, increases the log-odds of uncertainty. Therefore $(1−\pi_i)$ increases and makes the respondent's choice more driven by the uniform component. This suggests that as $y_{ik}$ increases, the individual is more indecisive or random in their rating.
+A positive coefficient $\beta_k$ implies that an increase in the $k$-th covariate $y_{ik}$, holding other covariates constant, increases the log-odds of uncertainty.
+Therefore $(1−\pi_i)$ increases and makes the respondent's choice more driven by the uniform component.
+This suggests that as $y_{ik}$ increases, the individual is more indecisive or random in their rating.
 
-A negative $\beta_k$ implies that an increase in $y_{ik}$ decreases the log-odds of uncertainty, thus decreasing $(1−\pi_i)$ and making the respondent's choice more driven by their underlying feeling. This suggests that as $y_{ik}$ increases, the individual becomes more certain in their rating.
+A negative $\beta_k$ implies that an increase in $y_{ik}$ decreases the log-odds of uncertainty, thus decreasing $(1−\pi_i)$ and making the respondent's choice more driven by their underlying feeling.
+This suggests that as $y_{ik}$ increases, the individual becomes more certain in their rating.
 
+**Coefficients** $\gamma$
 
-**Coefficients $\gamma$**
+These coefficients describe the impact of covariates $w_i$ on the log-odds of feeling towards higher scores.
 
-These coefficients describe the impact of covariates $w_i$  on the log-odds of feeling towards higher scores.
+A positive $\gamma_k$ implies that an increase in the $k$-th covariate $w_{ik}$, holding other covariates constant, increases the log-odds of feeling for higher scores, thus increasing $(1-\xi_i)$.
+This means that as $w_{ik}$ increases, the individual's underlying preference shifts towards the higher end of the rating scale.
 
-A positive $\gamma_k$ implies that an increase in the $k$-th covariate $w_{ik}$, holding other covariates constant, increases the log-odds of feeling for higher scores, thus increasing $(1-\xi_i)$. This means that as $w_{ik}$ increases, the individual's underlying preference shifts towards the higher end of the rating scale.
+A negative $\gamma_k$ implies that an increase in $w_{ik}$ decreases the log-odds of feeling for higher scores, thus decreasing $(1-\xi_i)$.
+This means that as $w_{ik}$ increases, the individual's underlying preference shifts towards the lower end of the rating scale.
 
-A negative $\gamma_k$ implies that an increase in $w_{ik}$ decreases the log-odds of feeling for higher scores, thus decreasing $(1-\xi_i)$. This means that as $w_{ik}$ increases, the individual's underlying preference shifts towards the lower end of the rating scale.
-
-**Important Note**: CUB models with covariates are not Generalized Linear Models (GLMs) in the strict sense. While the parameters $\pi_i$ and $\xi_i$ are linked to covariates using GLM-like structures (specifically, logistic regressions), the response variable itself (the mixture of Binomial and Uniform distributions) does not belong to the exponential family.
-
+**Important Note**: CUB models with covariates are not Generalized Linear Models (GLMs) in the strict sense.
+While the parameters $\pi_i$ and $\xi_i$ are linked to covariates using GLM-like structures (specifically, logistic regressions), the response variable itself (the mixture of Binomial and Uniform distributions) does not belong to the exponential family.
 
 ### Case Study: University's students satisfaction
 
@@ -2232,43 +2405,48 @@ A negative $\gamma_k$ implies that an increase in $w_{ik}$ decreases the log-odd
 :::
 :::
 
-This case study demonstrates the application of CUB (Combination of Uniform and a shifted Binomial) models for analyzing ordinal data, using the CUB package in R. The `univer` dataset comes from a survey administered to students at the University of Naples Federico II to evaluate orientation services.
+This case study demonstrates the application of CUB (Combination of Uniform and a shifted Binomial) models for analyzing ordinal data, using the CUB package in R.
+The `univer` dataset comes from a survey administered to students at the University of Naples Federico II to evaluate orientation services.
 
 **Dataset Description**
 
-The `univer` dataset from 2002 contains 2,179 observations, including responses to evaluation questions on a 7-point Likert scale (from 1 = “very unsatisfied” to 7 = “extremely satisfied”). The ordinal variables of interest are:
+The `univer` dataset from 2002 contains 2,179 observations, including responses to evaluation questions on a 7-point Likert scale (from 1 = “very unsatisfied” to 7 = “extremely satisfied”).
+The ordinal variables of interest are:
 
-- `informat`: Satisfaction level with the information received.
+-   `informat`: Satisfaction level with the information received.
 
-- `willingn`: Satisfaction level with the staff's willingness.
+-   `willingn`: Satisfaction level with the staff's willingness.
 
-- `officeho`: Satisfaction level with office opening hours.
+-   `officeho`: Satisfaction level with office opening hours.
 
-- `competen`: Satisfaction level with staff competence.
+-   `competen`: Satisfaction level with staff competence.
 
-- `global`: Overall satisfaction level.
+-   `global`: Overall satisfaction level.
 
 The dataset also includes covariates:
 
-- `Faculty`: A factor variable, with levels ranging from 1 to 13 indicating the coding for the different university faculties
+-   `Faculty`: A factor variable, with levels ranging from 1 to 13 indicating the coding for the different university faculties
 
-- `Freqserv`: A factor with levels: 0 = for not regular users, 1 = for regular users
+-   `Freqserv`: A factor with levels: 0 = for not regular users, 1 = for regular users
 
-- `Age`: Variable indicating the age of the respondent in years
+-   `Age`: Variable indicating the age of the respondent in years
 
-- `Gender`: A factor with levels: 0 = man, 1 = woman
+-   `Gender`: A factor with levels: 0 = man, 1 = woman
 
-- `Diploma`: A factor with levels: 1 = classic studies, 2 = scientific studies, 3 = linguistic, 4 = Professional, 5 = Technical/Accountancy, 6 = others
+-   `Diploma`: A factor with levels: 1 = classic studies, 2 = scientific studies, 3 = linguistic, 4 = Professional, 5 = Technical/Accountancy, 6 = others
 
-- `Residence`: A factor with levels: 1 = city NA, 2 = district NA, 3 = others
+-   `Residence`: A factor with levels: 1 = city NA, 2 = district NA, 3 = others
 
-- `ChangeFa`: A factor with levels: 1 = changed faculty, 2 = not changed faculty
+-   `ChangeFa`: A factor with levels: 1 = changed faculty, 2 = not changed faculty
 
 **Exploratory Analysis**
 
-As a first step, it is helpful to visualize the estimated CUB models for all ordinal variables simultaneously. The `multicub()` function fits a CUB model to each variable and plots the estimated parameters for uncertainty (1 - $\hat{\pi}$) and feeling (1 - $\hat{\xi}$) in the parameter space. The "feeling" (1 - $\xi$) represents the preference for higher scores on the rating scale.
+As a first step, it is helpful to visualize the estimated CUB models for all ordinal variables simultaneously.
+The `multicub()` function fits a CUB model to each variable and plots the estimated parameters for uncertainty (1 - $\hat{\pi}$) and feeling (1 - $\hat{\xi}$) in the parameter space.
+The "feeling" (1 - $\xi$) represents the preference for higher scores on the rating scale.
 
-Note that `multicub()` is especially useful for a comparative visual analysis of rating data vectors, even with different scale lengths. It requires the variables to be stored in a list.
+Note that `multicub()` is especially useful for a comparative visual analysis of rating data vectors, even with different scale lengths.
+It requires the variables to be stored in a list.
 
 ```{r warning = F, error=F, message= F}
 library(CUB)
@@ -2285,12 +2463,13 @@ multicub(listord, labels = labels,
          pos = c(1, rep(3, ncol(listord) - 1)), ylim = c(0.75, 1), xlim = c(0, 0.4))
 ```
 
-
-From the visual analysis, it appears that the `officeho` item (satisfaction with opening hours) has the highest uncertainty. For this reason, the subsequent analysis will focus on this variable.
+From the visual analysis, it appears that the `officeho` item (satisfaction with opening hours) has the highest uncertainty.
+For this reason, the subsequent analysis will focus on this variable.
 
 **CUB Model without Covariates for `officeho`**
 
-First, a basic CUB model is estimated for the officeho variable without including any covariates. This serves as a baseline to understand the variable's distribution.
+First, a basic CUB model is estimated for the officeho variable without including any covariates.
+This serves as a baseline to understand the variable's distribution.
 
 ```{r warning = F, message = F, error = F}
 ## CUB model without covariates for "officeho"
@@ -2311,7 +2490,6 @@ feeling <- 1 - param[2]
 feeling
 ```
 
-
 The `makeplot()` function can be used to compare the observed relative frequencies with the theoretical probabilities predicted by the estimated model.
 
 ```{r warning=F, error=F, message=F}
@@ -2319,11 +2497,11 @@ The `makeplot()` function can be used to compare the observed relative frequenci
 makeplot(cub_00)
 ```
 
-**CUB Models with Covariates**
-To improve the model's fit and interpretation, covariates can be introduced. In this example, we consider the dichotomous covariate freqserv (0 = non-regular users, 1 = regular users), which indicates the service usage frequency.
+**CUB Models with Covariates** To improve the model's fit and interpretation, covariates can be introduced.
+In this example, we consider the dichotomous covariate freqserv (0 = non-regular users, 1 = regular users), which indicates the service usage frequency.
 
-A model is estimated where the feeling component depends on the freqserv covariate, while the uncertainty remains constant. The model formula is `officeho ~ 0 | freqserv | 0`, indicating that the feeling component is modeled as a function of `freqserv` (`~ freqserv`), while the other components are constant (`~ 0`).
-
+A model is estimated where the feeling component depends on the freqserv covariate, while the uncertainty remains constant.
+The model formula is `officeho ~ 0 | freqserv | 0`, indicating that the feeling component is modeled as a function of `freqserv` (`~ freqserv`), while the other components are constant (`~ 0`).
 
 ```{r message=F, warning=F, error=F}
 # Estimate the CUB model with freqserv as a covariate on feeling
@@ -2332,7 +2510,9 @@ cub_csi <- GEM(Formula(officeho ~ 0 | freqserv | 0), family = "cub", data = univ
 # Display the model summary
 summary(cub_csi, digits = 3)
 ```
+
 The regression coefficients for the logistic link of the "feeling" can be extracted and analyzed.
+
 ```{r message = F, error = F, warning = F}
 # Extract the regression coefficients
 gama <- coef(cub_csi)[2:3]
@@ -2343,8 +2523,8 @@ gama0 <- gama[1] # Intercept term
 gama1 <- gama[2] # Coefficient for freqserv
 ```
 
-
-Using these coefficients, you can calculate the feeling parameter for each group of users (regular and non-regular). The `logis()` function calculates the inverse logistic transformation.
+Using these coefficients, you can calculate the feeling parameter for each group of users (regular and non-regular).
+The `logis()` function calculates the inverse logistic transformation.
 
 ```{r message = F, error = F, warning=F}
 # Calculate the csi parameter for non-regular users (freqserv = 0)
@@ -2360,24 +2540,23 @@ In this model, the feeling component is specified by:
 
 $$
 logit(1-\xi_i) = - \gamma_0 - \gamma_1 freqserv_i, \quad i = 1,\dots,n
-$$
-A plot can be generated to compare the fitted probability distributions for the two groups.
+$$ A plot can be generated to compare the fitted probability distributions for the two groups.
 
 ```{r warning=F, error=F, message=F}
 # Compare the fitted probability distributions for the two user groups
 makeplot(cub_csi)
 ```
 
-
 ```{r warning=F, error=F, message=F}
 BIC(cub_00); BIC(cub_csi)
 ```
+
 the reduction in BIC index from `BIC(cub_00)= 7535.208` to `BIC(cub_csi)= 7431.773` strongly supports the inclusion of the covariate freqserv in the model.
 
 **CUB Model with Covariates on Both Uncertainty and Feeling**
 
-In this more complex example, two covariates are considered jointly: `lage` (the deviation from the mean of the logarithmic transform of age) and `gender`. The variable `lage` is used to explain both uncertainty and feeling, while `gender` is used for uncertainty and `freqserv` for feeling.
-
+In this more complex example, two covariates are considered jointly: `lage` (the deviation from the mean of the logarithmic transform of age) and `gender`.
+The variable `lage` is used to explain both uncertainty and feeling, while `gender` is used for uncertainty and `freqserv` for feeling.
 
 ```{r warning = F, error=F, message=F}
 data(univer)
@@ -2391,7 +2570,6 @@ cub_pai_csi <- GEM(Formula(officeho ~ lage + gender | lage + freqserv | 0), fami
 # Display the summary with coefficient correlations
 summary(cub_pai_csi, correlation = TRUE, digits = 3)
 ```
-
 
 The estimated coefficients correspond to the logistic regression coefficients for the uncertainty and feeling components.
 
@@ -2408,7 +2586,7 @@ $$
 
 $$
 \text{logit}(1 - \xi_i) = -\gamma_0 - \gamma_1 \cdot \text{lage}_i - \gamma_2 \cdot \text{freqserv}_i
-$$ 
+$$
 
 Since no plot is directly provided as output, the performance of the cub model with significant covariates on feeling and uncertainty parameters may be summarized as in the following figure, obtained by the following code:
 
@@ -2441,45 +2619,53 @@ text(0.1, 0.85, labels = "Young", offset = 0.3, cex = 0.8, font = 4)
 text(0.5, 0.5, labels = "Elderly", offset = 0.3, cex = 0.8, font = 4)
 ```
 
-Summarizing, the sketch of analysis so pursued indicates that satisfaction increase with age
-whereas indecision decreases, and that men are more satisfied than women across all profiles.
-
+Summarizing, the sketch of analysis so pursued indicates that satisfaction increase with age whereas indecision decreases, and that men are more satisfied than women across all profiles.
 
 ## CUB Model with Shelter Option
 
-While the basic CUB model effectively captures the feeling and uncertainty in ordinal responses, real-world rating data often exhibit additional complexities. 
+While the basic CUB model effectively captures the feeling and uncertainty in ordinal responses, real-world rating data often exhibit additional complexities.
 
-One such common phenomenon is the tendency for respondents to disproportionately select a specific category, not entirely explained by their true underlying feeling or by simple random guessing. This over-selection of a particular category suggests it acts as a "shelter" or "refuge" for some respondents.
+One such common phenomenon is the tendency for respondents to disproportionately select a specific category, not entirely explained by their true underlying feeling or by simple random guessing.
+This over-selection of a particular category suggests it acts as a "shelter" or "refuge" for some respondents.
 
-The shelter effect describes a situation where a specific category on an ordinal scale receives an "extra" probability mass, beyond what would be predicted solely by the respondent's underlying feeling or by pure random uncertainty. This happens because some respondents might gravitate towards this category for reasons unrelated to their precise preference or indecision.
+The shelter effect describes a situation where a specific category on an ordinal scale receives an "extra" probability mass, beyond what would be predicted solely by the respondent's underlying feeling or by pure random uncertainty.
+This happens because some respondents might gravitate towards this category for reasons unrelated to their precise preference or indecision.
 
 Reasons for this "shelter-seeking" behavior have been extensively discussed in the literature (e.g., Iannario, 2012; Piccolo & Simone, 2019):
 
+-   **Cognitive Simplification**: Respondents may choose an easy, or cognitively less demanding option to reduce mental effort.
+    This could be the middle category (e.g., "Neutral"), a neutral option specifically provided, or even the first/last option if it serves as an easy default.
 
-- **Cognitive Simplification**: Respondents may choose an easy, or cognitively less demanding option to reduce mental effort. This could be the middle category (e.g., "Neutral"), a neutral option specifically provided, or even the first/last option if it serves as an easy default.
-- **Fatigue or Boredom**: Especially prevalent in long questionnaires or surveys, fatigue can lead respondents to disengage and simply pick a convenient category rather than carefully considering their true response.
-- **Social Desirability or Privacy Concerns**: Individuals might select a "safe", non-committal, or socially acceptable answer to avoid expressing a strong or controversial opinion, or to protect their privacy. The neutral option often serves this purpose.
+-   **Fatigue or Boredom**: Especially prevalent in long questionnaires or surveys, fatigue can lead respondents to disengage and simply pick a convenient category rather than carefully considering their true response.
 
-- **Questionnaire Design**: Poorly worded questions, ambiguous scale anchors, or an overwhelming number of options might inadvertently guide respondents towards a default or ambiguous middle ground.
+-   **Social Desirability or Privacy Concerns**: Individuals might select a "safe", non-committal, or socially acceptable answer to avoid expressing a strong or controversial opinion, or to protect their privacy.
+    The neutral option often serves this purpose.
 
-- **Satisficing**: This refers to the tendency to select a minimally acceptable response rather than the optimal one, often to save cognitive resources. The shelter option becomes the "good enough" answer.
+-   **Questionnaire Design**: Poorly worded questions, ambiguous scale anchors, or an overwhelming number of options might inadvertently guide respondents towards a default or ambiguous middle ground.
 
-The critical implication of the shelter effect is that the chosen category $c$ has an "extra" probability mass. This means the observed frequency for category $c$ is higher than what a standard two-component CUB model would predict. Effectively, a subset of respondents might be selecting $c$ directly, bypassing the usual feeling-uncertainty decision process.
+-   **Satisficing**: This refers to the tendency to select a minimally acceptable response rather than the optimal one, often to save cognitive resources.
+    The shelter option becomes the "good enough" answer.
+
+The critical implication of the shelter effect is that the chosen category $c$ has an "extra" probability mass.
+This means the observed frequency for category $c$ is higher than what a standard two-component CUB model would predict.
+Effectively, a subset of respondents might be selecting $c$ directly, bypassing the usual feeling-uncertainty decision process.
 
 ### Defining the shelter category
 
-The shelter category, denoted by $c$ (where $c \in \{1,2,…,m\}$), is a specific category on the ordinal scale that exhibits this inflated probability mass. Identifying this category is a crucial preliminary step. It can be:
+The shelter category, denoted by $c$ (where $c \in \{1,2,…,m\}$), is a specific category on the ordinal scale that exhibits this inflated probability mass.
+Identifying this category is a crucial preliminary step.
+It can be:
 
-- **Hypothesized a priori**: In many cases, the shelter category can be hypothesized beforehand based on the scale's design. For instance, on a 5-point Likert scale (1=Strongly Disagree, 5=Strongly Agree), the central category $c=3$ ("Neutral" or "Neither agree nor disagree") is a very common candidate for a shelter option. Other possibilities could be the minimum ($c=1$) or maximum ($c=m$) category if they function as easy "opt-out" or default choices.
- - **Identified Empirically**: If no a priori hypothesis exists, the shelter category can be identified empirically. This involves observing an unusually high frequency for a particular category that is not well explained by a simple CUB model. A large positive residual for a specific category from a basic CUB fit can point towards a potential shelter effect.
- 
+-   **Hypothesized a priori**: In many cases, the shelter category can be hypothesized beforehand based on the scale's design. For instance, on a 5-point Likert scale (1=Strongly Disagree, 5=Strongly Agree), the central category $c=3$ ("Neutral" or "Neither agree nor disagree") is a very common candidate for a shelter option. Other possibilities could be the minimum ($c=1$) or maximum ($c=m$) category if they function as easy "opt-out" or default choices.
+-   **Identified Empirically**: If no a priori hypothesis exists, the shelter category can be identified empirically. This involves observing an unusually high frequency for a particular category that is not well explained by a simple CUB model. A large positive residual for a specific category from a basic CUB fit can point towards a potential shelter effect.
+
 Once identified, the shelter category $c$ is treated as fixed in the model estimation.
-
 
 ### Statistical Formulation of CUB Model with Shelter Option
 
-
-To account for the shelter effect, the basic CUB model is extended into a three-component mixture model. A common and highly interpretable approach is the CUB with Shelter (CUSH) model. This model introduces a third component: a degenerate distribution that assigns all probability mass exclusively to the shelter category $c$.
+To account for the shelter effect, the basic CUB model is extended into a three-component mixture model.
+A common and highly interpretable approach is the CUB with Shelter (CUSH) model.
+This model introduces a third component: a degenerate distribution that assigns all probability mass exclusively to the shelter category $c$.
 
 The probability mass function (PMF) for the CUSH model for a rating $R=r$ is given by:
 
@@ -2498,18 +2684,23 @@ D_c(r) =
 \qquad r = 1, \dots, m.
 $$
 
-The parameter $\delta \in [0,1]$ represents the probability of choosing the shelter category $c$ directly. This is the weight assigned to the degenerate distribution.
+The parameter $\delta \in [0,1]$ represents the probability of choosing the shelter category $c$ directly.
+This is the weight assigned to the degenerate distribution.
 A higher $\delta$ indicates a stronger tendency for respondents to opt for the designated shelter category, irrespective of their true feeling or general uncertainty.
 
 **Model selection**
 
-Model selection is crucial when deciding whether a CUSH model offers a significantly better fit than a simpler CUB model. Standard statistical criteria can be used:
+Model selection is crucial when deciding whether a CUSH model offers a significantly better fit than a simpler CUB model.
+Standard statistical criteria can be used:
 
 Information criteria like Akaike Information Criterion and Bayesian information Criterion are widely used to balance model fit with model complexity.
 
-Lower values for AIC and BIC indicate a better-fitting model. BIC is often preferred in model selection for CUB models as it penalizes model complexity more heavily, which can help in choosing more parsimonious models.
+Lower values for AIC and BIC indicate a better-fitting model.
+BIC is often preferred in model selection for CUB models as it penalizes model complexity more heavily, which can help in choosing more parsimonious models.
 
-After fitting a basic CUB model, it's good practice to examine the residuals, which are the differences between observed and fitted probabilities/frequencies. If a simple CUB model shows a large positive residual for a specific category, it strongly suggests the presence of a shelter effect for that category. The Dissimilarity Index ($Diss$) can also be used to compare the overall fit improvement when a shelter component is added.
+After fitting a basic CUB model, it's good practice to examine the residuals, which are the differences between observed and fitted probabilities/frequencies.
+If a simple CUB model shows a large positive residual for a specific category, it strongly suggests the presence of a shelter effect for that category.
+The Dissimilarity Index ($Diss$) can also be used to compare the overall fit improvement when a shelter component is added.
 
 ### Case study: the reelgoods dataset
 
@@ -2519,32 +2710,32 @@ After fitting a basic CUB model, it's good practice to examine the residuals, wh
 :::
 :::
 
-
 The CUB model with shelter option is shown with the `relgoods` dataset, a survey designed to assess the importance of relational goods and involvement in leisure time activities.
 
-This dataset contains the results of a survey conducted in December 2014 in the metropolitan area of Naples, Italy. The survey's primary goal was to measure people's evaluation of relational goods (e.g., time spent with friends and family) and leisure time activities. The dataset includes both demographic information about the respondents and their evaluations on various topics.
+This dataset contains the results of a survey conducted in December 2014 in the metropolitan area of Naples, Italy.
+The survey's primary goal was to measure people's evaluation of relational goods (e.g., time spent with friends and family) and leisure time activities.
+The dataset includes both demographic information about the respondents and their evaluations on various topics.
 
 The survey used two main types of scales to collect data:
 
-1. 10-Point Ordinal Scale (Likert-type): Respondents rated several items on a 10-point scale (from 1 to 10). The interpretation of the scale endpoints varied slightly:
+1.  10-Point Ordinal Scale (Likert-type): Respondents rated several items on a 10-point scale (from 1 to 10). The interpretation of the scale endpoints varied slightly:
 
-* For relational goods: 1 = "never, at all" to 10 = "always, a lot".
+-   For relational goods: 1 = "never, at all" to 10 = "always, a lot".
 
-* For leisure time activities: 1 = "At all, nothing, never" to 10 = "Totally, extremely important, always".
-This scale captures the frequency or importance of a given activity.
+-   For leisure time activities: 1 = "At all, nothing, never" to 10 = "Totally, extremely important, always".
+    This scale captures the frequency or importance of a given activity.
 
-2. Continuous Happiness Scale: To measure happiness, respondents marked a sign on a 110mm horizontal line (left = "extremely unhappy", right = "extremely happy"). This is treated as a continuous variable.
+2.  Continuous Happiness Scale: To measure happiness, respondents marked a sign on a 110mm horizontal line (left = "extremely unhappy", right = "extremely happy"). This is treated as a continuous variable.
 
 The dataset includes the following types of variables:
 
-- Subject Covariates (Demographics): These provide background information about each respondent (e.g., ID, Gender, BirthMonth, EducationDegree, MaritalStatus, job, Smoking, Pets).
+-   Subject Covariates (Demographics): These provide background information about each respondent (e.g., ID, Gender, BirthMonth, EducationDegree, MaritalStatus, job, Smoking, Pets).
 
-- Relational Goods and General Evaluations (10-Point Scale): These variables capture aspects of social life and the environment (e.g., WalkOut, RelFriends, Safety).
+-   Relational Goods and General Evaluations (10-Point Scale): These variables capture aspects of social life and the environment (e.g., WalkOut, RelFriends, Safety).
 
-- Leisure Time Activities (10-Point Scale): These measure involvement or enjoyment of various activities (e.g., Reading, Cinema, Sport, Internet, MusicInstr).
+-   Leisure Time Activities (10-Point Scale): These measure involvement or enjoyment of various activities (e.g., Reading, Cinema, Sport, Internet, MusicInstr).
 
-- Continuous Happiness Score: The self-reported happiness score (Happiness).
-
+-   Continuous Happiness Score: The self-reported happiness score (Happiness).
 
 Let's inspect the distribution of the variable `Writing`, which asks respondents to rate their involvement in writing on a 10-point scale.
 
@@ -2557,10 +2748,11 @@ plot(table(as.factor(relgoods$Writing)))
 
 ```
 
+Let's apply the CUB model to the Writing variable to illustrate the shelter effect.
+This variable asks about involvement in writing on a 10-point scale.
 
-Let's apply the CUB model to the Writing variable to illustrate the shelter effect. This variable asks about involvement in writing on a 10-point scale.
-
-First, we fit a standard CUB model without the shelter option to the Writing variable. This serves as a baseline for comparison.
+First, we fit a standard CUB model without the shelter option to the Writing variable.
+This serves as a baseline for comparison.
 
 ```{r warning = F, error = F, message= F}
 # Fit a standard CUB model to the 'Writing' variable
@@ -2570,9 +2762,8 @@ summary(cub_writing)
 makeplot(cub_writing)
 ```
 
-
-
-Now, we introduce the shelter parameter, which models the probability of selecting a specific category as a refuge. In this case, we specify `shelter = 1`, which indicates that the first category (score of 1) is the shelter category.
+Now, we introduce the shelter parameter, which models the probability of selecting a specific category as a refuge.
+In this case, we specify `shelter = 1`, which indicates that the first category (score of 1) is the shelter category.
 
 ```{r warning = F, error = F, message= F}
 # Fit a CUB model with a shelter option on category 1
@@ -2582,41 +2773,49 @@ summary(cub_she)
 makeplot(cub_she)
 
 ```
+
 If we look at the value of $\delta$, it indicates that there is a medium tendency to opt for the shelter category.
 
 ## Treatment of "Don't Know" (DK) Options within the CUB Framework
 
-Beyond the core rating scale, surveys often include an option for respondents to indicate "Don't Know" (DK), "No Opinion", "Not Applicable", or similar non-substantive responses. While seemingly innocuous, the handling of these responses presents a significant challenge for traditional statistical modeling, as they often don't fit neatly into standard analytical frameworks. 
+Beyond the core rating scale, surveys often include an option for respondents to indicate "Don't Know" (DK), "No Opinion", "Not Applicable", or similar non-substantive responses.
+While seemingly innocuous, the handling of these responses presents a significant challenge for traditional statistical modeling, as they often don't fit neatly into standard analytical frameworks.
 
 The CUB framework, however, offers a theoretically robust and psychologically insightful approach to incorporating information from DK responses.
 
-"Don't Know" responses are common in surveys, and their treatment is critical for valid statistical inference. They are not merely missing data points; rather, they represent an active choice that reflects a specific cognitive or attitudinal state of the respondent.
-
+"Don't Know" responses are common in surveys, and their treatment is critical for valid statistical inference.
+They are not merely missing data points; rather, they represent an active choice that reflects a specific cognitive or attitudinal state of the respondent.
 
 DK responses are problematic for several reasons:
 
-- **Not Simply Missing Data**: Treating DKs as simple missing values and discarding them (listwise deletion) can lead to biased samples and results. If respondents who choose DK differ systematically from those who provide substantive ratings, removing them can distort the representativeness of the remaining sample, affecting parameter estimates and generalizability. 
+-   **Not Simply Missing Data**: Treating DKs as simple missing values and discarding them (listwise deletion) can lead to biased samples and results.
+    If respondents who choose DK differ systematically from those who provide substantive ratings, removing them can distort the representativeness of the remaining sample, affecting parameter estimates and generalizability.
 
-- **Imputation Issues**: Imputing a value for a DK response is inherently difficult and often relies on strong, untestable assumptions. Assigning a central value (e.g., the mean or median of the substantive responses) might mask genuine uncertainty, while more complex imputation methods (e.g., multiple imputation) can be challenging to implement and interpret accurately in the context of ordinal data.
+-   **Imputation Issues**: Imputing a value for a DK response is inherently difficult and often relies on strong, untestable assumptions.
+    Assigning a central value (e.g., the mean or median of the substantive responses) might mask genuine uncertainty, while more complex imputation methods (e.g., multiple imputation) can be challenging to implement and interpret accurately in the context of ordinal data.
 
- - **Adding DK as a Category**: A seemingly straightforward approach is to include DK as just another category on the ordinal scale. However, this fundamentally breaks the ordinal nature of the scale. For example, a sequence like "Strongly Disagree, Disagree, DK, Agree, Strongly Agree" is conceptually problematic. The DK option is not naturally ordered between "Disagree" and "Agree"; it represents a different type of response altogether. Its inclusion disrupts the monotonic relationship implied by ordinal categories.
+-   **Adding DK as a Category**: A seemingly straightforward approach is to include DK as just another category on the ordinal scale.
+    However, this fundamentally breaks the ordinal nature of the scale.
+    For example, a sequence like "Strongly Disagree, Disagree, DK, Agree, Strongly Agree" is conceptually problematic.
+    The DK option is not naturally ordered between "Disagree" and "Agree"; it represents a different type of response altogether.
+    Its inclusion disrupts the monotonic relationship implied by ordinal categories.
 
+To properly handle DK responses, it is essential to understand their underlying meanings.
+Research suggests that "Don't Know" can have several psychological interpretations:
 
+-   *True Lack of Knowledge/Opinion*: The respondent genuinely has no information, experience, or hasn't formed an opinion on the topic. Unwillingness to Answer: The respondent might have an opinion but chooses not to express it due to a sensitive topic, privacy concerns, or wanting to appear socially desirable (e.g., not wanting to seem extreme or uninformed).
+-   *Inability to Map Opinion to Scale*: The respondent might have an opinion but feels the provided scale categories are inadequate, too vague, or don't quite fit their nuanced view. They might feel their true sentiment falls "between" categories or doesn't align with any.
+-   *Question Ambiguity*: The respondent simply might not understand the question, its underlying assumptions, or the terms used, leading them to pick DK as a way out.
 
-To properly handle DK responses, it is essential to understand their underlying meanings. Research suggests that "Don't Know" can have several psychological interpretations:
-
- - *True Lack of Knowledge/Opinion*: The respondent genuinely has no information, experience, or hasn't formed an opinion on the topic.
-Unwillingness to Answer: The respondent might have an opinion but chooses not to express it due to a sensitive topic, privacy concerns, or wanting to appear socially desirable (e.g., not wanting to seem extreme or uninformed).
- - *Inability to Map Opinion to Scale*: The respondent might have an opinion but feels the provided scale categories are inadequate, too vague, or don't quite fit their nuanced view. They might feel their true sentiment falls "between" categories or doesn't align with any.
- - *Question Ambiguity*: The respondent simply might not understand the question, its underlying assumptions, or the terms used, leading them to pick DK as a way out.
- 
 The varied meanings of DK emphasize that it's a rich source of information, not just data to be thrown away or arbitrarily filled in.
 
 The approach for handling DK responses in the CUB framework is to think of the total population as having two unobserved (latent) groups:
 
-- Group A=0: Those who can give a substantive rating on the m-point scale. These people have a genuine underlying feeling or are able to make a choice, even if that choice has some general uncertainty.
+-   Group A=0: Those who can give a substantive rating on the m-point scale.
+    These people have a genuine underlying feeling or are able to make a choice, even if that choice has some general uncertainty.
 
-- Group A=1: Those who cannot (or would not) and would genuinely choose DK if it were an option. This group essentially represents the "true" non-responders when it comes to having a substantive opinion.
+-   Group A=1: Those who cannot (or would not) and would genuinely choose DK if it were an option.
+    This group essentially represents the "true" non-responders when it comes to having a substantive opinion.
 
 We'll use $p_{DK}$ to represent the proportion of individuals in the population who would choose DK.
 
@@ -2624,15 +2823,16 @@ We'll use $p_{DK}$ to represent the proportion of individuals in the population 
 
 This approach makes specific assumptions about how each latent group generates responses:
 
-For those who can answer (Group A=0, proportion $(1-p_{DK})$): When these individuals provide a substantive rating ($R=r$), their responses are assumed to follow a standard CUB model. This CUB model has its own parameters, $\pi_0$ (for uncertainty within this group) and $\xi_0$ (for feeling within this group), which describe the feeling and uncertainty among those capable of providing an opinion.
-
-
+For those who can answer (Group A=0, proportion $(1-p_{DK})$): When these individuals provide a substantive rating ($R=r$), their responses are assumed to follow a standard CUB model.
+This CUB model has its own parameters, $\pi_0$ (for uncertainty within this group) and $\xi_0$ (for feeling within this group), which describe the feeling and uncertainty among those capable of providing an opinion.
 
 $$
 P(R = r \mid A = 0, \pi_0, \xi_0) = \pi_0B(r\mid\xi_0) + (1-\pi_0)U(r)
 $$
- 
-For those who would choose DK (Group A=1, proportion $p_{DK}$), if these individuals are forced to pick a category from the m-point scale (e.g., if the DK option isn't available, or if their preference for DK is part of their general uncertainty), their choice isn't based on a genuine "feeling". Instead, their responses are driven purely by randomness or uncertainty across the available options. So, their responses are modeled by a discrete Uniform distribution.
+
+For those who would choose DK (Group A=1, proportion $p_{DK}$), if these individuals are forced to pick a category from the m-point scale (e.g., if the DK option isn't available, or if their preference for DK is part of their general uncertainty), their choice isn't based on a genuine "feeling".
+Instead, their responses are driven purely by randomness or uncertainty across the available options.
+So, their responses are modeled by a discrete Uniform distribution.
 
 $$
 P(R = r\mid A =1) =U(r)= \frac{1}{m}
@@ -2646,45 +2846,45 @@ The method proposed in this framework uses the presence of DKs to adjust the fun
 
 When DK responses are explicitly allowed in a survey and are present in the data the approach proceeds as follows:
 
-  1. Estimate $p_{DK}$: This is simply the observed proportion of DK responses in the sample.
- 
- $$
+1.  Estimate $p_{DK}$: This is simply the observed proportion of DK responses in the sample.
+
+$$
  \hat{p}_{DK} = \frac{Total\, number\, of\, DK\, responses}{Total\, number\, of\, responses}
  $$
- 
- 2. Focus on **Substantive Responders**: The remaining $(1- \hat{p}_{DK})$ proportion of the sample consists of individuals who gave a rating on the m-point ordinal scale (i.e., they picked a category from $1,…,m$). Let $N_{sub}$ be the number of these substantive responders.  
- 
- 3. **Model for Substantive Responses**: A standard CUB model is then fitted only to these $N_{sub}$ substantive responses. This fitting process gives us estimates for their underlying parameters, called $\pi_S$ and $\xi_S$. This model describes the probability distribution of ratings given that a substantive response was provided:
- $$
- P(R = r \mid Substantive) = \pi_SB(r\mid\xi_S) + (1-\pi_S)U(r)
- $$  
- 
- 4. **Relating to the Overall Population Parameters**: The crucial step is to link these parameters $(\pi_S, \xi_S)$ back to the overall population's true feeling and uncertainty, taking into account the proportion of DKs.
- 
-    - The feeling parameter for the overall population, $(1-\xi)$, is considered to be best represented by the feeling of those who actually gave a substantive rating. This is based on the idea that people who genuinely say "Don't Know" don't contribute to the "feeling" aspect of the scale. So:
-$$
-(1-\xi) = (1-\xi_S)
-$$
 
-    - The overall uncertainty parameter for the population, $(1-\pi)$, comes from two sources:
-        * The inherent uncertainty among those who could answer (captured by $1-\pi_S$).
-        * The complete uncertainty of those who chose DK (who are considered 100% uncertain regarding the m-point scale).
-      The overall $\pi$ for the population (the probability that a response is driven by feeling) is then calculated as:
+2.  Focus on **Substantive Responders**: The remaining $(1- \hat{p}_{DK})$ proportion of the sample consists of individuals who gave a rating on the m-point ordinal scale (i.e., they picked a category from $1,…,m$).
+    Let $N_{sub}$ be the number of these substantive responders.
+
+3.  **Model for Substantive Responses**: A standard CUB model is then fitted only to these $N_{sub}$ substantive responses.
+    This fitting process gives us estimates for their underlying parameters, called $\pi_S$ and $\xi_S$.
+    This model describes the probability distribution of ratings given that a substantive response was provided: $$
+     P(R = r \mid Substantive) = \pi_SB(r\mid\xi_S) + (1-\pi_S)U(r)
+     $$
+
+4.  **Relating to the Overall Population Parameters**: The crucial step is to link these parameters $(\pi_S, \xi_S)$ back to the overall population's true feeling and uncertainty, taking into account the proportion of DKs.
+
+    -   The feeling parameter for the overall population, $(1-\xi)$, is considered to be best represented by the feeling of those who actually gave a substantive rating.
+        This is based on the idea that people who genuinely say "Don't Know" don't contribute to the "feeling" aspect of the scale.
+        So: $$
+        (1-\xi) = (1-\xi_S)
+        $$
+
+    -   The overall uncertainty parameter for the population, $(1-\pi)$, comes from two sources:
+
+        -   The inherent uncertainty among those who could answer (captured by $1-\pi_S$).
+        -   The complete uncertainty of those who chose DK (who are considered 100% uncertain regarding the m-point scale). The overall $\pi$ for the population (the probability that a response is driven by feeling) is then calculated as:
 
 $$
 \pi = (1-\hat{p}_{DK})\cdot\pi_S
 $$
- 
 
 This means the overall probability that a response is based on feeling ($\pi$) is the probability that a respondent isn't a DK type $(1-\hat{p}_{DK})$ multiplied by the probability that, given they aren't a DK type, they respond based on feeling $(\pi_S)$.
 
 Consequently, the overall uncertainty for the population is:
 
-
 $$
 (1-\pi) = 1-(1-\hat{p}_{DK})\cdot\pi_S
 $$
- 
 
 This can be rewritten as:
 
@@ -2692,9 +2892,7 @@ $$
 (1-\pi) = \hat{p}_{DK} + (1-\hat{p}_{DK})\cdot(1-\pi_S)
 $$
 
-
 This last equation shows that the overall uncertainty in the population is the sum of the proportion of individuals who selected DK $(\hat{p}_{DK})$ and the proportion of uncertainty among those who provided a substantive response $(1-\pi_S)$, weighted by their share of the total population $(1-\hat{p}_{DK})$.
-
 
 ### Case study Eurobarometer's data
 
@@ -2708,23 +2906,24 @@ This last equation shows that the overall uncertainty in the population is the s
 
 In this section, we examine data from Standard Eurobarometer 81, a cross-national public opinion survey carried out in 2014 among citizens aged 15 and over across the 28 member states of the European Union (EU).
 
-The goal is to investigate how European citizens perceive the functioning, role, and future of the EU, with a particular focus on the treatment of Don’t Know (DK) responses in the analysis of ordinal data. Our attention is centered on a block of six attitudinal items (QA19.1–QA19.6), in which respondents rated their agreement on a four-point ordinal scale (totally disagree, tend to disagree, tend to agree, totally agree), with the possibility to select a DK option indicating uncertainty or lack of opinion. These items are intended to capture both cognitive understanding and emotional evaluation of the EU and related issues, such as globalization and European integration. By explicitly modeling DK responses, we gain insight not only into the direction of public opinion but also into the levels of uncertainty and ambivalence that shape attitudes toward complex political institutions like the EU.
+The goal is to investigate how European citizens perceive the functioning, role, and future of the EU, with a particular focus on the treatment of Don’t Know (DK) responses in the analysis of ordinal data.
+Our attention is centered on a block of six attitudinal items (QA19.1–QA19.6), in which respondents rated their agreement on a four-point ordinal scale (totally disagree, tend to disagree, tend to agree, totally agree), with the possibility to select a DK option indicating uncertainty or lack of opinion.
+These items are intended to capture both cognitive understanding and emotional evaluation of the EU and related issues, such as globalization and European integration.
+By explicitly modeling DK responses, we gain insight not only into the direction of public opinion but also into the levels of uncertainty and ambivalence that shape attitudes toward complex political institutions like the EU.
 
 The attitudinal items are:
 
-- QA19.1: I understand how the EU works
+-   QA19.1: I understand how the EU works
 
-- QA19.2: Globalisation is an opportunity for economic growth
+-   QA19.2: Globalisation is an opportunity for economic growth
 
-- QA19.3: (OUR COUNTRY) could better face the future outside
-the EU
+-   QA19.3: (OUR COUNTRY) could better face the future outside the EU
 
-- QA19.4: The EU should develop further into a federation of nation
-states
+-   QA19.4: The EU should develop further into a federation of nation states
 
-- QA19.5: More decisions should be taken at EU level
+-   QA19.5: More decisions should be taken at EU level
 
-- QA19.6: We need a united Europe in today’s world
+-   QA19.6: We need a united Europe in today’s world
 
 Let's start with the fitting of a CUB model for each variable by excluding the DK option.
 
@@ -2734,6 +2933,7 @@ library(CUB)
 # Load the data
 load("materials//microdata_eurobarometer.Rdata")
 ```
+
 ```{r warning = F, error = F, message = F}
 str(eurobarometer)
 
@@ -2772,15 +2972,12 @@ plot <- ggplot(param, aes(x = (1-x), y = (1-y), label = label)) +
 plot
 ```
 
-
 Now, let's see how the estimates of $\pi$ change by considering the DK option.
 First of all we have to compute the following quantity for each item:
 
 $$
 \hat{p}_{DK} = \frac{Total\, number\, of\, DK\, responses}{Total\, number\, of\, responses}
 $$
-
-
 
 ```{r warning = F, message = F, error = F}
 p_DK <- c()
@@ -2801,6 +2998,7 @@ p_DK
 
 param$p_DK <- as.numeric(p_DK)
 ```
+
 The "corrected" $\pi$ is computed as $\pi = (1-\hat{p}_{DK})\cdot\pi_S$.
 
 ```{r warning=F, error=F, message=F}
@@ -2808,6 +3006,7 @@ param$x_cor <- (1- param$p_DK)*param$x
 ```
 
 Then we can plot the estimated models by considering the DK option:
+
 ```{r warning=F, error=F, message=F}
 param$x_old <- 1 - param$x
 param$x_new <- 1 - param$x_cor
@@ -2828,29 +3027,42 @@ ggplot(param) +
   theme(panel.grid = element_blank())
 ```
 
-This plot shows that globally Europeans have quite negative feelings against Europe, since by looking at the results related to question QA19.6 people have a low feeling and low uncertainty, meaning that they generally don't think that we need a united europe today and they are almost sure about that. A similar opinion is confirmed by the high feeling shown for item QA19.3 which suggest that people globally think that their own country could better face the future outside the EU.
+This plot shows that globally Europeans have quite negative feelings against Europe, since by looking at the results related to question QA19.6 people have a low feeling and low uncertainty, meaning that they generally don't think that we need a united europe today and they are almost sure about that.
+A similar opinion is confirmed by the high feeling shown for item QA19.3 which suggest that people globally think that their own country could better face the future outside the EU.
 
 The other items show a medium level of feeling, especially QA19.2 and QA19.4, the consideration of the DK option shifts relevantly the level of uncertainty, meaning that the interviewees are not always able to say whether globalization is perceived as an opportunity for economic growth and are not able to express their perception about the possible development of the EU into a federation of nation states.
 
 **References and additional information**
 
-For those interested in learning more about CUB models, I suggest [this paper](https://link.springer.com/article/10.1007/s10260-019-00461-1){target="_blank"}, which provides a good overview of the main developments within the class of CUB models. Additional contributions and developments from my research group can be found on [this page](https://bodai.unibs.it/cub/){target="_blank"}.
+For those interested in learning more about CUB models, I suggest [this paper](https://link.springer.com/article/10.1007/s10260-019-00461-1){target="_blank"}, which provides a good overview of the main developments within the class of CUB models.
+Additional contributions and developments from my research group can be found on [this page](https://bodai.unibs.it/cub/){target="_blank"}.
 
 **Main References**
 
 The main references used for this module are:
 
-- D'Elia, A., & Piccolo, D. (2005). A mixture model for preferences data analysis. *Computational Statistics & Data Analysis*, 49(3), 917-934.
+-   D'Elia, A., & Piccolo, D.
+    (2005).
+    A mixture model for preferences data analysis.
+    *Computational Statistics & Data Analysis*, 49(3), 917-934.
 
-- Iannario, M. (2012). Modelling shelter choices in a class of mixture models for ordinal responses. *Statistical Methods & Applications*, 21(1), 1-22.
+-   Iannario, M.
+    (2012).
+    Modelling shelter choices in a class of mixture models for ordinal responses.
+    *Statistical Methods & Applications*, 21(1), 1-22.
 
-- Manisera, M., & Zuccolotto, P. (2014). Modeling “don’t know” responses in rating scales. *Pattern Recognition Letters*, 45, 226-234.
+-   Manisera, M., & Zuccolotto, P. (2014).
+    Modeling “don’t know” responses in rating scales.
+    *Pattern Recognition Letters*, 45, 226-234.
 
-- Piccolo, D., & Simone, R. (2019). The class of CUB models: statistical foundations, inferential issues and empirical evidence. *Statistical Methods & Applications*, 28, 389-435.
+-   Piccolo, D., & Simone, R.
+    (2019).
+    The class of CUB models: statistical foundations, inferential issues and empirical evidence.
+    *Statistical Methods & Applications*, 28, 389-435.
 
 **R Packages**
 
-The models and datasets (`univer`, `relgoods`) used in this module are provided in the R package [CUB](https://rdrr.io/cran/CUB/){target="_blank"} 
+The models and datasets (`univer`, `relgoods`) used in this module are provided in the R package [CUB](https://rdrr.io/cran/CUB/){target="_blank"}
 
 # Models for Multivariate Ordinal Data
 
@@ -2862,104 +3074,156 @@ The models and datasets (`univer`, `relgoods`) used in this module are provided 
 :::
 :::
 
-In previous modules, we explored what ordinal data are and how they can be modeled using approaches such as Proportional Odds Models and CUB models. These methods are well-suited for analyzing one or a few ordinal variables, especially when the interest lies in explaining or predicting an outcome. However, in many real-world settings, researchers are faced with multivariate ordinal data; that is, multiple ordinal variables collected simultaneously on each individual or unit.
+In previous modules, we explored what ordinal data are and how they can be modeled using approaches such as Proportional Odds Models and CUB models.
+These methods are well-suited for analyzing one or a few ordinal variables, especially when the interest lies in explaining or predicting an outcome.
+However, in many real-world settings, researchers are faced with multivariate ordinal data; that is, multiple ordinal variables collected simultaneously on each individual or unit.
 
-Think, for example, of a customer satisfaction survey where participants rate a range of services or products. Or consider a psychological questionnaire measuring various aspects of well-being or attitude. In such cases, the goal is often not to model a single response, but rather to uncover patterns, similarities, or latent structures in the data. This calls for multivariate methods.
+Think, for example, of a customer satisfaction survey where participants rate a range of services or products.
+Or consider a psychological questionnaire measuring various aspects of well-being or attitude.
+In such cases, the goal is often not to model a single response, but rather to uncover patterns, similarities, or latent structures in the data.
+This calls for multivariate methods.
 
 Before we delve into specific multivariate methods, it's helpful to briefly define two fundamental goals in multivariate data analysis that we will address:
 
- - **Dimensionality Reduction**: Imagine you have a dataset with a very large number of variables, or "dimensions", for each observation. This can make the data difficult to understand, visualize, and analyze. Dimensionality reduction is the process of transforming high-dimensional data into a lower-dimensional space (fewer variables) while trying to retain as much of the original, important information and relationships as possible. The aim is to simplify the data, making it more manageable for visualization, interpretation, and subsequent analyses, often by uncovering underlying "latent" variables or themes.
+-   **Dimensionality Reduction**: Imagine you have a dataset with a very large number of variables, or "dimensions", for each observation.
+    This can make the data difficult to understand, visualize, and analyze.
+    Dimensionality reduction is the process of transforming high-dimensional data into a lower-dimensional space (fewer variables) while trying to retain as much of the original, important information and relationships as possible.
+    The aim is to simplify the data, making it more manageable for visualization, interpretation, and subsequent analyses, often by uncovering underlying "latent" variables or themes.
 
+-   **Clustering**: In contrast to dimensionality reduction, clustering is an unsupervised learning technique aimed at finding natural groupings or segments within a dataset.
+    It involves organizing a set of observations (e.g., individuals, items) into groups (called "clusters") such that observations within the same group are more similar to each other than to those in other groups.
+    Clustering helps to uncover hidden patterns, identify distinct segments, and simplify complex datasets by categorizing observations based on their inherent similarities, without any prior knowledge of what those groups might be.
 
- - **Clustering**: In contrast to dimensionality reduction, clustering is an unsupervised learning technique aimed at finding natural groupings or segments within a dataset. It involves organizing a set of observations (e.g., individuals, items) into groups (called "clusters") such that observations within the same group are more similar to each other than to those in other groups. Clustering helps to uncover hidden patterns, identify distinct segments, and simplify complex datasets by categorizing observations based on their inherent similarities, without any prior knowledge of what those groups might be.
+These two concepts, though distinct, often complement each other in data analysis workflows.
+Dimensionality reduction can make data more amenable to clustering, for instance, by projecting it into a space where true similarities are more apparent.
 
-
-These two concepts, though distinct, often complement each other in data analysis workflows. Dimensionality reduction can make data more amenable to clustering, for instance, by projecting it into a space where true similarities are more apparent.
-
-While classical multivariate techniques, such as Principal Component Analysis (PCA) and K-means clustering, are powerful tools for continuous data, they encounter significant limitations when applied to ordinal data. The core challenge lies in the inherent nature of ordinal scales: their numeric labels represent ordered categories rather than true measurable quantities with uniform intervals. Respecting this fundamental distinction is paramount to avoid drawing misleading or erroneous conclusions from our analyses. In this chapter, we will explore several alternative approaches that are better suited to analyzing both multivariate ordinal data and mixed-type datasets (those combining nominal, ordinal, and continuous variables).
+While classical multivariate techniques, such as Principal Component Analysis (PCA) and K-means clustering, are powerful tools for continuous data, they encounter significant limitations when applied to ordinal data.
+The core challenge lies in the inherent nature of ordinal scales: their numeric labels represent ordered categories rather than true measurable quantities with uniform intervals.
+Respecting this fundamental distinction is paramount to avoid drawing misleading or erroneous conclusions from our analyses.
+In this chapter, we will explore several alternative approaches that are better suited to analyzing both multivariate ordinal data and mixed-type datasets (those combining nominal, ordinal, and continuous variables).
 
 ## Why Classical Multivariate Methods Fall Short
+
 The inadequacy of classical multivariate methods for ordinal data stems from their underlying assumptions, which are typically violated by the properties of ordinal scales.
 
 ### Principal Component Analysis (PCA)
 
-Classical PCA is a dimensionality reduction technique built upon the covariance or correlation matrix of the variables. Its objective is to identify a set of orthogonal linear combinations of the original variables (principal components) that capture the maximum variance in the data. The method inherently assumes that the data are numerical and that the distances between values are meaningful and consistent.
+Classical PCA is a dimensionality reduction technique built upon the covariance or correlation matrix of the variables.
+Its objective is to identify a set of orthogonal linear combinations of the original variables (principal components) that capture the maximum variance in the data.
+The method inherently assumes that the data are numerical and that the distances between values are meaningful and consistent.
 
-When PCA is applied directly to ordinal data (even after assigning numerical labels like 1, 2, 3, etc.), it treats these labels as if they represent continuous, interval-scaled quantities. This creates a critical misrepresentation. For example, PCA would treat the numerical "distance" between "agree" (e.g., coded as 4) and "strongly agree" (e.g., coded as 5) as identical to the "distance" between "neutral" (e.g., coded as 3) and "agree" (e.g., coded as 4). As previously discussed, these perceived "distances" on an ordinal scale are rarely equal in their true conceptual or psychological magnitude. By treating these non-uniform intervals as equal, PCA can generate principal components that distort the true underlying structure of the ordinal relationships, leading to potentially misleading interpretations of the latent dimensions.
+When PCA is applied directly to ordinal data (even after assigning numerical labels like 1, 2, 3, etc.), it treats these labels as if they represent continuous, interval-scaled quantities.
+This creates a critical misrepresentation.
+For example, PCA would treat the numerical "distance" between "agree" (e.g., coded as 4) and "strongly agree" (e.g., coded as 5) as identical to the "distance" between "neutral" (e.g., coded as 3) and "agree" (e.g., coded as 4).
+As previously discussed, these perceived "distances" on an ordinal scale are rarely equal in their true conceptual or psychological magnitude.
+By treating these non-uniform intervals as equal, PCA can generate principal components that distort the true underlying structure of the ordinal relationships, leading to potentially misleading interpretations of the latent dimensions.
 
 ### K-Means Clustering
-Similarly, standard clustering algorithms like K-means rely heavily on Euclidean distances to quantify similarity or dissimilarity between data points. Euclidean distance, by its very definition, assumes interval-scaled variables where differences between values are direct and comparable.
 
-Applying K-means directly to numerically coded ordinal data leads to similar problems as with PCA. The calculated Euclidean distances between response profiles will be based on the arbitrary numerical assignments, not on the true, often unequal, conceptual distances between ordered categories. This can result in the formation of artificial clusters that do not genuinely reflect meaningful patterns or homogeneous groups within the ordinal data. Consequently, relevant patterns might be masked, or spurious groupings might emerge, hindering accurate segmentation and interpretation.
+Similarly, standard clustering algorithms like K-means rely heavily on Euclidean distances to quantify similarity or dissimilarity between data points.
+Euclidean distance, by its very definition, assumes interval-scaled variables where differences between values are direct and comparable.
+
+Applying K-means directly to numerically coded ordinal data leads to similar problems as with PCA.
+The calculated Euclidean distances between response profiles will be based on the arbitrary numerical assignments, not on the true, often unequal, conceptual distances between ordered categories.
+This can result in the formation of artificial clusters that do not genuinely reflect meaningful patterns or homogeneous groups within the ordinal data.
+Consequently, relevant patterns might be masked, or spurious groupings might emerge, hindering accurate segmentation and interpretation.
 
 Therefore, when confronted with multivariate ordinal data, it becomes important to use analytical tools that account for their ordered nature.
 
 ## Techniques for Dimensionality Reduction and Visualization of Ordinal Data
 
-The methods discussed in this section—Nonlinear PCA, Correspondence Analysis, and Multiple Correspondence Analysis—all share a common overarching goal: to reduce the dimensionality of complex multivariate data and to provide insightful graphical representations of the relationships within the data. While they achieve this through different mechanisms and for slightly different data structures, they collectively aim to uncover latent structures and visualize patterns in a lower-dimensional space.
-
+The methods discussed in this section—Nonlinear PCA, Correspondence Analysis, and Multiple Correspondence Analysis—all share a common overarching goal: to reduce the dimensionality of complex multivariate data and to provide insightful graphical representations of the relationships within the data.
+While they achieve this through different mechanisms and for slightly different data structures, they collectively aim to uncover latent structures and visualize patterns in a lower-dimensional space.
 
 ### Nonlinear Principal Component Analysis (NLPCA)
 
-Nonlinear Principal Component Analysis (NLPCA) represents a significant advancement over classical PCA, extending its framework to accommodate diverse data types, including ordinal variables. When applied to ordinal data, NLPCA addresses the core challenge by transforming the original categorical responses into optimal scores.
+Nonlinear Principal Component Analysis (NLPCA) represents a significant advancement over classical PCA, extending its framework to accommodate diverse data types, including ordinal variables.
+When applied to ordinal data, NLPCA addresses the core challenge by transforming the original categorical responses into optimal scores.
 
-The fundamental idea behind NLPCA is to "translate" ordinal data into a numerical scale in a way that maximizes the variance explained by the resulting principal components, much like traditional PCA. However, unlike classical PCA, this "translation" is not fixed or arbitrary. Instead, NLPCA iteratively determines the most appropriate numerical values (optimal scores) for each category. These optimal scores are derived such that they best preserve the order of the categories and maximize the explained variance in the transformed data, effectively capturing potentially nonlinear relationships.
+The fundamental idea behind NLPCA is to "translate" ordinal data into a numerical scale in a way that maximizes the variance explained by the resulting principal components, much like traditional PCA.
+However, unlike classical PCA, this "translation" is not fixed or arbitrary.
+Instead, NLPCA iteratively determines the most appropriate numerical values (optimal scores) for each category.
+These optimal scores are derived such that they best preserve the order of the categories and maximize the explained variance in the transformed data, effectively capturing potentially nonlinear relationships.
 
-By employing optimal scaling, NLPCA can effectively handle data that are a mix of continuous, nominal, and ordinal variables, offering a flexible and powerful dimensionality reduction technique for heterogeneous datasets. The output of NLPCA is a set of principal components that reflect the major sources of variability, but crucially, they do so while respecting the intrinsic nature of the ordinal data. NLPCA is particularly valuable when one suspects that the latent constructs driving the data exhibit nonlinear relationships or are multidimensional in a non-Euclidean sense.
+By employing optimal scaling, NLPCA can effectively handle data that are a mix of continuous, nominal, and ordinal variables, offering a flexible and powerful dimensionality reduction technique for heterogeneous datasets.
+The output of NLPCA is a set of principal components that reflect the major sources of variability, but crucially, they do so while respecting the intrinsic nature of the ordinal data.
+NLPCA is particularly valuable when one suspects that the latent constructs driving the data exhibit nonlinear relationships or are multidimensional in a non-Euclidean sense.
 
 ### Correspondence Analysis (CA)
 
-Correspondence Analysis (CA) is a statistical technique primarily designed for exploring the association between two categorical variables, typically presented in a contingency table (a cross-tabulation). CA's strength lies in its ability to graphically represent the relationships between the row and column categories in a common low-dimensional space, usually two dimensions, where their proximity visually reflects their association.
+Correspondence Analysis (CA) is a statistical technique primarily designed for exploring the association between two categorical variables, typically presented in a contingency table (a cross-tabulation).
+CA's strength lies in its ability to graphically represent the relationships between the row and column categories in a common low-dimensional space, usually two dimensions, where their proximity visually reflects their association.
 
-For example, if we have a contingency table cross-tabulating "Education Level" (an ordinal variable) with "Preferred News Source" (a nominal or ordinal variable), CA can visually reveal if specific education levels are strongly associated with particular news sources. Points representing categories that are close together on the CA map indicate a strong tendency to co-occur.
+For example, if we have a contingency table cross-tabulating "Education Level" (an ordinal variable) with "Preferred News Source" (a nominal or ordinal variable), CA can visually reveal if specific education levels are strongly associated with particular news sources.
+Points representing categories that are close together on the CA map indicate a strong tendency to co-occur.
 
-While CA is most commonly associated with nominal data, it can also be applied to ordinal variables. However, it's important to note that in its standard form, CA does not explicitly leverage or enforce the order information of ordinal variables. Consequently, while CA can be highly useful for detecting general patterns and visualizing broad relationships in the data, it should be applied with caution when the precise ordinal nature and monotonicity of the data are central to the research question. Nevertheless, CA remains a valuable exploratory tool, offering useful insights into co-occurrence structures and showing which categories of different variables are more likely to appear together, particularly in the initial phases of data exploration.
+While CA is most commonly associated with nominal data, it can also be applied to ordinal variables.
+However, it's important to note that in its standard form, CA does not explicitly leverage or enforce the order information of ordinal variables.
+Consequently, while CA can be highly useful for detecting general patterns and visualizing broad relationships in the data, it should be applied with caution when the precise ordinal nature and monotonicity of the data are central to the research question.
+Nevertheless, CA remains a valuable exploratory tool, offering useful insights into co-occurrence structures and showing which categories of different variables are more likely to appear together, particularly in the initial phases of data exploration.
 
 ### Multiple Correspondence Analysis (MCA)
-Multiple Correspondence Analysis (MCA) extends the principles of CA to analyze the relationships among more than two categorical variables simultaneously. This makes MCA particularly well-suited for large survey datasets where respondents provide answers across numerous items, often using Likert-type scales.
 
-Similar to CA, MCA represents both the categories of the variables and the individual respondents in a low-dimensional space (e.g., a 2D scatter plot). This visual representation greatly facilitates the detection of latent structures and the visualization of similarities among individuals and variables. For instance, MCA can help identify clusters of individuals who exhibit similar response profiles across multiple survey questions. It can also reveal the underlying dimensions or "themes" that explain the relationships among the survey items themselves.
+Multiple Correspondence Analysis (MCA) extends the principles of CA to analyze the relationships among more than two categorical variables simultaneously.
+This makes MCA particularly well-suited for large survey datasets where respondents provide answers across numerous items, often using Likert-type scales.
 
-A key point to remember about standard MCA is that it traditionally treats all variables as nominal, thereby disregarding the inherent ordered nature of ordinal variables. To mitigate this limitation, several extensions of MCA have been proposed. These include methods like ordinal MCA or nonlinear MCA, which incorporate specific coding and weighting schemes for responses that explicitly account for their ordering. These advanced versions strive to preserve the monotonicity of ordinal scales and to produce more meaningful and interpretable dimensions that are faithful to the data's original structure.
+Similar to CA, MCA represents both the categories of the variables and the individual respondents in a low-dimensional space (e.g., a 2D scatter plot).
+This visual representation greatly facilitates the detection of latent structures and the visualization of similarities among individuals and variables.
+For instance, MCA can help identify clusters of individuals who exhibit similar response profiles across multiple survey questions.
+It can also reveal the underlying dimensions or "themes" that explain the relationships among the survey items themselves.
 
-In practice, MCA is widely employed in the social sciences, marketing research, and psychology due to its powerful ability to simplify complex datasets into interpretable patterns. It is an invaluable tool for dimensionality reduction and visualization, often preceding or complementing other analyses by providing a simplified, meaningful representation of the data.
+A key point to remember about standard MCA is that it traditionally treats all variables as nominal, thereby disregarding the inherent ordered nature of ordinal variables.
+To mitigate this limitation, several extensions of MCA have been proposed.
+These include methods like ordinal MCA or nonlinear MCA, which incorporate specific coding and weighting schemes for responses that explicitly account for their ordering.
+These advanced versions strive to preserve the monotonicity of ordinal scales and to produce more meaningful and interpretable dimensions that are faithful to the data's original structure.
+
+In practice, MCA is widely employed in the social sciences, marketing research, and psychology due to its powerful ability to simplify complex datasets into interpretable patterns.
+It is an invaluable tool for dimensionality reduction and visualization, often preceding or complementing other analyses by providing a simplified, meaningful representation of the data.
 
 ## Clustering with Ordinal and Mixed Data
 
-Clustering is a milestone of unsupervised learning since it allows to discover natural groupings or segments within a dataset. However, as anticipated, standard clustering algorithms like K-means are poorly suited for ordinal or mixed-type data due to their reliance on distance metrics that assume continuous, interval-scaled variables.
+Clustering is a milestone of unsupervised learning since it allows to discover natural groupings or segments within a dataset.
+However, as anticipated, standard clustering algorithms like K-means are poorly suited for ordinal or mixed-type data due to their reliance on distance metrics that assume continuous, interval-scaled variables.
 
 ### Distance-Based Clustering
 
-To perform clustering on ordinal data, the critical first step is to define distance measures that genuinely respect the ordinal nature of the variables. One of the most widely adopted and versatile approaches is to use Gower's distance (or Gower's coefficient of similarity). Gower's distance can handle mixed data types, including nominal, ordinal, and continuous variables, within a single dissimilarity metric. For ordinal variables specifically, Gower's metric calculates distances in a way that preserves the order and accounts for the number of categories separating two responses, without assuming equal intervals.
+To perform clustering on ordinal data, the critical first step is to define distance measures that genuinely respect the ordinal nature of the variables.
+One of the most widely adopted and versatile approaches is to use Gower's distance (or Gower's coefficient of similarity).
+Gower's distance can handle mixed data types, including nominal, ordinal, and continuous variables, within a single dissimilarity metric.
+For ordinal variables specifically, Gower's metric calculates distances in a way that preserves the order and accounts for the number of categories separating two responses, without assuming equal intervals.
 
-Another option involves using other ordinal-specific dissimilarity measures, such as those based on ranks, monotonic transformations, or agreement/disagreement counts. These measures are designed to avoid the pitfalls of assuming equal spacing between categories.
+Another option involves using other ordinal-specific dissimilarity measures, such as those based on ranks, monotonic transformations, or agreement/disagreement counts.
+These measures are designed to avoid the pitfalls of assuming equal spacing between categories.
 
-Once an appropriate dissimilarity matrix is computed (e.g., using Gower's distance), clustering algorithms that do not rely on Euclidean geometry or mean centroids can be effectively employed. 
+Once an appropriate dissimilarity matrix is computed (e.g., using Gower's distance), clustering algorithms that do not rely on Euclidean geometry or mean centroids can be effectively employed.
 
 Some examples are:
 
-- Hierarchical clustering: Builds a hierarchy of clusters from individual data points, based on their dissimilarities.
+-   Hierarchical clustering: Builds a hierarchy of clusters from individual data points, based on their dissimilarities.
 
-- Partitioning Around Medoids (PAM): A robust alternative to K-means that uses actual data points (medoids) as cluster centers, minimizing the sum of dissimilarities rather than squared Euclidean distances.
-
+-   Partitioning Around Medoids (PAM): A robust alternative to K-means that uses actual data points (medoids) as cluster centers, minimizing the sum of dissimilarities rather than squared Euclidean distances.
 
 ### Model-Based Clustering
 
-Beyond distance-based approaches, model-based clustering offers a probabilistic framework for identifying clusters. Instead of relying only on distance metrics, model-based clustering assumes that the data points within each cluster are generated from a specific probability distribution, and the entire dataset is a mixture of these distributions. The goal is to estimate the parameters of these component distributions and assign observations to the clusters that they are most likely to belong to.
+Beyond distance-based approaches, model-based clustering offers a probabilistic framework for identifying clusters.
+Instead of relying only on distance metrics, model-based clustering assumes that the data points within each cluster are generated from a specific probability distribution, and the entire dataset is a mixture of these distributions.
+The goal is to estimate the parameters of these component distributions and assign observations to the clusters that they are most likely to belong to.
 
-For ordinal data, model-based clustering often employs specialized distributions that are designed for ordered categories. For example, some approaches might use latent class models, where each latent class represents a cluster, and within each cluster, the ordinal responses follow a specific discrete probability distribution (e.g., a multinomial distribution or a specific ordinal-friendly distribution like the Binary Ordinal Search (BOS) model). This allows for a more rigorous statistical inference on the number of clusters and the characteristics of each cluster.
+For ordinal data, model-based clustering often employs specialized distributions that are designed for ordered categories.
+For example, some approaches might use latent class models, where each latent class represents a cluster, and within each cluster, the ordinal responses follow a specific discrete probability distribution (e.g., a multinomial distribution or a specific ordinal-friendly distribution like the Binary Ordinal Search (BOS) model).
+This allows for a more rigorous statistical inference on the number of clusters and the characteristics of each cluster.
 
 An important advantage of model-based clustering is its ability to:
 
-- Provide a statistical basis for clustering: This allows for formal tests and information criteria (like BIC or AIC) to select the optimal number of clusters.
+-   Provide a statistical basis for clustering: This allows for formal tests and information criteria (like BIC or AIC) to select the optimal number of clusters.
 
-- Handle uncertainty in cluster membership: Instead of hard assignments, observations are often assigned to clusters probabilistically.
+-   Handle uncertainty in cluster membership: Instead of hard assignments, observations are often assigned to clusters probabilistically.
 
 This approach allows researchers to segment individuals into genuinely homogeneous groups, revealing hidden patterns in the data that might not be evident through classical analyses while also providing a framework for statistical inference about the clustering solution.
 
----
+------------------------------------------------------------------------
 
-::: {.centered}
+::: centered
 **Final notes**
 :::
 
@@ -2967,12 +3231,13 @@ This course has offered an introduction to the analysis of ordinal data, a type 
 
 We have covered the following main topics:
 
- - Definition and characteristics of ordinal data, and the importance of treating them appropriately rather than assuming interval or continuous scale properties.
+-   Definition and characteristics of ordinal data, and the importance of treating them appropriately rather than assuming interval or continuous scale properties.
 
- - Survey and scale design.
+-   Survey and scale design.
 
- - Statistical models for ordinal data, such as the Proportional Odds Model and CUB models.
+-   Statistical models for ordinal data, such as the Proportional Odds Model and CUB models.
 
- - Multivariate methods for ordinal and mixed data. 
+-   Multivariate methods for ordinal and mixed data.
 
-Throughout the course, a common thread has been the need to respect the nature of ordinal data, choosing analytical methods that reflect their structure and meaning. Applying models designed for other types of data may lead to invalid interpretations, while appropriate methods can provide valuable insights into individual preferences, attitudes, and behaviors.
+Throughout the course, a common thread has been the need to respect the nature of ordinal data, choosing analytical methods that reflect their structure and meaning.
+Applying models designed for other types of data may lead to invalid interpretations, while appropriate methods can provide valuable insights into individual preferences, attitudes, and behaviors.
