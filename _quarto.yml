@@ -4,6 +4,7 @@ project:
 
 website:
   title: "Matteo Ventura"
+  site-url: https://matteoventura.github.io/
   # Aggiungiamo un footer per dare un aspetto finito
   page-footer:
     left: "© 2026 Matteo Ventura"
