@@ -2,10 +2,13 @@
 title: "Matteo Ventura"
 image: me2.jpg 
 toc: false
-# Questo rimuove le barre laterali vuote e allarga l'area del testo
 page-layout: full 
+# Diciamo a Quarto di copiare questi file nella cartella finale
+resources:
+  - "CV_VENTURA_ENG.pdf"
+  - "Seal of Excellence.pdf"
 about:
-  template: solana # Sfrutta meglio la larghezza rispetto a trestles
+  template: solana 
   image-width: 15em
   image-shape: round
   links:
@@ -18,18 +21,13 @@ about:
     - icon: google
       text: Scholar
       href: https://scholar.google.com/citations?user=aRhtf3kAAAAJ&hl=en
-    # - icon: mortarboard-fill
-    #   text: University
-    #   href: https://www.unibs.it/en/ugov/person/145546
     - icon: file-earmark-pdf
       text: CV
       href: CV_VENTURA_ENG.pdf
 ---
 
-
 I am a **Post-doc in Statistics** at the University of Calabria. 
 My methodological research focuses on Mixture Models for ordinal, with applications in sensory analysis, consumer behavior, and psychology.
-
 
 ## Research Interests
 
@@ -42,10 +40,7 @@ My methodological research focuses on Mixture Models for ordinal, with applicati
 ## Education & Visiting
 
 **Visiting Researcher** | Sep. 2025 – Oct. 2025   
-*Victoria University of Wellington, New Zealand*   
-Supervisors: Prof. Ivy Liu and Richard Arnold 
-
-
+*Victoria University of Wellington, New Zealand* Supervisors: Prof. Ivy Liu and Richard Arnold 
 
 **PhD in Analytics for Economics and Management** | 2021 - 2024  
 *University of Brescia, Italy* Thesis title: *Advances in Mixture Models for Ordinal Data: Theoretical Insights and Model-based Clustering*<br>
@@ -55,12 +50,11 @@ Supervisor: Prof. Paola Zuccolotto | Co-supervisor: Prof. Julien Jacques
 *University Lumière Lyon 2, France*<br>
 Supervisor: Prof. Julien Jacques
 
-
 ## Awards & Honors
 
 **Marie Skłodowska-Curie Action Seal of Excellence** (Feb. 2026)   
 *European Commission* | Score: 91.60 / 100   
-<a href="docs\Seal of Excellence.pdf" download class="pub-link" style="margin-left: 0px;">
+<a href="Seal of Excellence.pdf" download class="pub-link" style="margin-left: 0px;">
     <i class="bi bi-download"></i> Download Certificate
   </a>
   <br>

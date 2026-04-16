@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Matteo Ventura - Beyond Standard Approaches: Modeling Ordinal Data with CUB Models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="google-site-verification" content="C3ggHJs_ixVu-G17Z_vF1TG0r-XS1hQYsy6wOSJVfP8">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Matteo Ventura</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../courses.html" rel="" target="">
+ <span class="menu-text">Courses</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contacts.html" rel="" target="">
+ <span class="menu-text">Contacts</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/MatteoVentura" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-psychological-reasons-behind-the-cub-model" id="toc-the-psychological-reasons-behind-the-cub-model" class="nav-link active" data-scroll-target="#the-psychological-reasons-behind-the-cub-model">The Psychological Reasons Behind the CUB Model</a></li>
+  <li><a href="#the-cub-model-statistical-formulation" id="toc-the-cub-model-statistical-formulation" class="nav-link" data-scroll-target="#the-cub-model-statistical-formulation">The CUB Model: Statistical Formulation</a>
+  <ul class="collapse">
+  <li><a href="#interpretation-of-parameters" id="toc-interpretation-of-parameters" class="nav-link" data-scroll-target="#interpretation-of-parameters">Interpretation of Parameters</a></li>
+  <li><a href="#model-identifiability-and-estimation" id="toc-model-identifiability-and-estimation" class="nav-link" data-scroll-target="#model-identifiability-and-estimation">Model identifiability and Estimation</a></li>
+  <li><a href="#assessing-the-goodness-of-fit" id="toc-assessing-the-goodness-of-fit" class="nav-link" data-scroll-target="#assessing-the-goodness-of-fit">Assessing the Goodness of Fit</a></li>
+  <li><a href="#parameter-space-visualization" id="toc-parameter-space-visualization" class="nav-link" data-scroll-target="#parameter-space-visualization">Parameter Space Visualization</a></li>
+  </ul></li>
+  <li><a href="#extensions-of-the-cub-model-incorporating-covariates" id="toc-extensions-of-the-cub-model-incorporating-covariates" class="nav-link" data-scroll-target="#extensions-of-the-cub-model-incorporating-covariates">Extensions of the CUB Model: Incorporating Covariates</a>
+  <ul class="collapse">
+  <li><a href="#statistical-formulation-of-cub-model-with-covariates" id="toc-statistical-formulation-of-cub-model-with-covariates" class="nav-link" data-scroll-target="#statistical-formulation-of-cub-model-with-covariates">Statistical Formulation of CUB Model with Covariates</a></li>
+  <li><a href="#interpretation-of-covariate-effects" id="toc-interpretation-of-covariate-effects" class="nav-link" data-scroll-target="#interpretation-of-covariate-effects">Interpretation of Covariate Effects</a></li>
+  <li><a href="#case-study-universitys-students-satisfaction" id="toc-case-study-universitys-students-satisfaction" class="nav-link" data-scroll-target="#case-study-universitys-students-satisfaction">Case Study: University’s students satisfaction</a></li>
+  </ul></li>
+  <li><a href="#cub-model-with-shelter-option" id="toc-cub-model-with-shelter-option" class="nav-link" data-scroll-target="#cub-model-with-shelter-option">CUB Model with Shelter Option</a>
+  <ul class="collapse">
+  <li><a href="#defining-the-shelter-category" id="toc-defining-the-shelter-category" class="nav-link" data-scroll-target="#defining-the-shelter-category">Defining the shelter category</a></li>
+  <li><a href="#statistical-formulation-of-cub-model-with-shelter-option" id="toc-statistical-formulation-of-cub-model-with-shelter-option" class="nav-link" data-scroll-target="#statistical-formulation-of-cub-model-with-shelter-option">Statistical Formulation of CUB Model with Shelter Option</a></li>
+  <li><a href="#case-study-the-reelgoods-dataset" id="toc-case-study-the-reelgoods-dataset" class="nav-link" data-scroll-target="#case-study-the-reelgoods-dataset">Case study: the reelgoods dataset</a></li>
+  </ul></li>
+  <li><a href="#treatment-of-dont-know-dk-options-within-the-cub-framework" id="toc-treatment-of-dont-know-dk-options-within-the-cub-framework" class="nav-link" data-scroll-target="#treatment-of-dont-know-dk-options-within-the-cub-framework">Treatment of “Don’t Know” (DK) Options within the CUB Framework</a>
+  <ul class="collapse">
+  <li><a href="#modeling-assumptions-for-latent-groups" id="toc-modeling-assumptions-for-latent-groups" class="nav-link" data-scroll-target="#modeling-assumptions-for-latent-groups">Modeling Assumptions for Latent Groups</a></li>
+  <li><a href="#adjusting-cub-parameters-using-observed-dks" id="toc-adjusting-cub-parameters-using-observed-dks" class="nav-link" data-scroll-target="#adjusting-cub-parameters-using-observed-dks">Adjusting CUB Parameters using Observed DKs</a></li>
+  <li><a href="#case-study-eurobarometers-data" id="toc-case-study-eurobarometers-data" class="nav-link" data-scroll-target="#case-study-eurobarometers-data">Case study Eurobarometer’s data</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="03-CUB.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Beyond Standard Approaches: Modeling Ordinal Data with CUB Models</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+
+<div class="no-row-height column-margin column-container"><div class="">
+<!-- <p><a href="materials/Script_plots_examples.R" download style="margin-right: 5px;"> <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i> [R Script]{style="margin-left: 2px; vertical-align: middle;"} </a></p> -->
+<p>
+<a href="materials/Ordinal Data Analysis in R - Module 3.pdf" download=""> <i class="bi bi-file-earmark-slides-fill" style="font-size: 0.9em; vertical-align: middle;"></i> <span style="margin-left: 2px; vertical-align: middle;">Slides</span> </a>
+</p>
+<p>
+<a href="03-CUB.pdf" download=""> <i class="bi bi-file-earmark-pdf-fill" style="font-size: 0.9em; vertical-align: middle; color: #dc3545;"></i> <span style="margin-left: 2px; vertical-align: middle; color: #dc3545; font-weight: bold;">Module PDF</span> </a>
+</p>
+</div></div><p>While powerful and widely used, Ordered logit models operate under specific assumptions:</p>
+<ul>
+<li><p><strong>Proportional Odds Assumption</strong>: This assumption can be restrictive and, if violated, can lead to misleading conclusions.</p></li>
+<li><p><strong>Latent Variable Interpretation</strong>: While mathematically convenient, the interpretation of the latent variable might not always align perfectly with the psychological process of how an individual actually chooses an ordered category. The continuous latent variable often represents an underlying “utility” or “propensity,” but it doesn’t explicitly account for aspects like uncertainty or indecision in the response process.</p></li>
+</ul>
+<p>These limitations highlight a need for alternative modeling frameworks that can capture the nuanced complexities inherent in how individuals respond to ordinal scales.</p>
+<p>There is a clear and compelling need for specialized statistical models designed to capture the unique characteristics of ordinal data and, importantly, to reflect the underlying cognitive and psychological processes through which individuals select a particular ordered category. This is where CUB models (Combination of a Uniform and a shifted Binomial random variable) come into play.</p>
+<p>CUB models, primarily developed by Domenico Piccolo and collaborators starting in the early 2000s, offer a distinct and innovative approach to modeling ordinal data. They stand apart from traditional methods by explicitly incorporating psychological interpretations into their statistical structure.</p>
+<p>At their core, CUB models are mixture models specifically tailored for ordinal data. The fundamental idea is that a respondent’s observed rating is not solely a direct and deterministic mapping of their true “feeling” or “utility.” Instead, it is also significantly affected by an element of “uncertainty” or “indecision” that can influence the final choice. This acknowledgment of psychological complexity in the response process is what makes CUB models particularly insightful for rating data.</p>
+<section id="the-psychological-reasons-behind-the-cub-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-psychological-reasons-behind-the-cub-model">The Psychological Reasons Behind the CUB Model</h2>
+<p>The innovation of the CUB model lies in its attempt to statistically represent two fundamental psychological components that influence a respondent’s choice on an ordinal scale. The model posits that an observed rating <span class="math inline">\(R\)</span> is a probabilistic outcome of a decision process that weighs two components.</p>
+<p><strong>1. Feeling (or Attraction/Preference)</strong></p>
+<p>This component represents the conscious, rational, and deliberative aspect of the decision-making process. It reflects the respondent’s genuine evaluation, opinion, or perception regarding the item being rated. The “feeling” directs the respondent towards a specific category on the scale that best aligns with their internal assessment. This is the component that captures the respondent’s true position or stance on the matter at hand.</p>
+<p>Depending on the specific context of the rating, “feeling” can be interpreted as:</p>
+<ul>
+<li><p><strong>Agreement/Disagreement</strong>: How much a person agrees or disagrees with a statement.</p></li>
+<li><p><strong>Satisfaction/Dissatisfaction</strong>: The level of contentment or discontent with a product, service, or experience.</p></li>
+<li><p><strong>Liking/Disliking</strong>: The degree of preference or aversion towards an item.</p></li>
+<li><p><strong>Perceived quality, importance, risk, etc.</strong>: The subjective assessment of various attributes.</p></li>
+</ul>
+<p>In essence, the feeling component drives the respondent towards a particular region of the ordinal scale, reflecting their underlying preference or “attraction” to certain categories.</p>
+<p><strong>2. Uncertainty (or Indecision/Fuzziness)</strong></p>
+<p>This component captures the hesitation, randomness, or lack of decisiveness that can accompany the choice process. It acknowledges a crucial psychological reality: respondents may not always have a perfectly clear and precise mapping of their internal feeling onto the provided scale categories. This can introduce a degree of randomness or “noise” into the selection process.</p>
+<p>Sources of this uncertainty can be varied and include:</p>
+<ul>
+<li><p><strong>Lack of Information or Knowledge</strong>: The respondent might not have sufficient information to form a strong opinion about the item being rated.</p></li>
+<li><p><strong>Ambiguity</strong>: The question wording or the definition of the scale categories might be unclear, leading to confusion.</p></li>
+<li><p><strong>Personal Tendencies</strong>: Some individuals may inherently be more indecisive or tend to use certain parts of a scale (e.g., sticking to the middle categories).</p></li>
+<li><p><strong>Cognitive Effort/Satisficing</strong>: In long surveys or under time pressure, respondents might engage in “satisficing” behavior. Instead of expending full mental energy to find the optimal category, they might pick a plausible but not necessarily precise one to save cognitive effort.</p></li>
+<li><p><strong>Time Pressure or Fatigue</strong>: Being rushed or tired can reduce the ability to make a precise decision.</p></li>
+<li><p><strong>Emotional State or Mood</strong>: A respondent’s transient emotional state can also introduce variability into their choices.</p></li>
+</ul>
+<p>The uncertainty component effectively describes the probability that the respondent’s choice is influenced by random factors rather than a specific preference.</p>
+</section>
+<section id="the-cub-model-statistical-formulation" class="level2">
+<h2 class="anchored" data-anchor-id="the-cub-model-statistical-formulation">The CUB Model: Statistical Formulation</h2>
+<p>The basic CUB model, designed for m ordered categories (typically <span class="math inline">\(r=1,2,\dots,m\)</span>), is a finite mixture of two discrete probability distributions:</p>
+<ul>
+<li>A shifted Binomial distribution to model the feeling (or attraction/preference) component.</li>
+<li>A discrete Uniform distribution to model the uncertainty (or indecision/fuzziness) component.</li>
+</ul>
+<p>The Probability Mass Function (PMF) for an observed rating <span class="math inline">\(R=r\)</span> is given by:</p>
+<p><span class="math display">\[
+P(R = r \mid \pi,\xi) = \pi B(r \mid\xi) + (1-\pi)U(r)
+\]</span> where the elements of the mixture are:</p>
+<ul>
+<li><p><span class="math inline">\(m\)</span>: This is the number of ordered categories on the scale. For instance, if a scale ranges from “1 = Strongly Disagree” to “5 = Strongly Agree,” then <span class="math inline">\(m=5\)</span>.</p></li>
+<li><p><span class="math inline">\(r\)</span>: This denotes the selected category by a respondent, where <span class="math inline">\(r\in \{ 1,2,…,m\}\)</span>.</p></li>
+<li><p><span class="math inline">\(\pi \in (0,1]\)</span>, acts as a mixture weight. <span class="math inline">\(\pi\)</span> represents the probability that the observed choice is driven by the feeling component (i.e., the shifted Binomial distribution).<br>
+Consequently, <span class="math inline">\((1−\pi)\)</span> is called <strong>Uncertainty parameter</strong> and represents the probability that the observed choice is driven by the uncertainty component (i.e., the discrete Uniform distribution). A higher value of <span class="math inline">\((1−\pi)\)</span> means greater indecision or randomness in the response, indicating that the uniform component has a stronger influence.</p></li>
+<li><p><span class="math inline">\(\xi \in [0,1]\)</span>, is directly related to the shifted Binomial distribution and determines the location of the “feeling”.<br>
+More intuitively, <span class="math inline">\((1−\xi)\)</span> is often considered the direct measure of “feeling”, indeed it is called <strong>Feeling parameter</strong>.</p>
+<ul>
+<li>If <span class="math inline">\((1−\xi)\)</span> is high (e.g., close to 1, meaning <span class="math inline">\(\xi\)</span> is close to 0), there’s a strong underlying feeling towards the higher end of the scale.</li>
+<li>If <span class="math inline">\((1−\xi)\)</span> is low (e.g., close to 0, meaning <span class="math inline">\(\xi\)</span> is close to 1), there’s a strong underlying feeling towards the lower end of the scale.</li>
+<li>If <span class="math inline">\((1−\xi) = 0.5\)</span> (meaning <span class="math inline">\(\xi=0.5\)</span>), the feeling component is neutral or centered, implying a symmetric preference if not for the influence of uncertainty.</li>
+</ul></li>
+<li><p><span class="math inline">\(U(r)\)</span>: This is the probability of choosing category <span class="math inline">\(r\)</span> according to a discrete Uniform distribution.<br>
+For any category <span class="math inline">\(r\in\{1,2,…,m\}\)</span>, <span class="math inline">\(U(r)= \frac{1}{m}\)</span>.<br>
+This component represents complete randomness or a lack of specific preference among the <span class="math inline">\(m\)</span> categories. If a respondent is entirely uncertain or indecisive, their response is essentially a random pick from the available options.</p></li>
+<li><p><span class="math inline">\(B(r∣\xi)\)</span>: This is the probability of choosing category <span class="math inline">\(r\)</span> according to a shifted Binomial distribution.<br>
+Specifically, this refers to <span class="math inline">\(P(X=r−1)\)</span> where <span class="math inline">\(X\sim Bin(m−1,1−\xi)\)</span>. The “shifted” aspect arises because the rating scale typically starts from 1, while a standard Binomial distribution’s trials start from 0. Thus, to model a choice of <span class="math inline">\(r\)</span> on a scale <span class="math inline">\(1,…,m\)</span>, we consider <span class="math inline">\(r−1\)</span> successes out of <span class="math inline">\(m−1\)</span> trials.<br>
+So, the PMF is:</p></li>
+</ul>
+<p><span class="math display">\[
+B(r\mid\xi)=\binom{m-1}{r-1}(1-\xi)^{r-1}\xi^{m-r}
+\]</span></p>
+<p>This component models the feeling towards a particular category, allowing for various shapes (unimodal, skewed left/right, or even U-shaped if <span class="math inline">\((1−\xi)\)</span> is extremely close to 0 or 1, though the latter is less common in direct “feeling” interpretation). It captures where the respondent’s underlying preference lies on the scale.</p>
+<p>Finally, the CUB model can be written as: <span class="math display">\[
+P(R = r \mid \pi,\xi) = \pi \binom{m-1}{r-1}(1-\xi)^{r-1}\xi^{m-r} + (1-\pi) \frac{1}{m}
+\]</span></p>
+<section id="interpretation-of-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-of-parameters">Interpretation of Parameters</h3>
+<p>The feeling <span class="math inline">\((1-\xi)\)</span> and the uncertainty <span class="math inline">\((1-\pi)\)</span> parameters are not merely statistical quantities; they have direct psychological meanings related to the respondent’s decision process.</p>
+<p><strong>The Uncertainty Parameter</strong></p>
+<p>It directly quantifies the level of uncertainty or indecision in the respondent’s choice.</p>
+<ul>
+<li><p>If <span class="math inline">\((1-\pi = 0)\)</span> (i.e., <span class="math inline">\(\pi = 1\)</span>) it means that the observed choice is entirely determined by the feeling, modeled by the binomial component. There is no uncertainty. The distribution of responses will reflect the shape of the Binomial.</p></li>
+<li><p>If <span class="math inline">\((1−\pi)=1\)</span> (i.e., <span class="math inline">\(\pi=0\)</span>) it means that the observed choice is entirely determined by “uncertainty” (Uniform component). The respondent’s feeling plays no role. The distribution of responses will be perfectly flat, meaning each category is chosen with equal probability.</p></li>
+<li><p>Values between 0 and 1 indicate a mix of the two components. A higher value of <span class="math inline">\((1−\pi)\)</span> effectively “flattens” the observed distribution of responses towards a uniform shape, as the random component gains more influence.</p></li>
+</ul>
+<p><strong>The Feeling Parameter</strong></p>
+<p>The quantity <span class="math inline">\((1−\xi)\)</span> measures the underlying “feeling”, “preference”, or “attraction” of the respondent. It dictates the skewness and location of the Binomial component.</p>
+<ul>
+<li><p>If <span class="math inline">\((1−\xi)\)</span> is high (close to 1, so <span class="math inline">\(\xi\)</span> is close to 0), it means that there’s a strong attraction towards higher-valued categories. The Binomial component will be skewed to the right, with its mode (most frequent value) located at or near the maximum category <span class="math inline">\(m\)</span>.</p></li>
+<li><p>If <span class="math inline">\((1−\xi)\)</span> is low (close to 0, so <span class="math inline">\(\xi\)</span> is close to 1) it means that there’s a strong attraction towards lower-valued categories. The Binomial component will be skewed to the left, with its mode located at or near the minimum category 1.</p></li>
+<li><p>If <span class="math inline">\((1−\xi)=0.5\)</span> (so <span class="math inline">\(\xi=0.5\)</span>), the Binomial component is symmetric around the center of the scale, indicating a neutral or balanced feeling.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\CUBgrid.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Probability distribution functions of the CUB model, for <span class="math inline">\(m = 7\)</span> and 9 combinations of feeling and uncertainty.</figcaption>
+</figure>
+</div>
+</section>
+<section id="model-identifiability-and-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="model-identifiability-and-estimation">Model identifiability and Estimation</h3>
+<p>The CUB model is identifiable (i.e., different sets of parameter values lead to different probability distributions for the observed data) if the number of categories <span class="math inline">\(m &gt; 3\)</span>.</p>
+<p>The parameters <span class="math inline">\((\pi, \xi)\)</span> of the CUB model are typically estimated using the Maximum Likelihood Estimation (MLE) method. MLE search for the parameter values that maximize the likelihood of observing the given data.</p>
+<p>Since the CUB model is a mixture model, direct maximization of this log-likelihood function can be complex due to its non-linear nature. Therefore, the Expectation-Maximization (EM) algorithm is a common and robust iterative method for finding the MLEs.</p>
+</section>
+<section id="assessing-the-goodness-of-fit" class="level3">
+<h3 class="anchored" data-anchor-id="assessing-the-goodness-of-fit">Assessing the Goodness of Fit</h3>
+<p>A particularly common and intuitive measure for assessing how well a CUB model fits the observed data is the Dissimilarity (<span class="math inline">\(Diss\)</span>) Index. It quantifies the absolute difference between the observed and fitted proportions for each category. The <span class="math inline">\(Diss\)</span> index is defined as follows:</p>
+<p><span class="math display">\[
+Diss = \frac{1}{2}\sum_{r = 1}^{m} \mid f_r - p_r(\hat{\boldsymbol{\theta}})\mid
+\]</span> where <span class="math inline">\(f_r\)</span> are the observed relative frequencies and <span class="math inline">\(p_r(\hat{\boldsymbol{\theta}})\)</span> are the estimated probabilities for the response categories.</p>
+<ul>
+<li>Values of <span class="math inline">\(Diss\)</span> closer to 0 indicate a better fit, with a perfect fit yielding <span class="math inline">\(Diss = 0\)</span>.</li>
+<li>The maximum value of <span class="math inline">\(Diss\)</span> is 1 when there is no overlap between observed and fitted distributions.</li>
+</ul>
+<p>The Dissimilarity Index is popular because it provides a direct and easily interpretable measure of the overall discrepancy between the observed data distribution and the distribution predicted by the CUB model. In other words, it measures the proportion of responses to be changed to achieve a perfect fit.<br>
+It is less sensitive to low expected frequencies than the Pearson Chi-squared test and gives a clear indication of prediction accuracy.</p>
+</section>
+<section id="parameter-space-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="parameter-space-visualization">Parameter Space Visualization</h3>
+<p>CUB models offer a highly intuitive way to visualize the joint interpretation of their parameters: the parameter space visualization. This is typically represented on a unit square where:</p>
+<p>The x-axis represents <span class="math inline">\((1−\pi)\)</span>, the uncertainty level. The y-axis represents <span class="math inline">\((1−\xi)\)</span>, the feeling or attraction level. This “CUB plot” is incredibly helpful for comparing different datasets, subgroups, or even changes within a single group over time. Key regions of this plot offer immediate insights:</p>
+<ul>
+<li><p><strong>Bottom-left corner</strong> (<span class="math inline">\((1−\pi)\approx0,(1−\xi)\approx0\)</span>): This indicates very low uncertainty (respondents are very certain in their choices) and a strong feeling towards low scores (e.g., strong disagreement, high dissatisfaction).</p></li>
+<li><p><strong>Top-left corner</strong> (<span class="math inline">\((1−\pi)\approx0,(1−\xi)\approx1\)</span>): This signifies very low uncertainty and a strong feeling towards high scores (e.g., strong agreement, high satisfaction).</p></li>
+<li><p><strong>Right side</strong> (<span class="math inline">\((1−\pi)\approx1\)</span>): This region represents very high uncertainty. In this scenario, the feeling component becomes less influential, and responses tend to be closer to a uniform distribution, indicating a significant degree of randomness in the choices.</p></li>
+</ul>
+<p>This graphical representation provides a powerful diagnostic tool for understanding the underlying psychological processes at play in rating data.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\cartesian_agg.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Graphical representation of the parameter space of the CUB model</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="extensions-of-the-cub-model-incorporating-covariates" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="extensions-of-the-cub-model-incorporating-covariates">Extensions of the CUB Model: Incorporating Covariates</h2>
+<p>The basic CUB model, as discussed in Chapter 2, provides a powerful framework for understanding the underlying feeling and uncertainty in rating data. However, the basic formulation assumes a homogeneity in the population, meaning that the parameters are constant for all individuals. While useful for initial descriptive analysis, this assumption often oversimplifies the complex reality of human responses.</p>
+<p>In real-world applications, it is almost always more realistic to assume that the psychological components driving responses (the feeling and uncertainty components) vary across different individuals or groups. These variations are often systematically related to observable characteristics of the respondents or the context in which the ratings are collected.</p>
+<p>The introduction of covariates into the CUB model allows us to move beyond a simple description of the overall population’s feeling and uncertainty, enabling a much more nuanced and insightful analysis. Specifically, introducing covariates allows us to:</p>
+<ul>
+<li><p><strong>Explain heterogeneity in response patterns</strong>: Instead of treating differences in responses as random noise, covariates enable us to identify systematic factors that explain why different individuals or groups exhibit different levels of feeling and uncertainty.</p></li>
+<li><p><strong>Understand how specific characteristics influence feeling and uncertainty</strong>: This is perhaps the most powerful advantage. We can quantify the impact of a 10-year age increase on the probability of certainty (π) or the effect of a higher education level on the tendency to rate highly (1−ξ). This moves from mere description to explanation and inference.</p></li>
+</ul>
+<section id="statistical-formulation-of-cub-model-with-covariates" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-formulation-of-cub-model-with-covariates">Statistical Formulation of CUB Model with Covariates</h3>
+<p>Formulation of CUB with Covariates In a CUB model with covariates, the core idea is that the parameters <span class="math inline">\(\pi\)</span> and <span class="math inline">\(\xi\)</span> are no longer fixed constants across all individuals. Instead, they are modeled as functions of a set of explanatory variables. Let <span class="math inline">\(y_i\)</span> be a vector of covariates for subject <span class="math inline">\(i\)</span> specifically influencing their uncertainty, and <span class="math inline">\(w_i\)</span> be a vector of covariates for subject <span class="math inline">\(i\)</span> influencing their feeling. These covariate vectors can be the same, overlap, or be entirely different.</p>
+<p>To ensure that the parameters <span class="math inline">\(\pi_i\)</span> and <span class="math inline">\(\xi_i\)</span> remain within their valid range of <span class="math inline">\([0,1]\)</span>, a link function is employed, typically a logistic (logit) function, which is standard practice for modeling probabilities in generalized linear models.</p>
+<p><strong>Modeling the uncertainty</strong></p>
+<p>Since <span class="math inline">\(\pi_i\in [0,1]\)</span>, we model it using a logistic link. It’s often more intuitive to model <span class="math inline">\((1-\pi_i)\)</span>, which represents the probability that the choice is driven by the uniform component.</p>
+<p>The log-odds of uncertainty are linked to the covariates <span class="math inline">\(y_i\)</span>:</p>
+<p><span class="math display">\[
+\text{logit}(1-\pi_i) = \log \Bigg(\frac{1-\pi_i}{\pi_i}\Bigg) = \boldsymbol{y}^{T}_i\boldsymbol{\beta}
+\]</span> where <span class="math inline">\(\boldsymbol{\beta}\)</span> is a vector of coefficients corresponding to the covariates <span class="math inline">\(\boldsymbol{y}_i\)</span>.</p>
+<p>From this, we can derive the direct relationships for <span class="math inline">\((1−\pi_i)\)</span> and <span class="math inline">\(\pi_i\)</span></p>
+<p><span class="math display">\[
+(1-\pi_i)=\frac{\exp(\boldsymbol{y}^{T}_i\boldsymbol{\beta})}{1+\exp(\boldsymbol{y}^{T}_i\boldsymbol{\beta})}
+\]</span></p>
+<p>And consequently, for <span class="math inline">\(\pi_i\)</span>:</p>
+<p><span class="math display">\[
+\pi_i = 1-(1-\pi_i) = 1- \frac{\exp(\boldsymbol{y}^{T}_i\boldsymbol{\beta})}{1+\exp(\boldsymbol{y}^{T}_i\boldsymbol{\beta})} = \frac{1}{1+\exp(\boldsymbol{y}^{T}_i\boldsymbol{\beta})}
+\]</span></p>
+<p><strong>Modeling the feeling</strong></p>
+<p>Similarly, for <span class="math inline">\(\xi_i\in [0,1]\)</span>, a logit link is applied. It’s often more insightful to directly model <span class="math inline">\((1-\xi_i)\)</span>, which represents the feeling towards higher scores on the scale.</p>
+<p>The log-odds of feeling for higher scores are linked to the covariates <span class="math inline">\(w_i\)</span> :</p>
+<p><span class="math display">\[
+\text{logit}(1-\xi_i) = \log \Bigg(\frac{1-\xi_i}{\xi_i}\Bigg) = \boldsymbol{w}^{T}_i\boldsymbol{\gamma}
+\]</span> where <span class="math inline">\(\boldsymbol{\gamma}\)</span> is a vector of coefficients corresponding to the covariates <span class="math inline">\(\boldsymbol{w}_i\)</span>.</p>
+<p>This implies the following fo <span class="math inline">\((1−\xi_i)\)</span>:</p>
+<p><span class="math display">\[
+(1-\xi_i)=\frac{\exp(\boldsymbol{w}^{T}_i\boldsymbol{\gamma})}{1+\exp(\boldsymbol{w}^{T}_i\boldsymbol{\gamma})}
+\]</span></p>
+<p>And for <span class="math inline">\(\xi_i\)</span>:</p>
+<p><span class="math display">\[
+\xi_i = 1-(1-\xi_i) = 1- \frac{\exp(\boldsymbol{w}^{T}_i\boldsymbol{\gamma})}{1+\exp(\boldsymbol{w}^{T}_i\boldsymbol{\gamma})} = \frac{1}{1+\exp(\boldsymbol{w}^{T}_i\boldsymbol{\gamma})}
+\]</span></p>
+<p>With these formulations, the overall probability mass function for an observed rating R=r for subject i becomes:</p>
+<p><span class="math display">\[
+P(R_i = r \mid \pi_i,\xi_i) = \pi_i \binom{m-1}{r-1}(1-\xi_i)^{r-1}\xi_i^{m-r} + (1-\pi_i) \frac{1}{m}
+\]</span></p>
+<p>where <span class="math inline">\(\pi_i\)</span> and <span class="math inline">\(\xi_i\)</span> are determined by the covariates as defined above.</p>
+</section>
+<section id="interpretation-of-covariate-effects" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-of-covariate-effects">Interpretation of Covariate Effects</h3>
+<p>Interpreting the coefficients (<span class="math inline">\(\beta\)</span> and <span class="math inline">\(\gamma\)</span>) in a CUB model with covariates is crucial for understanding how specific characteristics influence the psychological components of rating. Remember that these coefficients operate on the log-odds scale due to the logistic link.</p>
+<p><strong>Coefficients</strong> <span class="math inline">\(\beta\)</span></p>
+<p>These coefficients describe the impact of covariates on the log-odds of uncertainty.</p>
+<p>A positive coefficient <span class="math inline">\(\beta_k\)</span> implies that an increase in the <span class="math inline">\(k\)</span>-th covariate <span class="math inline">\(y_{ik}\)</span>, holding other covariates constant, increases the log-odds of uncertainty. Therefore <span class="math inline">\((1−\pi_i)\)</span> increases and makes the respondent’s choice more driven by the uniform component. This suggests that as <span class="math inline">\(y_{ik}\)</span> increases, the individual is more indecisive or random in their rating.</p>
+<p>A negative <span class="math inline">\(\beta_k\)</span> implies that an increase in <span class="math inline">\(y_{ik}\)</span> decreases the log-odds of uncertainty, thus decreasing <span class="math inline">\((1−\pi_i)\)</span> and making the respondent’s choice more driven by their underlying feeling. This suggests that as <span class="math inline">\(y_{ik}\)</span> increases, the individual becomes more certain in their rating.</p>
+<p><strong>Coefficients</strong> <span class="math inline">\(\gamma\)</span></p>
+<p>These coefficients describe the impact of covariates <span class="math inline">\(w_i\)</span> on the log-odds of feeling towards higher scores.</p>
+<p>A positive <span class="math inline">\(\gamma_k\)</span> implies that an increase in the <span class="math inline">\(k\)</span>-th covariate <span class="math inline">\(w_{ik}\)</span>, holding other covariates constant, increases the log-odds of feeling for higher scores, thus increasing <span class="math inline">\((1-\xi_i)\)</span>. This means that as <span class="math inline">\(w_{ik}\)</span> increases, the individual’s underlying preference shifts towards the higher end of the rating scale.</p>
+<p>A negative <span class="math inline">\(\gamma_k\)</span> implies that an increase in <span class="math inline">\(w_{ik}\)</span> decreases the log-odds of feeling for higher scores, thus decreasing <span class="math inline">\((1-\xi_i)\)</span>. This means that as <span class="math inline">\(w_{ik}\)</span> increases, the individual’s underlying preference shifts towards the lower end of the rating scale.</p>
+<p><strong>Important Note</strong>: CUB models with covariates are not Generalized Linear Models (GLMs) in the strict sense. While the parameters <span class="math inline">\(\pi_i\)</span> and <span class="math inline">\(\xi_i\)</span> are linked to covariates using GLM-like structures (specifically, logistic regressions), the response variable itself (the mixture of Binomial and Uniform distributions) does not belong to the exponential family.</p>
+</section>
+<section id="case-study-universitys-students-satisfaction" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="case-study-universitys-students-satisfaction">Case Study: University’s students satisfaction</h3>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>
+<a href="materials/script_univer.R" download="" style="margin-right: 5px;"> <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i> <span style="margin-left: 2px; vertical-align: middle;">R Script</span> </a>
+</p>
+</div></div><p>This case study demonstrates the application of CUB (Combination of Uniform and a shifted Binomial) models for analyzing ordinal data, using the CUB package in R. The <code>univer</code> dataset comes from a survey administered to students at the University of Naples Federico II to evaluate orientation services.</p>
+<p><strong>Dataset Description</strong></p>
+<p>The <code>univer</code> dataset from 2002 contains 2,179 observations, including responses to evaluation questions on a 7-point Likert scale (from 1 = “very unsatisfied” to 7 = “extremely satisfied”). The ordinal variables of interest are:</p>
+<ul>
+<li><p><code>informat</code>: Satisfaction level with the information received.</p></li>
+<li><p><code>willingn</code>: Satisfaction level with the staff’s willingness.</p></li>
+<li><p><code>officeho</code>: Satisfaction level with office opening hours.</p></li>
+<li><p><code>competen</code>: Satisfaction level with staff competence.</p></li>
+<li><p><code>global</code>: Overall satisfaction level.</p></li>
+</ul>
+<p>The dataset also includes covariates:</p>
+<ul>
+<li><p><code>Faculty</code>: A factor variable, with levels ranging from 1 to 13 indicating the coding for the different university faculties</p></li>
+<li><p><code>Freqserv</code>: A factor with levels: 0 = for not regular users, 1 = for regular users</p></li>
+<li><p><code>Age</code>: Variable indicating the age of the respondent in years</p></li>
+<li><p><code>Gender</code>: A factor with levels: 0 = man, 1 = woman</p></li>
+<li><p><code>Diploma</code>: A factor with levels: 1 = classic studies, 2 = scientific studies, 3 = linguistic, 4 = Professional, 5 = Technical/Accountancy, 6 = others</p></li>
+<li><p><code>Residence</code>: A factor with levels: 1 = city NA, 2 = district NA, 3 = others</p></li>
+<li><p><code>ChangeFa</code>: A factor with levels: 1 = changed faculty, 2 = not changed faculty</p></li>
+</ul>
+<p><strong>Exploratory Analysis</strong></p>
+<p>As a first step, it is helpful to visualize the estimated CUB models for all ordinal variables simultaneously. The <code>multicub()</code> function fits a CUB model to each variable and plots the estimated parameters for uncertainty (1 - <span class="math inline">\(\hat{\pi}\)</span>) and feeling (1 - <span class="math inline">\(\hat{\xi}\)</span>) in the parameter space. The “feeling” (1 - <span class="math inline">\(\xi\)</span>) represents the preference for higher scores on the rating scale.</p>
+<p>Note that <code>multicub()</code> is especially useful for a comparative visual analysis of rating data vectors, even with different scale lengths. It requires the variables to be stored in a list.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(CUB)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(univer)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only the columns with ordinal variables</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>listord <span class="ot">&lt;-</span> univer[, <span class="dv">8</span><span class="sc">:</span><span class="dv">12</span>]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign labels for the plot</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">names</span>(univer)[<span class="dv">8</span><span class="sc">:</span><span class="dv">12</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize CUB models for each ordinal variable</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">multicub</span>(listord, <span class="at">labels =</span> labels,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">caption =</span> <span class="st">"CUB models on Univer data set"</span>, <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">pos =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fu">rep</span>(<span class="dv">3</span>, <span class="fu">ncol</span>(listord) <span class="sc">-</span> <span class="dv">1</span>)), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="dv">1</span>), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-CUB_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>From the visual analysis, it appears that the <code>officeho</code> item (satisfaction with opening hours) has the highest uncertainty. For this reason, the subsequent analysis will focus on this variable.</p>
+<p><strong>CUB Model without Covariates for <code>officeho</code></strong></p>
+<p>First, a basic CUB model is estimated for the officeho variable without including any covariates. This serves as a baseline to understand the variable’s distribution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## CUB model without covariates for "officeho"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>cub_00 <span class="ot">&lt;-</span> <span class="fu">GEM</span>(<span class="fu">Formula</span>(officeho <span class="sc">~</span> <span class="dv">0</span> <span class="sc">|</span> <span class="dv">0</span> <span class="sc">|</span> <span class="dv">0</span>), <span class="at">family =</span> <span class="st">"cub"</span>, <span class="at">data =</span> univer)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Display a detailed summary of the estimated model</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cub_00, <span class="at">digits =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>======================================================================= 
+=====&gt;&gt;&gt; CUB  model    &lt;&lt;&lt;=====   ML-estimates via E-M algorithm   
+======================================================================= 
+ m= 7  Sample size: n= 2179  Iterations= 28  Maxiter= 500 
+======================================================================= 
+Uncertainty                                            
+    Estimates   StdErr   Wald
+pai   0.68019 0.019349 35.153
+======================================================================= 
+Feeling                                            
+    Estimates    StdErr   Wald
+csi   0.19714 0.0058822 33.515
+======================================================================= 
+Log-lik            = -3759.917 
+Mean Log-likelihood= -1.72552 
+Log-lik(UNIFORM)   = -4240.138 
+Log-lik(saturated) = -3706.922 
+Deviance           = 105.9914 
+----------------------------------------------------------------------- 
+AIC       = 7523.834 
+BIC       = 7535.208 
+ICOMP     = 7521.135 
+======================================================================= 
+Elapsed time= 0.05 seconds =====&gt;&gt;&gt; Thu Apr 16 12:57:05 2026 
+======================================================================= </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract and print the estimated parameters</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>param <span class="ot">&lt;-</span> <span class="fu">coef</span>(cub_00, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>param</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         
+pai 0.680
+csi 0.197</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate and print the uncertainty and feeling estimates</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>uncertainty <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> param[<span class="dv">1</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>uncertainty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.32</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>feeling <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> param[<span class="dv">2</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>feeling</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.803</code></pre>
+</div>
+</div>
+<p>The <code>makeplot()</code> function can be used to compare the observed relative frequencies with the theoretical probabilities predicted by the estimated model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create a comparison plot</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">makeplot</span>(cub_00)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-CUB_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>CUB Models with Covariates</strong> To improve the model’s fit and interpretation, covariates can be introduced. In this example, we consider the dichotomous covariate freqserv (0 = non-regular users, 1 = regular users), which indicates the service usage frequency.</p>
+<p>A model is estimated where the feeling component depends on the freqserv covariate, while the uncertainty remains constant. The model formula is <code>officeho ~ 0 | freqserv | 0</code>, indicating that the feeling component is modeled as a function of <code>freqserv</code> (<code>~ freqserv</code>), while the other components are constant (<code>~ 0</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate the CUB model with freqserv as a covariate on feeling</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>cub_csi <span class="ot">&lt;-</span> <span class="fu">GEM</span>(<span class="fu">Formula</span>(officeho <span class="sc">~</span> <span class="dv">0</span> <span class="sc">|</span> freqserv <span class="sc">|</span> <span class="dv">0</span>), <span class="at">family =</span> <span class="st">"cub"</span>, <span class="at">data =</span> univer)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the model summary</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cub_csi, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>======================================================================= 
+=====&gt;&gt;&gt; CUB  model    &lt;&lt;&lt;=====   ML-estimates via E-M algorithm   
+======================================================================= 
+ m= 7  Sample size: n= 2179  Iterations= 24  Maxiter= 500 
+======================================================================= 
+Uncertainty                                            
+    Estimates StdErr Wald
+pai     0.687 0.0192 35.9
+======================================================================= 
+Feeling                                            
+         Estimates StdErr   Wald
+constant    -1.152 0.0403 -28.58
+freqserv    -0.811 0.0850  -9.55
+======================================================================= 
+Log-lik            = -3704.357 
+Mean Log-likelihood= -1.7 
+----------------------------------------------------------------------- 
+AIC       = 7414.714 
+BIC       = 7431.773 
+ICOMP     = 7410.96 
+======================================================================= 
+Elapsed time= 0.53 seconds =====&gt;&gt;&gt; Thu Apr 16 12:57:06 2026 
+======================================================================= </code></pre>
+</div>
+</div>
+<p>The regression coefficients for the logistic link of the “feeling” can be extracted and analyzed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the regression coefficients</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>gama <span class="ot">&lt;-</span> <span class="fu">coef</span>(cub_csi)[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>gama</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.151942 -0.811228</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate the intercept from the covariate's coefficient</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>gama0 <span class="ot">&lt;-</span> gama[<span class="dv">1</span>] <span class="co"># Intercept term</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>gama1 <span class="ot">&lt;-</span> gama[<span class="dv">2</span>] <span class="co"># Coefficient for freqserv</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Using these coefficients, you can calculate the feeling parameter for each group of users (regular and non-regular). The <code>logis()</code> function calculates the inverse logistic transformation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the csi parameter for non-regular users (freqserv = 0)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>csi_nru <span class="ot">&lt;-</span> <span class="fu">logis</span>(<span class="dv">0</span>, gama)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>csi_nru</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2401346</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the csi parameter for regular users (freqserv = 1)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>csi_ru <span class="ot">&lt;-</span> <span class="fu">logis</span>(<span class="dv">1</span>, gama)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>csi_ru</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1231244</code></pre>
+</div>
+</div>
+<p>In this model, the feeling component is specified by:</p>
+<p><span class="math display">\[
+logit(1-\xi_i) = - \gamma_0 - \gamma_1 freqserv_i, \quad i = 1,\dots,n
+\]</span> A plot can be generated to compare the fitted probability distributions for the two groups.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the fitted probability distributions for the two user groups</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">makeplot</span>(cub_csi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-CUB_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(cub_00); <span class="fu">BIC</span>(cub_csi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7535.208</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7431.773</code></pre>
+</div>
+</div>
+<p>the reduction in BIC index from <code>BIC(cub_00)= 7535.208</code> to <code>BIC(cub_csi)= 7431.773</code> strongly supports the inclusion of the covariate freqserv in the model.</p>
+<p><strong>CUB Model with Covariates on Both Uncertainty and Feeling</strong></p>
+<p>In this more complex example, two covariates are considered jointly: <code>lage</code> (the deviation from the mean of the logarithmic transform of age) and <code>gender</code>. The variable <code>lage</code> is used to explain both uncertainty and feeling, while <code>gender</code> is used for uncertainty and <code>freqserv</code> for feeling.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(univer)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the deviation from the mean of log(age)</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> univer<span class="sc">$</span>age</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>lage <span class="ot">&lt;-</span> <span class="fu">log</span>(age) <span class="sc">-</span> <span class="fu">mean</span>(<span class="fu">log</span>(age))</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate the CUB model with covariates on both parameters</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>cub_pai_csi <span class="ot">&lt;-</span> <span class="fu">GEM</span>(<span class="fu">Formula</span>(officeho <span class="sc">~</span> lage <span class="sc">+</span> gender <span class="sc">|</span> lage <span class="sc">+</span> freqserv <span class="sc">|</span> <span class="dv">0</span>), <span class="at">family =</span> <span class="st">"cub"</span>, <span class="at">data =</span> univer)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the summary with coefficient correlations</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cub_pai_csi, <span class="at">correlation =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>======================================================================= 
+=====&gt;&gt;&gt; CUB  model    &lt;&lt;&lt;=====   ML-estimates via E-M algorithm   
+======================================================================= 
+ m= 7  Sample size: n= 2179  Iterations= 23  Maxiter= 500 
+======================================================================= 
+Uncertainty                                            
+         Estimates StdErr Wald
+constant     0.563  0.118 4.78
+lage         1.240  0.613 2.02
+gender       0.495  0.169 2.94
+======================================================================= 
+Feeling                                            
+         Estimates StdErr   Wald
+constant    -1.147 0.0404 -28.41
+lage        -0.590 0.2410  -2.45
+freqserv    -0.824 0.0851  -9.68
+======================================================================= 
+Parameters Correlation matrix 
+           constant       lage     gender   constant       lage   freqserv
+constant  1.0000000 -0.0506498 -0.6428539  0.1733713  0.0186039  0.1264982
+lage     -0.0506498  1.0000000  0.0915196 -0.0064633  0.2750023 -0.0028018
+gender   -0.6428539  0.0915196  1.0000000 -0.0158130 -0.0255944  0.0369170
+constant  0.1733713 -0.0064633 -0.0158130  1.0000000 -0.0992397 -0.4153292
+lage      0.0186039  0.2750023 -0.0255944 -0.0992397  1.0000000  0.0802712
+freqserv  0.1264982 -0.0028018  0.0369170 -0.4153292  0.0802712  1.0000000
+======================================================================= 
+Log-lik            = -3693.888 
+Mean Log-likelihood= -1.695 
+----------------------------------------------------------------------- 
+AIC       = 7399.776 
+BIC       = 7433.895 
+ICOMP     = 7396.68 
+======================================================================= 
+Elapsed time= 1.88 seconds =====&gt;&gt;&gt; Thu Apr 16 12:57:09 2026 
+======================================================================= </code></pre>
+</div>
+</div>
+<p>The estimated coefficients correspond to the logistic regression coefficients for the uncertainty and feeling components.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the estimated coefficients for both logistic models</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(cub_pai_csi, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               
+constant  0.563
+lage      1.240
+gender    0.495
+constant -1.147
+lage     -0.590
+freqserv -0.824</code></pre>
+</div>
+</div>
+<p>Then, the resulting cub model can be summarized by:</p>
+<p><span class="math display">\[
+\text{logit}(1 - \pi_i) = -\beta_0 - \beta_1 \cdot \text{lage}_i - \beta_2 \cdot \text{gender}_i
+\]</span></p>
+<p><span class="math display">\[
+\text{logit}(1 - \xi_i) = -\gamma_0 - \gamma_1 \cdot \text{lage}_i - \gamma_2 \cdot \text{freqserv}_i
+\]</span></p>
+<p>Since no plot is directly provided as output, the performance of the cub model with significant covariates on feeling and uncertainty parameters may be summarized as in the following figure, obtained by the following code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(univer)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>age<span class="ot">&lt;-</span>univer<span class="sc">$</span>age</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>average<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">log</span>(age))</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>ageseq<span class="ot">&lt;-</span><span class="fu">log</span>(<span class="fu">seq</span>(<span class="dv">17</span>, <span class="dv">51</span>, <span class="at">by =</span> <span class="fl">0.1</span>))<span class="sc">-</span>average</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>param<span class="ot">&lt;-</span><span class="fu">coef</span>(cub_pai_csi)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="do">####################</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>paicov0<span class="ot">&lt;-</span><span class="fu">logis</span>(<span class="fu">cbind</span>(ageseq, <span class="dv">0</span>), param[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>paicov1<span class="ot">&lt;-</span><span class="fu">logis</span>(<span class="fu">cbind</span>(ageseq, <span class="dv">1</span>), param[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>csicov0<span class="ot">&lt;-</span><span class="fu">logis</span>(<span class="fu">cbind</span>(ageseq, <span class="dv">0</span>), param[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>])</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>csicov1<span class="ot">&lt;-</span><span class="fu">logis</span>(<span class="fu">cbind</span>(ageseq, <span class="dv">1</span>), param[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>])</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="do">####################</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">-</span>paicov0, <span class="dv">1</span><span class="sc">-</span>csicov0, <span class="at">type =</span> <span class="st">"n"</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">cex =</span> <span class="dv">1</span>,</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.6</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.9</span>), <span class="at">font.main =</span> <span class="dv">4</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="at">main =</span> <span class="st">"CUB models with covariates"</span>,</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="at">xlab =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Uncertainty "</span>, (<span class="dv">1</span><span class="sc">-</span>pi))),</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="at">ylab =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Feeling "</span>, (<span class="dv">1</span><span class="sc">-</span>xi))), <span class="at">cex.main =</span> <span class="fl">0.9</span>,</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="at">cex.lab =</span> <span class="fl">0.9</span>)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">-</span>paicov1, <span class="dv">1</span><span class="sc">-</span>csicov1, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">4</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">-</span>paicov0, <span class="dv">1</span><span class="sc">-</span>csicov0, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">4</span>, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">-</span>paicov0, <span class="dv">1</span><span class="sc">-</span>csicov1, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">4</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">-</span>paicov1, <span class="dv">1</span><span class="sc">-</span>csicov0, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">4</span>, <span class="at">col =</span> <span class="st">"green"</span>)</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomleft"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Man-User"</span>, <span class="st">"Man-Not User"</span>,</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="st">"Woman-User"</span>, <span class="st">"Woman-Not User"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>),</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a><span class="at">lty =</span> <span class="dv">1</span>, <span class="at">text.col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>), <span class="at">cex =</span> <span class="fl">0.6</span>)</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fl">0.1</span>, <span class="fl">0.85</span>, <span class="at">labels =</span> <span class="st">"Young"</span>, <span class="at">offset =</span> <span class="fl">0.3</span>, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">font =</span> <span class="dv">4</span>)</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="at">labels =</span> <span class="st">"Elderly"</span>, <span class="at">offset =</span> <span class="fl">0.3</span>, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">font =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-CUB_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Summarizing, the sketch of analysis so pursued indicates that satisfaction increase with age whereas indecision decreases, and that men are more satisfied than women across all profiles.</p>
+</section>
+</section>
+<section id="cub-model-with-shelter-option" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="cub-model-with-shelter-option">CUB Model with Shelter Option</h2>
+<p>While the basic CUB model effectively captures the feeling and uncertainty in ordinal responses, real-world rating data often exhibit additional complexities.</p>
+<p>One such common phenomenon is the tendency for respondents to disproportionately select a specific category, not entirely explained by their true underlying feeling or by simple random guessing. This over-selection of a particular category suggests it acts as a “shelter” or “refuge” for some respondents.</p>
+<p>The shelter effect describes a situation where a specific category on an ordinal scale receives an “extra” probability mass, beyond what would be predicted solely by the respondent’s underlying feeling or by pure random uncertainty. This happens because some respondents might gravitate towards this category for reasons unrelated to their precise preference or indecision.</p>
+<p>Reasons for this “shelter-seeking” behavior have been extensively discussed in the literature (e.g., Iannario, 2012; Piccolo &amp; Simone, 2019):</p>
+<ul>
+<li><p><strong>Cognitive Simplification</strong>: Respondents may choose an easy, or cognitively less demanding option to reduce mental effort. This could be the middle category (e.g., “Neutral”), a neutral option specifically provided, or even the first/last option if it serves as an easy default.</p></li>
+<li><p><strong>Fatigue or Boredom</strong>: Especially prevalent in long questionnaires or surveys, fatigue can lead respondents to disengage and simply pick a convenient category rather than carefully considering their true response.</p></li>
+<li><p><strong>Social Desirability or Privacy Concerns</strong>: Individuals might select a “safe”, non-committal, or socially acceptable answer to avoid expressing a strong or controversial opinion, or to protect their privacy. The neutral option often serves this purpose.</p></li>
+<li><p><strong>Questionnaire Design</strong>: Poorly worded questions, ambiguous scale anchors, or an overwhelming number of options might inadvertently guide respondents towards a default or ambiguous middle ground.</p></li>
+<li><p><strong>Satisficing</strong>: This refers to the tendency to select a minimally acceptable response rather than the optimal one, often to save cognitive resources. The shelter option becomes the “good enough” answer.</p></li>
+</ul>
+<p>The critical implication of the shelter effect is that the chosen category <span class="math inline">\(c\)</span> has an “extra” probability mass. This means the observed frequency for category <span class="math inline">\(c\)</span> is higher than what a standard two-component CUB model would predict. Effectively, a subset of respondents might be selecting <span class="math inline">\(c\)</span> directly, bypassing the usual feeling-uncertainty decision process.</p>
+<section id="defining-the-shelter-category" class="level3">
+<h3 class="anchored" data-anchor-id="defining-the-shelter-category">Defining the shelter category</h3>
+<p>The shelter category, denoted by <span class="math inline">\(c\)</span> (where <span class="math inline">\(c \in \{1,2,…,m\}\)</span>), is a specific category on the ordinal scale that exhibits this inflated probability mass. Identifying this category is a crucial preliminary step. It can be:</p>
+<ul>
+<li><strong>Hypothesized a priori</strong>: In many cases, the shelter category can be hypothesized beforehand based on the scale’s design. For instance, on a 5-point Likert scale (1=Strongly Disagree, 5=Strongly Agree), the central category <span class="math inline">\(c=3\)</span> (“Neutral” or “Neither agree nor disagree”) is a very common candidate for a shelter option. Other possibilities could be the minimum (<span class="math inline">\(c=1\)</span>) or maximum (<span class="math inline">\(c=m\)</span>) category if they function as easy “opt-out” or default choices.</li>
+<li><strong>Identified Empirically</strong>: If no a priori hypothesis exists, the shelter category can be identified empirically. This involves observing an unusually high frequency for a particular category that is not well explained by a simple CUB model. A large positive residual for a specific category from a basic CUB fit can point towards a potential shelter effect.</li>
+</ul>
+<p>Once identified, the shelter category <span class="math inline">\(c\)</span> is treated as fixed in the model estimation.</p>
+</section>
+<section id="statistical-formulation-of-cub-model-with-shelter-option" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-formulation-of-cub-model-with-shelter-option">Statistical Formulation of CUB Model with Shelter Option</h3>
+<p>To account for the shelter effect, the basic CUB model is extended into a three-component mixture model. A common and highly interpretable approach is the CUB with Shelter (CUSH) model. This model introduces a third component: a degenerate distribution that assigns all probability mass exclusively to the shelter category <span class="math inline">\(c\)</span>.</p>
+<p>The probability mass function (PMF) for the CUSH model for a rating <span class="math inline">\(R=r\)</span> is given by:</p>
+<p><span class="math display">\[
+P(R = r\mid \pi, \xi, \delta) = \delta \Big[D_c(r)\Big] + (1-\delta)\Big[\pi B(r \mid \xi) + (1-\pi)U(r)\Big]
+\]</span></p>
+<p>where there is an additional component, compared to the basic CUB model: the degenerate distribution fir the shelter category <span class="math inline">\(c\)</span>, <span class="math inline">\(D_c(r)\)</span>:</p>
+<p><span class="math display">\[
+D_c(r) =
+\begin{cases}
+    1, &amp; \text{if } r = s; \\
+    0, &amp; \text{otherwise;}
+\end{cases}
+\qquad r = 1, \dots, m.
+\]</span></p>
+<p>The parameter <span class="math inline">\(\delta \in [0,1]\)</span> represents the probability of choosing the shelter category <span class="math inline">\(c\)</span> directly. This is the weight assigned to the degenerate distribution. A higher <span class="math inline">\(\delta\)</span> indicates a stronger tendency for respondents to opt for the designated shelter category, irrespective of their true feeling or general uncertainty.</p>
+<p><strong>Model selection</strong></p>
+<p>Model selection is crucial when deciding whether a CUSH model offers a significantly better fit than a simpler CUB model. Standard statistical criteria can be used:</p>
+<p>Information criteria like Akaike Information Criterion and Bayesian information Criterion are widely used to balance model fit with model complexity.</p>
+<p>Lower values for AIC and BIC indicate a better-fitting model. BIC is often preferred in model selection for CUB models as it penalizes model complexity more heavily, which can help in choosing more parsimonious models.</p>
+<p>After fitting a basic CUB model, it’s good practice to examine the residuals, which are the differences between observed and fitted probabilities/frequencies. If a simple CUB model shows a large positive residual for a specific category, it strongly suggests the presence of a shelter effect for that category. The Dissimilarity Index (<span class="math inline">\(Diss\)</span>) can also be used to compare the overall fit improvement when a shelter component is added.</p>
+</section>
+<section id="case-study-the-reelgoods-dataset" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="case-study-the-reelgoods-dataset">Case study: the reelgoods dataset</h3>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>
+<a href="materials/script_relgoods.R" download="" style="margin-right: 5px;"> <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i> <span style="margin-left: 2px; vertical-align: middle;">R Script</span> </a>
+</p>
+</div></div><p>The CUB model with shelter option is shown with the <code>relgoods</code> dataset, a survey designed to assess the importance of relational goods and involvement in leisure time activities.</p>
+<p>This dataset contains the results of a survey conducted in December 2014 in the metropolitan area of Naples, Italy. The survey’s primary goal was to measure people’s evaluation of relational goods (e.g., time spent with friends and family) and leisure time activities. The dataset includes both demographic information about the respondents and their evaluations on various topics.</p>
+<p>The survey used two main types of scales to collect data:</p>
+<ol type="1">
+<li>10-Point Ordinal Scale (Likert-type): Respondents rated several items on a 10-point scale (from 1 to 10). The interpretation of the scale endpoints varied slightly:</li>
+</ol>
+<ul>
+<li><p>For relational goods: 1 = “never, at all” to 10 = “always, a lot”.</p></li>
+<li><p>For leisure time activities: 1 = “At all, nothing, never” to 10 = “Totally, extremely important, always”. This scale captures the frequency or importance of a given activity.</p></li>
+</ul>
+<ol start="2" type="1">
+<li>Continuous Happiness Scale: To measure happiness, respondents marked a sign on a 110mm horizontal line (left = “extremely unhappy”, right = “extremely happy”). This is treated as a continuous variable.</li>
+</ol>
+<p>The dataset includes the following types of variables:</p>
+<ul>
+<li><p>Subject Covariates (Demographics): These provide background information about each respondent (e.g., ID, Gender, BirthMonth, EducationDegree, MaritalStatus, job, Smoking, Pets).</p></li>
+<li><p>Relational Goods and General Evaluations (10-Point Scale): These variables capture aspects of social life and the environment (e.g., WalkOut, RelFriends, Safety).</p></li>
+<li><p>Leisure Time Activities (10-Point Scale): These measure involvement or enjoyment of various activities (e.g., Reading, Cinema, Sport, Internet, MusicInstr).</p></li>
+<li><p>Continuous Happiness Score: The self-reported happiness score (Happiness).</p></li>
+</ul>
+<p>Let’s inspect the distribution of the variable <code>Writing</code>, which asks respondents to rate their involvement in writing on a 10-point scale.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(CUB)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(relgoods)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the frequency distribution of the 'MusicInstr' variable</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">table</span>(<span class="fu">as.factor</span>(relgoods<span class="sc">$</span>Writing)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-CUB_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Let’s apply the CUB model to the Writing variable to illustrate the shelter effect. This variable asks about involvement in writing on a 10-point scale.</p>
+<p>First, we fit a standard CUB model without the shelter option to the Writing variable. This serves as a baseline for comparison.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a standard CUB model to the 'Writing' variable</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>cub_writing <span class="ot">&lt;-</span> <span class="fu">GEM</span>(<span class="fu">Formula</span>(Writing <span class="sc">~</span> <span class="dv">0</span> <span class="sc">|</span> <span class="dv">0</span> <span class="sc">|</span> <span class="dv">0</span>), <span class="at">family =</span> <span class="st">"cub"</span>,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">maxiter =</span> <span class="dv">500</span>, <span class="at">toler =</span> <span class="fl">1e-3</span>, <span class="at">data =</span> relgoods)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cub_writing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>======================================================================= 
+=====&gt;&gt;&gt; CUB  model    &lt;&lt;&lt;=====   ML-estimates via E-M algorithm   
+======================================================================= 
+ m= 10  Sample size: n= 2449  Iterations= 18  Maxiter= 500 
+======================================================================= 
+Uncertainty                                            
+    Estimates     StdErr     Wald
+pai   0.37887 0.01354622 27.96869
+======================================================================= 
+Feeling                                            
+    Estimates     StdErr    Wald
+csi   0.98052 0.00275681 355.672
+======================================================================= 
+Log-lik            = -4920.633 
+Mean Log-likelihood= -2.009242 
+Log-lik(UNIFORM)   = -5639.031 
+Log-lik(saturated) = -4859.017 
+Deviance           = 123.2317 
+----------------------------------------------------------------------- 
+AIC       = 9845.266 
+BIC       = 9856.873 
+ICOMP     = 9843.336 
+======================================================================= 
+Elapsed time= 0.03 seconds =====&gt;&gt;&gt; Thu Apr 16 12:57:09 2026 
+======================================================================= </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">makeplot</span>(cub_writing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-CUB_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now, we introduce the shelter parameter, which models the probability of selecting a specific category as a refuge. In this case, we specify <code>shelter = 1</code>, which indicates that the first category (score of 1) is the shelter category.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a CUB model with a shelter option on category 1</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>cub_she <span class="ot">&lt;-</span> <span class="fu">GEM</span>(<span class="fu">Formula</span>(Writing <span class="sc">~</span> <span class="dv">0</span> <span class="sc">|</span> <span class="dv">0</span> <span class="sc">|</span> <span class="dv">0</span>), <span class="at">family =</span> <span class="st">"cub"</span>, <span class="at">shelter =</span> <span class="dv">1</span>,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">maxiter =</span> <span class="dv">500</span>, <span class="at">toler =</span> <span class="fl">1e-3</span>, <span class="at">data =</span> relgoods)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cub_she)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>======================================================================= 
+=====&gt;&gt;&gt; CUB  model    &lt;&lt;&lt;=====   ML-estimates via E-M algorithm   
+======================================================================= 
+ m= 10  Sample size: n= 2449  Iterations= 77  Maxiter= 500 
+======================================================================= 
+======================================================================= 
+     Estimates     StdErr     Wald
+pai1 0.1922306 0.01652574 11.63219
+pai2 0.4902216 0.01907354 25.70166
+csi  0.7518936 0.01433876 52.43784
+======================================================================= 
+Alternative parameterization 
+        Estimates     StdErr     Wald
+paistar 0.2816762 0.02422031 11.62975
+csi     0.7518936 0.01433876 52.43784
+delta   0.3175478 0.01121160 28.32315
+======================================================================= 
+Log-lik            = -4887.843 
+Mean Log-likelihood= -1.995853 
+Log-lik(UNIFORM)   = -5639.031 
+Log-lik(saturated) = -4859.017 
+Deviance           = 57.65222 
+----------------------------------------------------------------------- 
+AIC       = 9781.686 
+BIC       = 9799.096 
+ICOMP     = 9776.957 
+======================================================================= 
+Elapsed time= 0 seconds =====&gt;&gt;&gt; Thu Apr 16 12:57:09 2026 
+======================================================================= </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">makeplot</span>(cub_she)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-CUB_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>If we look at the value of <span class="math inline">\(\delta\)</span>, it indicates that there is a medium tendency to opt for the shelter category.</p>
+</section>
+</section>
+<section id="treatment-of-dont-know-dk-options-within-the-cub-framework" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="treatment-of-dont-know-dk-options-within-the-cub-framework">Treatment of “Don’t Know” (DK) Options within the CUB Framework</h2>
+<p>Beyond the core rating scale, surveys often include an option for respondents to indicate “Don’t Know” (DK), “No Opinion”, “Not Applicable”, or similar non-substantive responses. While seemingly innocuous, the handling of these responses presents a significant challenge for traditional statistical modeling, as they often don’t fit neatly into standard analytical frameworks.</p>
+<p>The CUB framework, however, offers a theoretically robust and psychologically insightful approach to incorporating information from DK responses.</p>
+<p>“Don’t Know” responses are common in surveys, and their treatment is critical for valid statistical inference. They are not merely missing data points; rather, they represent an active choice that reflects a specific cognitive or attitudinal state of the respondent.</p>
+<p>DK responses are problematic for several reasons:</p>
+<ul>
+<li><p><strong>Not Simply Missing Data</strong>: Treating DKs as simple missing values and discarding them (listwise deletion) can lead to biased samples and results. If respondents who choose DK differ systematically from those who provide substantive ratings, removing them can distort the representativeness of the remaining sample, affecting parameter estimates and generalizability.</p></li>
+<li><p><strong>Imputation Issues</strong>: Imputing a value for a DK response is inherently difficult and often relies on strong, untestable assumptions. Assigning a central value (e.g., the mean or median of the substantive responses) might mask genuine uncertainty, while more complex imputation methods (e.g., multiple imputation) can be challenging to implement and interpret accurately in the context of ordinal data.</p></li>
+<li><p><strong>Adding DK as a Category</strong>: A seemingly straightforward approach is to include DK as just another category on the ordinal scale. However, this fundamentally breaks the ordinal nature of the scale. For example, a sequence like “Strongly Disagree, Disagree, DK, Agree, Strongly Agree” is conceptually problematic. The DK option is not naturally ordered between “Disagree” and “Agree”; it represents a different type of response altogether. Its inclusion disrupts the monotonic relationship implied by ordinal categories.</p></li>
+</ul>
+<p>To properly handle DK responses, it is essential to understand their underlying meanings. Research suggests that “Don’t Know” can have several psychological interpretations:</p>
+<ul>
+<li><em>True Lack of Knowledge/Opinion</em>: The respondent genuinely has no information, experience, or hasn’t formed an opinion on the topic. Unwillingness to Answer: The respondent might have an opinion but chooses not to express it due to a sensitive topic, privacy concerns, or wanting to appear socially desirable (e.g., not wanting to seem extreme or uninformed).</li>
+<li><em>Inability to Map Opinion to Scale</em>: The respondent might have an opinion but feels the provided scale categories are inadequate, too vague, or don’t quite fit their nuanced view. They might feel their true sentiment falls “between” categories or doesn’t align with any.</li>
+<li><em>Question Ambiguity</em>: The respondent simply might not understand the question, its underlying assumptions, or the terms used, leading them to pick DK as a way out.</li>
+</ul>
+<p>The varied meanings of DK emphasize that it’s a rich source of information, not just data to be thrown away or arbitrarily filled in.</p>
+<p>The approach for handling DK responses in the CUB framework is to think of the total population as having two unobserved (latent) groups:</p>
+<ul>
+<li><p>Group A=0: Those who can give a substantive rating on the m-point scale. These people have a genuine underlying feeling or are able to make a choice, even if that choice has some general uncertainty.</p></li>
+<li><p>Group A=1: Those who cannot (or would not) and would genuinely choose DK if it were an option. This group essentially represents the “true” non-responders when it comes to having a substantive opinion.</p></li>
+</ul>
+<p>We’ll use <span class="math inline">\(p_{DK}\)</span> to represent the proportion of individuals in the population who would choose DK.</p>
+<section id="modeling-assumptions-for-latent-groups" class="level3">
+<h3 class="anchored" data-anchor-id="modeling-assumptions-for-latent-groups">Modeling Assumptions for Latent Groups</h3>
+<p>This approach makes specific assumptions about how each latent group generates responses:</p>
+<p>For those who can answer (Group A=0, proportion <span class="math inline">\((1-p_{DK})\)</span>): When these individuals provide a substantive rating (<span class="math inline">\(R=r\)</span>), their responses are assumed to follow a standard CUB model. This CUB model has its own parameters, <span class="math inline">\(\pi_0\)</span> (for uncertainty within this group) and <span class="math inline">\(\xi_0\)</span> (for feeling within this group), which describe the feeling and uncertainty among those capable of providing an opinion.</p>
+<p><span class="math display">\[
+P(R = r \mid A = 0, \pi_0, \xi_0) = \pi_0B(r\mid\xi_0) + (1-\pi_0)U(r)
+\]</span></p>
+<p>For those who would choose DK (Group A=1, proportion <span class="math inline">\(p_{DK}\)</span>), if these individuals are forced to pick a category from the m-point scale (e.g., if the DK option isn’t available, or if their preference for DK is part of their general uncertainty), their choice isn’t based on a genuine “feeling”. Instead, their responses are driven purely by randomness or uncertainty across the available options. So, their responses are modeled by a discrete Uniform distribution.</p>
+<p><span class="math display">\[
+P(R = r\mid A =1) =U(r)= \frac{1}{m}
+\]</span></p>
+<p>The overall observed distribution of ratings, if all respondents are forced to choose from the m-point scale (meaning no explicit DK option is given, or if we consider the hypothetical responses of those who would pick DK if it were there), is a mix of the CUB model for “knowers” and the Uniform distribution for those “forced” to choose.</p>
+</section>
+<section id="adjusting-cub-parameters-using-observed-dks" class="level3">
+<h3 class="anchored" data-anchor-id="adjusting-cub-parameters-using-observed-dks">Adjusting CUB Parameters using Observed DKs</h3>
+<p>The method proposed in this framework uses the presence of DKs to adjust the fundamental uncertainty in the main CUB model.</p>
+<p>When DK responses are explicitly allowed in a survey and are present in the data the approach proceeds as follows:</p>
+<ol type="1">
+<li>Estimate <span class="math inline">\(p_{DK}\)</span>: This is simply the observed proportion of DK responses in the sample.</li>
+</ol>
+<p><span class="math display">\[
+\hat{p}_{DK} = \frac{Total\, number\, of\, DK\, responses}{Total\, number\, of\, responses}
+\]</span></p>
+<ol start="2" type="1">
+<li><p>Focus on <strong>Substantive Responders</strong>: The remaining <span class="math inline">\((1- \hat{p}_{DK})\)</span> proportion of the sample consists of individuals who gave a rating on the m-point ordinal scale (i.e., they picked a category from <span class="math inline">\(1,…,m\)</span>). Let <span class="math inline">\(N_{sub}\)</span> be the number of these substantive responders.</p></li>
+<li><p><strong>Model for Substantive Responses</strong>: A standard CUB model is then fitted only to these <span class="math inline">\(N_{sub}\)</span> substantive responses. This fitting process gives us estimates for their underlying parameters, called <span class="math inline">\(\pi_S\)</span> and <span class="math inline">\(\xi_S\)</span>. This model describes the probability distribution of ratings given that a substantive response was provided: <span class="math display">\[
+P(R = r \mid Substantive) = \pi_SB(r\mid\xi_S) + (1-\pi_S)U(r)
+\]</span></p></li>
+<li><p><strong>Relating to the Overall Population Parameters</strong>: The crucial step is to link these parameters <span class="math inline">\((\pi_S, \xi_S)\)</span> back to the overall population’s true feeling and uncertainty, taking into account the proportion of DKs.</p>
+<ul>
+<li><p>The feeling parameter for the overall population, <span class="math inline">\((1-\xi)\)</span>, is considered to be best represented by the feeling of those who actually gave a substantive rating. This is based on the idea that people who genuinely say “Don’t Know” don’t contribute to the “feeling” aspect of the scale. So: <span class="math display">\[
+(1-\xi) = (1-\xi_S)
+\]</span></p></li>
+<li><p>The overall uncertainty parameter for the population, <span class="math inline">\((1-\pi)\)</span>, comes from two sources:</p>
+<ul>
+<li>The inherent uncertainty among those who could answer (captured by <span class="math inline">\(1-\pi_S\)</span>).</li>
+<li>The complete uncertainty of those who chose DK (who are considered 100% uncertain regarding the m-point scale). The overall <span class="math inline">\(\pi\)</span> for the population (the probability that a response is driven by feeling) is then calculated as:</li>
+</ul></li>
+</ul></li>
+</ol>
+<p><span class="math display">\[
+\pi = (1-\hat{p}_{DK})\cdot\pi_S
+\]</span></p>
+<p>This means the overall probability that a response is based on feeling (<span class="math inline">\(\pi\)</span>) is the probability that a respondent isn’t a DK type <span class="math inline">\((1-\hat{p}_{DK})\)</span> multiplied by the probability that, given they aren’t a DK type, they respond based on feeling <span class="math inline">\((\pi_S)\)</span>.</p>
+<p>Consequently, the overall uncertainty for the population is:</p>
+<p><span class="math display">\[
+(1-\pi) = 1-(1-\hat{p}_{DK})\cdot\pi_S
+\]</span></p>
+<p>This can be rewritten as:</p>
+<p><span class="math display">\[
+(1-\pi) = \hat{p}_{DK} + (1-\hat{p}_{DK})\cdot(1-\pi_S)
+\]</span></p>
+<p>This last equation shows that the overall uncertainty in the population is the sum of the proportion of individuals who selected DK <span class="math inline">\((\hat{p}_{DK})\)</span> and the proportion of uncertainty among those who provided a substantive response <span class="math inline">\((1-\pi_S)\)</span>, weighted by their share of the total population <span class="math inline">\((1-\hat{p}_{DK})\)</span>.</p>
+</section>
+<section id="case-study-eurobarometers-data" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="case-study-eurobarometers-data">Case study Eurobarometer’s data</h3>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>
+<a href="materials/script_eurobarometer.R" download="" style="margin-right: 5px;"> <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i> <span style="margin-left: 2px; vertical-align: middle;">R Script</span> </a>
+</p>
+<p>
+<a href="materials/microdata_eurobarometer.Rdata" download="" style="margin-right: 5px;"> <i class="bi bi-database-fill-down" style="font-size: 0.9em; vertical-align: middle;"></i> <span style="margin-left: 2px; vertical-align: middle;">R Data</span> </a>
+</p>
+</div></div><p>In this section, we examine data from Standard Eurobarometer 81, a cross-national public opinion survey carried out in 2014 among citizens aged 15 and over across the 28 member states of the European Union (EU).</p>
+<p>The goal is to investigate how European citizens perceive the functioning, role, and future of the EU, with a particular focus on the treatment of Don’t Know (DK) responses in the analysis of ordinal data. Our attention is centered on a block of six attitudinal items (QA19.1–QA19.6), in which respondents rated their agreement on a four-point ordinal scale (totally disagree, tend to disagree, tend to agree, totally agree), with the possibility to select a DK option indicating uncertainty or lack of opinion. These items are intended to capture both cognitive understanding and emotional evaluation of the EU and related issues, such as globalization and European integration. By explicitly modeling DK responses, we gain insight not only into the direction of public opinion but also into the levels of uncertainty and ambivalence that shape attitudes toward complex political institutions like the EU.</p>
+<p>The attitudinal items are:</p>
+<ul>
+<li><p>QA19.1: I understand how the EU works</p></li>
+<li><p>QA19.2: Globalisation is an opportunity for economic growth</p></li>
+<li><p>QA19.3: (OUR COUNTRY) could better face the future outside the EU</p></li>
+<li><p>QA19.4: The EU should develop further into a federation of nation states</p></li>
+<li><p>QA19.5: More decisions should be taken at EU level</p></li>
+<li><p>QA19.6: We need a united Europe in today’s world</p></li>
+</ul>
+<p>Let’s start with the fitting of a CUB model for each variable by excluding the DK option.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(CUB)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"materials//microdata_eurobarometer.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(eurobarometer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   2800 obs. of  7 variables:
+ $ Country: chr  "BE" "BE" "BE" "BE" ...
+ $ D19-1  : chr  "2" "2" "3" "4" ...
+ $ D19-2  : chr  "dk" "2" "dk" "3" ...
+ $ D19-3  : chr  "4" "3" "3" "4" ...
+ $ D19-4  : chr  "3" "dk" "2" "4" ...
+ $ D19-5  : chr  "2" "1" "3" "2" ...
+ $ D19-6  : chr  "4" "1" "1" "1" ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># Estimate a CUB model for each item</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>CUB_list <span class="ot">&lt;-</span> <span class="fu">list</span> ()</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>pi <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>xi <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>){</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  ordinal <span class="ot">&lt;-</span> eurobarometer[,i]</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  ordinal <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(ordinal[<span class="sc">-</span><span class="fu">which</span>(ordinal <span class="sc">==</span> <span class="st">"dk"</span>)])</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  CUB_list[[i<span class="dv">-1</span>]] <span class="ot">&lt;-</span> <span class="fu">GEM</span>(<span class="fu">Formula</span>(ordinal <span class="sc">~</span> <span class="dv">0</span> <span class="sc">|</span> <span class="dv">0</span> <span class="sc">|</span> <span class="dv">0</span>), <span class="at">family =</span> <span class="st">"cub"</span>)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  pi[i<span class="dv">-1</span>] <span class="ot">&lt;-</span> CUB_list[[i<span class="dv">-1</span>]]<span class="sc">$</span>estimates[<span class="dv">1</span>]</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  xi[i<span class="dv">-1</span>] <span class="ot">&lt;-</span> CUB_list[[i<span class="dv">-1</span>]]<span class="sc">$</span>estimates[<span class="dv">2</span>]</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>param <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="st">"QA19.1"</span>, <span class="st">"QA19.2"</span>,</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"QA19.3"</span>, <span class="st">"QA19.4"</span>,</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"QA19.5"</span>, <span class="st">"QA19.6"</span>), pi, xi))</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(param) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"label"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>)</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>param<span class="sc">$</span>x <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(param<span class="sc">$</span>x)</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>param<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(param<span class="sc">$</span>y)</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(param, <span class="fu">aes</span>(<span class="at">x =</span> (<span class="dv">1</span><span class="sc">-</span>x), <span class="at">y =</span> (<span class="dv">1</span><span class="sc">-</span>y), <span class="at">label =</span> label)) <span class="sc">+</span></span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>((<span class="dv">1</span><span class="sc">-</span>pi)), <span class="at">y =</span> <span class="fu">expression</span>((<span class="dv">1</span><span class="sc">-</span>xi))) <span class="sc">+</span></span>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a>plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-CUB_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now, let’s see how the estimates of <span class="math inline">\(\pi\)</span> change by considering the DK option. First of all we have to compute the following quantity for each item:</p>
+<p><span class="math display">\[
+\hat{p}_{DK} = \frac{Total\, number\, of\, DK\, responses}{Total\, number\, of\, responses}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>p_DK <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop over the 6 items</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>) {</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  item_responses <span class="ot">&lt;-</span> eurobarometer[, i]</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  total_responses <span class="ot">&lt;-</span> <span class="fu">length</span>(item_responses)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  dk_count <span class="ot">&lt;-</span> <span class="fu">sum</span>(item_responses <span class="sc">==</span> <span class="st">"dk"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  p_DK[i <span class="sc">-</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> dk_count <span class="sc">/</span> total_responses</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign labels to the vector</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(p_DK) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"QA19."</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the result</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>p_DK</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    QA19.1     QA19.2     QA19.3     QA19.4     QA19.5     QA19.6 
+0.03821429 0.14964286 0.10500000 0.21928571 0.10107143 0.07000000 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>param<span class="sc">$</span>p_DK <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(p_DK)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The “corrected” <span class="math inline">\(\pi\)</span> is computed as <span class="math inline">\(\pi = (1-\hat{p}_{DK})\cdot\pi_S\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>param<span class="sc">$</span>x_cor <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">-</span> param<span class="sc">$</span>p_DK)<span class="sc">*</span>param<span class="sc">$</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then we can plot the estimated models by considering the DK option:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>param<span class="sc">$</span>x_old <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> param<span class="sc">$</span>x</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>param<span class="sc">$</span>x_new <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> param<span class="sc">$</span>x_cor</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>param<span class="sc">$</span>y_val <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> param<span class="sc">$</span>y</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(param) <span class="sc">+</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> x_old, <span class="at">y =</span> y_val, <span class="at">xend =</span> x_new<span class="fl">-0.015</span>, <span class="at">yend =</span> y_val),</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>)), <span class="at">color =</span> <span class="st">"darkgray"</span>) <span class="sc">+</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> x_old, <span class="at">y =</span> y_val), <span class="at">color =</span> <span class="st">"gray30"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> x_new, <span class="at">y =</span> y_val), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> x_new, <span class="at">y =</span> y_val, <span class="at">label =</span> label),</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="dv">1</span> <span class="sc">-</span> pi), <span class="at">y =</span> <span class="fu">expression</span>(<span class="dv">1</span> <span class="sc">-</span> xi)) <span class="sc">+</span></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-CUB_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This plot shows that globally Europeans have quite negative feelings against Europe, since by looking at the results related to question QA19.6 people have a low feeling and low uncertainty, meaning that they generally don’t think that we need a united europe today and they are almost sure about that. A similar opinion is confirmed by the high feeling shown for item QA19.3 which suggest that people globally think that their own country could better face the future outside the EU.</p>
+<p>The other items show a medium level of feeling, especially QA19.2 and QA19.4, the consideration of the DK option shifts relevantly the level of uncertainty, meaning that the interviewees are not always able to say whether globalization is perceived as an opportunity for economic growth and are not able to express their perception about the possible development of the EU into a federation of nation states.</p>
+<p><strong>References and additional information</strong></p>
+<p>For those interested in learning more about CUB models, I suggest <a href="https://link.springer.com/article/10.1007/s10260-019-00461-1" target="_blank">this paper</a>, which provides a good overview of the main developments within the class of CUB models. Additional contributions and developments from my research group can be found on <a href="https://bodai.unibs.it/cub/" target="_blank">this page</a>.</p>
+<p><strong>Main References</strong></p>
+<p>The main references used for this module are:</p>
+<ul>
+<li><p>D’Elia, A., &amp; Piccolo, D. (2005). A mixture model for preferences data analysis. <em>Computational Statistics &amp; Data Analysis</em>, 49(3), 917-934.</p></li>
+<li><p>Iannario, M. (2012). Modelling shelter choices in a class of mixture models for ordinal responses. <em>Statistical Methods &amp; Applications</em>, 21(1), 1-22.</p></li>
+<li><p>Manisera, M., &amp; Zuccolotto, P. (2014). Modeling “don’t know” responses in rating scales. <em>Pattern Recognition Letters</em>, 45, 226-234.</p></li>
+<li><p>Piccolo, D., &amp; Simone, R. (2019). The class of CUB models: statistical foundations, inferential issues and empirical evidence. <em>Statistical Methods &amp; Applications</em>, 28, 389-435.</p></li>
+</ul>
+<p><strong>R Packages</strong></p>
+<p>The models and datasets (<code>univer</code>, <code>relgoods</code>) used in this module are provided in the R package <a href="https://rdrr.io/cran/CUB/" target="_blank">CUB</a></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">© 2026 Matteo Ventura</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Built with <a href="https://quarto.org/">Quarto</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

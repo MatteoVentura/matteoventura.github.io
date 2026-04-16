@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Matteo Ventura - Classical Models for Ordinal Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="google-site-verification" content="C3ggHJs_ixVu-G17Z_vF1TG0r-XS1hQYsy6wOSJVfP8">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Matteo Ventura</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../courses.html" rel="" target="">
+ <span class="menu-text">Courses</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contacts.html" rel="" target="">
+ <span class="menu-text">Contacts</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/MatteoVentura" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#limitations-of-most-commonly-used-models" id="toc-limitations-of-most-commonly-used-models" class="nav-link active" data-scroll-target="#limitations-of-most-commonly-used-models">Limitations of most commonly used models</a>
+  <ul class="collapse">
+  <li><a href="#limitations-of-linear-regression" id="toc-limitations-of-linear-regression" class="nav-link" data-scroll-target="#limitations-of-linear-regression">Limitations of Linear Regression:</a></li>
+  <li><a href="#limitations-of-binary-logistic-regression" id="toc-limitations-of-binary-logistic-regression" class="nav-link" data-scroll-target="#limitations-of-binary-logistic-regression">Limitations of Binary Logistic Regression:</a></li>
+  <li><a href="#limitations-of-multinomial-logistic-regression" id="toc-limitations-of-multinomial-logistic-regression" class="nav-link" data-scroll-target="#limitations-of-multinomial-logistic-regression">Limitations of Multinomial Logistic Regression:</a></li>
+  </ul></li>
+  <li><a href="#modeling-cumulative-probabilities" id="toc-modeling-cumulative-probabilities" class="nav-link" data-scroll-target="#modeling-cumulative-probabilities">Modeling Cumulative Probabilities</a></li>
+  <li><a href="#the-cumulative-logit-with-proportional-odds-assumption" id="toc-the-cumulative-logit-with-proportional-odds-assumption" class="nav-link" data-scroll-target="#the-cumulative-logit-with-proportional-odds-assumption">The Cumulative Logit with Proportional Odds Assumption</a>
+  <ul class="collapse">
+  <li><a href="#latent-variable-motivation" id="toc-latent-variable-motivation" class="nav-link" data-scroll-target="#latent-variable-motivation">Latent Variable Motivation</a></li>
+  <li><a href="#testing-the-proportional-odds-assumption" id="toc-testing-the-proportional-odds-assumption" class="nav-link" data-scroll-target="#testing-the-proportional-odds-assumption">Testing the Proportional Odds Assumption</a></li>
+  <li><a href="#graphical-inspection" id="toc-graphical-inspection" class="nav-link" data-scroll-target="#graphical-inspection">Graphical Inspection</a></li>
+  <li><a href="#violation-of-the-proportional-odds-assumption" id="toc-violation-of-the-proportional-odds-assumption" class="nav-link" data-scroll-target="#violation-of-the-proportional-odds-assumption">Violation of the Proportional Odds Assumption</a></li>
+  </ul></li>
+  <li><a href="#coefficients-interpretation" id="toc-coefficients-interpretation" class="nav-link" data-scroll-target="#coefficients-interpretation">Coefficients interpretation</a>
+  <ul class="collapse">
+  <li><a href="#connection-with-the-latent-variable-interpretation" id="toc-connection-with-the-latent-variable-interpretation" class="nav-link" data-scroll-target="#connection-with-the-latent-variable-interpretation">Connection with the Latent Variable interpretation</a></li>
+  <li><a href="#inference-on-parameters" id="toc-inference-on-parameters" class="nav-link" data-scroll-target="#inference-on-parameters">Inference on Parameters</a></li>
+  </ul></li>
+  <li><a href="#case-study-analyzing-disciplinary-decisions-in-professional-soccer" id="toc-case-study-analyzing-disciplinary-decisions-in-professional-soccer" class="nav-link" data-scroll-target="#case-study-analyzing-disciplinary-decisions-in-professional-soccer">Case Study: Analyzing Disciplinary Decisions in Professional Soccer</a>
+  <ul class="collapse">
+  <li><a href="#simplifying-the-model" id="toc-simplifying-the-model" class="nav-link" data-scroll-target="#simplifying-the-model">Simplifying the Model</a></li>
+  <li><a href="#goodness-of-fit" id="toc-goodness-of-fit" class="nav-link" data-scroll-target="#goodness-of-fit">Goodness of Fit</a></li>
+  <li><a href="#testing-the-proportional-odds-assumption-1" id="toc-testing-the-proportional-odds-assumption-1" class="nav-link" data-scroll-target="#testing-the-proportional-odds-assumption-1">Testing the proportional odds assumption</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="02-ordinal-models.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Classical Models for Ordinal Data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+
+<div class="no-row-height column-margin column-container"><div class="">
+<!-- <p><a href="materials/Script_plots_examples.R" download style="margin-right: 5px;"> <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i> [R Script]{style="margin-left: 2px; vertical-align: middle;"} </a></p> -->
+<p>
+<a href="materials/Ordinal Data Analysis in R - Module 2.pdf" download=""> <i class="bi bi-file-earmark-slides-fill" style="font-size: 0.9em; vertical-align: middle;"></i> <span style="margin-left: 2px; vertical-align: middle;">Slides</span> </a>
+</p>
+<p>
+<a href="02-ordinal-models.pdf" download=""> <i class="bi bi-file-earmark-pdf-fill" style="font-size: 0.9em; vertical-align: middle; color: #dc3545;"></i> <span style="margin-left: 2px; vertical-align: middle; color: #dc3545; font-weight: bold;">Module PDF</span> </a>
+</p>
+</div></div><section id="limitations-of-most-commonly-used-models" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-of-most-commonly-used-models">Limitations of most commonly used models</h2>
+<section id="limitations-of-linear-regression" class="level3 unnumbered toc-ignore">
+<h3 class="unnumbered toc-ignore anchored" data-anchor-id="limitations-of-linear-regression">Limitations of Linear Regression:</h3>
+<p>Linear regression is designed for dependent variables that are continuous and can take any value within a range (or at least have a large number of distinct, equally-spaced values). Applying linear regression to ordinal data involves treating the ordered categories as if they were numerical scores with equal intervals between them.</p>
+<ul>
+<li><p><strong>Ignores Non-Interval Nature</strong>: The primary issue is that linear regression assumes that the difference between category 1 and 2 is the same as the difference between category 2 and 3, and so on. For ordinal data, this is often not true. The “distance” between “Very Dissatisfied” and “Dissatisfied” might not be the same in the minds of respondents as the distance between “Satisfied” and “Very Satisfied.” By assigning numerical scores (e.g., 1, 2, 3, 4, 5) and running linear regression, we impose an arbitrary interval structure that the data doesn’t necessarily possess. This can lead to inaccurate estimates of the effects of predictors.</p></li>
+<li><p><strong>Violation of Assumptions</strong>: Linear regression assumes the dependent variable is continuous and errors are normally distributed with constant variance. For an ordinal variable with a limited number of categories, these assumptions are violated. The predicted values from a linear model can also fall outside the valid range of the ordinal scale (e.g., predicting a satisfaction level of 0.5 or 5.8 on a 1-5 scale).</p></li>
+<li><p><strong>Misleading Interpretation</strong>: Interpreting coefficients in linear regression involves saying that a one-unit increase in a predictor is associated with a certain change in the mean score of the ordinal variable. This interpretation is based on the problematic assumption of equal intervals and might not accurately reflect the underlying process generating the ordinal response.</p></li>
+</ul>
+</section>
+<section id="limitations-of-binary-logistic-regression" class="level3 unnumbered toc-ignore">
+<h3 class="unnumbered toc-ignore anchored" data-anchor-id="limitations-of-binary-logistic-regression">Limitations of Binary Logistic Regression:</h3>
+<p>Binary logistic regression is suitable for dependent variables with exactly two outcomes (e.g., Yes/No, Success/Failure). To use it with an ordinal variable, you have to collapse the multiple ordered categories into just two.</p>
+<ul>
+<li><p><strong>Loss of Information</strong>: The biggest drawback is the loss of valuable information about the granularity and ordering of the original categories. Forcing a 5-point scale into a binary outcome (e.g., “Satisfied/Very Satisfied” vs.&nbsp;“Dissatisfied/Neutral/Very Dissatisfied”) discards the nuances within the original categories. A model that can distinguish between “Dissatisfied” and “Very Dissatisfied” will likely be more informative than one that groups them.</p></li>
+<li><p><strong>Arbitrary Threshold</strong>: The choice of where to split the ordinal scale into two groups is often arbitrary. Different researchers might choose different cut-off points, and this arbitrary choice can significantly influence the results and conclusions drawn from the analysis. The effect of a predictor might appear different depending on how the dichotomization is performed.</p></li>
+<li><p><strong>Reduced Statistical Power</strong>: By reducing the number of outcomes, you potentially reduce the variability captured by the dependent variable, which can lead to a loss of statistical power to detect significant effects of your predictors compared to a model that utilizes the full ordinal scale.</p></li>
+</ul>
+</section>
+<section id="limitations-of-multinomial-logistic-regression" class="level3 unnumbered toc-ignore">
+<h3 class="unnumbered toc-ignore anchored" data-anchor-id="limitations-of-multinomial-logistic-regression">Limitations of Multinomial Logistic Regression:</h3>
+<p>Multinomial (or polytomous) logistic regression is designed for dependent variables with three or more categories that have no natural order (e.g., choice of car color: red, blue, green). While it can handle multiple categories, its fundamental structure doesn’t account for ranking.</p>
+<ul>
+<li><p><strong>Ignores the Order</strong>: Multinomial logistic regression models the probability of being in each category relative to a chosen baseline category. It estimates a separate set of coefficients for each category comparison (e.g., Category 2 vs.&nbsp;Category 1, Category 3 vs.&nbsp;Category 1, etc.). It treats the categories as distinct nominal outcomes, completely ignoring the fact that category 3 falls between category 2 and category 4 in a meaningful way.</p></li>
+<li><p><strong>Difficult Interpretation</strong> (in terms of Order): The coefficients in a multinomial logit model are interpreted in terms of the change in log-odds of being in a specific category versus the baseline category for a one-unit change in a predictor. While technically correct, relating these separate category-specific effects back to the overall ordered nature of the dependent variable can be cumbersome and less intuitive than the single cumulative odds ratio provided by the cumulative logit model (when the proportional odds assumption holds). It doesn’t directly answer questions like “how does this predictor affect the likelihood of being in a higher category?”</p></li>
+</ul>
+</section>
+</section>
+<section id="modeling-cumulative-probabilities" class="level2">
+<h2 class="anchored" data-anchor-id="modeling-cumulative-probabilities">Modeling Cumulative Probabilities</h2>
+<p>The primary methodology for modeling ordinal data revolves around the cumulative probabilities associated with the ordered categories. This approach respects the inherent order of the data, ensuring that these probabilities monotonically increase as we move up the ordinal scale.</p>
+<!-- In the context of binary response variables, logistic regression is the standard model. -->
+<!-- For multinomial variables, the Baseline-category Logit model, an extension of logistic regression, is used to form logits by comparing each category to a baseline category. However, this method is generally better suited for unordered categorical responses because it does not account for the crucial characteristic of ordinality. -->
+<p>To more appropriately handle ordinality, the cumulative probabilities approach modifies logistic regression by applying transformations that consider the order of the categories. A common transformation is the logit transformation applied to the cumulative probabilities, which enhances the model’s ability to capture the ordered nature of the data. Other transformations, such as probit or log-log, can also be used depending on the specific data characteristics and analytical requirements.</p>
+<!-- Furthermore, two additional transformations are noteworthy for ordinal data: the use of adjacent categories, and the use of the continuation ratio. -->
+<!-- These methods refine the approach by focusing on the relationships between consecutive categories, providing a more detailed modeling of the ordinal data's structure. -->
+<!-- To model the relationship between predictors and an ordinal response variable, the cumulative logit model doesn't directly model the probability of being in each specific category (P(Y=c  -->
+<!-- j -->
+<!-- ​ -->
+<!--  )). Instead, it focuses on cumulative probabilities. -->
+<p><strong>Definition</strong>: Given an ordinal variable <span class="math inline">\(R\)</span> with <span class="math inline">\(m\)</span> ordered categories, let’s denote these categories as <span class="math inline">\(r_1, r_2, \dots, r_m\)</span>, where <span class="math inline">\(r_1\)</span> is the “lowest” category and <span class="math inline">\(r_m\)</span> is the “highest”. The categories have a meaningful order: <span class="math inline">\(r_1 \leq r_2, \leq \dots, \leq r_m\)</span>.</p>
+<p>A cumulative probability for a specific category <span class="math inline">\(r_j\)</span> is the probability that the observed response <span class="math inline">\(R\)</span> falls into category <span class="math inline">\(r_j\)</span>, or any category below it. Mathematically, this is expressed as <span class="math inline">\(P(R \leq r_j)\)</span>.</p>
+<p>We can define <span class="math inline">\(m-1\)</span> such cumulative probabilities, corresponding to the thresholds between the categories:</p>
+<ul>
+<li><p>For the first category <span class="math inline">\(r_1\)</span>:<br>
+<span class="math inline">\(P(R \leq r_1) = P(R = r_1)\)</span> is simply the probability of being in the lowest category.</p></li>
+<li><p>For the first category <span class="math inline">\(r_2\)</span>:<br>
+<span class="math inline">\(P(R \leq r_2) = P(R = r_1) + P(R = r_2)\)</span> is the probability of being in the second category or any category below it (which is just the first category).</p></li>
+<li><p>For the third category <span class="math inline">\(r_3\)</span>:<br>
+<span class="math inline">\(P(R \leq r_3) = P(R = r_1) + P(R = r_2) + P(R = r_3)\)</span> is the probability of being in the third category or any category below it.</p></li>
+<li><p>…and so on, up to the <span class="math inline">\((m-1)\)</span>-th category <span class="math inline">\(r_{(m-1)}\)</span>:<br>
+<span class="math inline">\(P(R \leq r_{(m-1)}) = P(R = r_1) + P(R = r_2) + P(R = r_3) + \dots + P(R = r_{(m-1)})\)</span> is the probability of being in the second-highest category or any category below it.</p></li>
+<li><p>For the last category <span class="math inline">\(r_m\)</span> <span class="math inline">\(r_{(m-1)}\)</span>:<br>
+<span class="math inline">\(P(R \leq r_m) = P(R = r_1) + P(R = r_2) + P(R = r_3) + \dots + P(R = r_{(m-1)})+ P(R = r_m)=1\)</span>, which is the cumulative probability is always 1 because it includes all possible outcomes. Since it carries no information about the differences between categories, it is not included in the modeling process; we only model the first <span class="math inline">\(m-1\)</span> cumulative probabilities.</p></li>
+</ul>
+<p>The use of cumulative probabilities is a clever way to turn the ordinal modeling problem into a series of binary comparisons, while respecting the order. Each cumulative probability <span class="math inline">\(P(R \leq r_j)\)</span> inherently creates a binary split at the threshold <span class="math inline">\(r_j\)</span>: - Outcome 1: the response is in category <span class="math inline">\(r_j\)</span> or lower <span class="math inline">\((R\leq r_j)\)</span>; - Outcome 2: The response is in category higher than <span class="math inline">\(r_j\)</span> <span class="math inline">\((R &gt; r_j)\)</span>.</p>
+<p>By modeling the probability of this binary outcome for each threshold <span class="math inline">\(j=1,\dots,m−1\)</span>, we capture the transitions between categories along the ordered scale. The cumulative logit model then applies the logit transformation to these cumulative probabilities, allowing them to be related to a linear combination of predictors.</p>
+<p><strong>Numerical Example</strong>: Let’s consider a simple ordinal variable, “Product Satisfaction,” with <span class="math inline">\(m = 4\)</span> ordered categories:</p>
+<ul>
+<li><span class="math inline">\(r_1\)</span>: Very Dissatisfied (VD)</li>
+<li><span class="math inline">\(r_2\)</span>: Dissatisfied (D)</li>
+<li><span class="math inline">\(r_3\)</span>: Satisfied (S)</li>
+<li><span class="math inline">\(r_4\)</span>: Very Satisfied (VS)</li>
+</ul>
+<p>Suppose, for a particular group of individuals, the probabilities of being in each specific category are:</p>
+<ul>
+<li><span class="math inline">\(P(R=VD)=P(R=r_1)=0.10\)</span></li>
+<li><span class="math inline">\(P(R=D)=P(R=r_2)=0.20\)</span></li>
+<li><span class="math inline">\(P(R=S)=P(R=r_3)=0.40\)</span></li>
+<li><span class="math inline">\(P(R=VS)=P(R=r_4)=0.30\)</span></li>
+</ul>
+<p>Now, let’s calculate the cumulative probabilities:</p>
+<ol type="1">
+<li><p>Cumulative Probability for <span class="math inline">\(r_1\)</span> (VD) <br> <span class="math inline">\(P(R \leq r_1) = P(R = VD) = 0.10\)</span> <br> This represents the probability of being in the “Very Dissatisfied” category or below (just VD). The implied binary split is <span class="math inline">\(\{VD\}\)</span> vs <span class="math inline">\(\{D, S, VS\}\)</span>.</p></li>
+<li><p>Cumulative Probability for <span class="math inline">\(r_2\)</span> (D) <br> <span class="math inline">\(P(R \leq r_2) = P(R = VD) + P(R = D) = 0.10 + 0.20 = 0.30\)</span> <br> This represents the probability of being in the “Dissatisfied” category or below (VD or D). The implied binary split is <span class="math inline">\(\{VD, D\}\)</span> vs <span class="math inline">\(\{S, VS\}\)</span>.</p></li>
+<li><p>Cumulative Probability for <span class="math inline">\(r_3\)</span> (S) <br> <span class="math inline">\(P(R \leq r_3) = P(R = VD) + P(R = D) + P(R = S) = 0.10 + 0.20 + 0.40 = 0.70\)</span> <br> This represents the probability of being in the “Satisfied” category or below (VD, D, or S). The implied binary split is <span class="math inline">\(\{VD, D, S\}\)</span> vs <span class="math inline">\(\{VS\}\)</span>.</p></li>
+<li><p>Cumulative Probability for <span class="math inline">\(r_4\)</span> (VS) <br> <span class="math inline">\(P(R \leq r_4) = P(R = VD) + P(R = D) + P(R = S) + P(R = VS) = 0.10 + 0.20 + 0.40 + 0.3 = 1\)</span> As expected, the cumulative probability for the highest category is 1. We do not model this.</p></li>
+</ol>
+<p>So, for this 4-category variable, the cumulative logit model will focus on modeling the relationships between predictors and the first <span class="math inline">\(m−1=4−1=3\)</span> cumulative probabilities. Each of these represents a different threshold or cut-point on the ordered scale.</p>
+</section>
+<section id="the-cumulative-logit-with-proportional-odds-assumption" class="level2">
+<h2 class="anchored" data-anchor-id="the-cumulative-logit-with-proportional-odds-assumption">The Cumulative Logit with Proportional Odds Assumption</h2>
+<p>To be able to model the relationship between the cumulative probabilities and the explanatory variables, a function is needed and, as in the binary logistic regression, we use the logit to model the probability of success. In the case of ordinal data, we apply the logit not to the probability of a single category, but to the cumulative probabilities.</p>
+<p>The cumulative logit transformation for the <span class="math inline">\(j\)</span>-th threshold (where <span class="math inline">\(j\)</span> goes from <span class="math inline">\(1\)</span> to <span class="math inline">\(m−1\)</span>) is defined as the natural logarithm of the cumulative odds:</p>
+<p><span id="eq-cumlogit1"><span class="math display">\[
+\text{logit} [ P (R \leq r_j)] = \log \Bigg( \frac{P(R \leq r_j)}{1-P(R \leq r_j)}\Bigg)
+\tag{1}\]</span></span></p>
+<p>Since <span class="math inline">\(1-P(R \leq r_j)\)</span> is the probability that the outcome <span class="math inline">\(R\)</span> is greather than the category <span class="math inline">\(r_j\)</span>. So, the cumulative logit can be rewritten as:</p>
+<p><span id="eq-cumlogit2"><span class="math display">\[
+\text{logit} [ P (R \leq r_j)] = \log \Bigg( \frac{P(R \leq r_j)}{P(R &gt; r_j)}\Bigg)
+\tag{2}\]</span></span></p>
+<p>This expression represents the natural logarithm of the odds of being in category <span class="math inline">\(r_j\)</span> or any category below it, versus being in any category above <span class="math inline">\(r_j\)</span>. This transformation, as in the case of the binary logistic regression, maps probabilities (which are between 0 and 1) onto the entire real number line <span class="math inline">\((-\infty, + \infty)\)</span>. This allows us to equate the logit of this cumulative probability to a linear combination of our predictors, which can take any real value.</p>
+<p>The resulting statistical model, and the most common one for ordinal data with a cumulative logit link, is known as the Cumulative Logit Proportional Odds Model. Its basic structure assumes that the cumulative logit for each threshold is a linear function of the predictor variables:</p>
+<p><span id="eq-cumlogit3"><span class="math display">\[
+\text{logit}[P(R\leq r_j | X_1, \dots, X_k)] = \alpha_j + \beta_1X_1 + \beta_2X_2 + \dots + \beta_kX_k
+\tag{3}\]</span></span></p>
+<p>This equation is estimated simultaneously for each of the <span class="math inline">\(m-1\)</span> cumulative thresholds. in this equation:</p>
+<ul>
+<li><p><span class="math inline">\(P(R \leq r_j | \boldsymbol{X})\)</span> is the cumulative probability of being in category <span class="math inline">\(r_j\)</span> or lower, conditional on the values of the predictor variables <span class="math inline">\(X_1 ,X_2, \dots, X_k\)</span>.</p></li>
+<li><p><span class="math inline">\(\alpha_j\)</span> are the intercepts of the model. A crucial aspect of the cumulative logit model is that there is a different intercept for each of the <span class="math inline">\(m-1\)</span> cumulative logits we are modeling.<br>
+<span class="math inline">\(\alpha_1\)</span> is the intercept for <span class="math inline">\(\text{logit}[P(R\leq r_1)]\)</span>, <span class="math inline">\(\alpha_2\)</span> is the intercept for <span class="math inline">\(\text{logit}[P(R\leq r_2)]\)</span>, and <span class="math inline">\(\alpha_{(m-1)}\)</span> is the intercept for <span class="math inline">\(\text{logit}[P(R\leq r_{(m-1)})]\)</span>.<br>
+These intercepts represent the baseline cumulative log-odds for their respective threshold when all the predictor variables X are zero.<br>
+It is necessary that these intercepts are ordered: <span class="math inline">\(\alpha_1 \leq \alpha_2 \leq \dots \leq \alpha_{(m-1)}\)</span>.<br>
+This ensures that the resulting cumulative probabilities are non-decreasing as j increases.</p></li>
+<li><p><span class="math inline">\(\beta_1, \beta_2, \dots, \beta_k\)</span> are the coefficients associated to each predictor variables <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, <span class="math inline">\(\dots, X_k\)</span>.<br>
+Since we are operating under proportional odds assumption, in this model these is only one set of <span class="math inline">\(\beta\)</span> coefficients that applies across all <span class="math inline">\(m-1\)</span> cumulative logit equations.<br>
+This implies that the effect of each predictor on the cumulative log-odds is the same.</p></li>
+</ul>
+<p>To demonstrate the proportional odds assumption, let’s consider the cumulative odds for two distinct sets of predictor values: <span class="math inline">\(\boldsymbol{X}^{(1)} = (X_1^{(1)}, \dots, X_k^{(1)})\)</span> and <span class="math inline">\(\boldsymbol{X}^{(2)} = (X_1^{(2)}, \dots, X_k^{(2)})\)</span>.</p>
+<p>The cumulative odds at threshold <span class="math inline">\(r_j\)</span> for the first set of predictors <span class="math inline">\(\boldsymbol{X}^{(1)}\)</span> are: <span class="math display">\[
+\text{Odds}(R \leq r_j | \boldsymbol{X}^{(1)}) =\exp \Bigg( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(1)} \Bigg)
+\]</span> Similarly, for the second set of predictors <span class="math inline">\(\boldsymbol{X}^{(2)}\)</span>:</p>
+<p><span class="math display">\[
+\text{Odds}(R \leq r_j | \boldsymbol{X}^{(2)}) = \exp \Bigg( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(2)} \Bigg)
+\]</span> The Odds Ratio (OR) comparing the cumulative odds at <span class="math inline">\(\boldsymbol{X}^{(2)}\)</span> to those at <span class="math inline">\(\boldsymbol{X}^{(1)}\)</span> for the event <span class="math inline">\(R \leq r_j\)</span> is: <span class="math display">\[
+\text{OR}_j = \frac{\text{Odds}(R \leq r_j | \boldsymbol{X}^{(2)})}{\text{Odds}(R \leq r_j | \boldsymbol{X}^{(1)})}
+\]</span> Substituting the exponential expressions for the odds: <span class="math display">\[
+\text{OR}_j = \frac{\exp \Big( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(2)} \Big)}{\exp \Big( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(1)} \Big)}
+\]</span> Using the property <span class="math inline">\(e^a / e^b = e^{a-b}\)</span>, we can simplify the expression: <span class="math display">\[
+\text{OR}_j = \exp \Bigg( \Big( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(2)} \Big) - \Big( \alpha_j + \sum_{i=1}^{k} \beta_iX_i^{(1)} \Big) \Bigg)
+\]</span></p>
+<p>Crucially, the intercept term <span class="math inline">\(\alpha_j\)</span> cancels out:</p>
+<p><span class="math display">\[
+\text{OR}_j = \exp \Bigg( \sum_{i=1}^{k} \beta_iX_i^{(2)} - \sum_{i=1}^{k} \beta_iX_i^{(1)} \Bigg)
+\]</span></p>
+<p>This can be further condensed:</p>
+<p><span class="math display">\[
+\text{OR}_j = \exp \Bigg( \sum_{i=1}^{k} \beta_i(X_i^{(2)} - X_i^{(1)}) \Bigg)
+\]</span></p>
+<p>As evident from this final formula, the Odds Ratio (<span class="math inline">\(\text{OR}_j\)</span>) does not contain the subscript <span class="math inline">\(j\)</span>. This signifies that the odds ratio associated with a change in the predictor variables is constant across all <span class="math inline">\(m-1\)</span> cumulative thresholds. This inherent consistency in the effect of predictors across the ordinal categories is precisely what defines the proportional odds assumption. It means that while the baseline odds change for each category, the multiplicative effect of the predictors on these odds remains the same.</p>
+<p>Graphically, this translates to parallelism on the log-odds scale. If you were to plot the cumulative log-odds for different levels of a predictor, you would see a set of parallel lines. For example, imagine an ordinal outcome with four categories (e.g., ‘Low’, ‘Medium’, ‘High’, ‘Very High’). There would be three cumulative probabilities: <span class="math inline">\(P(R\leq Low)\)</span>, <span class="math inline">\(P(R \leq Medium)\)</span>, and <span class="math inline">\(P(R \leq High)\)</span>. If the Proportional Odds assumption holds for a continuous predictor, then the log-odds for each of these cumulative probabilities would change by the same amount for a one-unit increase in that predictor.</p>
+<p>You would visualize three separate curves, one for each cumulative probability, plotted against the predictor on the x-axis, with the y-axis representing the logit of these probabilities. If the Proportional Odds assumption holds, these three curves would run parallel to each other across the entire range of the predictor. They would be shifted vertically relative to each other (due to the different <span class="math inline">\(\alpha_j\)</span>, but their slopes (the <span class="math inline">\(\beta\)</span> coefficients) would be identical.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="02-ordinal-models_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The Proportional Odds assumption is useful for two main reason:</p>
+<ul>
+<li><p><strong>Parsimony and Simplicity</strong>: This is a major advantage. If the assumption holds, the <span class="math inline">\(\beta\)</span> coefficients are estimated for each predictor, regardless of the number of categories <span class="math inline">\(m\)</span>. Fewer parameters make the model easier to estimate, interpret, and potentially more stable, especially with smaller sample sizes.</p></li>
+<li><p><strong>Clear and Consistent Interpretation</strong>: A single Odds Ratio per predictor provides a clear, concise summary of its effect across the entire ordinal scale.</p></li>
+</ul>
+<!-- For instance, if $$\text{exp}(\beta_{temp})=0.75$$, we confidently say that increasing temperature by one unit multiplies the odds of being in a lower rating category by 0.75, regardless the categories we are comparing.  -->
+<section id="latent-variable-motivation" class="level3 unnumbered toc-ignore">
+<h3 class="unnumbered toc-ignore anchored" data-anchor-id="latent-variable-motivation">Latent Variable Motivation</h3>
+<p>To better understand this model we can think about an underlying, unobserved latent continuous variable, called <span class="math inline">\(R^*\)</span>. Let’s imagine that the ordinal response <span class="math inline">\(R\)</span> that we observe is actually a categorized version of the continuous unobserved variable <span class="math inline">\(R^*\)</span>. We can assume that <span class="math inline">\(R^*\)</span> is linearly related to our predictors plus some error, similar to a standard linear regression model:</p>
+<p><span class="math display">\[
+R^* = \beta_0^* + \beta_1^*X_1 + \dots + \beta_k^*X_k + \epsilon
+\]</span></p>
+<p>We can set some fixed thresholds, <span class="math inline">\(\gamma_0 = -\infty, \gamma_1\)</span>, <span class="math inline">\(\gamma_2\)</span>, <span class="math inline">\(\dots, \gamma_{(m-1)}\)</span>, <span class="math inline">\(\gamma_m = +\infty\)</span> on the <span class="math inline">\(R^*\)</span> scale, such that if <span class="math inline">\(R^*\)</span> falls between two thresholds, the observed ordinal variable <span class="math inline">\(R\)</span> falls into the corresponding category. The thresholds are set such that <span class="math inline">\(\gamma_0 &lt; \gamma_1\)</span> &lt; <span class="math inline">\(\gamma_2\)</span> &lt; <span class="math inline">\(\dots &lt; \gamma_{(m-1)}\)</span> <span class="math inline">\(&lt;\gamma_m\)</span>.</p>
+<p>The ordinal category is determined by <span class="math inline">\(R^*\)</span> based on the thresholds:</p>
+<ul>
+<li><span class="math inline">\(R = r_1\)</span> if <span class="math inline">\(R^* \leq \gamma_1\)</span></li>
+<li><span class="math inline">\(R = r_2\)</span> if <span class="math inline">\(\gamma_1 &lt; R^* \leq \gamma_2\)</span></li>
+<li><span class="math inline">\(R = r_j\)</span> if <span class="math inline">\(\gamma_{(j-1)} &lt; R^* \leq \gamma_j\)</span></li>
+<li><span class="math inline">\(R = r_m\)</span> if <span class="math inline">\(R^* &gt; \gamma_{(m-1)}\)</span></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="02-ordinal-models_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>If we assume that the error <span class="math inline">\(\epsilon\)</span> follows a standard logistic distribution, it can be shown that this structure leads directly to the form of the cumulative logit model:</p>
+<p><span class="math display">\[
+\text{logit}[P \leq r_j | \boldsymbol{X})] = (\gamma_j - \beta_0^*) - \beta_1^*X_1 - \dots - \beta_k^*X_k,
+\]</span></p>
+<p>which clearly matches the cumulative logit model form given in <a href="#eq-cumlogit3">Equation&nbsp;3</a> if we define the model intercept <span class="math inline">\(\alpha_j = \gamma_j - \beta_0^*\)</span> and the model’s coefficients <span class="math inline">\(\beta_i = -\beta_i^*\)</span>.</p>
+<p>In this latent variable framework, the Proportional Odds assumption means two things:</p>
+<ol type="1">
+<li><p>The thresholds on the <span class="math inline">\(R^*\)</span> scale are fixed and do not depend on the predictor variables <span class="math inline">\(X\)</span>.</p></li>
+<li><p>The effect of each predictor <span class="math inline">\(X_i\)</span>(represented by is simply to shift the entire distribution of the latent variable <span class="math inline">\(R^*\)</span> along the continuous scale. This shift is the same magnitude regardless of where the fixed thresholds <span class="math inline">\(\gamma_j\)</span> are located.</p></li>
+</ol>
+<p>This parallel shif” of the latent distribution is the reason why the odds ratios for cumulative probabilities are proportional across all thresholds.</p>
+</section>
+<section id="testing-the-proportional-odds-assumption" class="level3 unnumbered toc-ignore">
+<h3 class="unnumbered toc-ignore anchored" data-anchor-id="testing-the-proportional-odds-assumption">Testing the Proportional Odds Assumption</h3>
+<p>Violating the Proportional Odds assumption can lead to inaccurate conclusions about the effects of the predictors. The most robust and commonly recommended way to test the Proportional Odds assumption with is by using a Likelihood Ratio Test to compare a constrained model (the PO model) with a more flexible, unconstrained model (where the PO assumption is relaxed for a specific predictor).</p>
+<p>The <code>clm()</code> function from the ordinal package allows you to relax the PO assumption for specific predictors using the <code>nominal = ~ predictor</code> argument. This creates a “partial proportional odds” model (also known as a generalized ordinal logit model). We then compare this more complex model (where the assumption is relaxed) to our original, simpler proportional odds model using <code>anova()</code>, which performs a Likelihood Ratio Test.</p>
+<ul>
+<li><p><strong>Null Hypothesis (</strong><span class="math inline">\(H_0\)</span>): The Proportional Odds assumption holds for the specified predictor (i.e., its coefficient is constant across all thresholds).</p></li>
+<li><p><strong>Alternative Hypothesis (</strong><span class="math inline">\(h_1\)</span>): The Proportional Odds assumption does not hold for the specified predictor (i.e., its coefficient varies across thresholds).</p></li>
+</ul>
+<p>Imagine we have an ordinal outcome Response (e.g., ‘Low’, ‘Medium’, ‘High’) and a continuous predictor Experience.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ordinal) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)   </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Response =</span> <span class="fu">factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span>), <span class="at">ordered =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Experience =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">5</span>, <span class="dv">2</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a standard Proportional Odds model</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>po_model_hypo <span class="ot">&lt;-</span> <span class="fu">clm</span>(Response <span class="sc">~</span> Experience, <span class="at">data =</span> data)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(po_model_hypo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>formula: Response ~ Experience
+data:    data
+
+ link  threshold nobs logLik  AIC    niter max.grad cond.H 
+ logit flexible  100  -109.55 225.10 3(0)  1.49e-10 4.6e+02
+
+Coefficients:
+           Estimate Std. Error z value Pr(&gt;|z|)
+Experience -0.08062    0.10394  -0.776    0.438
+
+Threshold coefficients:
+            Estimate Std. Error z value
+Low|Medium   -1.0554     0.5491  -1.922
+Medium|High   0.3228     0.5390   0.599</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a model where the PO assumption is relaxed for 'Experience'</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>non_po_model_hypo <span class="ot">&lt;-</span> <span class="fu">clm</span>(Response <span class="sc">~</span> Experience, <span class="at">nominal =</span> <span class="sc">~</span> Experience, <span class="at">data =</span> data)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(non_po_model_hypo) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>formula: Response ~ Experience
+nominal: ~Experience
+data:    data
+
+ link  threshold nobs logLik  AIC    niter max.grad cond.H 
+ logit flexible  100  -109.55 227.09 3(0)  1.87e-09 7.0e+02
+
+Coefficients: (1 not defined because of singularities)
+           Estimate Std. Error z value Pr(&gt;|z|)
+Experience       NA         NA      NA       NA
+
+Threshold coefficients:
+                        Estimate Std. Error z value
+Low|Medium.(Intercept)  -1.03724    0.64650  -1.604
+Medium|High.(Intercept)  0.30635    0.62133   0.493
+Low|Medium.Experience    0.07697    0.12457   0.618
+Medium|High.Experience   0.08416    0.12352   0.681</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the models using anova()</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(po_model_hypo, non_po_model_hypo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Likelihood ratio tests of cumulative link models:
+ 
+                  formula:              nominal:    link: threshold:
+po_model_hypo     Response ~ Experience ~1          logit flexible  
+non_po_model_hypo Response ~ Experience ~Experience logit flexible  
+
+                  no.par    AIC  logLik LR.stat df Pr(&gt;Chisq)
+po_model_hypo          3 225.10 -109.55                      
+non_po_model_hypo      4 227.09 -109.55  0.0028  1     0.9576</code></pre>
+</div>
+</div>
+<p><strong>Interpretation of the results</strong></p>
+<p><code>po_model_hypo</code> is the Proportional Odds model, where the effect of <code>Experience</code> is assumed to be constant across all thresholds. <code>non_po_model_hypo</code> is the generalized ordinal logit model (or partial proportional odds model), where the effect of <code>Experience</code> is allowed to vary across the thresholds.</p>
+<p>The AIC is 225.10 for <code>po_model_hypo</code> and 227.09 for <code>non_po_model_hypo</code>, this already suggest that the simpler model should be preferred.</p>
+<p><code>LR.stat</code> (Likelihood Ratio Statistic) is the test statistic for comparing the two nested models. It’s calculated as <span class="math inline">\(2 \cdot (logLik_{unconstrained} −logLik_{constrained})\)</span>.</p>
+<p>In this example, <code>LR.stat</code> = 0.0028. This indicates that the unconstrained model doesn’t provide a much better fit than the constrained model.</p>
+<p><code>Pr(&gt;Chisq)</code> (p-value) is the p-value associated with the LR.stat.</p>
+<p>Based on this Likelihood Ratio Test, there is no statistically significant evidence to suggest that the Proportional Odds assumption is violated for the Experience predictor in the data. The effect of Experience on the log-odds of cumulative probabilities does not appear to vary significantly across the different thresholds.</p>
+</section>
+<section id="graphical-inspection" class="level3 unnumbered toc-ignore">
+<h3 class="unnumbered toc-ignore anchored" data-anchor-id="graphical-inspection">Graphical Inspection</h3>
+<p>While statistically rigorous, formal tests can be overly sensitive, especially in large datasets. A statistically significant p-value might indicate a violation that is numerically very small and practically insignificant. This is where graphical inspection becomes invaluable.</p>
+<p>Graphical inspection provides a visual assessment of whether the coefficients for a given predictor truly remain constant across thresholds. This involves fitting a more flexible model and then plotting the estimated coefficients for each predictor across the different thresholds.</p>
+<!-- ```{r warning=F, error=F, message=F} -->
+<!-- # Ensure necessary packages are loaded -->
+<!-- library(ordinal) -->
+<!-- library(ggplot2) -->
+<!-- library(tidyr) # For pivot_longer -->
+<!-- # Re-create hypothetical data and models for a clean run -->
+<!-- set.seed(456) -->
+<!-- hypothetical_data <- data.frame( -->
+<!--   Response = factor(sample(c("Low", "Medium", "High"), 100, replace = TRUE), -->
+<!--                     levels = c("Low", "Medium", "High"), ordered = TRUE), -->
+<!--   Experience = rnorm(100, 5, 2) -->
+<!-- ) -->
+<!-- po_model_hypo <- clm(Response ~ Experience, data = hypothetical_data) -->
+<!-- non_po_model_hypo <- clm(Response ~ Experience, nominal = ~ Experience, data = hypothetical_data) -->
+<!-- # Extract coefficients and SEs from the non-PO model -->
+<!-- coef_values <- coef(non_po_model_hypo) -->
+<!-- vcov_matrix <- vcov(non_po_model_hypo) -->
+<!-- # Identify the coefficients related to 'Experience' that vary by threshold. -->
+<!-- # These typically have names like 'Experience:1|2', 'Experience:2|3', etc. -->
+<!-- # We'll explicitly filter for these nominal coefficients. -->
+<!-- nominal_coeffs_names <- names(coef_values)[grep("Experience:", names(coef_values))] -->
+<!-- exp_coeffs <- coef_values[nominal_coeffs_names] -->
+<!-- exp_ses <- sqrt(diag(vcov_matrix))[nominal_coeffs_names] -->
+<!-- # Create a data frame for plotting -->
+<!-- plot_data_coeffs <- data.frame( -->
+<!--   Threshold = nominal_coeffs_names, # Use the actual names like Experience:1|2 -->
+<!--   Estimate = exp_coeffs, -->
+<!--   SE = exp_ses -->
+<!-- ) -->
+<!-- # Add 95% confidence intervals -->
+<!-- plot_data_coeffs$Lower <- plot_data_coeffs$Estimate - 1.96 * plot_data_coeffs$SE -->
+<!-- plot_data_coeffs$Upper <- plot_data_coeffs$Estimate + 1.96 * plot_data_coeffs$SE -->
+<!-- # Add the single PO coefficient for comparison (from po_model_hypo) -->
+<!-- po_estimate_x <- coef(po_model_hypo)["Experience"] -->
+<!-- # Ensure Threshold is a factor for correct ordering on the plot -->
+<!-- plot_data_coeffs$Threshold <- factor(plot_data_coeffs$Threshold, -->
+<!--                                      levels = rev(nominal_coeffs_names)) # Reverse for typical plot order -->
+<!-- # --- Plotting the coefficients across thresholds --- -->
+<!-- ggplot(plot_data_coeffs, aes(x = Threshold, y = Estimate)) + -->
+<!--   geom_point(size = 3) + -->
+<!--   geom_errorbar(aes(ymin = Lower, ymax = Upper), width = 0.2) + -->
+<!--   geom_hline(yintercept = po_estimate_x, linetype = "dashed", color = "blue", size = 0.8) + -->
+<!--   labs( -->
+<!--     title = "Estimated Coefficients for 'Experience' Across Thresholds", -->
+<!--     subtitle = "Dashed line is the PO model estimate (assuming constant effect)", -->
+<!--     y = "Coefficient Estimate", -->
+<!--     x = "Cumulative Threshold" -->
+<!--   ) + -->
+<!--   theme_minimal() + -->
+<!--   coord_flip() # Flip coordinates for better readability -->
+<!-- ``` -->
+</section>
+<section id="violation-of-the-proportional-odds-assumption" class="level3 unnumbered toc-ignore">
+<h3 class="unnumbered toc-ignore anchored" data-anchor-id="violation-of-the-proportional-odds-assumption">Violation of the Proportional Odds Assumption</h3>
+<p>When the Proportional Odds assumption is violated for a predictor, the effect of that predictor on the cumulative log-odds is not constant across thresholds. Graphically, this means the lines for different cumulative probabilities would not be parallel. Their slopes would differ, meaning the <span class="math inline">\(\beta\)</span> coefficients are not the same for each threshold.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="02-ordinal-models_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>When the formal tests and especially the graphical inspection indicate a statistically and practically significant violation, it is not possible to proceed with the standard Proportional Odds model, as the coefficient estimates would be biased and their interpretation misleading.</p>
+<p>There are two main alternative models to handle this problem:</p>
+<ol type="1">
+<li><strong>Generalized Ordinal Logit Models</strong> (or Partial Proportional Odds Models): are a flexible extension of the proportional odds model. They allow the coefficients of specific predictor variables to vary across the cumulative logit equations (i.e., across the thresholds), while still forcing other predictors (those that do satisfy the Proportional Odds assumption) to have constant effects. When only a subset of coefficients is allowed to vary, it’s specifically called a Partial Proportional Odds (PPO) model. Instead of estimating a single <span class="math inline">\(\beta_i\)</span> for a predictor <span class="math inline">\(X_i\)</span>, a PPO model estimates a separate <span class="math inline">\(\beta_{ij}\)</span> for each cumulative logit <span class="math inline">\(r_j\)</span>.<br>
+The advantages are:</li>
+</ol>
+<ul>
+<li><em>Flexibility</em>: It directly addresses the violation by allowing coefficients to differ where necessary.</li>
+<li><em>Parsimony</em> (relative to Multinomial): It retains some of the efficiency of the ordinal model. If only a few predictors violate the Proportional Odds assumption, it is possible to estimate fewer parameters than a full multinomial logit model, making it more parsimonious and potentially more stable.</li>
+<li><em>Maintains Ordinality</em>: Crucially, it still respects the inherent ordering of the outcome categories. This means that the interpretations are still about “moving up or down” the ordered scale, but the strength of that effect can differ at various points along the scale.</li>
+<li><em>Interpretation</em>: While more complex than the Proportional Odds model, the interpretation of varying coefficients provides a richer understanding. You might find that a predictor has a strong effect in distinguishing “Low” from “Medium/High” but a much weaker effect in distinguishing “Medium” from “High”.</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Multinomial Logit Model</strong>: A multinomial (or polytomous) logit model treats the outcome categories as purely nominal (unordered), even if they are inherently ordinal. It fits a separate binary logistic regression model for each category, comparing it to a chosen reference category. Advantages are:</li>
+</ol>
+<ul>
+<li><em>No PO Assumption</em>: It makes no assumption about the effects of predictors being constant across categories; therefore, it automatically handles any PO violation.</li>
+<li><em>Maximum Flexibility</em>: It is the most flexible approach for categorical outcomes, as it allows for completely different effects for each category comparison.</li>
+</ul>
+<p>However, thre are some disadvantages: - <em>Loss of Ordinal Information</em>: This can lead to less precise estimates and interpretations that don’t fully reflect the nature of your outcome. - <em>Increased Complexity and Reduced Parsimony</em>: <span class="math inline">\((m−1)\cdot k\)</span> coefficients (where <span class="math inline">\(k\)</span> is the number of predictors), which is more than a Proportional Odds model (<span class="math inline">\(k\)</span> predictors) or even a PPO model. This increased number of parameters can lead to: - <em>Larger standard errors</em>: Less statistical power. - <em>Difficulty in interpretation</em>: Interpreting multiple sets of coefficients and odds ratios can be cumbersome. - <em>Overfitting</em>: Especially with smaller sample sizes, estimating too many parameters can lead to models that fit the current data well but generalize poorly.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is crucial to recognize that a statistically significant p-value from a formal test, such as the Likelihood Ratio Test, does not always signify a practically meaningful violation of the Proportional Odds assumption, especially in large datasets where even trivial deviations can be flagged. Therefore, graphical inspection becomes invaluable: if the estimated coefficients for a predictor across thresholds are very similar and their confidence intervals largely overlap (indicating near-parallelism), then despite a statistical rejection, the practical implication of the violation might be minimal, allowing one to retain the more parsimonious standard PO model. Conversely, if coefficients vary widely with little to no overlap in their confidence intervals, indicating both statistical and practical significance, then adopting a more flexible model like a Partial Proportional Odds model or, as a last resort, a Multinomial Logit model, becomes necessary to accurately reflect the data.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="coefficients-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="coefficients-interpretation">Coefficients interpretation</h2>
+<p>Consider the effect of changing a single predictor, <span class="math inline">\(X_i\)</span>, by one unit, while holding all other predictors constant. The change in the cumulative log-odds for a one-unit increase in <span class="math inline">\(X_i\)</span> is simply the coefficient <span class="math inline">\(\beta_i\)</span>.</p>
+<p>So, <span class="math inline">\(\beta_i\)</span> is the change in the cumulative log-odds for a one-unit increase in <span class="math inline">\(X_i\)</span>, holding other predictors constant.</p>
+<p>To get the Odds Ratio, we exponentiate the coefficient: <span class="math inline">\(OR_i = \text{exp}(\beta_i)\)</span>.</p>
+<p>This <span class="math inline">\(OR_i\)</span> is the multiplicative change in the cumulative odds for a one-unit increase in <span class="math inline">\(X_i\)</span>.</p>
+<p>For a one-unit increase in the predictor <span class="math inline">\(X_i\)</span>, while holding all other predictors constant, the odds of being in category <span class="math inline">\(r_j\)</span> or any category below it, versus being in a category above <span class="math inline">\(r_j\)</span>, are multiplied by <span class="math inline">\(\text{exp}(\beta_i)\)</span>.</p>
+<p><strong>Note</strong> Due to the Proportional Odds assumption, this multiplicative effect, <span class="math inline">\(\text{exp}(\beta_i)\)</span>, is the same for all <span class="math inline">\(m-1\)</span> thresholds.</p>
+<ul>
+<li><p>If <span class="math inline">\(\beta_i &gt; 0\)</span> (and thus <span class="math inline">\(\text{exp}(\beta_i)&gt;1\)</span>): A one-unit increase in <span class="math inline">\(X_i\)</span> increases the cumulative log-odds. This means it increases the odds of being in category <span class="math inline">\(r_j\)</span> or below.<br>
+Therefore, a positive <span class="math inline">\(\beta_i\)</span> indicates that higher values of <span class="math inline">\(X_i\)</span> are associated with a greater likelihood of being in the lower (or earlier) categories of the ordinal variable <span class="math inline">\(R\)</span>. Equivalently, it’s associated with a lower likelihood of being in the higher categories.</p></li>
+<li><p>If <span class="math inline">\(\beta_i &lt;0\)</span> (and thus <span class="math inline">\(\text{exp}(\beta_i)&lt;1\)</span>): A one-unit increase in <span class="math inline">\(X_i\)</span> decreases the cumulative log-odds. This means it decreases the odds of being in category <span class="math inline">\(r_j\)</span> or below.<br>
+Therefore, a negative <span class="math inline">\(\beta_i\)</span> indicates that higher values of <span class="math inline">\(X_i\)</span> are associated with a greater likelihood of being in the higher (or later) categories of the ordinal variable Y. Equivalently, it’s associated with a lower likelihood of being in the lower categories.</p></li>
+</ul>
+<section id="connection-with-the-latent-variable-interpretation" class="level3 unnumbered toc-ignore">
+<h3 class="unnumbered toc-ignore anchored" data-anchor-id="connection-with-the-latent-variable-interpretation">Connection with the Latent Variable interpretation</h3>
+<p>In the latent variable model <span class="math inline">\(R^* = \beta_0^* + \beta_1^*X_1 + \dots + \beta_k^*X_k + \epsilon\)</span>, a positive <span class="math inline">\(\beta_i^*\)</span> means that increasing <span class="math inline">\(X_i\)</span> increases the value of the latent variable <span class="math inline">\(R^*\)</span>. Since higher values of <span class="math inline">\(R^*\)</span> correspond to higher ordinal categories, <span class="math inline">\(\beta_i&gt;0\)</span> implies a shift towards higher categories. As we saw in the derivation, the cumulative logit model coefficient <span class="math inline">\(\beta_I\)</span> (for <span class="math inline">\(P(Y \leq r_j)\)</span>) is typically <span class="math inline">\(-\beta_i^*\)</span>. So, if <span class="math inline">\(\beta_i^*&gt;0\)</span>, then <span class="math inline">\(\beta_i&lt;0\)</span> in the cumulative logit model, which is associated with higher ordinal categories. This confirms the consistency between the two interpretations, although the sign convention can be tricky.</p>
+<p>To avoid confusion, it is generally easiest and most standard to interpret the results directly from the estimated coefficients (<span class="math inline">\(\beta_i\)</span>) and Odds Ratios (<span class="math inline">\(\text{exp}(\beta_i)\)</span>) from the cumulative logit model output:</p>
+<ul>
+<li><p><span class="math inline">\(\text{exp}(\beta_i)&gt;1\)</span>: Higher values of <span class="math inline">\(X_i\)</span> are associated with increased odds of being in a lower category (or equivalently, decreased odds of being in a higher category). The shift is towards the beginning of the ordered scale.</p></li>
+<li><p><span class="math inline">\(\text{exp}(\beta_i)&lt;1\)</span>: Higher values of <span class="math inline">\(X_i\)</span> are associated with decreased odds of being in a lower category (or equivalently, increased odds of being in a higher category). The shift is towards the end of the ordered scale.</p></li>
+</ul>
+<section id="including-and-interpreting-qualitative-predictors" class="level4 unnumbered toc-ignore">
+<h4 class="unnumbered toc-ignore anchored" data-anchor-id="including-and-interpreting-qualitative-predictors">Including and Interpreting Qualitative Predictors</h4>
+<p>Categorical predictors (nominal or ordinal, when used as predictors) cannot be entered directly into the model as single numbers. Instead, we use dummy variables. For a categorical predictor with <span class="math inline">\(m\)</span> categories, <span class="math inline">\(m−1\)</span> dummy variables will be created. One category is designated as the “reference category”. This category does not get its own dummy variable; its effect is absorbed into the intercept (<span class="math inline">\(\alpha_j\)</span>). All other categories are then compared to this reference category.</p>
+<p>Choice Considerations:</p>
+<ul>
+<li><p>Clinical/Logical Baseline: a naturally occurring baseline (e.g., “No exposure,” “Placebo group,” “Male gender” if female is the group of interest).</p></li>
+<li><p>Largest Category: often chosen for statistical stability, as there’s more data for comparison.</p></li>
+<li><p>First or Last Category: convenient for software defaults. Category of Primary Interest: if you want to compare all other groups to a specific group. Example: Gender Predictor (Male, Female)</p></li>
+</ul>
+<p>Let’s assume “Female” is the reference category, and the ordinal dependent variable is “Self-Rated Health” (1=Poor to 5=Excellent). We create one dummy variable for “Male”.</p>
+<p><span class="math inline">\(X_{\text{male}}=1\)</span> if Gender = Male</p>
+<p><span class="math inline">\(X_{\text{male}}=0\)</span> if Gender = Female</p>
+<p>The proportional odds model incorporating Gender would look like:</p>
+<p><span class="math display">\[\text{logit}[P(R\leq r_j∣Gender,Other Predictors)] = \alpha_j + \beta_{male}X_{male} + \beta_{OthPred}X_{OthPred} \]</span></p>
+<p>The coefficient for a dummy variable represents the difference in the cumulative log-odds between the category represented by the dummy variable and the reference category, holding all other predictors constant.</p>
+<p>The Odds Ratio for a dummy variable is <span class="math inline">\(e^{\beta_{\text{dummy}}}\)</span>. This Odds Ratio represents the ratio of the odds of being in a lower outcome category for the dummy variable group compared to the reference group, holding other predictors constant.</p>
+<p>Example: Gender Predictor (Male, Female) for Self-Rated Health</p>
+<p>Let’s continue with “Self-Rated Health” (1=Poor to 5=Excellent). Assume “Female” is the reference category.</p>
+<p>In our example, keeping Female as the reference category, if the estimated <span class="math inline">\(\beta_{male}\)</span> is 0.4, the Odds Ratio for Male would be <span class="math inline">\(e^{0.4}\approx 1.49\)</span>.</p>
+<p>Interpretation:</p>
+<ul>
+<li><p>Coefficient (<span class="math inline">\(\beta_{male}=0.4\)</span>): Males have, on average, 0.4 units higher cumulative log-odds of being in a lower self-rated health category (e.g., Poor, Fair, Good, Very Good) compared to females, holding other predictors constant.</p></li>
+<li><p>Odds Ratio (<span class="math inline">\(OR_{male}=1.49\)</span>): The odds of a male reporting “Poor or Fair or Good or Very Good Health” vs.&nbsp;“Excellent Health” are 1.49 times the odds for a female, holding all other predictors constant. Similarly, the odds of a male reporting “Poor or Fair or Good Health” vs.&nbsp;“Very Good or Excellent Health” are 1.49 times the odds for a female, and so on, across all cumulative splits.</p></li>
+</ul>
+<p>In simpler terms, males have a higher odds of being in the less healthy (lower) categories of self-rated health compared to females. This effect is assumed to be consistent across the entire range of health categories.</p>
+</section>
+</section>
+<section id="inference-on-parameters" class="level3 unnumbered toc-ignore">
+<h3 class="unnumbered toc-ignore anchored" data-anchor-id="inference-on-parameters">Inference on Parameters</h3>
+<p>Once the model is fitted using Maximum Likelihood Estimation, it is necessary to understand the statistical significance and precision of the parameter estimates.</p>
+<section id="significance-tests-for-individual-predictors" class="level4 unnumbered toc-ignore">
+<h4 class="unnumbered toc-ignore anchored" data-anchor-id="significance-tests-for-individual-predictors">Significance Tests for Individual Predictors</h4>
+<p>To determine if an individual predictor variable has a statistically significant effect on the ordinal outcome, most statistical software packages provide a Wald Test for each predictor. The Wald test calculates a z-statistic for each coefficient: <span class="math inline">\(Z= \frac{Estimate}{Std Error}\)</span>. This z-statistic is then squared to get <span class="math inline">\(\chi^2\)</span> statistic with 1 degree of freedom: <span class="math inline">\(Wald\chi^2 = Z^2\)</span>.<br>
+A p-value is then calculated based on this <span class="math inline">\(\chi^2\)</span> statistic. The <em>Null Hypothesis</em> (<span class="math inline">\(H_0\)</span>) is that the coefficient for this predictor is zero (i.e., the predictor has no effect on the cumulative log-odds). The <em>Alternative Hypothesis</em> (<span class="math inline">\(H_1\)</span>) is that the coefficient for this predictor is not zero (i.e., the predictor has a significant effect).<br>
+If the p-value <span class="math inline">\((Pr(&gt;|z|))\)</span> is small (typically less than 0.05), the null hypothesis is rejected. This suggests that the predictor has a statistically significant effect on the ordinal outcome. If the p-value is large, we fail to reject the null hypothesis. There’s insufficient evidence to conclude that the predictor has a significant effect.</p>
+</section>
+<section id="confidence-intervals-for-the-coefficients-and-the-odds-ratios" class="level4 unnumbered toc-ignore">
+<h4 class="unnumbered toc-ignore anchored" data-anchor-id="confidence-intervals-for-the-coefficients-and-the-odds-ratios">Confidence Intervals for the coefficients and the Odds Ratios</h4>
+<p>While p-values give about statistical significance, confidence intervals (CIs) provide a range of plausible values for the true population parameter, giving information about the precision of our estimates.<br>
+Interpretation for coefficients (<span class="math inline">\(\beta\)</span>): A 95% CI for a coefficient means that if we were to repeat the study many times, 95% of the calculated CIs would contain the true population coefficient. If a CI for <span class="math inline">\(\beta\)</span> does not include 0, then the coefficient is statistically significant at the corresponding alpha level (e.g., 0.05 for a 95% CI).<br>
+Interpretation for Odds Ratios (<span class="math inline">\(exp^\beta\)</span>)): A 95% CI for an OR means that we are 95% confident that the true population OR lies within this range. If a CI for an OR does not include 1, then the effect is statistically significant.<br>
+If the CI is entirely above 1, the predictor significantly increases the odds of a lower outcome.<br>
+If the CI is entirely below 1, the predictor significantly decreases the odds of a lower outcome (i.e., increases the odds of a higher outcome).</p>
+</section>
+<section id="evaluating-model-fit-and-performance" class="level4 unnumbered toc-ignore">
+<h4 class="unnumbered toc-ignore anchored" data-anchor-id="evaluating-model-fit-and-performance">Evaluating Model Fit and Performance</h4>
+<p>There are several statistics to evaluate the Goodness of Fit of a Proportional Odds Model.</p>
+<p>In linear regression, the <span class="math inline">\(R^2\)</span> is commonly used to describe the proportion of variance in the dependent variable explained by the independent variables. However, for ordinal logistic regression (and other generalized linear models), the concept of explained variance is more complex, and the traditional <span class="math inline">\(R^2\)</span> is not appropriate because the model relies on a non-linear link function.<br>
+Instead, <strong>Pseudo R-squared</strong> measures are commonly used and they attempt to provide an analogous quantification of how well the model fits the data, or how much variance it “explains”, relative to a null model.<br>
+They typically compare the log-likelihood of the fitted model (<span class="math inline">\(L_{model}\)</span>) to the log-likelihood of a null (intercept-only) model (<span class="math inline">\(L_{null}\)</span>).<br>
+Common types of Pseudo R-squared include:</p>
+<ul>
+<li><p>McFadden’s <span class="math inline">\(R^2\)</span>: <span class="math inline">\(1−\Big(\frac{L_{model}}{L_{null}}\Big)\)</span></p></li>
+<li><p>Cox &amp; Snell’s <span class="math inline">\(R^2\)</span>: <span class="math inline">\(1−\Big(\frac{L_{model}}{L_{null}}\Big)^{\frac{2}{n}}\)</span></p></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do NOT compare directly to linear regression <span class="math inline">\(R^2\)</span>: Pseudo R-squared values are typically much lower than <span class="math inline">\(R^2\)</span> values from linear regression models, even for models that fit the data very well. A McFadden’s <span class="math inline">\(R^2\)</span> of 0.20 might be considered very good in an ordinal logistic regression context, whereas a linear <span class="math inline">\(R^2\)</span> of 0.20 would often be considered weak.</p>
+</div>
+</div>
+<p>Another widely used statistics is the <strong>Likelihood Ratio Test</strong>, which is used for comparing two nested models: the likelihood of a simpler model (the null hypothesis model) to the likelihood of a more complex model (the alternative hypothesis model) that contains all the parameters of the simpler model plus some additional parameters. If the more complex model significantly improves the likelihood, it suggests that the additional parameters are meaningful.</p>
+<p>Let <span class="math inline">\(L_{restricted}\)</span> be the maximum likelihood of the simpler (nested) model, and <span class="math inline">\(L_{full}\)</span> be the maximum likelihood of the more complex (full) model. The likelihood ratio test statistic (<span class="math inline">\(\Lambda\)</span>) is:</p>
+<p><span class="math display">\[
+\Lambda = - 2 \cdot \log \Bigg(\frac{L_{restricted}}{L_{full}}\Bigg)
+\]</span></p>
+<p>Which simplifies to (due to properties of logarithms):</p>
+<p><span class="math display">\[
+\Lambda = -2 \cdot [\log(L_{restricted})-\log(L_{full})]
+\]</span></p>
+<p>The Null Hypothesis (<span class="math inline">\(H_0\)</span>) of this test is that the additional parameters in the full model do not significantly improve the fit, so the simpler model is enough. The Alternative Hypothesis (<span class="math inline">\(H_1\)</span>) is that the more complex model provides a significantly better fit. Under the null hypothesis, <span class="math inline">\(\Lambda\)</span> asymptotically follows a chi-squared distribution with degrees of freedom equal to the difference in the number of parameters between the two models.<br>
+A large <span class="math inline">\(\Lambda\)</span> value (and small p-value) indicates that the more complex model fits the data significantly better than the simpler model, leading to rejection of <span class="math inline">\(H_0\)</span>.</p>
+<p><strong>Information criteria</strong> provide a way to balance model fit with model complexity. They are particularly useful for comparing non-nested models or when there are multiple competing models. Lower values generally indicate a better model. The goal is to find a model that explains the data well without being overly complex.</p>
+<ul>
+<li>AIC = <span class="math inline">\(-2 \log(L_{model})+2k\)</span><br>
+where
+<ul>
+<li><span class="math inline">\(L_{model}\)</span> is the maximum likelihood of the fitted model</li>
+<li><span class="math inline">\(k\)</span> is the is the number of parameters in the model,including the intercept and any cut-points in ordinal regression</li>
+</ul></li>
+<li>BIC = <span class="math inline">\(-2 \log(L_{model})+k\log(n)\)</span><br>
+where
+<ul>
+<li><span class="math inline">\(L_{model}\)</span> is the maximum likelihood of the fitted model</li>
+<li><span class="math inline">\(k\)</span> is the is the number of parameters in the model,including the intercept and any cut-points in ordinal regression</li>
+<li><span class="math inline">\(n\)</span> is the sample size</li>
+</ul></li>
+</ul>
+<p>AIC tends to favor more complex models and is generally better for prediction accuracy. BIC tends to favor simpler, more parsimonious models and is often preferred for model selection when the goal is to identify the “true” underlying model.</p>
+</section>
+</section>
+</section>
+<section id="case-study-analyzing-disciplinary-decisions-in-professional-soccer" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="case-study-analyzing-disciplinary-decisions-in-professional-soccer">Case Study: Analyzing Disciplinary Decisions in Professional Soccer</h2>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>
+<a href="materials/script_soccer.R" download="" style="margin-right: 5px;"> <i class="bi bi-file-earmark-code-fill" style="font-size: 0.9em; vertical-align: middle;"></i> <span style="margin-left: 2px; vertical-align: middle;">R Script</span> </a>
+</p>
+</div></div><p>You are working as a data analyst for a sports broadcaster preparing an in-depth segment on referee decisions and player discipline in professional soccer. Your task is to investigate which factors may influence the likelihood and severity of disciplinary actions taken against players during matches.</p>
+<p>To support this analysis, you have access to a dataset containing information on over 2000 player-match observations. The key variable of interest is the level of disciplinary action taken by the referee, which is recorded as an ordinal outcome with three ordered categories:</p>
+<ul>
+<li><p>None: no disciplinary action,</p></li>
+<li><p>Yellow: the player received a yellow card (warning),</p></li>
+<li><p>Red: the player received a red card (ejection from the game).</p></li>
+</ul>
+<p>In addition to the outcome, the dataset includes the following explanatory variables:</p>
+<ul>
+<li><p><code>n_yellow_25</code>: number of yellow cards received by the player in the 25 games prior to the current match.</p></li>
+<li><p><code>n_red_25</code>: number of red cards received by the player in the previous 25 games.</p></li>
+<li><p><code>position</code>: player’s position in the game — ‘D’ for defender or goalkeeper, ‘M’ for midfielder, ‘S’ for striker.</p></li>
+<li><p><code>level</code>: competitive level of the match — 1 for higher-tier games, 2 for lower-tier games.</p></li>
+<li><p><code>country</code>: country where the match was played — England or Germany.</p></li>
+<li><p><code>result</code>: result of the game for the player’s team — ‘W’ (win), ‘L’ (loss), or ‘D’ (draw).</p></li>
+</ul>
+<p>Your objective is to model the disciplinary outcome and identify whether past player behavior, position, game context, and other covariates are associated with the referee’s decision, using statistical techniques suitable for ordinal response data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download data</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"http://peopleanalytics-regression-book.org/data/soccer.csv"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>soccer <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(url)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(soccer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  discipline n_yellow_25 n_red_25 position result country level
+1       None           4        1        S      D England     1
+2       None           2        2        D      W England     2
+3       None           2        1        M      D England     1
+4       None           2        1        M      L Germany     1
+5       None           2        0        S      W Germany     1
+6       None           3        2        M      W England     1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(soccer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   2291 obs. of  7 variables:
+ $ discipline : chr  "None" "None" "None" "None" ...
+ $ n_yellow_25: int  4 2 2 2 2 3 4 3 4 3 ...
+ $ n_red_25   : int  1 2 1 1 0 2 2 0 3 3 ...
+ $ position   : chr  "S" "D" "M" "M" ...
+ $ result     : chr  "D" "W" "D" "L" ...
+ $ country    : chr  "England" "England" "England" "Germany" ...
+ $ level      : int  1 2 1 1 1 1 2 1 1 1 ...</code></pre>
+</div>
+</div>
+<p>Before proceeding with the modeling phase, we need to ensure that the variables in our dataset are correctly specified in terms of data type. In particular, since our outcome variable <code>discipline</code> represents ordered categories (ranging from no punishment to a red card) we need to explicitly define it as an ordered factor in R. This is essential because many models for ordinal data (e.g., proportional odds models) rely on the natural ordering of the response variable.</p>
+<p>We can perform this conversion using the <code>ordered()</code> function, specifying the levels in increasing order of severity:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert discipline to ordered factor</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>soccer<span class="sc">$</span>discipline <span class="ot">&lt;-</span> <span class="fu">ordered</span>(soccer<span class="sc">$</span>discipline, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="st">"Yellow"</span>, <span class="st">"Red"</span>))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># check conversion</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(soccer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   2291 obs. of  7 variables:
+ $ discipline : Ord.factor w/ 3 levels "None"&lt;"Yellow"&lt;..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ n_yellow_25: int  4 2 2 2 2 3 4 3 4 3 ...
+ $ n_red_25   : int  1 2 1 1 0 2 2 0 3 3 ...
+ $ position   : chr  "S" "D" "M" "M" ...
+ $ result     : chr  "D" "W" "D" "L" ...
+ $ country    : chr  "England" "England" "England" "Germany" ...
+ $ level      : int  1 2 1 1 1 1 2 1 1 1 ...</code></pre>
+</div>
+</div>
+<p>In addition to the response variable, several explanatory variables in our dataset are also categorical in nature. Specifically, the variables <code>position</code>, <code>country</code>, <code>result</code>, and <code>level</code> represent categories rather than continuous measurements, and should therefore be converted to factors in R.</p>
+<p>While some of these variables could conceptually be treated as ordered (for example, result might be interpreted as “win &gt; draw &gt; loss”, and level as “level 1 &gt; level 2” in terms of competition quality) this is not strictly necessary when using them as predictor variables in a model. In practice, treating them as nominal (unordered) factors often leads to more interpretable model outputs.</p>
+<p>We can convert them as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert categorical predictors to factors</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>soccer<span class="sc">$</span>position <span class="ot">&lt;-</span> <span class="fu">factor</span>(soccer<span class="sc">$</span>position)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>soccer<span class="sc">$</span>result   <span class="ot">&lt;-</span> <span class="fu">factor</span>(soccer<span class="sc">$</span>result)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>soccer<span class="sc">$</span>country  <span class="ot">&lt;-</span> <span class="fu">factor</span>(soccer<span class="sc">$</span>country)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>soccer<span class="sc">$</span>level    <span class="ot">&lt;-</span> <span class="fu">factor</span>(soccer<span class="sc">$</span>level)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We are now ready to fit the model using all available predictors. The <code>clm()</code> function within the <code>ordinal</code> package will automatically handle the creation of dummy variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ordinal)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the full model</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>model_clm <span class="ot">&lt;-</span> <span class="fu">clm</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  discipline <span class="sc">~</span> n_yellow_25 <span class="sc">+</span> n_red_25 <span class="sc">+</span> position <span class="sc">+</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>               result <span class="sc">+</span> country <span class="sc">+</span> level,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> soccer</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># View summary</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_clm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>formula: 
+discipline ~ n_yellow_25 + n_red_25 + position + result + country + level
+data:    soccer
+
+ link  threshold nobs logLik   AIC     niter max.grad cond.H 
+ logit flexible  2291 -1722.27 3464.53 5(0)  4.43e-12 7.5e+02
+
+Coefficients:
+               Estimate Std. Error z value Pr(&gt;|z|)    
+n_yellow_25     0.32236    0.03308   9.746  &lt; 2e-16 ***
+n_red_25        0.38324    0.04051   9.462  &lt; 2e-16 ***
+positionM       0.19685    0.11649   1.690   0.0911 .  
+positionS      -0.68534    0.15011  -4.566 4.98e-06 ***
+resultL         0.48303    0.11195   4.315 1.60e-05 ***
+resultW        -0.73947    0.12129  -6.097 1.08e-09 ***
+countryGermany  0.13297    0.09360   1.421   0.1554    
+level2          0.09097    0.09355   0.972   0.3308    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+            Estimate Std. Error z value
+None|Yellow   2.5085     0.1918   13.08
+Yellow|Red    3.9257     0.2057   19.08</code></pre>
+</div>
+</div>
+<p>As expected, the summary displays:</p>
+<ul>
+<li><p>A single set of regression coefficients for the predictor variables, assuming the proportional odds assumption holds (i.e., the effects are constant across the thresholds of the ordinal response).</p></li>
+<li><p>Two intercepts (also called cutpoints or thresholds) corresponding to the boundaries between the three ordered categories of the response variable (None, Yellow, Red).</p></li>
+</ul>
+<p>While the intercepts are required for model estimation, they are typically not the focus of interpretation. Instead, we concentrate on the coefficients of the predictors, which quantify the change in the (log) odds of receiving a higher level of discipline.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Odds ratios</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(model_clm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   None|Yellow     Yellow|Red    n_yellow_25       n_red_25      positionM 
+    12.2865823     50.6896260      1.3803820      1.4670350      1.2175573 
+     positionS        resultL        resultW countryGermany         level2 
+     0.5039204      1.6209823      0.4773655      1.1422177      1.0952321 </code></pre>
+</div>
+</div>
+<p>Based on the p-values, we can now interpret the estimated coefficients for the significant predictors. In each case, we interpret the effect on the odds of receiving a more severe disciplinary action, holding all other variables constant.</p>
+<ul>
+<li><p><code>n_yellow_25</code>: Each additional yellow card received in the previous 25 games is associated with a 38% increase in the odds of receiving more severe discipline from the referee. (Odds ratio ≈ 1.38)</p></li>
+<li><p><code>n_red_25</code>: Each additional red card in the last 25 games corresponds to a 47% increase in the odds of greater disciplinary action. (Odds ratio ≈ 1.47)</p></li>
+<li><p><code>position</code>: Players in the Striker (S) role have about 50% lower odds of receiving greater disciplinary action compared to Defenders (D), the reference category. (Odds ratio ≈ 0.50)</p></li>
+</ul>
+<p>We can conclude that:</p>
+<ul>
+<li><p>Players on teams that lost have 62% higher odds of greater disciplinary action than those whose team drew. (Odds ratio ≈ 1.62)</p></li>
+<li><p>Players on teams that won have 52% lower odds compared to those on teams that drew. (Odds ratio ≈ 0.48)</p></li>
+</ul>
+<section id="simplifying-the-model" class="level3 unnumbered toc-ignore">
+<h3 class="unnumbered toc-ignore anchored" data-anchor-id="simplifying-the-model">Simplifying the Model</h3>
+<p>We may choose to simplify the model by removing predictors that are not statistically significant and do not substantially improve model fit. In this case, both level and country show little impact, either in terms of coefficient size or statistical significance.</p>
+<p>We can refit the model without these variables and compare the AIC (Akaike Information Criterion) values. If the simpler model yields a comparable AIC, we may prefer it for interpretability and parsimony:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduced model (without level and country)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>model_clm_reduced <span class="ot">&lt;-</span> <span class="fu">clm</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  discipline <span class="sc">~</span> n_yellow_25 <span class="sc">+</span> n_red_25 <span class="sc">+</span> position <span class="sc">+</span> result,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> soccer</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare AICs</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model_clm, model_clm_reduced)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  df      AIC
+model_clm         10 3464.534
+model_clm_reduced  8 3463.485</code></pre>
+</div>
+</div>
+<p>Since the reduced model shows no meaningful degradation in fit, we proceed with it for the remainder of our analysis.</p>
+</section>
+<section id="goodness-of-fit" class="level3 unnumbered toc-ignore">
+<h3 class="unnumbered toc-ignore anchored" data-anchor-id="goodness-of-fit">Goodness of Fit</h3>
+<p>We can assess the fit and parsimony of a proportional odds model using pseudo-<span class="math inline">\(R^2\)</span> measures and AIC.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Log-likelihoods</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>ll_full <span class="ot">&lt;-</span> <span class="fu">logLik</span>(model_clm_reduced)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>ll_null <span class="ot">&lt;-</span> <span class="fu">logLik</span>(<span class="fu">update</span>(model_clm_reduced, . <span class="sc">~</span> <span class="dv">1</span>))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample size</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nobs</span>(model_clm_reduced)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># McFadden's R2</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>r2_mcfadden <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="fu">as.numeric</span>(ll_full) <span class="sc">/</span> <span class="fu">as.numeric</span>(ll_null))</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Cox-Snell's R2</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>r2_coxsnell <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>((<span class="dv">2</span> <span class="sc">/</span> n) <span class="sc">*</span> (<span class="fu">as.numeric</span>(ll_null) <span class="sc">-</span> <span class="fu">as.numeric</span>(ll_full)))</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">McFadden =</span> r2_mcfadden,</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">CoxSnell =</span> r2_coxsnell,</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">AIC</span>(model_clm_reduced)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   McFadden  CoxSnell      AIC
+1 0.1001707 0.1542375 3463.485</code></pre>
+</div>
+</div>
+<ul>
+<li><p>McFadden’s <span class="math inline">\(R^2\)</span> is conceptually similar to <span class="math inline">\(R^2\)</span> in linear models but usually much smaller in value.</p></li>
+<li><p>Cox–Snell and Nagelkerke are rescaled to be more interpretable on a 0–1 scale.</p></li>
+<li><p>AIC helps compare models: lower values indicate better parsimony.</p></li>
+</ul>
+</section>
+<section id="testing-the-proportional-odds-assumption-1" class="level3 unnumbered toc-ignore">
+<h3 class="unnumbered toc-ignore anchored" data-anchor-id="testing-the-proportional-odds-assumption-1">Testing the proportional odds assumption</h3>
+<p>As we discussed earlier, the suitability of a proportional odds logistic regression model depends on the assumption that each input variable has a similar effect on the different levels of the ordinal outcome variable. It is very important to check that this assumption is not violated before proceeding to declare the results of a proportional odds model valid. There are two common approaches to validating the proportional odds assumption, and we will go through each of them here.</p>
+<ul>
+<li>Nominal Test: use <code>nominal_test()</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nominal_test</span>(model_clm_reduced)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tests of nominal effects
+
+formula: discipline ~ n_yellow_25 + n_red_25 + position + result
+            Df  logLik    AIC    LRT Pr(&gt;Chi)  
+&lt;none&gt;         -1723.7 3463.5                  
+n_yellow_25  1 -1723.0 3464.1 1.3933  0.23785  
+n_red_25     1 -1723.0 3463.9 1.5467  0.21363  
+position     2 -1719.6 3459.1 8.3656  0.01526 *
+result       2 -1722.7 3465.4 2.0968  0.35049  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Null hypothesis (<span class="math inline">\(H_0\)</span>): PO assumption holds</p></li>
+<li><p>A small p-value (e.g.&nbsp;&lt; 0.05) indicates violation of the assumption for that variable.</p></li>
+</ul>
+<p>Let’s look at the Confidence Intervals:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model_clm_reduced, <span class="at">type =</span> <span class="st">"Wald"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  2.5 %     97.5 %
+None|Yellow  2.04607487  2.7520921
+Yellow|Red   3.43369100  4.1959994
+n_yellow_25  0.25732251  0.3870545
+n_red_25     0.30204387  0.4606422
+positionM   -0.02744177  0.4290013
+positionS   -0.97101327 -0.3829654
+resultL      0.26472851  0.7029830
+resultW     -0.97178750 -0.4967697</code></pre>
+</div>
+</div>
+<p>The confidence interval for <code>positionM</code> includes zero, meaning it’s not statistically significant in this Proportional Odds (PO) model.</p>
+<p>This finding, combined with the <code>nominal_test</code> (which showed a violation of the PO assumption for position), is crucial. It means the assumption that position’s effect is constant across all outcome categories is likely false.</p>
+<p>Therefore, the single coefficient for <code>positionM</code> from this model is an ‘average’ effect, which might not accurately represent its true influence at different outcome thresholds. Interpret this insignificance with caution.</p>
+<p>For a more accurate understanding of position’s impact, we should use a Generalized Ordinal Logistic Model (Partial PO Model), allowing its effect to vary across categories.</p>
+<!-- - Graphical Inspection -->
+<!-- ```{r warning=F, error=F, message=F} -->
+<!-- library(ordinal) -->
+<!-- library(ggplot2) -->
+<!-- library(dplyr) -->
+<!-- library(tidyr) -->
+<!-- # Supponiamo che model_clm sia già il tuo modello "semplice" -->
+<!-- model_clm <- clm(discipline ~ n_yellow_25 + n_red_25 + position + result, data = soccer) -->
+<!-- # Estrai coefficienti -->
+<!-- thresholds <- model_clm$Theta              # soglie (intercette cumulative) -->
+<!-- beta_n_yellow <- coef(model_clm)["n_yellow_25"]  # coefficiente principale -->
+<!-- # Simula una sequenza di valori del predittore continuo -->
+<!-- x_vals <- seq(min(soccer$n_yellow_25), max(soccer$n_yellow_25), length.out = 100) -->
+<!-- # Calcola le log-odds cumulative per ogni soglia -->
+<!-- plot_data <- data.frame( -->
+<!--   x = x_vals, -->
+<!--   Threshold_1 = thresholds[1] - beta_n_yellow * x_vals, -->
+<!--   Threshold_2 = thresholds[2] - beta_n_yellow * x_vals -->
+<!-- ) -->
+<!-- # Porta in formato long -->
+<!-- plot_data_long <- plot_data %>% -->
+<!--   pivot_longer( -->
+<!--     cols = starts_with("Threshold_"), -->
+<!--     names_to = "Cumulative_Log_Odds_Curve", -->
+<!--     values_to = "Log_Odds" -->
+<!--   ) -->
+<!-- # Grafico -->
+<!-- ggplot(plot_data_long, aes(x = x, y = Log_Odds, color = Cumulative_Log_Odds_Curve)) + -->
+<!--   geom_line(size = 1.2) + -->
+<!--   labs( -->
+<!--     title = "Verifica grafica dell’assunzione di proportional odds", -->
+<!--     subtitle = "Linee parallele delle log-odds cumulative → assunzione plausibile", -->
+<!--     x = "Numero di cartellini gialli nelle 25 partite precedenti", -->
+<!--     y = "Log-odds cumulative", -->
+<!--     color = "Soglia cumulativa" -->
+<!--   ) + -->
+<!--   theme_minimal() + -->
+<!--   scale_color_brewer(palette = "Set1", labels = c("P(Disciplina ≤ Yellow)", "P(Disciplina ≤ Red)")) + -->
+<!--   theme(legend.position = "bottom") -->
+<!-- ``` -->
+<!-- ```{r warning=F, error=F, message=F} -->
+<!-- library(ordinal) -->
+<!-- library(ggplot2) -->
+<!-- library(dplyr) -->
+<!-- library(tidyr) -->
+<!-- # Prepara i dati con valori medi per le variabili continue, e livelli per position -->
+<!-- new_data <- expand.grid( -->
+<!--   position = levels(soccer$position), -->
+<!--   n_yellow_25 = mean(soccer$n_yellow_25, na.rm = TRUE), -->
+<!--   n_red_25 = mean(soccer$n_red_25, na.rm = TRUE), -->
+<!--   result = levels(soccer$result)[1]  # primo livello di result, ad es. "D" -->
+<!-- ) -->
+<!-- # Predici le probabilità cumulative (attenzione al tipo "cum.prob") -->
+<!-- pred <- predict(model_clm_reduced, newdata = new_data, type = "cum.prob") -->
+<!-- # Trasforma in data frame, aggiungi la posizione -->
+<!-- plot_data <- as.data.frame(pred) -->
+<!-- plot_data$position <- new_data$position -->
+<!-- # Metti in formato long per ggplot -->
+<!-- plot_data_long <- pivot_longer(plot_data, cols = -position, -->
+<!--                               names_to = "Threshold", values_to = "Cumulative_Prob") -->
+<!-- # Ordina posizione come fattore -->
+<!-- plot_data_long$position <- factor(plot_data_long$position, levels = levels(soccer$position)) -->
+<!-- # Calcola log-odds -->
+<!-- plot_data_long <- plot_data_long %>% -->
+<!--   mutate(Log_Odds = log(Cumulative_Prob / (1 - Cumulative_Prob))) -->
+<!-- # Grafico -->
+<!-- ggplot(plot_data_long, aes(x = position, y = Log_Odds, group = Threshold, color = Threshold)) + -->
+<!--   geom_line(aes(linetype = Threshold), size = 1.2) + -->
+<!--   geom_point(size = 2) + -->
+<!--   labs( -->
+<!--     title = "Log-odds cumulative per soglia in funzione di 'position'", -->
+<!--     subtitle = "Verifica grafica dell’assunzione di proportional odds", -->
+<!--     x = "Posizione", -->
+<!--     y = "Log-odds cumulative", -->
+<!--     color = "Soglia cumulativa" -->
+<!--   ) + -->
+<!--   theme_minimal() + -->
+<!--   scale_color_brewer(palette = "Dark2") + -->
+<!--   theme(legend.position = "bottom") -->
+<!-- ``` -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">© 2026 Matteo Ventura</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Built with <a href="https://quarto.org/">Quarto</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

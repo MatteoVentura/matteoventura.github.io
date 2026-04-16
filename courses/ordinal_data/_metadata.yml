@@ -1,0 +1,18 @@
+website:
+  sidebar:
+    id: "ordinal-sidebar"
+    title: "Ordinal Data Course" # Titolo della sidebar
+    style: "docked"
+    search: false
+    contents:
+      - href: index.qmd
+        text: "🏠 Course Home" # Link per tornare alla main page del corso
+      - href: ../../courses.qmd
+        text: "⬅️ Back to All Courses" # Link per tornare all'elenco generale
+      - text: "---" # Una riga divisoria
+      - section: "Course Modules"
+        contents:
+          - 01-introduction.qmd
+          - 02-ordinal-models.qmd
+          - 03-CUB.qmd
+          - 04-multivariate.qmd

@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Matteo Ventura">
+<meta name="dcterms.date" content="2025-07-07">
 
-<title>Matteo Ventura</title>
+<title>Matteo Ventura - Ordinal Data Analysis in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,17 +66,17 @@ ul.task-list li input[type="checkbox"] {
 <meta name="google-site-verification" content="C3ggHJs_ixVu-G17Z_vF1TG0r-XS1hQYsy6wOSJVfP8">
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Matteo Ventura</span>
     </a>
   </div>
@@ -84,19 +87,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./publications.html" rel="" target="">
+    <a class="nav-link" href="../../publications.html" rel="" target="">
  <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./courses.html" rel="" target="">
+    <a class="nav-link" href="../../courses.html" rel="" target="">
  <span class="menu-text">Courses</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contacts.html" rel="" target="">
+    <a class="nav-link" href="../../contacts.html" rel="" target="">
  <span class="menu-text">Contacts</span></a>
   </li>  
 </ul>
@@ -115,72 +118,84 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<div class="quarto-about-solana column-page">
-  <div class="about-entity">
-    <div class="entity-contents">
-      <header id="title-block-header" class="quarto-title-block default">
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Matteo Ventura</h1>
+<h1 class="title">Ordinal Data Analysis in R</h1>
+<p class="subtitle lead">Measuring Human Perceptions from Surveys</p>
 </div>
+
+
+
 <div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Matteo Ventura </p>
+          </div>
   </div>
-</header> <div class="about-links">
-  <a href="https://github.com/MatteoVentura" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">GitHub</span>
-  </a>
-  <a href="https://www.linkedin.com/in/matteo-ventura-770037171/" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-  <a href="https://scholar.google.com/citations?user=aRhtf3kAAAAJ&amp;hl=en" class="about-link" rel="" target="">
-    <i class="bi bi-google"></i>
-     <span class="about-link-text">Scholar</span>
-  </a>
-  <a href="/CV_VENTURA_ENG.pdf" class="about-link" rel="" target="">
-    <i class="bi bi-file-earmark-pdf"></i>
-     <span class="about-link-text">CV</span>
-  </a>
-</div>
-      <div class="about-contents"><main class="content column-page" id="quarto-document-content">
-<p>I am a <strong>Post-doc in Statistics</strong> at the University of Calabria. My methodological research focuses on Mixture Models for ordinal, with applications in sensory analysis, consumer behavior, and psychology.</p>
-<section id="research-interests" class="level2">
-<h2 data-anchor-id="research-interests">Research Interests</h2>
-<ul>
-<li><p><strong>Mixture Models for Ordinal Data:</strong> Development and extension of the CUB (Combination of Uniform and Binomial) model class to measure latent components such as feeling and uncertainty. My work includes methodological advancements applied to diverse fields such as sensory analysis, sports analytics, and consumer experience.</p></li>
-<li><p><strong>Model-Based Clustering &amp; Mixture Models:</strong> Design and implementation of clustering algorithms for multivariate rating data. My research aims at developing computationally efficient methods that accurately account for the dependence structure among variables.</p></li>
-<li><p><strong>Graphical Models with Applications in Ecology:</strong> Application of Gaussian Graphical Models to study belowground biodiversity and the structure of soil arthropod communities in agroecosystems. The goal is to provide statistical tools to support environmental management and decision-making.</p></li>
-</ul>
-</section>
-<section id="education-visiting" class="level2">
-<h2 data-anchor-id="education-visiting">Education &amp; Visiting</h2>
-<p><strong>Visiting Researcher</strong> | Sep.&nbsp;2025 – Oct.&nbsp;2025<br>
-<em>Victoria University of Wellington, New Zealand</em> Supervisors: Prof.&nbsp;Ivy Liu and Richard Arnold</p>
-<p><strong>PhD in Analytics for Economics and Management</strong> | 2021 - 2024<br>
-<em>University of Brescia, Italy</em> Thesis title: <em>Advances in Mixture Models for Ordinal Data: Theoretical Insights and Model-based Clustering</em><br> Supervisor: Prof.&nbsp;Paola Zuccolotto | Co-supervisor: Prof.&nbsp;Julien Jacques</p>
-<p><strong>Visiting PhD student</strong> | Sep.&nbsp;2023 - Jun.&nbsp;2024<br>
-<em>University Lumière Lyon 2, France</em><br> Supervisor: Prof.&nbsp;Julien Jacques</p>
-</section>
-<section id="awards-honors" class="level2">
-<h2 data-anchor-id="awards-honors">Awards &amp; Honors</h2>
-<p><strong>Marie Skłodowska-Curie Action Seal of Excellence</strong> (Feb.&nbsp;2026)<br>
-<em>European Commission</em> | Score: 91.60 / 100<br>
-<a href="Seal of Excellence.pdf" download="" class="pub-link" style="margin-left: 0px;"> <i class="bi bi-download"></i> Download Certificate </a> <br> Awarded for the project proposal <em>ACHIEVE</em>.</p>
-
-
-</section>
-</main></div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 7, 2025</p>
     </div>
-    <img src="me2.jpg" class="about-image
-  round " style="height: 15em; width: 15em;">
   </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="column-page-centered">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="cover_ordinal_2.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
- <!-- /main -->
+</div>
+<!-- <div style="text-align: center; margin-top: 30px; margin-bottom: 40px;"> -->
+<!--   <a href="full-course.pdf" download class="btn btn-danger btn-lg"> -->
+<!--     <i class="bi bi-file-earmark-pdf-fill"></i> Download Full Course PDF -->
+<!--   </a> -->
+<!-- </div> -->
+<h1>
+Description of the course
+</h1>
+<p>Surveys are key tools for measuring human perceptions, capturing latent traits through structured responses. Among the data they generate, ordinal and rating data are particularly important yet often less studied, requiring specialized statistical techniques. Ordinal data appears frequently in real-world applications, such as customer satisfaction surveys, psychological assessments, and medical research, making its correct analysis crucial for obtaining reliable insights. This short course provides instructor-led, hands-on training in the analysis of ordinal data. It begins with an overview of survey design and the validation of results, focusing on building effective surveys and ensuring the reliability of the data obtained. The course then covers the most commonly used statistical models for analyzing ordinal data, with an emphasis on discovering latent patterns and traits. Both theoretical foundations and practical applications will be explored, using real-world case studies from domains such as marketing, social sciences, tourism and culture.</p>
+<p>A common approach to analyzing ordinal data is to treat it as numerical, but this can lead to a loss of statistical power. In this course, participants will learn how to apply specialized methods designed for ordinal data, allowing them to draw more effective and reliable conclusions.</p>
+<h1>
+Objectives of the course
+</h1>
+<p>By the end of the course, participants will have both theoretical knowledge and practical skills to analyze ordinal data in research and professional settings. Specifically, they will be able to:</p>
+<ul>
+<li>Understand what ordinal data is, how it differs from other types of data, and the challenges involved in its analysis</li>
+<li>Compute and interpret reliability and validity measures</li>
+<li>Fit proportional odds models in R and interpret the results</li>
+<li>Analyse rating data by applying CUB models</li>
+</ul>
+<p><br></p>
+<section id="course-modules" class="level2">
+<h2 class="anchored" data-anchor-id="course-modules">Course modules</h2>
+<div class="list-group">
+<p><a href="../../courses/ordinal_data/01-introduction.html" class="list-group-item list-group-item-action"><strong>1. Introduction to Ordinal Data and Survey Design</strong></a> Overview of ordinal data characteristics, survey design principles, and data visualization techniques.</p>
+<p><a href="../../courses/ordinal_data/02-ordinal-models.html" class="list-group-item list-group-item-action"><strong>2. Classical Models for Ordinal Data</strong></a> In-depth analysis of Cumulative Link Models (CLM) and proportional odds, with applied case studies.</p>
+<p><a href="../../courses/ordinal_data/03-CUB.html" class="list-group-item list-group-item-action"><strong>3. Beyond Standard Approaches: CUB Models</strong></a> Exploring CUB models to measure latent traits, separating respondents’ feelings from uncertainty.</p>
+<p><a href="../../courses/ordinal_data/04-multivariate.html" class="list-group-item list-group-item-action"><strong>4. Models for Multivariate Ordinal Data</strong></a> Advanced techniques for analyzing multivariate ordinal variables and clustering methods.</p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -316,6 +331,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
