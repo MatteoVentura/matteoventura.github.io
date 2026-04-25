@@ -39,14 +39,14 @@ My methodological research focuses on Mixture Models for ordinal, with applicati
 
 ## Education & Visiting
 
-**Visiting Researcher** | Sep. 2025 – Oct. 2025   
-*Victoria University of Wellington, New Zealand* Supervisors: Prof. Ivy Liu and Richard Arnold 
+**Visiting Researcher** | Sep. 2025 – Oct. 2025   <br>
+*Victoria University of Wellington, New Zealand*<br> Supervisors: Prof. Ivy Liu and Richard Arnold 
 
-**PhD in Analytics for Economics and Management** | 2021 - 2024  
+**PhD in Analytics for Economics and Management** | 2021 - 2024  <br>
 *University of Brescia, Italy* Thesis title: *Advances in Mixture Models for Ordinal Data: Theoretical Insights and Model-based Clustering*<br>
 Supervisor: Prof. Paola Zuccolotto | Co-supervisor: Prof. Julien Jacques
 
-**Visiting PhD student** | Sep. 2023 - Jun. 2024     
+**Visiting PhD student** | Sep. 2023 - Jun. 2024     <br>
 *University Lumière Lyon 2, France*<br>
 Supervisor: Prof. Julien Jacques
 
