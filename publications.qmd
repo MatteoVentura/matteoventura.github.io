@@ -6,14 +6,23 @@ title: "Publications"
 
 <ol reversed>
 
-  <li>
-    Ventura, M., Macis, A., Manisera, M., & Zuccolotto, P., (2026) Measuring synesthetic experience of museum visitors using multi-point semantic differential scales. <i>Quality and Quantity</i>. Accepted for Publication.
-  </li>
+
 
   <li>
     Ventura, M., Jacques, J., & Zuccolotto, P., (2026) Multivariate Latent Class Modeling of Rating Data for Investigating the Sustainability Perception and the Economic Behavior in the Made in Italy Sector. <i>Statistical Papers</i>. Accepted for Publication.
   </li>
 
+  <li>
+    Ventura, M., Macis, A., Manisera, M., & Zuccolotto, P., (2026) Measuring synesthetic experience of museum visitors using multi-point semantic differential scales. <i>Quality and Quantity</i>. Accepted for Publication.
+ <a href="https://doi.org/10.1007/s11135-026-02768-0" target="_blank" class="pub-link">
+      <i class="bi bi-link-45deg"></i> DOI
+    </a>
+    <a href="pdf_papers/journals/2026 - QQ - Ventura et al - Synesthetic experience.pdf" target="_blank" class="pub-link">
+      <i class="bi bi-file-earmark-pdf"></i> PDF
+    </a>
+  </li>
+  
+  
   <li>
     Ventura, M., Jacques, J., & Zuccolotto, P. (2025). Model-Based Clustering of Multivariate Rating Data Accounting for Feeling and Uncertainty. <i>Journal of Classification</i>, 1-22. 
     <a href="https://doi.org/10.1007/s00357-025-09521-6" target="_blank" class="pub-link">
@@ -22,7 +31,14 @@ title: "Publications"
     <a href="pdf_papers/journals/2025 - JoC - Ventura et al - Model-based Clustering.pdf" target="_blank" class="pub-link">
       <i class="bi bi-file-earmark-pdf"></i> PDF
     </a>
-  </li>
+    
+    <a href="https://github.com/MatteoVentura/CUBClustR" target="_blank" class="pub-link">
+      <i class="bi bi-box-seam"></i> R Package
+    </a>
+    <a href="Tutorials\MLCCUB\MLCCUB_tutorial.qmd" target="_blank" class="pub-link">
+      <i class="bi bi-laptop"></i> Tutorial & Code
+    </a>
+</li>
 
   <li>
     Simonetto, A., Ventura, M. (2025) Distance Measures for Unweighted Undirected Networks: a comparison study. <i>Australian and New Zealand Journal of Statistics.</i>

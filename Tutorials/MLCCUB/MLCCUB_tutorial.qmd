@@ -1,0 +1,208 @@
+---
+title: "Tutorial: Analyzing Ordinal Data with CUBClustR"
+author: "Matteo Ventura"
+date: last-modified
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+    theme: cosmo
+    code-fold: show
+    code-summary: "Show Code"
+    self-contained: true
+execute:
+  warning: false
+  message: false
+---
+
+## Introduction
+
+
+The MLC-CUB model extends the CUB (Combination of a Uniform and shifted Binomial) framework to multivariate rating data.
+It assumes that each response results from two latent components:
+
+- *Feeling* – the respondent’s underlying attitude or preference;
+
+- *Uncertainty* – the indecision inherent in the response process.
+
+By combining these components within a model-based clustering approach estimated via the EM algorithm, MLC-CUB identifies groups of respondents sharing similar patterns of feeling and uncertainty.
+The figure represents the results obtained and described in the seminal paper. The participants of the study were asked to evaluate five specific aspects of the University of Naples Federico II Orientation services. Each item corresponds to a key dimension of the student experience:
+
+- Q1 – Information: Satisfaction regarding the quality and clarity of the acquired information.
+
+- Q2 – Willingness: Satisfaction regarding the availability and helpfulness of the staff.
+
+- Q3 – Office Hours: Satisfaction regarding the accessibility and convenience of the opening hours.
+
+- Q4 – Competence: Satisfaction regarding the professional expertise and knowledge of the staff.
+
+- Q5 – Global Satisfaction: An overall evaluation of the orientation service experience.
+
+The responses were collected using a seven-point Likert scale (1 = "Very unsatisfied", 7 = "Extremely satisfied").
+The analyses can be replicated with the code provided below.
+
+![](clusters_university.jpg){fig-align="center"}
+
+Thhe following tutorial demonstrates the workflow for analyzing ordinal rating data using the **MLC-CUB (Multivariate Latent Class CUB)** model. 
+
+
+## Setup and Data Preparation
+
+First, we load the necessary libraries and prepare a subset of the `univer` dataset (evaluations of the University of Naples Federico II).
+
+```{r}
+#| label: setup
+library(CUBClustR)
+library(CUB)
+library(ggplot2)
+library(vegan) # For NMDS analysis
+
+# Load the dataset
+data(univer)
+
+# Select 5 relevant ordinal items (7-point scale)
+# Items 8 to 12 represent satisfaction with specific university services
+R <- apply(univer[, 8:12], 2, as.integer)
+
+# Define the maximum category for each item (m = 7)
+m_vector <- rep(7, ncol(R))
+```
+
+## Model Selection
+
+We test different numbers of latent classes ($K$) to find the optimal balance between model complexity and statistical fit. We use the Bayesian Information Criterion (BIC): lower values indicate a better model.
+
+```{r}
+#| label: model-selection
+#| cache: true
+# Testing solutions from 1 to 7 clusters
+model_selection <- compare_MLCCUB_models(
+  data     = R, 
+  m        = m_vector, 
+  K_vector = 1:7, 
+  EM_iter  = 10, 
+  max_iter = 1000
+)
+
+# Visualize the BIC trend
+ggplot(model_selection$summary, aes(x = K, y = BIC)) +
+  geom_line(color = "#2C3E50", linewidth = 1.2) +
+  geom_point(color = "#BD4F6C", size = 3) +
+  theme_bw() +
+  labs(
+    title = "Model Selection: BIC Trend",
+    subtitle = "Lower BIC indicates the optimal number of clusters",
+    x = "Number of Latent Classes (K)",
+    y = "BIC"
+  ) +
+  scale_x_continuous(breaks = 1:7)
+```
+
+## Stability and Identifiability
+
+Once the optimal $K$ is selected (e.g., $K=5$), we must ensure the solution is stable and not a result of a local maximum. We use a parallelized bootstrap to calculate the Adjusted Rand Index (ARI).
+
+```{r}
+#| label: identifiability
+#| cache: true
+# Checking the stability of the 5-cluster solution
+identifiability <- check_identifiability(
+  data      = R, 
+  m         = m_vector, 
+  K         = 5, 
+  n_boot    = 100, 
+  n_cores   = 5,  # Adjust based on your CPU cores
+  EM_iter  = 10, 
+  max_iter = 1000
+)
+
+# Plotting ARI distribution (values close to 1 indicate high stability)
+identifiability$plot
+```
+
+
+## Results Visualization
+
+### Parameter SpaceThe 
+
+MLC-CUB model estimates two parameters for each item in each cluster: Feeling and Uncertainty.
+
+```{r}
+#| label: visualization
+# Select the 5-cluster model
+model_k5 <- model_selection$all_models$K5
+
+# Plot the parameter space
+plot_MLCCUB_clusters(model_k5) + 
+  labs(title = "Parameter Space: Feeling vs. Uncertainty per Cluster")
+```
+
+### Goodness of Fit (WAD Index)
+
+The Weighted Average Dissimilarity (WAD) index measures the absolute fit of the model. Values closer to 0 indicate excellent fit.
+
+```{r}
+#| label: diagnostic
+fit_metrics <- calculate_WAD(model_obj = model_k5, data = R, m = m_vector)
+cat("Global WAD Index:", round(fit_metrics$WAD, 4), "\n")
+```
+
+### Observed vs. Theoretical Distributions
+
+We can compare the actual survey responses (bars) with the distributions predicted by the model (dashed lines).
+
+```{r}
+#| label: fit-plot
+#| fig-width: 10
+#| fig-height: 8
+plot_CUB_fit(
+  model_obj  = model_k5, 
+  data       = R, 
+  m          = m_vector,
+  line_color = "#93B5C6"
+)
+```
+
+
+## Non-metric Multidimensional Scaling (NMDS)
+To visualize how respondents are grouped in a continuous space, we apply NMDS using Manhattan distance. This is particularly useful for ordinal data.
+
+```{r}
+#| label: nmds
+#| cache: true
+set.seed(123)
+# Subsampling for better visualization performance
+idx_sample <- sample(1:nrow(R), 800) 
+R_sub <- R[idx_sample, ]
+cluster_sub <- model_k5$class[idx_sample]
+
+# Run NMDS
+nmds_res <- metaMDS(R_sub, 
+                    distance = "manhattan", 
+                    k = 2, 
+                    trymax = 20,
+                    autotransform = FALSE, 
+                    trace = 0)
+
+# Prepare dataframe for plotting
+nmds_plot_data <- data.frame(
+  NMDS1   = nmds_res$points[, 1],
+  NMDS2   = nmds_res$points[, 2],
+  Cluster = factor(cluster_sub)
+)
+
+# Plotting the clusters in the NMDS space
+my_colors <- c("#93B5C6", "#DDEDAA", "#D7816A", "#F0CF65", "#BD4F6C")
+
+ggplot(nmds_plot_data, aes(x = NMDS1, y = NMDS2, color = Cluster)) +
+  geom_jitter(width = 0.3, height = 0.3, alpha = 0.7, size = 2) +
+  scale_color_manual(values = my_colors) +
+  theme_minimal() +
+  labs(
+    title = "NMDS Visualization of Respondent Clusters",
+    subtitle = "Manhattan distance, 2D projection",
+    x = "Dimension 1",
+    y = "Dimension 2"
+  )
+```
+
