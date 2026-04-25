@@ -15,7 +15,6 @@ execute:
   message: false
 ---
 
-## Introduction
 
 
 The MLC-CUB model extends the CUB (Combination of a Uniform and shifted Binomial) framework to multivariate rating data.
@@ -28,22 +27,21 @@ It assumes that each response results from two latent components:
 By combining these components within a model-based clustering approach estimated via the EM algorithm, MLC-CUB identifies groups of respondents sharing similar patterns of feeling and uncertainty.
 The figure represents the results obtained and described in the seminal paper. The participants of the study were asked to evaluate five specific aspects of the University of Naples Federico II Orientation services. Each item corresponds to a key dimension of the student experience:
 
-- Q1 – Information: Satisfaction regarding the quality and clarity of the acquired information.
+- **Q1 – Information**: Satisfaction regarding the quality and clarity of the acquired information.
 
-- Q2 – Willingness: Satisfaction regarding the availability and helpfulness of the staff.
+- **Q2 – Willingness**: Satisfaction regarding the availability and helpfulness of the staff.
 
-- Q3 – Office Hours: Satisfaction regarding the accessibility and convenience of the opening hours.
+- **Q3 – Office Hours**: Satisfaction regarding the accessibility and convenience of the opening hours.
 
-- Q4 – Competence: Satisfaction regarding the professional expertise and knowledge of the staff.
+- **Q4 – Competence**: Satisfaction regarding the professional expertise and knowledge of the staff.
 
-- Q5 – Global Satisfaction: An overall evaluation of the orientation service experience.
+- **Q5 – Global Satisfaction**: An overall evaluation of the orientation service experience.
 
 The responses were collected using a seven-point Likert scale (1 = "Very unsatisfied", 7 = "Extremely satisfied").
-The analyses can be replicated with the code provided below.
+
 
 ![](clusters_university.jpg){fig-align="center"}
-
-Thhe following tutorial demonstrates the workflow for analyzing ordinal rating data using the **MLC-CUB (Multivariate Latent Class CUB)** model. 
+The analyses of the seminal paper can be replicated with the code provided below, which can be considered a tutorial that demonstrates the workflow for analyzing ordinal rating data using the MLC-CUB model. 
 
 
 ## Setup and Data Preparation
@@ -123,7 +121,7 @@ identifiability$plot
 
 ## Results Visualization
 
-### Parameter SpaceThe 
+### Parameter Space 
 
 MLC-CUB model estimates two parameters for each item in each cluster: Feeling and Uncertainty.
 
@@ -165,6 +163,7 @@ plot_CUB_fit(
 
 
 ## Non-metric Multidimensional Scaling (NMDS)
+
 To visualize how respondents are grouped in a continuous space, we apply NMDS using Manhattan distance. This is particularly useful for ordinal data.
 
 ```{r}

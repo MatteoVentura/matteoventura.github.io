@@ -28,12 +28,13 @@ title: "Publications"
     <a href="pdf_papers/journals/2025 - JoC - Ventura et al - Model-based Clustering.pdf" target="_blank" class="pub-link">
       <i class="bi bi-file-earmark-pdf"></i> PDF
     </a>
-    <a href="https://github.com/MatteoVentura/CUBClustR" target="_blank" class="pub-link">
+    
+  <a href="https://github.com/MatteoVentura/CUBClustR" target="_blank" class="pub-link">
       <i class="bi bi-box-seam"></i> R Package
     </a>
-    <a href="Tutorials/MLCCUB/MLCCUB_tutorial.html" class="pub-link" target="_self" data-external="0">
-      <i class="bi bi-laptop"></i> Tutorial & Code
-    </a>
+<a href="Tutorials/MLCCUB/MLCCUB_tutorial.html" class="pub-link" onclick="window.open(this.href, '_self'); return false;">
+  <i class="bi bi-laptop"></i> Tutorial & Code
+</a>
   </li>
 
   <li>
