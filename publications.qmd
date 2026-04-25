@@ -35,7 +35,7 @@ title: "Publications"
     <a href="https://github.com/MatteoVentura/CUBClustR" target="_blank" class="pub-link">
       <i class="bi bi-box-seam"></i> R Package
     </a>
-    <a href="Tutorials\MLCCUB\MLCCUB_tutorial.qmd" target="_blank" class="pub-link">
+    <a href="Tutorials\MLCCUB\MLCCUB_tutorial.qmd" target="_self" class="pub-link">
       <i class="bi bi-laptop"></i> Tutorial & Code
     </a>
 </li>
