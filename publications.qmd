@@ -11,7 +11,7 @@ title: "Publications"
   </li>
 
   <li>
-    Ventura, M., Macis, A., Manisera, M., & Zuccolotto, P., (2026) Measuring synesthetic experience of museum visitors using multi-point semantic differential scales. <i>Quality and Quantity</i>. Accepted for Publication.
+    Ventura, M., Macis, A., Manisera, M., & Zuccolotto, P., (2026) Measuring synesthetic experience of museum visitors using multi-point semantic differential scales. <i>Quality and Quantity</i>. 1-30
     <a href="https://doi.org/10.1007/s11135-026-02768-0" target="_blank" class="pub-link">
       <i class="bi bi-link-45deg"></i> DOI
     </a>
