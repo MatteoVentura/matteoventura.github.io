@@ -26,7 +26,7 @@ about:
       href: CV_VENTURA_ENG.pdf
 ---
 
-I am a **Post-doc in Statistics** at the University of Calabria. 
+I am a **Post-doc in Statistics** at the Department of Statistical Sciences at the Catholic University of the Sacred Heart.  
 My methodological research focuses on Mixture Models for ordinal, with applications in sensory analysis, consumer behavior, and psychology.
 
 ## Research Interests

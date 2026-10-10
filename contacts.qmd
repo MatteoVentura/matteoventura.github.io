@@ -30,27 +30,28 @@ about:
 <div style="color: #c8932f; margin-right: 15px; font-size: 1.2em;">{{< fa building-columns >}}</div>
 <div>
 <strong>Affiliation</strong><br>
-University of Calabria<br>
-Department of Economics, Statistics and Finance<br>
+Catholic University of the Sacred Heart<br>
+Department of Statistical Sciences<br>
+Faculty of Economics<br>
 </div>
 </div>
 
-<div style="display: flex; align-items: flex-start; margin-bottom: 1.5em;">
-<div style="color: #c8932f; margin-right: 15px; font-size: 1.2em;">{{< fa map-marker-alt >}}</div>
-<div>
-<strong>Working Address</strong><br>
-University of Brescia<br>
-Department of Economics and Management<br>
-Contrada S. Chiara 50, 25122 Brescia, Italy
-</div>
-</div>
+<!-- <div style="display: flex; align-items: flex-start; margin-bottom: 1.5em;"> -->
+<!-- <div style="color: #c8932f; margin-right: 15px; font-size: 1.2em;">{{< fa map-marker-alt >}}</div> -->
+<!-- <div> -->
+<!-- <strong>Working Address</strong><br> -->
+<!-- University of Brescia<br> -->
+<!-- Department of Economics and Management<br> -->
+<!-- Contrada S. Chiara 50, 25122 Brescia, Italy -->
+<!-- </div> -->
+<!-- </div> -->
 
 <div style="display: flex; align-items: flex-start; margin-bottom: 1.5em;">
 <div style="color: #c8932f; margin-right: 15px; font-size: 1.2em;">{{< fa envelope-open-text >}}</div>
 <div>
 <strong>Email</strong><br>
-<a href="mailto:matteo.ventura@unibs.it">matteo.ventura@unibs.it</a><br>
-<a href="mailto:matteo.ventura@unical.it">matteo.ventura@unical.it</a>
+<!-- <a href="mailto:matteo.ventura@unibs.it">matteo.ventura@unibs.it</a><br> -->
+<a href="mailto:matteo.ventura@unical.it">matteo.ventura@unicatt.it</a>
 </div>
 </div>
 
